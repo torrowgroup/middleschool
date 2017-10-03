@@ -39,7 +39,6 @@ public class BaseDao<T> extends SqlSessionDaoSupport
 			type = type.getClass().getSuperclass().getGenericSuperclass();
 		}
 		clazz = (Class<T>) ((ParameterizedType) type).getActualTypeArguments()[0];
-		log.info("log对象创建成功"+clazz);
 	}
     
     //这是为了让父类获得SqlSessionFactory实例以便获得SqlSession，该实例已在spring-mybatis.xml配置
@@ -50,7 +49,6 @@ public class BaseDao<T> extends SqlSessionDaoSupport
     
     //得到***Mapper.xml的命名空间
     public final String getNameSpace(){
-//    	Class<?> clazz = GenericsUtils.getSuperClassGenericType(this.getClass() , 0);
     	return  clazz.getName().replaceFirst("entity", "dao")+"Dao";
     }
     
@@ -70,13 +68,13 @@ public class BaseDao<T> extends SqlSessionDaoSupport
      * @return 根据id返回一个实例
      */
 	public final T selectOneEntity(int id){
-    	return getSqlSession().selectOne("selectByPrimaryKey" , id);
+    	return getSqlSession().selectOne(this.getNameSpace()+".selectByPrimaryKey" , id);
     }
 	/**
 	 * @return 返回所有记录
 	 */
     public final List<T> selectAllEntity(){
-    	return getSqlSession().selectList(".selectAll");
+    	return getSqlSession().selectList(this.getNameSpace()+".selectAll");
     }
     /**
      * 更新一条记录
@@ -84,7 +82,7 @@ public class BaseDao<T> extends SqlSessionDaoSupport
      * @return 受影响的行数
      */
     public final int updateEntity(T record){
-    	return getSqlSession().update(".updateByPrimaryKey", record);
+    	return getSqlSession().update(this.getNameSpace()+".updateByPrimaryKey", record);
     }
     
 }
