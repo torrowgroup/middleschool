@@ -7,13 +7,20 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.torrow.school.base.BaseDao;
 import com.torrow.school.dao.TbUserDao;
 import com.torrow.school.entity.TbUser;
 import com.torrow.school.service.TbUserService;
-
+/*
+ * 用户业务层，继承基础类，实现业务类
+ */
 @Service
-public class TbUserServiceImpl implements TbUserService{ 
+public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService{ 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Resource
 	private TbUserDao tbUserDao;
 	
@@ -25,8 +32,7 @@ public class TbUserServiceImpl implements TbUserService{
 
 	@Override
 	public int insert(TbUser record) {		//添加用户
-		System.out.println("---");
-		return tbUserDao.insert(record);
+		return this.insertEntity(record);
 	}
 
 	@Override

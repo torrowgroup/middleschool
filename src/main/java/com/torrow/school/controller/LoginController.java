@@ -1,7 +1,6 @@
 
 package com.torrow.school.controller;
 
-import java.io.StringReader;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +27,7 @@ public class LoginController extends BaseController {
 
 	@RequestMapping(value="hello",method=RequestMethod.GET)	
 	public String hello(@RequestParam("name") String name,Model model){
-		TbUser user = new TbUser(1,"1@1","1","1","1",1,"12","123","123","12","ads","dsa");
+		TbUser user = new TbUser("1@1","1","1","1",1,"12","123","123","12","ads","dsa");
 //		user.setUsId(1);
 		log.info("name"+name+" "+user);
 		userService.insert(user);

@@ -23,7 +23,7 @@ public abstract class BaseController implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	protected Logger log;
+	protected Logger log; 
 
 	public BaseController() {
 		if (log == null) {

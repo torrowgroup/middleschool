@@ -23,12 +23,12 @@
   
   <!-- 添加用户 -->
   <insert id="insert" parameterType="com.torrow.school.entity.TbUser">
-    insert into tb_user (us_id, us_email, us_password, 
+    insert into tb_user (us_email, us_password, 
       us_name, us_sex, ca_id, 
       ca_name, us_phone, us_picture, 
       us_introduction, spare, us_achievements
       )
-    values (#{usId,jdbcType=INTEGER}, #{usEmail,jdbcType=VARCHAR}, #{usPassword,jdbcType=VARCHAR}, 
+    values (#{usEmail,jdbcType=VARCHAR}, #{usPassword,jdbcType=VARCHAR}, 
       #{usName,jdbcType=VARCHAR}, #{usSex,jdbcType=VARCHAR}, #{caId,jdbcType=INTEGER}, 
       #{caName,jdbcType=VARCHAR}, #{usPhone,jdbcType=VARCHAR}, #{usPicture,jdbcType=VARCHAR}, 
       #{usIntroduction,jdbcType=VARCHAR}, #{spare,jdbcType=VARCHAR}, #{usAchievements,jdbcType=LONGVARCHAR}

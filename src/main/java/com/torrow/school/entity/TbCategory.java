@@ -28,9 +28,8 @@ public class TbCategory implements Serializable {
 		super();
 	}
 
-	public TbCategory(Integer caId, Integer caPid, String caName, String spare) {
+	public TbCategory( Integer caPid, String caName, String spare) {
 		super();
-		this.caId = caId;
 		this.caPid = caPid;
 		this.caName = caName;
 		this.spare = spare;

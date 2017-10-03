@@ -17,10 +17,10 @@
   </delete>
   
   <insert id="insert" parameterType="com.torrow.school.entity.TbResource">
-    insert into tb_resource (re_id, ca_id, ca_name, 
+    insert into tb_resource (ca_id, ca_name, 
       re_title, re_ issuer, re_issuingdate, 
       spare, re_content)
-    values (#{reId,jdbcType=INTEGER}, #{caId,jdbcType=INTEGER}, #{caName,jdbcType=VARCHAR}, 
+    values ( #{caId,jdbcType=INTEGER}, #{caName,jdbcType=VARCHAR}, 
       #{reTitle,jdbcType=VARCHAR}, #{re issuer,jdbcType=VARCHAR}, #{reIssuingdate,jdbcType=TIMESTAMP}, 
       #{spare,jdbcType=VARCHAR}, #{reContent,jdbcType=LONGVARCHAR})
   </insert>

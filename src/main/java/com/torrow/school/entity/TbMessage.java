@@ -31,10 +31,9 @@ public class TbMessage implements Serializable {
 		super();
 	}
 
-	public TbMessage(Integer meId, String meTitle, String mePicture, String meHide, Date meIssuingdate, String meStatus,
+	public TbMessage( String meTitle, String mePicture, String meHide, Date meIssuingdate, String meStatus,
 			String meContent, String meReply, String spare) {
 		super();
-		this.meId = meId;
 		this.meTitle = meTitle;
 		this.mePicture = mePicture;
 		this.meHide = meHide;

@@ -29,10 +29,9 @@ public class TbResource implements Serializable {
 		super();
 	}
 
-	public TbResource(Integer reId, Integer caId, String caName, String reTitle, String reIssuer, Date reIssuingdate,
+	public TbResource(Integer caId, String caName, String reTitle, String reIssuer, Date reIssuingdate,
 			String reContent, String spare) {
 		super();
-		this.reId = reId;
 		this.caId = caId;
 		this.caName = caName;
 		this.reTitle = reTitle;
