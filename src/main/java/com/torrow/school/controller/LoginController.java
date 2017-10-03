@@ -1,8 +1,5 @@
 
 package com.torrow.school.controller;
-
-import java.io.StringReader;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +10,9 @@ import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbUser;
 
 /**
- * @author 张金高
+ * @author 寮犻噾楂�
  *
- * 2017年10月2日上午9:10:26
+ * 2017骞�10鏈�2鏃ヤ笂鍗�9:10:26
  */
 @Controller
 @RequestMapping("/")
@@ -34,6 +31,20 @@ public class LoginController extends BaseController {
 		userService.insert(user);
 		model.addAttribute("name", name);
 		return "/index";
+	}
+	
+	@RequestMapping("login")
+	public String login(String usEmail,String usPassword,Model model){
+		
+		System.out.println("用户登录："+usEmail+usPassword);
+		
+		TbUser tbUser=userService.login(usEmail,usPassword);
+		if(tbUser!=null) {
+			model.addAttribute("msg", "登录成功");
+		}else{
+			model.addAttribute("msg", "用户名或密码错误");
+		}
+		return "index";
 	}
 	
 }

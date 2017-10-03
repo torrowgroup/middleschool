@@ -47,5 +47,11 @@ public class TbUserServiceImpl implements TbUserService{
 		return 0;
 	}
 
+	@Override
+	public TbUser login(String usEmail, String usPassword) {
+		// TODO Auto-generated method stub
+		return tbUserDao.findUserByNameAndPwd(usEmail,usPassword); 
+	}
+
 	
 }
