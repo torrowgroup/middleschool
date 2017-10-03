@@ -36,11 +36,10 @@ public class TbUser implements Serializable {
 		super();
 	}
 
-	public TbUser(Integer usId, String usEmail, String usPassword, String usName, String usSex, Integer caId,
+	public TbUser( String usEmail, String usPassword, String usName, String usSex, Integer caId,
 			String caName, String usPhone, String usPicture, String usIntroduction, String usAchievements,
 			String spare) {
 		super();
-		this.usId = usId;
 		this.usEmail = usEmail;
 		this.usPassword = usPassword;
 		this.usName = usName;

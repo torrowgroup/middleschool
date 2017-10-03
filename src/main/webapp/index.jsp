@@ -4,14 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>登录</title>
 </head>
 <body>
-hello world+++${name}
-<a href="hello?name=578">hello1</a>
-	<a href="hello">hello2</a>
-<a href="${rootPath}hello?name=578239">hello4</a>
-<form action="${pageContext.request.contextPath }/login.action">
+<form action="${rootPath}login.action">
 		<table border="1">
 			<tr>
 				<td>用户名:</td>
@@ -28,6 +24,6 @@ hello world+++${name}
 			</tr>
 		</table>
 	</form>
-</body>
 ${msg}
+</body>
 </html>

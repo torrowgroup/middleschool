@@ -14,9 +14,9 @@
   </delete>
   
   <insert id="insert" parameterType="com.torrow.school.entity.TbCategory">
-    insert into tb_category (ca_id, ca_pId, ca_name, 
+    insert into tb_category (ca_pId, ca_name, 
       spare)
-    values (#{caId,jdbcType=INTEGER}, #{caPid,jdbcType=INTEGER}, #{caName,jdbcType=VARCHAR}, 
+    values ( #{caPid,jdbcType=INTEGER}, #{caName,jdbcType=VARCHAR}, 
       #{spare,jdbcType=VARCHAR})
   </insert>
   

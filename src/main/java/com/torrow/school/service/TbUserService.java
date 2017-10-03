@@ -15,6 +15,6 @@ public interface TbUserService {
     List<TbUser> selectAll();
 
     int updateByPrimaryKey(TbUser record);
-    //ÓÃ»§µÇÂ¼
+    //ç™»é™†çš„æ–¹æ³•
 	TbUser login(String usEmail, String usPassword);
 }

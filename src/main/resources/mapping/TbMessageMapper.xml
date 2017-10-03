@@ -19,11 +19,11 @@
   </delete>
   
   <insert id="insert" parameterType="com.torrow.school.entity.TbMessage">
-    insert into tb_message (me_id, me_title, me_picture, 
+    insert into tb_message (d, me_title, me_picture, 
       me_hide, me_issuingdate, me_status, 
       spare, me_content, me_reply
       )
-    values (#{meId,jdbcType=INTEGER}, #{meTitle,jdbcType=VARCHAR}, #{mePicture,jdbcType=VARCHAR}, 
+    values ( #{meTitle,jdbcType=VARCHAR}, #{mePicture,jdbcType=VARCHAR}, 
       #{meHide,jdbcType=VARCHAR}, #{meIssuingdate,jdbcType=TIMESTAMP}, #{meStatus,jdbcType=VARCHAR}, 
       #{spare,jdbcType=VARCHAR}, #{meContent,jdbcType=LONGVARCHAR}, #{meReply,jdbcType=LONGVARCHAR}
       )

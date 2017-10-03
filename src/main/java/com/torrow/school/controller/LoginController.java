@@ -1,4 +1,3 @@
-
 package com.torrow.school.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,16 +22,12 @@ public class LoginController extends BaseController {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@RequestMapping(value="hello",method=RequestMethod.GET)	
-	public String hello(@RequestParam("name") String name,Model model){
-		TbUser user = new TbUser(1,"1@1","1","1","1",1,"12","123","123","12","ads","dsa");
-//		user.setUsId(1);
-		log.info("name"+name+" "+user);
-		userService.insert(user);
-		model.addAttribute("name", name);
-		return "/index";
-	}
-	
+	/**
+	 * @param usEmail
+	 * @param usPassword
+	 * @param model
+	 * @return 登陆的方法
+	 */
 	@RequestMapping("login")
 	public String login(String usEmail,String usPassword,Model model){
 		
@@ -41,6 +36,7 @@ public class LoginController extends BaseController {
 		TbUser tbUser=userService.login(usEmail,usPassword);
 		if(tbUser!=null) {
 			model.addAttribute("msg", "登录成功");
+			
 		}else{
 			model.addAttribute("msg", "用户名或密码错误");
 		}
