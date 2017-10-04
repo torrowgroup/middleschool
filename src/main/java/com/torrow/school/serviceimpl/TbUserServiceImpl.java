@@ -53,14 +53,10 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService{
 		return 0;
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.torrow.school.service.TbUserService#login(java.lang.String, java.lang.String)
-	 * 登录的方法
-	 */	
 	@Override
 	public TbUser login(String usEmail, String usPassword) {
-		
-		return tbUserDao.findUserByNameAndPwd(usEmail,usPassword); 
+		TbUser tbUser=tbUserDao.findUserByNameAndPwd(usEmail,usPassword);
+		return  tbUser;
 	}
 
 	
