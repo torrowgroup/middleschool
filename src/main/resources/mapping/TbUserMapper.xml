@@ -65,7 +65,7 @@
   </select>
   
   <!--注意这里的参数类型是parameterType而不是parameterMap，因为返回的是单个类型  -->
-	<select id="findUserByNameAndPwd"  parameterType="map"  resultType="com.torrow.school.entity.TbUser">
-		select t.us_email,t.us_password from tb_user t where us_email=#{usEmail} and us_password=#{usPassword}
+	<select id="findUserByNameAndPwd"  parameterType="java.lang.String" resultMap="BaseResultMap">
+		select * from tb_user  where us_email=#{0} 
 	</select>
 </mapper>

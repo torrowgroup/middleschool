@@ -59,8 +59,8 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService{
 	 */	
 	@Override
 	public TbUser login(String usEmail, String usPassword) {
-		
-		return tbUserDao.findUserByNameAndPwd(usEmail,usPassword); 
+		return tbUserDao.findUserByNameAndPwd(usEmail,usPassword);
+//		return tbUserDao.selectByPrimaryKey(1);
 	}
 
 	
