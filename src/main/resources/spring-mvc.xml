@@ -9,7 +9,7 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-<!--  扩充了注解驱动，可以将请求参数绑定到控制器参数 -->
+	<!-- 扩充了注解驱动，可以将请求参数绑定到控制器参数 -->
 	<mvc:annotation-driven />
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
 	<context:component-scan base-package="com.torrow.school.controller" />
@@ -71,6 +71,23 @@
 		</property>
 		<property name="ignoreAcceptHeader" value="true"></property>
 	</bean>
+
+	<!--springMVC+thymeleaf的跳转页面配置 -->
+	<bean id="templateResolver"
+		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<!-- <property name="prefix" value="/WEB-INF/views/" /> -->
+		<property name="suffix" value=".html" />
+		<property name="templateMode" value="HTML5" />
+	</bean>
+
+	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+	</bean>
+
+	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="templateEngine" />
+	</bean>
+
 
 	<!-- 配置视图解析器viewResolver，jsp文件前缀后缀 -->
 	<bean id="viewResolver"
