@@ -25,5 +25,6 @@
 		</table>
 	</form>
 ${msg}
+${sessionScope.toUser.usEmail}
 </body>
 </html>

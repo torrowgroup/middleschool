@@ -16,5 +16,5 @@ public interface TbUserService {
 
     int updateByPrimaryKey(TbUser record);
     //登陆的方法
-	TbUser login(String usEmail, String usPassword);
+	public TbUser login(String usEmail, String usPassword);
 }
