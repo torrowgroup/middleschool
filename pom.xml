@@ -13,6 +13,8 @@
 		<spring.version>4.0.2.RELEASE</spring.version>
 		<!-- mybatis版本号 -->
 		<mybatis.version>3.2.6</mybatis.version>
+		<!-- thymeleaf版本号 -->
+		<thymeleaf.version>2.1.4.RELEASE</thymeleaf.version> 
 	</properties>
 
 	<dependencies>
@@ -22,6 +24,17 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- 配置Thymeleaf -->
+		 <dependency>  
+            <groupId>org.thymeleaf</groupId>  
+            <artifactId>thymeleaf</artifactId>  
+            <version>${thymeleaf.version}</version>  
+         </dependency>  
+         <dependency>  
+            <groupId>org.thymeleaf</groupId>  
+            <artifactId>thymeleaf-spring4</artifactId>  
+            <version>${thymeleaf.version}</version>  
+         </dependency> 
 		<!-- spring核心包 -->
 		<dependency>
 			<groupId>org.springframework</groupId>

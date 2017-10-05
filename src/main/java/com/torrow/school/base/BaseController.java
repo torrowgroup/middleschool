@@ -7,6 +7,8 @@ package com.torrow.school.base;
 import java.io.Serializable;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,7 +25,7 @@ public abstract class BaseController implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	protected Logger log; 
+	protected Logger log; 	//日志
 	
 	public BaseController() {
 		if (log == null) {
@@ -43,8 +45,10 @@ public abstract class BaseController implements Serializable {
 	protected TbResourceService resourceSerice;
 	@Resource
 	protected TbUserService userService;
-
-	
+	@Resource
+	protected HttpServletRequest request;//获得request
+	@Resource
+	protected HttpSession session;	//获得session
 	
 	/**
 	 * 返回一个 ModelAndView 实例
