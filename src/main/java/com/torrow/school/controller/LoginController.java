@@ -2,8 +2,6 @@ package com.torrow.school.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbUser;
 
@@ -29,12 +27,13 @@ public class LoginController extends BaseController {
 	 */
 	@RequestMapping("login")
 	public String login(String usEmail,String usPassword,Model model){
-		log.info("验证用户");
 		TbUser tbUser=userService.login(usEmail,usPassword);
+		log.info("验证用户"+usEmail);
 		if(tbUser!=null) {
 			model.addAttribute("msg", "登录成功");
 		}else{
 			model.addAttribute("msg", "用户名或密码错误");
+			return "index";
 		}
 		return "admin/index";
 	}

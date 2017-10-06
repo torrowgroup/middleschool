@@ -1,6 +1,7 @@
 package com.torrow.school.serviceimpl;
 
 import java.util.HashMap;
+
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -28,31 +29,18 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 		return tbUserDao.findUserByNameAndPwd(usEmail, usPassword);
 	}
 
-
 	@Override
-	public PageBean<TbUser> findByPage(int currentPage) {
+	public PageBean<TbUser> findPage(int currentPage) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		PageBean<TbUser> pageBean = new PageBean<TbUser>();
-		// 封装当前页数
-		pageBean.setCurrPage(currentPage);
-		// 每页显示的数据
 		int pageSize = 2;
-		pageBean.setPageSize(pageSize);
-		// 封装总记录数
 		int totalCount = tbUserDao.selectCount();
-		pageBean.setTotalCount(totalCount);
-		// 封装总页数
 		double tc = totalCount;
 		Double num = Math.ceil(tc / pageSize);// 向上取整
-		pageBean.setTotalPage(num.intValue());
 		map.put("start", (currentPage - 1) * pageSize);
-		map.put("size", pageBean.getPageSize());
-		// 封装每页显示的数据
+		map.put("size", pageSize);
 		List<TbUser> lists = tbUserDao.findByPage(map);
-		pageBean.setLists(lists);
-		log.info(pageBean);
+		PageBean<TbUser> pageBean = new PageBean<TbUser>(currentPage,pageSize,lists,num.intValue(),totalCount);		
 		return pageBean;
 	}
-
 
 }
