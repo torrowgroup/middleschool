@@ -139,4 +139,5 @@ public class Page implements Serializable {
         this.hasLast = hasLast;  
     }  
   
-}   
+}  
+

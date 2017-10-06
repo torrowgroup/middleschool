@@ -21,6 +21,10 @@
     where us_id = #{usId,jdbcType=INTEGER}
   </delete>
   
+   <sql id="Base_Column_List">
+        us_id, us_email, us_password, us_name, us_sex, ca_id, ca_name, us_phone, us_picture, us_introduction, spare, us_achievements
+    </sql>
+  
   <!-- 添加用户 -->
   <insert id="insert" parameterType="com.torrow.school.entity.TbUser">
     insert into tb_user (us_email, us_password, 
@@ -68,4 +72,31 @@
 	<select id="findUserByNameAndPwd"   parameterType="java.lang.String"  resultMap="BaseResultMap">
 		select * from tb_user where us_email=#{usEmail} and us_password=#{usPassword}
 	</select>
+	
+	 <!-- 根据分页数据start 和size查询数据 -->
+    <select id="findByPage" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tb_user
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+    <!-- 查询用户记录总数 -->
+    <select id="selectCount" resultType="int">
+        select count(*) from tb_user
+    </select>
+    
+    <select id="selectUsersByPage" resultMap="BaseResultMap">  
+  		select * from tb_user limit #{startPos},#{pageSize}   
+	</select>  
+	<!-- 取得记录的总数 -->  
+	<select id="getUsersCount" resultType="long">  
+	  select count(*) from tb_user   
+	</select>  
+	
+	<!-- <select id="findByPaging" parameterType="PagingVO" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> WHERE limit #{toPageNo}, #{pageSize}
+    </select> -->
 </mapper>

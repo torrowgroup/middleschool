@@ -7,7 +7,7 @@
 <title>登录</title>
 </head>
 <body>
-<form action="${rootPath}login.action">
+<form action="${rootPath}login">
 		<table border="1">
 			<tr>
 				<td>用户名:</td>
@@ -25,6 +25,7 @@
 		</table>
 	</form>
 ${msg}
-${sessionScope.toUser.usEmail}
+<a href="${rootPath}user/showAllUser">用户管理</a>
+<a href="${rootPath}user/main">用户管理</a>
 </body>
 </html>
