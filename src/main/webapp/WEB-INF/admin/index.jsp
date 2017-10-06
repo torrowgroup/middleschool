@@ -7,11 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<details>
-	<summary>用户管理</summary>
-	<a href="">增加用户</a>
-</details>
+admin
+<!-- <details> -->
+<!-- 	<summary>用户管理</summary> -->
+<!-- 	<a href="">增加用户</a> -->
+<!-- </details> -->
 
 </body>
 </html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Home</title>
+</head>
+<body>
+<div th:if="false">....</div>
+	<p th:text="#{home.welcome}">Welcome to our grocery store!</p>
+<a th:href="@{http://www.thymeleaf.org}">Thymeleaf</a>	
+	<form th:action="@{/login}" method="post">
+		<table border="1">
+			<tr>
+				<td>用户名:</td>
+				<td><input type="text" name="usEmail"></td>
+			</tr>
+			<tr>
+				<td>密码:</td>
+				<td><input type="password" name="usPassword"></td>
+			</tr>
+			<tr>
+				<td th:text="${msg}"><a href=""
+					th:href="@{http://www.baidu.com}" class="signOut">as</a></td>
+				<td><input type="submit" value="登录"> <input
+					type="reset" value="重置"></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="
-       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
-       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+      http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.0.xsd
+      http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+      http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+      http://www.springframework.org/schema/mvc  http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+      ">
 
 	<!-- 扩充了注解驱动，可以将请求参数绑定到控制器参数 -->
 	<mvc:annotation-driven />
+	<!-- 静态资源访问 -->
+	<mvc:default-servlet-handler />
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-	<context:component-scan base-package="com.torrow.school.controller" />
-
-	<!-- 静态资源处理 css js imgs -->
-	<mvc:resources location="/static/" mapping="/static/**" />
+    <context:component-scan base-package="com.torrow.school.controller" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation"
+                                expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+	<!-- 静态资源处理 css js imgs-->
+	<mvc:resources location="/static/" mapping="/static/**" /> 
 
 	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->
 	<bean id="mappingJacksonHttpMessageConverter"
@@ -49,35 +56,14 @@
 		<property name="resolveLazily" value="true" />
 	</bean>
 
-	<!-- 配置ViewResolver 。可用多个ViewResolver 。使用order属性排序。 InternalResourceViewResolver 
-		放在最后 -->
-	<bean
-		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-		<property name="order" value="1"></property>
-		<!-- <property name="mediaTypes"> -->
-		<!-- <map> -->
-		<!-- 告诉视图解析器，返回的类型为json格式 -->
-		<!-- <entry key="json" value="application/json" /> -->
-		<!-- <entry key="xml" value="application/xml" /> -->
-		<!-- <entry key="htm" value="text/htm" /> -->
-		<!-- </map> -->
-		<!-- </property> -->
-		<property name="defaultViews">
-			<list>
-				<!-- ModelAndView里的数据变成JSON -->
-				<bean
-					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
-			</list>
-		</property>
-		<property name="ignoreAcceptHeader" value="true"></property>
-	</bean>
-
-	<!--springMVC+thymeleaf的跳转页面配置 -->
+	<!-- 使用thymeleaf解析 -->
 	<bean id="templateResolver"
-		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
-		<!-- <property name="prefix" value="/WEB-INF/views/" /> -->
-		<property name="suffix" value=".html" />
-		<property name="templateMode" value="HTML5" />
+		class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".html" />	
+		<property name="templateMode" value="HTML5" />	
+		<property name="cacheable" value="false" />
+		<property name="characterEncoding" value="UTF-8" /><!--不加会乱码 -->
 	</bean>
 
 	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
@@ -86,17 +72,7 @@
 
 	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
 		<property name="templateEngine" ref="templateEngine" />
+		<!--解决中文乱码 -->
+		<property name="characterEncoding" value="UTF-8" />
 	</bean>
-
-
-	<!-- 配置视图解析器viewResolver，jsp文件前缀后缀 -->
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<!-- <property name="prefix"> -->
-		<!-- <value></value> -->
-		<!-- </property> -->
-		<property name="suffix">
-			<value>.jsp</value>
-		</property>
-	</bean>
-</beans>  
+</beans> 

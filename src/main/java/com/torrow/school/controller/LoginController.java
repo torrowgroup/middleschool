@@ -12,7 +12,7 @@ import com.torrow.school.entity.TbUser;
  * 2017年10月3日下午4:36:56
  */
 @Controller
-@RequestMapping("/")
+
 public class LoginController extends BaseController {
 
 	/**
@@ -26,9 +26,9 @@ public class LoginController extends BaseController {
 	 * @param model
 	 * @return 登陆的方法
 	 */
-	@RequestMapping("login")
+	@RequestMapping("/login")
 	public String login(String usEmail,String usPassword,Model model){
-		
+		log.info("---");
 		TbUser tbUser=userService.login(usEmail,usPassword);
 		if(tbUser!=null) {
 			model.addAttribute("msg", "登录成功");
@@ -38,4 +38,9 @@ public class LoginController extends BaseController {
 		return "index";
 	}
 	
+	@RequestMapping("/index")
+	public String index(){
+		log.info("项目启动");
+		return "index";
+	}
 }
