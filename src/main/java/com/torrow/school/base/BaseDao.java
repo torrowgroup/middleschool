@@ -3,6 +3,7 @@ package com.torrow.school.base;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,6 +11,7 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
+import com.torrow.school.util.PageBean;
 
 /**
  * @author 张金高
@@ -85,4 +87,21 @@ public class BaseDao<T> extends SqlSessionDaoSupport
     	return getSqlSession().update(this.getNameSpace()+".updateByPrimaryKey", record);
     }
     
+	/**
+	 * 分页查询
+	 * @param currentPage
+	 * @return
+	 */
+	public final PageBean<T> pageCut(int currentPage) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int pageSize = 2;
+		int totalCount = getSqlSession().selectOne(this.getNameSpace()+".selectCount");//得到总记录数
+		double tc = totalCount;
+		Double num = Math.ceil(tc / pageSize);// 向上取整
+		map.put("start", (currentPage - 1) * pageSize);
+		map.put("size", pageSize);
+		List<T> lists = getSqlSession().selectList(this.getNameSpace()+".findByPage", map);//得到所有的记录
+		PageBean<T> pageBean = new PageBean<T>(currentPage,pageSize,lists,num.intValue(),totalCount);		
+		return pageBean;
+	}
 }

@@ -9,7 +9,9 @@ public interface TbCategoryService {
     int insert(TbCategory record);
 
     TbCategory selectByPrimaryKey(Integer caId);
-
+    
+    //张金高
+    //得到全部类别类
     List<TbCategory> selectAll();
 
     int updateByPrimaryKey(TbCategory record);
