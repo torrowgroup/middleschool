@@ -3,6 +3,7 @@ package com.torrow.school.controller.manager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
@@ -25,7 +26,7 @@ public class CategoryController extends BaseController {
 	/**
 	 * @return 用于跳转到添加类别类
 	 */
-	@RequestMapping("jumping")
+	@RequestMapping("categoryjumping")
 	public String jumping(){
 		log.info("跳转");
 		return "admin/addCategory";	
@@ -50,4 +51,11 @@ public class CategoryController extends BaseController {
 		}	
 		return "admin/addCategory";
 	}
+	
+	
+	@RequestMapping("categoryCheckByPage")
+    public String  main(@RequestParam(value="currentPage",defaultValue="1")int currentPage,Model model){
+		model.addAttribute("pagemsg", categoryService.findPage(currentPage));//回显分页数据
+        return "admin/main";
+    }
 }

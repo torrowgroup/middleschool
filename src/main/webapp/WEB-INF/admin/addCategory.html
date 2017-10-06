@@ -13,12 +13,14 @@
 		</tr>
 		<tr>
 			<td>属于的类别名称:</td>
-			<select id="caPid" name="caPid">
-		        <option value="1" th:selected="${caPid=='1'}">概括类</option>
-		        <option value="2" th:selected="${caPid=='2'}">新闻类</option>
-		        <option value="3" th:selected="${caPid=='3'}">机构部</option>
-		        <option value="4" th:selected="${caPid=='4'}">用户类</option>
-	    	</select>
+			<td>
+				<select id="caPid" name="caPid" style="width:160px">
+			        <option value="1" th:selected="${caPid=='1'}">概括类</option>
+			        <option value="2" th:selected="${caPid=='2'}">新闻类</option>
+			        <option value="3" th:selected="${caPid=='3'}">机构部</option>
+			        <option value="4" th:selected="${caPid=='4'}">用户类</option>
+	    		</select>
+	    	</td>
         </tr>
     	<tr><td th:text="${message}"></td>
     		<td><input type="submit" value="添加">

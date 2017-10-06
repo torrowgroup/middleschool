@@ -13,9 +13,11 @@
     where ca_id = #{caId,jdbcType=INTEGER}
   </delete>
   
-  <insert id="insert" parameterType="com.torrow.school.entity.TbCategory">
-    insert into tb_category (ca_pId, ca_name)
-    values ( #{caPid,jdbcType=INTEGER}, #{caName,jdbcType=VARCHAR})
+   <insert id="insert" parameterType="com.torrow.school.entity.TbCategory">
+    insert into tb_category (ca_pId, ca_name, 
+      spare)
+    values ( #{caPid,jdbcType=INTEGER}, #{caName,jdbcType=VARCHAR}, 
+      #{spare,jdbcType=VARCHAR})
   </insert>
   
   	<select id="findCategoryByCaName"   parameterType="java.lang.String"  resultMap="BaseResultMap">

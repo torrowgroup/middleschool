@@ -25,36 +25,6 @@
         us_id, us_email, us_password, us_name, us_sex, ca_id, ca_name, us_phone, us_picture, us_introduction, spare, us_achievements
     </sql>
   
-  <!-- 添加用户 -->
-  <insert id="insert" parameterType="com.torrow.school.entity.TbUser">
-    insert into tb_user (us_email, us_password, 
-      us_name, us_sex, ca_id, 
-      ca_name, us_phone, us_picture, 
-      us_introduction, spare, us_achievements
-      )
-    values (#{usEmail,jdbcType=VARCHAR}, #{usPassword,jdbcType=VARCHAR}, 
-      #{usName,jdbcType=VARCHAR}, #{usSex,jdbcType=VARCHAR}, #{caId,jdbcType=INTEGER}, 
-      #{caName,jdbcType=VARCHAR}, #{usPhone,jdbcType=VARCHAR}, #{usPicture,jdbcType=VARCHAR}, 
-      #{usIntroduction,jdbcType=VARCHAR}, #{spare,jdbcType=VARCHAR}, #{usAchievements,jdbcType=LONGVARCHAR}
-      )
-  </insert>
-  
-  <update id="updateByPrimaryKey" parameterType="com.torrow.school.entity.TbUser">
-    update tb_user
-    set us_email = #{usEmail,jdbcType=VARCHAR},
-      us_password = #{usPassword,jdbcType=VARCHAR},
-      us_name = #{usName,jdbcType=VARCHAR},
-      us_sex = #{usSex,jdbcType=VARCHAR},
-      ca_id = #{caId,jdbcType=INTEGER},
-      ca_name = #{caName,jdbcType=VARCHAR},
-      us_phone = #{usPhone,jdbcType=VARCHAR},
-      us_picture = #{usPicture,jdbcType=VARCHAR},
-      us_introduction = #{usIntroduction,jdbcType=VARCHAR},
-      spare = #{spare,jdbcType=VARCHAR},
-      us_achievements = #{usAchievements,jdbcType=LONGVARCHAR}
-    where us_id = #{usId,jdbcType=INTEGER}
-  </update>
-  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select us_id, us_email, us_password, us_name, us_sex, ca_id, ca_name, us_phone, us_picture, 
     us_introduction, spare, us_achievements
@@ -101,17 +71,6 @@
 		us_achievements = #{usAchievements,jdbcType=LONGVARCHAR}
 		where us_id = #{usId,jdbcType=INTEGER}
 	</update>
-
-	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
-		resultMap="BaseResultMap">
-		select * from tb_user
-		where us_id = #{usId,jdbcType=INTEGER}
-	</select>
-
-	<select id="selectAll" resultMap="BaseResultMap">
-		select * from tb_user
-	</select>
-
 	<!--login -->
 	<select id="findUserByNameAndPwd" parameterType="java.lang.String"
 		resultMap="BaseResultMap">

@@ -15,4 +15,5 @@ public interface TbCategoryService {
     int updateByPrimaryKey(TbCategory record);
     //进行查询类别名称
 	public TbCategory selectCaName(String caName);
+	public TbCategory  findPage(int currentPage);
 }

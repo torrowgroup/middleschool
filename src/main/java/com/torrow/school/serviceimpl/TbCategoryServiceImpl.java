@@ -1,18 +1,18 @@
 
 package com.torrow.school.serviceimpl;
-
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
-
+import com.torrow.school.base.BaseDao;
 import com.torrow.school.dao.TbCategoryDao;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.service.TbCategoryService;
-
 @Service
-public class TbCategoryServiceImpl implements TbCategoryService{
+public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCategoryService{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Resource
 	private TbCategoryDao tbCategoryDao;
 	
@@ -24,7 +24,7 @@ public class TbCategoryServiceImpl implements TbCategoryService{
 
 	@Override
 	public void insert(TbCategory record) {
-        tbCategoryDao.insert(record);
+        this.insertEntity(record);
 	}
 
 	@Override
@@ -49,6 +49,14 @@ public class TbCategoryServiceImpl implements TbCategoryService{
 	public TbCategory selectCaName(String caName) {
 		return tbCategoryDao.findCategoryByCaName(caName);
 	}
+
+	@Override
+	public TbCategory findPage(int currentPage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 	
 	
