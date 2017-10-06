@@ -39,7 +39,7 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 		int pageSize = 2;
 		pageBean.setPageSize(pageSize);
 		// 封装总记录数
-		int totalCount = this.selectCount();
+		int totalCount = tbUserDao.selectCount();
 		pageBean.setTotalCount(totalCount);
 		// 封装总页数
 		double tc = totalCount;
@@ -54,10 +54,5 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 		return pageBean;
 	}
 
-
-	@Override
-	public int selectCount() {
-		return tbUserDao.selectCount();
-	}
 
 }

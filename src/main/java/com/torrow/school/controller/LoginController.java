@@ -39,7 +39,10 @@ public class LoginController extends BaseController {
 		return "admin/index";
 	}
 	
-	//web-app下jsp用于跳转
+	
+	/**
+	 * @return web-app下jsp用于跳转
+	 */
 	@RequestMapping("/index")
 	public String index(){
 		log.info("项目启动");

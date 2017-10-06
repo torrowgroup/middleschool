@@ -5,6 +5,12 @@ import java.util.List;
  * @author 
  * @Date2016年12月13日 上午9:40:10
  */
+
+/**
+ * @author 安李杰
+ *
+ * @2017年10月6日下午5:33:32
+ */
 public class PageBean<T> {
 
     private int currPage;//当前页数

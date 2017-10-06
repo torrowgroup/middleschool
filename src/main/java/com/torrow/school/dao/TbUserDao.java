@@ -8,20 +8,7 @@ public interface TbUserDao {
 	
 	//登陆的方法
 	TbUser findUserByNameAndPwd(@Param("usEmail")String usEmail, @Param("usPassword")String usPassword);
-    
-    /** 
-     *  
-     * @param page 
-     * @return startPos},#{pageSize}  
-     */  
-    public List<TbUser> selectUsersByPage(@Param(value="startPos") Integer startPos,@Param(value="pageSize") Integer pageSize);  
-      
-    /** 
-     * 
-     * @return 
-     */  
-    public long getUsersCount();
-		
+   	
     /**
      * 查询用户记录总数
      * @return
