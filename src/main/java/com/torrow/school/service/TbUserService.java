@@ -9,6 +9,6 @@ public interface TbUserService {
 	//得到记录总数
 	int selectCount();
 	
-    PageBean<TbUser> findByPage(int currentPage);
+    PageBean<TbUser> findPage(int currentPage);
 
 }

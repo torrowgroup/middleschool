@@ -34,7 +34,6 @@
                 <td>Delete</td>
             </tr>
             </thead>
-<!--             <c:forEach items="${requestScope.pagemsg.lists}" var="u"> -->
                 <tr th:each="user,userStart:${pagemsg.lists}">
                     <td th:text="${user.usId }"></td>
                     <td th:text="${user.usEmail}">${user.usEmail}</td>
@@ -50,7 +49,6 @@
                     <td><a href="edit?id=${u.id}">Edit</a></td>
                     <td><a href="delete?id=${u.id}" onclick="return confirm('确定要删除吗')">Delete</a></td>
                 </tr>
-<!--             </c:forEach>         -->
         </table>    
     </div>
 
@@ -60,12 +58,19 @@
    <span th:if ="${pagemsg.currPage != 1}">
            <a th:href="@{/user/main?(currentPage=1)}">[首页]</a>&nbsp;&nbsp;
            <a th:href="@{/user/main?(currentPage=${pagemsg.currPage-1})}">[上一页]</a>&nbsp;&nbsp;
-
-       <span th:if ="${pagemsg.currPage != pagemsg.totalPage}">
+	</span>	
+	<span th:if="${pagemsg.currPage == 1}">
+		[首页][上一页]
+	</span>
+	<span th:each="i:${#numbers.sequence(1,pagemsg.totalPage)}">
+			<a th:if="${i > pagemsg.currPage-3} and ${i < pagemsg.currPage+3}"  th:href="@{/user/main?(currentPage=${i})}"th:text="${i}">#</a>
+	</span>
+    <span th:if ="${pagemsg.currPage < pagemsg.totalPage}">
            <a th:href="@{/user/main?(currentPage=${pagemsg.currPage+1})}">[下一页]</a>&nbsp;&nbsp;
-           <a th:href="@{/user/main?(currentPage=${pagemsg.totalPage})}">[尾页]</a>&nbsp;&nbsp;
-		</span>
-   </span>
+	</span>
+	<span th:if="${pagemsg.currPage >= pagemsg.totalPage}">
+		[下一页]
+	</span>
 </td>
 </tr>
 </table>

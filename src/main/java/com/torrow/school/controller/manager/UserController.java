@@ -21,7 +21,7 @@ public class UserController extends BaseController {
 	
 	@RequestMapping("main")
     public String  main(@RequestParam(value="currentPage",defaultValue="1")int currentPage,Model model){
-		model.addAttribute("pagemsg", userService.findByPage(currentPage));//回显分页数据
+		model.addAttribute("pagemsg", userService.findPage(currentPage));//回显分页数据
         return "admin/main";
     }
    
