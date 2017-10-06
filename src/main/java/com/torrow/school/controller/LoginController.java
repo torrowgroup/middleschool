@@ -29,12 +29,13 @@ public class LoginController extends BaseController {
 	 */
 	@RequestMapping("login")
 	public String login(String usEmail,String usPassword,Model model){
-		log.info("验证用户");
 		TbUser tbUser=userService.login(usEmail,usPassword);
+		log.info("验证用户"+usEmail);
 		if(tbUser!=null) {
 			model.addAttribute("msg", "登录成功");
 		}else{
 			model.addAttribute("msg", "用户名或密码错误");
+			return "index";
 		}
 		return "admin/index";
 	}

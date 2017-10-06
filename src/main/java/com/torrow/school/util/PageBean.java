@@ -17,7 +17,15 @@ public class PageBean<T> {
         super();
     }
 
-    public int getCurrPage() {
+    public PageBean(int currPage,int pageSize,List<T> lists,int totalPage,int totalCount){
+    	this.currPage = currPage;
+		this.pageSize = pageSize;
+		this.totalCount = totalCount;
+		this.totalPage = totalPage;
+		this.lists = lists;
+    }
+
+	public int getCurrPage() {
         return currPage;
     }
 

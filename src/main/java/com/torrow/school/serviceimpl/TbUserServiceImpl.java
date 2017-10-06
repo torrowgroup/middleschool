@@ -31,31 +31,15 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 	@Override
 	public PageBean<TbUser> findPage(int currentPage) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		PageBean<TbUser> pageBean = new PageBean<TbUser>();
-		// 每页显示的数据
 		int pageSize = 2;
-		// 封装总记录数
-		int totalCount = this.selectCount();
-		// 封装总页数
+		int totalCount = tbUserDao.selectCount();
 		double tc = totalCount;
 		Double num = Math.ceil(tc / pageSize);// 向上取整
 		map.put("start", (currentPage - 1) * pageSize);
 		map.put("size", pageSize);
-		// 封装每页显示的数据
 		List<TbUser> lists = tbUserDao.findByPage(map);
-		pageBean.setCurrPage(currentPage);
-		pageBean.setPageSize(pageSize);
-		pageBean.setLists(lists);
-		pageBean.setTotalPage(num.intValue());
-		pageBean.setTotalCount(totalCount);
-		log.info(pageBean);
+		PageBean<TbUser> pageBean = new PageBean<TbUser>(currentPage,pageSize,lists,num.intValue(),totalCount);		
 		return pageBean;
-	}
-
-
-	@Override
-	public int selectCount() {
-		return tbUserDao.selectCount();
 	}
 
 }
