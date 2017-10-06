@@ -1,11 +1,8 @@
 package com.torrow.school.dao;
 
 import java.util.*;
-
 import org.apache.ibatis.annotations.Param;
-
 import com.torrow.school.entity.TbUser;
-import com.torrow.school.util.PagingVO;
 
 public interface TbUserDao {
 	
@@ -37,8 +34,6 @@ public interface TbUserDao {
      */
     List<TbUser> findByPage(HashMap<String,Object> map);
     
-	List<TbUser> findByPaging(PagingVO pagingVO);
-	
 	//查询所有
 	public List<TbUser> selectAll();
 }

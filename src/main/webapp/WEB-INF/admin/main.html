@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>主页</title>
+</head>
+<body>
+    <!-- 当前用户：${pageScope.currentUser}(只能在同一个页面中使用)  <br>
+    当前用户：${requestScope.currentUser}-${roleName} 有重定向数据就访问不到<br>
+    当前用户：${sessionScope.currentUser}-${roleName} 可以使用<br>
+    <hr>
+    <a href="add"> 添加用户</a><br>-->
+    <span th:if ="${pagemsg.totalCount}==0">
+        没有任何用户信息！
+    </span>
+ <div th:if ="${pagemsg.totalCount}!=0">
+        <table border="1" cellpadding="10" cellspacing="0" class="table1">
+        <thead>
+            <tr>
+                <td>编号</td>
+                <td>用户名</td>
+                <td>密码</td>
+                <td>邮件</td>
+                <td>联系电话</td>
+                <td>职位</td>
+                <td>用户名</td>
+                <td>密码</td>
+                <td>邮件</td>
+                <td>联系电话</td>
+                <td>职位</td>
+                <td>Edit</td>
+                <td>Delete</td>
+            </tr>
+            </thead>
+<!--             <c:forEach items="${requestScope.pagemsg.lists}" var="u"> -->
+                <tr th:each="user,userStart:${pagemsg.lists}">
+                    <td th:text="${user.usId }"></td>
+                    <td th:text="${user.usEmail}">${user.usEmail}</td>
+                    <td th:text="${user.usPassword}">${user.usPassword }</td>
+                    <td th:text="${user.usName}">${user.usName }</td>
+                    <td th:text="${user.usSex}">${user.usSex }</td>
+                    <td th:text="${user.caId}">${user.caId }</td>
+                    <td th:text="${user.caName}">${user.caName }</td>
+                    <td th:text="${user.usPhone}">${user.usPhone }</td>
+                    <td th:text="${user.usPicture}">${user.usPicture }</td>
+                    <td th:text="${user.usIntroduction}">${user.usIntroduction }</td>
+                    <td th:text="${user.usAchievements}">${user.usAchievements }</td>
+                    <td><a href="edit?id=${u.id}">Edit</a></td>
+                    <td><a href="delete?id=${u.id}" onclick="return confirm('确定要删除吗')">Delete</a></td>
+                </tr>
+<!--             </c:forEach>         -->
+        </table>    
+    </div>
+
+<table >
+<tr>
+<td class="td2">
+   <span th:if ="${pagemsg.currPage != 1}">
+           <a th:href="@{/user/main?(currentPage=1)}">[首页]</a>&nbsp;&nbsp;
+           <a th:href="@{/user/main?(currentPage=${pagemsg.currPage-1})}">[上一页]</a>&nbsp;&nbsp;
+
+       <span th:if ="${pagemsg.currPage != pagemsg.totalPage}">
+           <a th:href="@{/user/main?(currentPage=${pagemsg.currPage+1})}">[下一页]</a>&nbsp;&nbsp;
+           <a th:href="@{/user/main?(currentPage=${pagemsg.totalPage})}">[尾页]</a>&nbsp;&nbsp;
+		</span>
+   </span>
+</td>
+</tr>
+</table>
+</body>
+</html>

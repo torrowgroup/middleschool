@@ -2,7 +2,7 @@ package com.torrow.school.util;
 import java.util.List;
 /**
  * 分页实体类
- * @author Peng
+ * @author 
  * @Date2016年12月13日 上午9:40:10
  */
 public class PageBean<T> {
@@ -56,5 +56,11 @@ public class PageBean<T> {
     public void setLists(List<T> lists) {
         this.lists = lists;
     }
+
+	@Override
+	public String toString() {
+		return "PageBean [currPage=" + currPage + ", pageSize=" + pageSize + ", totalCount=" + totalCount
+				+ ", totalPage=" + totalPage + ", lists=" + lists + "]";
+	}
 
 }
