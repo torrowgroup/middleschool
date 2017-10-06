@@ -11,7 +11,7 @@ public interface TbUserService {
 
     //登陆的方法
 	TbUser login(String usEmail, String usPassword);
+
 	//得到分页
     PageBean<TbUser> findPage(int currentPage);
-
 }

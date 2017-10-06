@@ -10,11 +10,11 @@ import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbUser;
 
+
 /**
- * 
- * @author 张金高
+ * @author 安李杰
  *
- *         2017年10月6日下午4:50:17
+ * @2017年10月6日下午5:33:50
  */
 @Controller
 @RequestMapping("/user")

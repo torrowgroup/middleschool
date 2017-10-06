@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface TbCategoryService {
     int deleteByPrimaryKey(Integer caId);
-
-    int insert(TbCategory record);
+    //插入类别
+    public void insert(TbCategory record);
 
     TbCategory selectByPrimaryKey(Integer caId);
     
@@ -15,4 +15,6 @@ public interface TbCategoryService {
     List<TbCategory> selectAll();
 
     int updateByPrimaryKey(TbCategory record);
+    //进行查询类别名称
+	public TbCategory selectCaName(String caName);
 }

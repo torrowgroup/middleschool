@@ -14,11 +14,13 @@
   </delete>
   
   <insert id="insert" parameterType="com.torrow.school.entity.TbCategory">
-    insert into tb_category (ca_pId, ca_name, 
-      spare)
-    values ( #{caPid,jdbcType=INTEGER}, #{caName,jdbcType=VARCHAR}, 
-      #{spare,jdbcType=VARCHAR})
+    insert into tb_category (ca_pId, ca_name)
+    values ( #{caPid,jdbcType=INTEGER}, #{caName,jdbcType=VARCHAR})
   </insert>
+  
+  	<select id="findCategoryByCaName"   parameterType="java.lang.String"  resultMap="BaseResultMap">
+		select * from tb_category where ca_name = #{caName}
+	</select>
   
   <update id="updateByPrimaryKey" parameterType="com.torrow.school.entity.TbCategory">
     update tb_category

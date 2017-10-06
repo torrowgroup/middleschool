@@ -34,7 +34,13 @@ public class TbCategory implements Serializable {
 		this.caName = caName;
 		this.spare = spare;
 	}
-
+	
+	public TbCategory( Integer caPid, String caName) {
+		super();
+		this.caPid = caPid;
+		this.caName = caName;
+	}
+	
 	public Integer getCaId() {
 		return caId;
 	}
