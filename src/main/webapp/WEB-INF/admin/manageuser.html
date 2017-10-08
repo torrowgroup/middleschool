@@ -1,69 +1,58 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>主页</title>
 </head>
 <body>
-    <span th:if ="${pagemsg.totalCount}==0">
-        没有任何用户信息！
-    </span>
- <div th:if ="${pagemsg.totalCount}!=0">
-<<<<<<< HEAD:src/main/webapp/WEB-INF/admin/manageuser.html
-        <table border="1" >
-=======
-        <table border="1"  class="table1">
->>>>>>> 268060ad9c7940aa92bc8c3681fd446d170de47e:src/main/webapp/WEB-INF/admin/main.html
-        <thead>
-            <tr>
-                <td>姓名</td>
-                <td>邮箱</td>
-                <td>性别</td>
-                <td>职位id</td>
-                <td>职位</td>
-                <td>联系电话</td>
-                <td>图片</td>
-                <td>Edit</td>
-                <td>Delete</td>
-            </tr>
-            </thead>
-                <tr th:each="user,userStart:${pagemsg.lists}">
- 					<td th:text="${user.usName}">${user.usName }</td>
-                    <td th:text="${user.usEmail}">${user.usEmail}</td>
-                    <td th:text="${user.usSex}">${user.usSex }</td>
-                    <td th:text="${user.caId}">${user.caId }</td>
-                    <td th:text="${user.caName}">${user.caName }</td>
-                    <td th:text="${user.usPhone}">${user.usPhone }</td>
-                    <td th:text="${user.usPicture}">${user.usPicture }</td>
-                    <td><a href="edit?id=${u.id}">Edit</a></td>
-                    <td><a href="delete?id=${u.id}" onclick="return confirm('确定要删除吗')">Delete</a></td>
-                </tr>
-        </table>    
-    </div>
+	<div th:if="${pagemsg.totalCount}==0">没有任何用户信息！</div>
+	<div th:if="${pagemsg.totalCount}!=0">
+		<table border="1">
+			<thead>
+				<tr>
+					<td>姓名</td>
+					<td>邮箱</td>
+					<td>性别</td>
+					<td>职位id</td>
+					<td>职位</td>
+					<td>联系电话</td>
+					<td>图片</td>
+					<td>Edit</td>
+					<td>Delete</td>
+				</tr>
+			</thead>
+			<tr th:each="user,userStart:${pagemsg.lists}">
+				<td th:text="${user.usName}">${user.usName }</td>
+				<td th:text="${user.usEmail}">${user.usEmail}</td>
+				<td th:text="${user.usSex}">${user.usSex }</td>
+				<td th:text="${user.caId}">${user.caId }</td>
+				<td th:text="${user.caName}">${user.caName }</td>
+				<td th:text="${user.usPhone}">${user.usPhone }</td>
+				<td th:text="${user.usPicture}">${user.usPicture }</td>
+				<td><a th:href="@{/user/updateUser?(id=${user.usId})}">Edit</a></td>
+				<td><a th:href="@{/user/deleteUser?(id=${user.usId})}"
+					onclick="return confirm('确定要删除吗')">Delete</a></td>
+			</tr>
+		</table>
+	</div>
 
-<table >
-<tr>
-<td class="td2">
-   <span th:if ="${pagemsg.currPage != 1}">
-           <a th:href="@{/user/manageUser?(currentPage=1)}">[首页]</a>&nbsp;&nbsp;
-           <a th:href="@{/user/manageUser?(currentPage=${pagemsg.currPage-1})}">[上一页]</a>&nbsp;&nbsp;
-	</span>	
-	<span th:if="${pagemsg.currPage == 1}">
-		[首页][上一页]
-	</span>
-	<span th:each="i:${#numbers.sequence(1,pagemsg.totalPage)}">
-			<a th:if="${i > pagemsg.currPage-3} and ${i < pagemsg.currPage+3}"  th:href="@{/user/manageUser?(currentPage=${i})}"th:text="${i}">#</a>
-	</span>
-    <span th:if ="${pagemsg.currPage < pagemsg.totalPage}">
-           <a th:href="@{/user/manageUser?(currentPage=${pagemsg.currPage+1})}">[下一页]</a>&nbsp;&nbsp;
-	</span>
-	<span th:if="${pagemsg.currPage >= pagemsg.totalPage}">
-		[下一页]
-	</span>
-</td>
-</tr>
-</table>
+	<table>
+		<tr>
+			<td class="td2"><span th:if="${pagemsg.currPage != 1}"> <a
+					th:href="@{/user/manageUser?(currentPage=1)}">[首页]</a>&nbsp;&nbsp;
+					<a
+					th:href="@{/user/manageUser?(currentPage=${pagemsg.currPage-1})}">[上一页]</a>&nbsp;&nbsp;
+			</span> <span th:if="${pagemsg.currPage == 1}"> [首页][上一页] </span> <span
+				th:each="i:${#numbers.sequence(1,pagemsg.totalPage)}"> <a
+					th:if="${i > pagemsg.currPage-3} and ${i < pagemsg.currPage+3}"
+					th:href="@{/user/manageUser?(currentPage=${i})}" th:text="${i}">#</a>
+			</span> <span th:if="${pagemsg.currPage < pagemsg.totalPage}"> <a
+					th:href="@{/user/manageUser?(currentPage=${pagemsg.currPage+1})}">[下一页]</a>&nbsp;&nbsp;
+			</span> <span th:if="${pagemsg.currPage >= pagemsg.totalPage}"> [下一页]
+			</span></td>
+		</tr>
+	</table>
 </body>
 </html>

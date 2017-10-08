@@ -54,4 +54,17 @@
     me_reply
     from tb_message
   </select>
+  
+  <!-- 根据分页数据start 和size查询数据 -->
+	<select id="findByPage" parameterType="Map" resultMap="BaseResultMap">
+		select * from tb_message
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+  
+  <!-- 查询用户记录总数 -->
+	<select id="selectCount" resultType="int">
+		select count(*) from tb_message
+	</select>
 </mapper>

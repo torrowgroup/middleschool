@@ -1,4 +1,6 @@
 package com.torrow.school.serviceimpl;
+import java.util.List;
+
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import com.torrow.school.base.BaseDao;
@@ -27,6 +29,21 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 	@Override
 	public PageBean<TbUser> findPage(int currentPage) {
 		return this.pageCut(currentPage);		
+	}
+
+	@Override
+	public List<TbUser> selectAll() {
+		return this.selectAllEntity();
+	}
+
+	@Override
+	public TbUser selectById(int id) {
+		return this.selectOneEntity(id);
+	}
+
+	@Override
+	public int deleteById(int id) {
+		return this.deleteEntity(id);
 	}
 
 }

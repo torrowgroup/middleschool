@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Home</title>
+</head>
+<body>
+	<form action="">
+		<table>
+			<tr>
+				<td>邮箱：</td>
+				<td><input type="email" name="usEmail" id="usEmail"
+					required="required" th:onblur="'javascript:testEmail();'"></td>
+				<td><span id="testEmail"></span></td>
+			</tr>
+			<tr>
+				<td>密码：</td>
+				<td><input type="password" name="usPassword"
+					required="required"></td>
+			</tr>
+			<tr>
+				<td>姓名：</td>
+				<td><input type="text" name="usName" required="required"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input name="usSex" type="radio" value="男" />男
+					<input name="usSex" type="radio" value="女" />女
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input /></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
