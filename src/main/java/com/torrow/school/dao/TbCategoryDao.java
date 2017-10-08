@@ -6,8 +6,6 @@ import com.torrow.school.entity.TbCategory;
 
 public interface TbCategoryDao {
 	
-	//插入类别
-	public void insert(TbCategory record);
 
 	//查看类别名称是否重复
 	public TbCategory findCategoryByCaName(@Param("caName")String caName);

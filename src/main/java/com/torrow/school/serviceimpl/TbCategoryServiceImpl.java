@@ -6,7 +6,7 @@ import com.torrow.school.base.BaseDao;
 import com.torrow.school.dao.TbCategoryDao;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.service.TbCategoryService;
-
+import com.torrow.school.util.PageBean;
 @Service
 public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCategoryService{
 
@@ -19,20 +19,18 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 	private TbCategoryDao tbCategoryDao;
 	
 	@Override
-	public int deleteByPrimaryKey(Integer caId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteByPrimaryKey(Integer id) {
+		return this.deleteEntity(id);
 	}
 
 	@Override
 	public void insert(TbCategory record) {
-        tbCategoryDao.insert(record);
+        this.insertEntity(record);
 	}
 
 	@Override
-	public TbCategory selectByPrimaryKey(Integer caId) {
-		// TODO Auto-generated method stub
-		return null;
+	public TbCategory selectByPrimaryKey(Integer id) {
+		return this.selectOneEntity(id);
 	}
 
 	//得到所有类别类，调用basedao里方法
@@ -43,13 +41,18 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 
 	@Override
 	public int updateByPrimaryKey(TbCategory record) {
-		// TODO Auto-generated method stub
-		return 0;
+		return updateEntity(record);
 	}
 	
 	@Override
 	public TbCategory selectCaName(String caName) {
 		return tbCategoryDao.findCategoryByCaName(caName);
+	}
+
+	@Override
+	public PageBean<TbCategory> findPage(int currentPage) {
+		
+		return this.pageCut(currentPage);
 	}
 	
 }

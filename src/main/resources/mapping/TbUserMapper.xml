@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.torrow.school.dao.TbUserDao">
+
 	<resultMap id="BaseResultMap" type="com.torrow.school.entity.TbUser">
 		<id column="us_id" jdbcType="INTEGER" property="usId" />
 		<result column="us_email" jdbcType="VARCHAR" property="usEmail" />
@@ -21,23 +22,20 @@
 		delete from tb_user
 		where us_id = #{usId,jdbcType=INTEGER}
 	</delete>
-
-	<sql id="Base_Column_List">
-		us_id, us_email, us_password, us_name, us_sex, ca_id, ca_name, us_phone,
-		us_picture, us_introduction, spare, us_achievements
-	</sql>
-
 	<!-- 添加用户 -->
 	<insert id="insert" parameterType="com.torrow.school.entity.TbUser">
-		insert into tb_user (us_email, us_password,
+		insert into tb_user (us_email,
+		us_password,
 		us_name, us_sex, ca_id,
 		ca_name, us_phone, us_picture,
 		us_introduction, spare, us_achievements
 		)
-		values (#{usEmail,jdbcType=VARCHAR}, #{usPassword,jdbcType=VARCHAR},
+		values
+		(#{usEmail,jdbcType=VARCHAR}, #{usPassword,jdbcType=VARCHAR},
 		#{usName,jdbcType=VARCHAR}, #{usSex,jdbcType=VARCHAR},
 		#{caId,jdbcType=INTEGER},
-		#{caName,jdbcType=VARCHAR}, #{usPhone,jdbcType=VARCHAR}, #{usPicture,jdbcType=VARCHAR},
+		#{caName,jdbcType=VARCHAR},
+		#{usPhone,jdbcType=VARCHAR}, #{usPicture,jdbcType=VARCHAR},
 		#{usIntroduction,jdbcType=VARCHAR}, #{spare,jdbcType=VARCHAR},
 		#{usAchievements,jdbcType=LONGVARCHAR}
 		)
@@ -45,23 +43,30 @@
 
 	<update id="updateByPrimaryKey" parameterType="com.torrow.school.entity.TbUser">
 		update tb_user
-		set us_email = #{usEmail,jdbcType=VARCHAR},
-		us_password = #{usPassword,jdbcType=VARCHAR},
+		set
+		us_email = #{usEmail,jdbcType=VARCHAR},
+		us_password =
+		#{usPassword,jdbcType=VARCHAR},
 		us_name = #{usName,jdbcType=VARCHAR},
 		us_sex = #{usSex,jdbcType=VARCHAR},
 		ca_id = #{caId,jdbcType=INTEGER},
 		ca_name = #{caName,jdbcType=VARCHAR},
-		us_phone = #{usPhone,jdbcType=VARCHAR},
-		us_picture = #{usPicture,jdbcType=VARCHAR},
-		us_introduction = #{usIntroduction,jdbcType=VARCHAR},
+		us_phone =
+		#{usPhone,jdbcType=VARCHAR},
+		us_picture =
+		#{usPicture,jdbcType=VARCHAR},
+		us_introduction =
+		#{usIntroduction,jdbcType=VARCHAR},
 		spare = #{spare,jdbcType=VARCHAR},
 		us_achievements = #{usAchievements,jdbcType=LONGVARCHAR}
-		where us_id = #{usId,jdbcType=INTEGER}
+		where us_id =
+		#{usId,jdbcType=INTEGER}
 	</update>
 
 	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
 		resultMap="BaseResultMap">
-		select us_id, us_email, us_password, us_name, us_sex, ca_id, ca_name,
+		select us_id, us_email, us_password, us_name, us_sex, ca_id,
+		ca_name,
 		us_phone, us_picture,
 		us_introduction, spare, us_achievements
 		from tb_user
@@ -69,7 +74,8 @@
 	</select>
 
 	<select id="selectAll" resultMap="BaseResultMap">
-		select us_id, us_email, us_password, us_name, us_sex, ca_id, ca_name,
+		select us_id, us_email,
+		us_password, us_name, us_sex, ca_id, ca_name,
 		us_phone, us_picture,
 		us_introduction, spare, us_achievements
 		from tb_user

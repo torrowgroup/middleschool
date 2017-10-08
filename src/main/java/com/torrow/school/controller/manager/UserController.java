@@ -17,7 +17,7 @@ import com.torrow.school.entity.TbResource;
 import com.torrow.school.entity.TbUser;
 
 /**
- * @author 安李杰
+ * @author 张金高
  *
  * @2017年10月6日下午5:33:50
  */

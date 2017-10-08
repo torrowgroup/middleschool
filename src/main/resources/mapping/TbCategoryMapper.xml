@@ -13,9 +13,11 @@
     where ca_id = #{caId,jdbcType=INTEGER}
   </delete>
   
-  <insert id="insert" parameterType="com.torrow.school.entity.TbCategory">
-    insert into tb_category (ca_pId, ca_name)
-    values ( #{caPid,jdbcType=INTEGER}, #{caName,jdbcType=VARCHAR})
+   <insert id="insert" parameterType="com.torrow.school.entity.TbCategory">
+    insert into tb_category (ca_pId, ca_name, 
+      spare)
+    values ( #{caPid,jdbcType=INTEGER}, #{caName,jdbcType=VARCHAR}, 
+      #{spare,jdbcType=VARCHAR})
   </insert>
   
   	<select id="findCategoryByCaName"   parameterType="java.lang.String"  resultMap="BaseResultMap">
@@ -40,4 +42,17 @@
     select ca_id, ca_pId, ca_name, spare
     from tb_category
   </select>
+  
+  <!-- 根据分页数据start 和size查询数据 -->
+	<select id="findByPage" parameterType="Map" resultMap="BaseResultMap">
+		select * from tb_category
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+
+	<!-- 查询用户记录总数 -->
+	<select id="selectCount" resultType="int">
+		select count(*) from tb_category
+	</select>
 </mapper>
