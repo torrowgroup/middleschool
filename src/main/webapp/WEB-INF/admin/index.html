@@ -6,21 +6,26 @@
   <title>管理系统</title>
 </head>
 <body>
-<a th:href="@{/user/main}">用户管理</a>
 <details>
 	<summary>用户管理</summary>
+	<a th:href="@{/user/toAddUser}" target="mainIframe">添加用户</a><br>
+	<a th:href="@{/user/manageUser}" target="mainIframe">用户管理</a>
+</details>
+<details>
+	<summary>留言管理</summary>
 	<a href="">添加用户</a><br>
 	<a href="">管理用户</a>
 </details>
 <details>
 	<summary>类别管理</summary>
-	<a th:href="@{/category/categoryjumping}">添加类别</a><br>
-	<a th:href="@{/category/categoryCheckByPage}">管理类别</a>
+	<a th:href="@{/category/categoryjumping}" target="mainIframe">添加类别</a><br>
+	<a th:href="@{/category/manageCategory}" target="mainIframe">管理类别</a>
 </details>
 <details>
 	<summary>资源管理</summary>
 	<a href="">添加资源</a><br>
 	<a href="">管理资源</a>
 </details>
+<iframe name="mainIframe" height="500px;" width="1000px;"></iframe>
 </body>
 </html>

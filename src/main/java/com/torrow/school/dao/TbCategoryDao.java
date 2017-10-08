@@ -10,5 +10,6 @@ public interface TbCategoryDao {
 	//查看类别名称是否重复
 	public TbCategory findCategoryByCaName(@Param("caName")String caName);
 
+	
 
 }

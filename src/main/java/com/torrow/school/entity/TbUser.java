@@ -9,27 +9,16 @@ public class TbUser implements Serializable {
 	private static final long serialVersionUID = 1L;
     
 	private Integer usId;	//用户编号
-
-    private String usEmail;	//用户账号
-
+    private String usEmail;	//用户邮箱，账号
     private String usPassword;	//用户密码
-
     private String usName;	//用户姓名
-
     private String usSex;	//用户性别
-
     private Integer caId;	//身份编号，类别类编号
-
     private String caName;	//身份名称
-
     private String usPhone;	//联系方式
-
     private String usPicture;	//用户照片
-
     private String usIntroduction;	//用户简介
-
     private String usAchievements;	//用户成就
-    
     private String spare;	//备用
 
 	public TbUser() {

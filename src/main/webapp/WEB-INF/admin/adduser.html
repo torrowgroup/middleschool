@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Home</title>
+</head>
+<body>
+<form th:action="@{/user/addUser}" method="post">
+	<table>
+		<tr>
+			<td>姓名：</td>
+			<td><input type="text" name="usName" required="required"></td>
+		</tr>
+		<tr>
+			<td>相片：</td>
+			<td><input type="file" name="usPicture"></td>
+		</tr>
+		<tr>
+			<td>身份：</td>
+			<td>
+				<select th:each="TbCategory">
+					<option></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>
