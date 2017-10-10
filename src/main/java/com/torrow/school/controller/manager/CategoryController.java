@@ -2,6 +2,7 @@ package com.torrow.school.controller.manager;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -71,7 +72,6 @@ public class CategoryController extends BaseController {
 	 */
 	@RequestMapping("/selectOneCategory")
 	public String selectOneCategory(Integer id,Model model) {
-		log.info("look"+id);
 		TbCategory category=categoryService.selectByPrimaryKey(id);
 		model.addAttribute("category",category);
 		return "admin/updatecategory";
@@ -83,26 +83,30 @@ public class CategoryController extends BaseController {
 	 * @return 修改类别信息
 	 */
 	@RequestMapping("/updateCategory")
-	public String updateCategory(Model model,String caName) {
+	public String updateCategory(Model model,String caName,Integer id) {
 		TbCategory tbCategory=categoryService.selectCaName(caName);
 		if(tbCategory!=null) {
 			model.addAttribute("message","该类别已存在,修改失败");
 			return "admin/updatecategory";
-		}else {
-			log.info("Me"+caName);
-			TbCategory record=new TbCategory();
+		}else{
+			TbCategory record=categoryService.selectByPrimaryKey(id);
 			record.setCaName(caName);
 			categoryService.updateByPrimaryKey(record);
 			model.addAttribute("message","修改成功");
 		}
-		return "admin/updatecategory";
+		return "admin/index";
 	}
 	
+	/**
+	 * @param model
+	 * @param id
+	 * @return 根据id来删除类别类
+	 */
 	@RequestMapping("/deleteCategory")
 	public String deleteCategory(Model model,Integer id) {
 		log.info("P"+id);
 		categoryService.deleteByPrimaryKey(id);
 		model.addAttribute("message","删除成功");
-		return "admin/managecategory";
+		return "admin/index";
 	}
 }

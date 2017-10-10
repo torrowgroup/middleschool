@@ -6,16 +6,17 @@
   <title>home</title>
 </head>
 <body>
-<form th:action="@{/category/updateCategory}" method="post">  
+<form th:action="@{/category/updateCategory?(id=${category.caId})}" method="post">  
 	  <table>
 	    <tr>
 	      <td>类别名称</td>
-		  <td><input type="text" name="caName" value="${category.caName}"/></td>
+		  <td>
+		  <input type="text" name="caName" th:value="${category.caName}" />
+		  </td>  
 		</tr> 
 		<tr>
 			<td th:text="${message}"></td>
-		   <td><input type="submit" value="提交"/></td>
-		 	<td><input type="reset" value="重置"></td>
+		   <td><input type="submit" value="修改"/></td>
 		</tr>
 	  </table>
 </form>  

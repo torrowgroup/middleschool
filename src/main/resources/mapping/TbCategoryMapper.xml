@@ -19,7 +19,7 @@
     values ( #{caPid,jdbcType=INTEGER}, #{caName,jdbcType=VARCHAR}, 
       #{spare,jdbcType=VARCHAR})
   </insert>
-  
+  	<!--添加类别  -->
   	<select id="findCategoryByCaName"   parameterType="java.lang.String"  resultMap="BaseResultMap">
 		select * from tb_category where ca_name = #{caName}
 	</select>
@@ -43,7 +43,7 @@
     from tb_category
   </select>
   
-  <!-- 根据分页数据start 和size查询数据 -->
+  	<!-- 根据分页数据start 和size查询数据 -->
 	<select id="findByPage" parameterType="Map" resultMap="BaseResultMap">
 		select * from tb_category
 		<if test="start!=null and size!=null">

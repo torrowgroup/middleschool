@@ -1,6 +1,8 @@
 package com.torrow.school.service;
 
 import com.torrow.school.entity.TbResource;
+import com.torrow.school.util.PageBean;
+
 import java.util.List;
 
 public interface TbResourceService {
@@ -13,4 +15,6 @@ public interface TbResourceService {
     List<TbResource> selectAll();
 
     int updateByPrimaryKey(TbResource record);
+    //对资源类的分页查看
+    public PageBean<TbResource>  findPage(int currentPage);
 }

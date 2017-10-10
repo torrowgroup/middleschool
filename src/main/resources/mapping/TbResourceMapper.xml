@@ -47,4 +47,17 @@
     select re_id, ca_id, ca_name, re_title, re_ issuer, re_issuingdate, spare, re_content
     from tb_resource
   </select>
+  
+  	<!-- 根据分页数据start 和size查询数据 -->
+	<select id="findByPage" parameterType="Map" resultMap="BaseResultMap">
+		select * from tb_resource
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+
+	<!-- 查询资源类记录总数 -->
+	<select id="selectCount" resultType="int">
+		select count(*) from tb_resource
+	</select>
 </mapper>
