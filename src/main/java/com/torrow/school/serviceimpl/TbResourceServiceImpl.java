@@ -43,8 +43,7 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 
 	@Override
 	public List<TbResource> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.selectAllEntity();
 	}
 
 	@Override

@@ -5,11 +5,18 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.torrow.school.base.BaseDao;
 import com.torrow.school.entity.TbMessage;
 import com.torrow.school.service.TbMessageService;
+import com.torrow.school.util.PageBean;
 
 @Service
-public class TbMessageServiceImpl  implements TbMessageService{
+public class TbMessageServiceImpl extends BaseDao<TbMessage> implements TbMessageService{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public int deleteByPrimaryKey(Integer meId) {
@@ -25,8 +32,7 @@ public class TbMessageServiceImpl  implements TbMessageService{
 
 	@Override
 	public TbMessage selectByPrimaryKey(Integer meId) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.selectByPrimaryKey(meId);
 	}
 
 	@Override
@@ -39,6 +45,11 @@ public class TbMessageServiceImpl  implements TbMessageService{
 	public int updateByPrimaryKey(TbMessage record) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public PageBean<TbMessage> findPage(int currentPage) {
+		return this.pageCut(currentPage);
 	}
 	
 

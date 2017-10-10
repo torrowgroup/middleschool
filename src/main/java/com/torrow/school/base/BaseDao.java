@@ -89,7 +89,7 @@ public class BaseDao<T> extends SqlSessionDaoSupport
     
 	/**
 	 * 分页查询
-	 * @param currentPage
+	 * @param currentPage 当前页码
 	 * @return
 	 */
 	public final PageBean<T> pageCut(int currentPage) {
@@ -101,7 +101,7 @@ public class BaseDao<T> extends SqlSessionDaoSupport
 		map.put("start", (currentPage - 1) * pageSize);
 		map.put("size", pageSize);
 		List<T> lists = getSqlSession().selectList(this.getNameSpace()+".findByPage", map);//得到所有的记录
-		PageBean<T> pageBean = new PageBean<T>(currentPage,pageSize,lists,num.intValue(),totalCount);		
+		PageBean<T> pageBean = new PageBean<T>(currentPage,pageSize,lists,num.intValue(),totalCount);
 		return pageBean;
 	}
 }

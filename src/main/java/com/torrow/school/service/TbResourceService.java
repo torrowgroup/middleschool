@@ -12,6 +12,8 @@ public interface TbResourceService {
 
     TbResource selectByPrimaryKey(Integer reId);
 
+    //张金高
+    //得到所有资源类
     List<TbResource> selectAll();
 
     int updateByPrimaryKey(TbResource record);
