@@ -30,9 +30,9 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	}
 
 	@Override
-	public int insert(TbResource record) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void insert(TbResource record) {
+		System.out.println("555555");
+		this.insertEntity(record);
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import java.util.List;
 public interface TbResourceService {
     int deleteByPrimaryKey(Integer reId);
 
-    int insert(TbResource record);
+    void insert(TbResource record);
 
     TbResource selectByPrimaryKey(Integer reId);
 
