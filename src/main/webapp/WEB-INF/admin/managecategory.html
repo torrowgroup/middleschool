@@ -24,8 +24,8 @@
                 <tr th:each="category,categoryStart:${pagemsg.lists}">
                 	<td th:text="${category.caId}">${category.caId}</td>
                     <td th:text="${category.caName}">${category.caName}</td>
-                    <td><a href="@{/category/selectOneCategory?id=${category.caId}">Edit</a></td>
-                    <td><a href="@{/category/deleteCategory?id=${category.caId}" onclick="return confirm('确定要删除吗')">Delete</a></td>
+                    <td><a th:href="@{/category/selectOneCategory?(id=${category.caId})}">Edit</a></td>
+                    <td><a th:href="@{/category/deleteCategory?(id=${category.caId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
                 </tr>
         </table>    
     </div>

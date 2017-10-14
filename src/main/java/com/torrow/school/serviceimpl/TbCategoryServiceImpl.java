@@ -41,7 +41,8 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 
 	@Override
 	public int updateByPrimaryKey(TbCategory record) {
-		return updateEntity(record);
+		log.info(record+"7744");
+		return this.updateEntity(record);
 	}
 	
 	@Override
@@ -51,7 +52,6 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 
 	@Override
 	public PageBean<TbCategory> findPage(int currentPage) {
-		
 		return this.pageCut(currentPage);
 	}
 	

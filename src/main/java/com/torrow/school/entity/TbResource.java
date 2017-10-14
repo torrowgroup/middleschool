@@ -1,7 +1,11 @@
 package com.torrow.school.entity;
 
 import java.io.Serializable;
+
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 /*
  * 资源类
  */
@@ -41,6 +45,25 @@ public class TbResource implements Serializable {
 		this.spare = spare;
 	}
 
+	public TbResource(Integer caId, Date reIssuingdate,String caName, String reTitle,
+			String reContent) {
+		super();
+		this.caId = caId;
+		this.reIssuingdate = reIssuingdate;
+		this.caName = caName;
+		this.reTitle = reTitle;
+		this.reContent = reContent;
+	}
+	
+	public TbResource(Integer caId,String caName, String reTitle,
+			String reContent) {
+		super();
+		this.caId = caId;
+		this.caName = caName;
+		this.reTitle = reTitle;
+		this.reContent = reContent;
+	}
+	
 	public Integer getReId() {
 		return reId;
 	}

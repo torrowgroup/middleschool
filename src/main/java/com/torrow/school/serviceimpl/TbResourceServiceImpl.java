@@ -8,7 +8,13 @@ import org.springframework.stereotype.Service;
 import com.torrow.school.base.BaseDao;
 import com.torrow.school.entity.TbResource;
 import com.torrow.school.service.TbResourceService;
+import com.torrow.school.util.PageBean;
 
+/**
+ * @author 安李杰
+ *
+ * @2017年10月10日上午9:07:28
+ */
 @Service
 public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbResourceService{
 
@@ -24,9 +30,9 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	}
 
 	@Override
-	public int insert(TbResource record) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void insert(TbResource record) {
+		System.out.println("555555");
+		this.insertEntity(record);
 	}
 
 	@Override
@@ -44,6 +50,11 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	public int updateByPrimaryKey(TbResource record) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public PageBean<TbResource> findPage(int currentPage) {
+		return this.pageCut(currentPage);
 	}
 
 }

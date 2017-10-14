@@ -42,7 +42,7 @@ public abstract class BaseController implements Serializable {
 	@Resource
 	protected TbMessageService messageService;
 	@Resource
-	protected TbResourceService resourceSerice;
+	protected TbResourceService resourceService;
 	@Resource
 	protected TbUserService userService;
 	@Resource

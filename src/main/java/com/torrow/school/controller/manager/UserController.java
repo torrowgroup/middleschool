@@ -40,7 +40,7 @@ public class UserController extends BaseController {
 	// 到达添加用户界面
 	@RequestMapping("toAddUser")
 	public String toAddUser(Model model) {
-		List<TbResource> resourceList = resourceSerice.selectAll();
+		List<TbResource> resourceList = resourceService.selectAll();
 		log.info(resourceList);
 
 		model.addAttribute("resourceList", resourceList);
