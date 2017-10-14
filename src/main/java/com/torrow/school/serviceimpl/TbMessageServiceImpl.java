@@ -20,8 +20,7 @@ public class TbMessageServiceImpl extends BaseDao<TbMessage> implements TbMessag
 
 	@Override
 	public int deleteByPrimaryKey(Integer meId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.deleteEntity(meId);
 	}
 
 	@Override
@@ -32,7 +31,7 @@ public class TbMessageServiceImpl extends BaseDao<TbMessage> implements TbMessag
 
 	@Override
 	public TbMessage selectByPrimaryKey(Integer meId) {
-		return this.selectByPrimaryKey(meId);
+		return this.selectOneEntity(meId);
 	}
 
 	@Override
@@ -43,13 +42,20 @@ public class TbMessageServiceImpl extends BaseDao<TbMessage> implements TbMessag
 
 	@Override
 	public int updateByPrimaryKey(TbMessage record) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public PageBean<TbMessage> findPage(int currentPage) {
 		return this.pageCut(currentPage);
+	}
+
+	@Override
+	public int reply(int id, String meReply) {
+		TbMessage message =  this.selectOneEntity(id);
+		message.setMeReply(meReply);
+		message.setMeStatus("已回复");
+		return this.updateEntity(message);
 	}
 	
 

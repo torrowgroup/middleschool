@@ -6,6 +6,7 @@
   <title>Home</title>
 </head>
 <body>
+<div th:text="${msg}"></div>
 <table border="1">
 	<tr>
 		<td>标题</td>
@@ -20,7 +21,7 @@
 		<td th:text="${message.meHide}">发布人</td>
 		<td th:text="${message.meIssuingdate}">发布时间</td>
 		<td th:text="${message.meStatus}">状态</td>
-		<td><a th:href="@{/message/answerMessage?(id=${message.meId})}">回复</a></td>
+		<td><a th:href="@{/message/toAnswerMessage?(id=${message.meId})}">回复</a></td>
 		<td><a th:href="@{/message/deleteMessage?(id=${message.meId})}">删除</a></td>
 	</tr>
 </table>
@@ -33,7 +34,7 @@
 			</span> <span th:if="${messagePage.currPage == 1}"> [首页][上一页] </span> <span
 				th:each="i:${#numbers.sequence(1,messagePage.totalPage)}"> <a
 					th:if="${i > messagePage.currPage-3} and ${i < messagePage.currPage+3}"
-					th:href="@{/user/manageUser?(currentPage=${i})}" th:text="${i}">#</a>
+					th:href="@{/message/manageMessage?(currentPage=${i})}" th:text="${i}">#</a>
 			</span> <span th:if="${messagePage.currPage < messagePage.totalPage}"> <a
 					th:href="@{/message/manageMessage?(currentPage=${messagePage.currPage+1})}">[下一页]</a>&nbsp;&nbsp;
 			</span> <span th:if="${messagePage.currPage >= messagePage.totalPage}"> [下一页]
