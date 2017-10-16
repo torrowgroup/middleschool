@@ -38,17 +38,15 @@ public class CategoryController extends BaseController {
 	 */
 	@RequestMapping("/addCategory")
 	public String addCategory(String caName,Integer caPid,Model model){
-		log.info("测试"+caName+caPid);
 		TbCategory tbCategory=categoryService.selectCaName(caName);
 		if(tbCategory!=null) {
 			model.addAttribute("message","该类别已存在");
-			return "admin/addCategory";
 		}else {
 			TbCategory record=new TbCategory(caPid,caName);
 			categoryService.insert(record);
 			model.addAttribute("message","添加成功");
 		}	
-		return this.manageCategory(1, model);
+		return "admin/addcategory";
 	}
 	
 	
@@ -60,6 +58,7 @@ public class CategoryController extends BaseController {
 	@RequestMapping("/manageCategory")
     public String  manageCategory(@RequestParam(value="currentPage",defaultValue="1")int currentPage,Model model){
 		model.addAttribute("pagemsg", categoryService.findPage(currentPage));//回显分页数据
+		session.setAttribute("currentPage", currentPage);
         return "admin/managecategory";
     }
 	
@@ -82,10 +81,10 @@ public class CategoryController extends BaseController {
 	 */
 	@RequestMapping("/updateCategory")
 	public String updateCategory(Model model,String caName,Integer id) {
+		int currentPage=(int) session.getAttribute("currentPage");
 		TbCategory tbCategory=categoryService.selectCaName(caName);
 		if(tbCategory!=null) {
 			model.addAttribute("message","该类别已存在,修改失败");
-			return "admin/updatecategory";
 		}else{
 			TbCategory record=categoryService.selectByPrimaryKey(id);
 			record.setCaName(caName);
@@ -101,8 +100,8 @@ public class CategoryController extends BaseController {
 				userService.updateByPrimaryKey(user);
 			}
 			model.addAttribute("message","修改成功");
-		}
-		return this.manageCategory(1, model);
+		 }
+		return this.manageCategory(currentPage, model);
 	}
 	
 	/**
@@ -112,6 +111,7 @@ public class CategoryController extends BaseController {
 	 */
 	@RequestMapping("/deleteCategory")
 	public String deleteCategory(Model model,Integer id) {
+		int currentPage=(int) session.getAttribute("currentPage");
 		categoryService.deleteByPrimaryKey(id);
 		TbResource tb=resourceService.selectByCaId(id);
 		if(tb!=null) {
@@ -122,6 +122,6 @@ public class CategoryController extends BaseController {
 			userService.deleteByCaId(id);
 		}
 		model.addAttribute("message","删除成功");
-		return this.manageCategory(1, model);
+		return this.manageCategory(currentPage, model);
 	}
 }

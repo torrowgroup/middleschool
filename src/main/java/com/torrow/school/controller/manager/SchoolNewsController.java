@@ -61,7 +61,7 @@ public class SchoolNewsController extends BaseController{
 				}
 			}
 		}
-		return this.manageSchoolNews(1, model);
+		return "admin/addschoolnews";
 	}
 	
 	/**
@@ -72,6 +72,7 @@ public class SchoolNewsController extends BaseController{
 	@RequestMapping("manageSchoolNews")
 	public String manageSchoolNews(@RequestParam(value="currentPage",defaultValue="1")int currentPage,Model model){
 		model.addAttribute("pagemsg",resourceService.findingByPaging(currentPage,2));//回显分页数据
+		session.setAttribute("currentPage", currentPage);
 		return "admin/manageschoolews";
 	}
 	
@@ -96,6 +97,7 @@ public class SchoolNewsController extends BaseController{
 	 */
 	@RequestMapping("updateSchoolNews")
 	public String updateSchoolNews(Model model,int id,String reTitle,String reContent){
+		int currentPage=(int) session.getAttribute("currentPage");
 		TbResource tb=resourceService.selectByPrimaryKey(id);
 		TbResource record=new TbResource(tb.getReId(),tb.getCaId(),tb.getCaName(),reTitle,tb.getReIssuer(),tb.getReIssuingdate(),reContent);
 		int i=resourceService.updateByPrimaryKey(record);
@@ -104,7 +106,7 @@ public class SchoolNewsController extends BaseController{
 		}else{
 			model.addAttribute("message","修改失败");
 		}
-		return this.manageSchoolNews(1, model);
+		return this.manageSchoolNews(currentPage, model);
 	}
 	
 	/**
@@ -114,12 +116,13 @@ public class SchoolNewsController extends BaseController{
 	 */
 	@RequestMapping("deleteNews")
 	public String deleteNews(Model model,int id){
+		int currentPage=(int) session.getAttribute("currentPage");
 		int i=resourceService.deleteByPrimaryKey(id);
 		if(i!=0) {
 			model.addAttribute("message","删除成功");
 		}else {
 			model.addAttribute("message","删除失败");
 		}
-		return this.manageSchoolNews(1, model);
+		return this.manageSchoolNews(currentPage, model);
 	}
 }

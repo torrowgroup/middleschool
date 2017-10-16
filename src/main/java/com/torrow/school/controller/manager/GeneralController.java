@@ -30,6 +30,7 @@ public class GeneralController extends BaseController{
 	@RequestMapping("manageGeneral")
 	public String manageGeneral(@RequestParam(value="currentPage",defaultValue="1")int currentPage,Model model){
 		model.addAttribute("pagemsg",resourceService.findingByPaging(currentPage,1));//回显分页数据
+		session.setAttribute("currentPage", currentPage);
 		return "admin/managegeneral";
 	}
 	
@@ -55,6 +56,7 @@ public class GeneralController extends BaseController{
 	 */
 	@RequestMapping("updateGeneral")
 	public String updateGeneral(Model model,int id,String reTitle,String reContent){
+		int currentPage=(int) session.getAttribute("currentPage");
 		TbResource tb=resourceService.selectByPrimaryKey(id);
 		TbResource record=new TbResource(tb.getReId(),tb.getCaId(),tb.getCaName(),reTitle,tb.getReIssuer(),tb.getReIssuingdate(),reContent);
 		int i=resourceService.updateByPrimaryKey(record);
@@ -63,7 +65,7 @@ public class GeneralController extends BaseController{
 		}else{
 			model.addAttribute("message","修改失败");
 		}
-		return this.manageGeneral(1, model);	
+		return this.manageGeneral(currentPage, model);	
 	}
 	
 	/**
@@ -71,13 +73,14 @@ public class GeneralController extends BaseController{
 	 */
 	@RequestMapping("deleteGeneral")
 	public String deleteGeneral(Model model,int id){
+		int currentPage=(int) session.getAttribute("currentPage");
 		int i=resourceService.deleteByPrimaryKey(id);
 		if(i!=0) {
 			model.addAttribute("message","删除成功");
 		}else {
 			model.addAttribute("message","删除失败");
 		}
-		return this.manageGeneral(1, model);
+		return this.manageGeneral(currentPage, model);
 	}
 	
 	@RequestMapping("manageGeneralJumping")
@@ -128,7 +131,7 @@ public class GeneralController extends BaseController{
 				}
 			
 		}
-		return this.manageGeneral(1, model);
+		return "admin/addgeneral";
 	}
 	
 }

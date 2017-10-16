@@ -34,7 +34,7 @@ public class BottomLinkController extends BaseController{
 		TbResource record=new TbResource("底部链接",reTitle,reContent);
 		resourceService.insert(record);
 		model.addAttribute("message","添加成功");
-		return this.manageLink(model);
+		return "admin/addlink";
 	}
 	
 	/**
