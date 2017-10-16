@@ -19,7 +19,7 @@ public class TbMessage implements Serializable {
 
     private Date meIssuingdate;	//留言日期
 
-    private String meStatus;	//留言状态
+    private String meStatus;	//留言状态(未回复，已回复)
 
     private String meContent;	//留言内容
 

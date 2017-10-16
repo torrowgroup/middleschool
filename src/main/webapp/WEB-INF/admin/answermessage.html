@@ -4,12 +4,75 @@
 
 <head>
   <title>Home</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/static/dist/css/wangEditor.min.css}">
+<script th:inline="javascript">
+/*<![CDATA[*/
+	window.onload=function(){
+		var me = [[${message.meReply}]];
+		editor.$txt.html(me);
+	}
+     function modifyContent() {
+       var content = document.getElementById("content");   	    
+	   content.value = editor.$txt.html();
+   }
+ /*]]>*/
+</script>
+<style>
+.tilp{
+  padding-top:20px;
+  font-size:26px;
+  text-align:center;
+  font-family:"华文行楷","微软雅黑";
+  text-shadow: 3px 3px 6px rgba(0,0,0,.4);
+
+}
+</style>
 </head>
 <body>
-<table>
+<table border="1">
 	<tr>
-		<td>标题</td>
-		<td><input /></td>
+		<td>标题：</td>
+		<td th:text="${message.meTitle}"></td>
+	</tr>
+	<tr>
+		<td>发布人：</td>
+		<td th:text="${message.meHide}"></td>
+	</tr>
+	<tr th:if="${message.mePicture}!=null">
+		<td>图片</td>
+		<td><img alt="加载中" src="@{/middleschool/static/uploadimg/${message.mePicture}}"></td>
+	</tr>
+	<tr>
+		<td>内容</td>
+		<td>
+			<textarea rows="" cols="" th:text="${message.meContent}"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>留言日期：</td>
+		<td th:text="${message.meIssuingdate}"/></td>
+	</tr>
+	<tr>
+		<td>回复</td>
+		<td>
+			<form th:action="@{/message/reply}"  method="post" onsubmit="modifyContent()">
+			<div style="width: 600px;">
+				<input type="hidden" name="id" th:value="${message.meId}"/>
+				<textarea name="meReply" style="display: none;" id="content"></textarea>
+				<div id="editor"></div>
+				<script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
+				<script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script>
+					<script type="text/javascript">
+				        var E = window.wangEditor
+				        var editor = new E('editor')
+// 				     	editor.config.uploadImgUrl = '${rootPath}user/Participator_uploadImg'
+// 				     	editor.config.uploadImgFileName = 'myFileName'
+				        editor.create()
+				    </script>
+				<input type="submit" value="回复"/>
+				</div>
+			</form>	
+		</td>
 	</tr>
 </table>
 </body>

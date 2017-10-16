@@ -13,6 +13,7 @@ import com.torrow.school.util.PageBean;
  */
 
 public interface TbMessageService {
+	//删除留言
     int deleteByPrimaryKey(Integer meId);
 
     int insert(TbMessage record);
@@ -26,4 +27,6 @@ public interface TbMessageService {
 
     //得到所有留言，分页
 	PageBean<TbMessage> findPage(int currentPage);
+	//留言回复
+	int reply(int id, String meReply);
 }
