@@ -22,6 +22,12 @@
 		delete from tb_user
 		where us_id = #{usId,jdbcType=INTEGER}
 	</delete>
+	<!-- 根据caId来删除 -->
+	<delete id="deleteByCaId" parameterType="java.lang.Integer">
+		delete from tb_user
+		where ca_id = #{caId,jdbcType=INTEGER}
+	</delete>
+	
 	<!-- 添加用户 -->
 	<insert id="insert" parameterType="com.torrow.school.entity.TbUser">
 		insert into tb_user (us_email,
@@ -72,7 +78,18 @@
 		from tb_user
 		where us_id = #{usId,jdbcType=INTEGER}
 	</select>
-
+	
+	<!--根据caId来查询 -->
+	<select id="selectByCaId" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select us_id, us_email, us_password, us_name, us_sex, ca_id,
+		ca_name,
+		us_phone, us_picture,
+		us_introduction, spare, us_achievements
+		from tb_user
+		where ca_id = #{caId,jdbcType=INTEGER}
+	</select>
+	
 	<select id="selectAll" resultMap="BaseResultMap">
 		select us_id, us_email,
 		us_password, us_name, us_sex, ca_id, ca_name,

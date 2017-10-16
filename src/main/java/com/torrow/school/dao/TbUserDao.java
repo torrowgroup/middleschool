@@ -23,4 +23,9 @@ public interface TbUserDao {
     
 	//查询所有
 	public List<TbUser> selectAll();
+	
+	//根据caId来查询
+	public TbUser selectByCaId(@Param("caId")Integer caId);
+	//根据caId来删除
+	public int deleteByCaId(@Param("caId")Integer caId);
 }

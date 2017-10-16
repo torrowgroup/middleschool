@@ -1,14 +1,12 @@
 package com.torrow.school.controller.manager;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
-
+import com.torrow.school.entity.TbResource;
+import com.torrow.school.entity.TbUser;
 /**
  * 这个控制器是对类别进行管理的
  * @author 安李杰
@@ -50,7 +48,7 @@ public class CategoryController extends BaseController {
 			categoryService.insert(record);
 			model.addAttribute("message","添加成功");
 		}	
-		return "admin/addcategory";
+		return this.manageCategory(1, model);
 	}
 	
 	
@@ -92,9 +90,19 @@ public class CategoryController extends BaseController {
 			TbCategory record=categoryService.selectByPrimaryKey(id);
 			record.setCaName(caName);
 			categoryService.updateByPrimaryKey(record);
+			TbResource tb=resourceService.selectByCaId(id);
+			if(tb!=null) {
+				tb.setCaName(caName);
+				resourceService.updateByPrimaryKey(tb);
+			}
+			TbUser user=userService.selectByCaId(id);
+			if(user!=null){
+				user.setCaName(caName);
+				userService.updateByPrimaryKey(user);
+			}
 			model.addAttribute("message","修改成功");
 		}
-		return "admin/index";
+		return this.manageCategory(1, model);
 	}
 	
 	/**
@@ -104,9 +112,16 @@ public class CategoryController extends BaseController {
 	 */
 	@RequestMapping("/deleteCategory")
 	public String deleteCategory(Model model,Integer id) {
-		log.info("P"+id);
 		categoryService.deleteByPrimaryKey(id);
+		TbResource tb=resourceService.selectByCaId(id);
+		if(tb!=null) {
+			resourceService.deleteByCaId(id);
+		}
+		TbUser user=userService.selectByCaId(id);
+		if(user!=null){
+			userService.deleteByCaId(id);
+		}
 		model.addAttribute("message","删除成功");
-		return "admin/index";
+		return this.manageCategory(1, model);
 	}
 }

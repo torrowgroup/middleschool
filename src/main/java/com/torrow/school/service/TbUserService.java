@@ -22,4 +22,12 @@ public interface TbUserService {
 	TbUser selectById(int id);
 	//根据id删除用户
 	int deleteById(int id);
+	//这个方法是为了根据caId来查找的
+	TbUser selectByCaId(Integer caId);
+	
+	//这个方法根据caId来删除
+	int deleteByCaId(Integer caId);
+	
+	//修改
+    int updateByPrimaryKey(TbUser record);
 }

@@ -16,6 +16,12 @@
     where re_id = #{reId,jdbcType=INTEGER}
   </delete>
   
+  <!--根据caId来删除 -->
+  <delete id="deleteByCaId" parameterType="java.lang.Integer">
+    delete from tb_resource
+    where ca_id = #{caId,jdbcType=INTEGER}
+  </delete>
+  
   <insert id="insert" parameterType="com.torrow.school.entity.TbResource">
     insert into tb_resource (ca_id, ca_name, 
       re_title, re_issuer, re_issuingdate, 
@@ -41,6 +47,12 @@
     select re_id, ca_id, ca_name, re_title, re_issuer, re_issuingdate, spare, re_content
     from tb_resource
     where re_id = #{reId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByCaId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select re_id, ca_id, ca_name, re_title, re_issuer, re_issuingdate, spare, re_content
+    from tb_resource
+    where ca_id = #{caId,jdbcType=INTEGER}
   </select>
   
   <select id="selectAll" resultMap="BaseResultMap">

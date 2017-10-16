@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>home</title>
+</head>
+<body>
+<form th:action="@{/link/updateLink?(id=${link.reId})}" method="post">  
+	  <table>
+		<tr>
+				<td>链接名称</td>
+				<td><input type="text" name="reTitle" th:value="${link.reTitle}"/></td>
+			</tr>
+			
+			<tr>
+				<td>链接地址</td>
+				<td><input type="url" name="reContent" th:value="${link.reContent}"/></td>
+			</tr>
+		<tr>
+			<td th:text="${message}"></td>
+		   <td><input type="submit" value="修改"/></td>
+		</tr>
+	  </table>
+</form>  
+</body>
+</html>

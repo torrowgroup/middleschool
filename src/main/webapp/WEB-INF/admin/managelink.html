@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>底部链接管理</title>
+</head>
+<body>
+  <span th:if ="${itemList}==0">
+        没有任何链接信息！
+    </span>
+ <div th:if ="${itemList}!=0">
+        <table border="1"  class="table1">
+        <thead>
+            <tr>
+            	<td>链接名称</td>
+                <td>链接地址</td>
+                <td>Edit</td>
+                <td>Delete</td>
+            </tr>
+            </thead>
+                <tr th:each="link,linkStart:${itemList}">
+                	<td th:text="${link.reTitle}">${link.reTitle}</td>
+                    <td th:text="${link.reContent}">${link.reContent}</td>
+                    <td><a th:href="@{/link/selectOneLink?(id=${link.reId})}">Edit</a></td>
+                    <td><a th:href="@{/link/deleteLink?(id=${link.reId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
+                </tr>
+        </table>    
+    </div>
+</body>
+</html>
