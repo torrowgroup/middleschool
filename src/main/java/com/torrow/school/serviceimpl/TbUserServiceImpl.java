@@ -1,6 +1,7 @@
 package com.torrow.school.serviceimpl;
 import java.util.List;
 
+
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import com.torrow.school.base.BaseDao;
@@ -49,6 +50,20 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 	@Override
 	public int addUser(TbUser tbUser) {
 		return this.insertEntity(tbUser);
+	}
+	public TbUser selectByCaId(Integer caId) {
+		
+		return tbUserDao.selectByCaId(caId);
+	}
+
+	@Override
+	public int deleteByCaId(Integer caId) {
+		return tbUserDao.deleteByCaId(caId);
+	}
+
+	@Override
+	public int updateByPrimaryKey(TbUser record) {
+		return this.updateEntity(record);
 	}
 
 }

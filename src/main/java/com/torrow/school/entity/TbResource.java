@@ -2,8 +2,8 @@ package com.torrow.school.entity;
 
 import java.io.Serializable;
 
-import java.util.Date;
 
+import java.util.Date;
 /*
  * 资源类
  */
@@ -31,16 +31,16 @@ public class TbResource implements Serializable {
 		super();
 	}
 
-	public TbResource(Integer caId, String caName, String reTitle, String reIssuer, Date reIssuingdate,
-			String reContent, String spare) {
+	public TbResource(Integer reId,Integer caId, String caName, String reTitle, String reIssuer, Date reIssuingdate,
+			String reContent) {
 		super();
+		this.reId=reId;
 		this.caId = caId;
 		this.caName = caName;
 		this.reTitle = reTitle;
 		this.reIssuer = reIssuer;
 		this.reIssuingdate = reIssuingdate;
 		this.reContent = reContent;
-		this.spare = spare;
 	}
 
 	public TbResource(Integer caId, Date reIssuingdate,String caName, String reTitle,
@@ -57,6 +57,14 @@ public class TbResource implements Serializable {
 			String reContent) {
 		super();
 		this.caId = caId;
+		this.caName = caName;
+		this.reTitle = reTitle;
+		this.reContent = reContent;
+	}
+	
+	public TbResource(String caName,String reTitle,
+			String reContent) {
+		super();
 		this.caName = caName;
 		this.reTitle = reTitle;
 		this.reContent = reContent;

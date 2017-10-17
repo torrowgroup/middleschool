@@ -1,6 +1,7 @@
 package com.torrow.school.base;
 
 import java.io.Serializable;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
+
 import com.torrow.school.util.PageBean;
 
 /**
@@ -91,6 +93,16 @@ public class BaseDao<T> extends SqlSessionDaoSupport
 	 * 分页查询
 	 * @param currentPage 当前页码
 	 * @return
+	 * 
+	 * pageSize
+	 * List<Resource> listAll  10
+	 * currentPage=3
+	 * List<Resource> list 返回给前台第三页的resource
+	 * 
+	 * for(int i=(currpage-1)*pageSize;i<currpage*pageSize;i++){
+	 * 	list = listAll.get(i);
+	 * }
+	 * 
 	 */
 	public final PageBean<T> pageCut(int currentPage) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -104,4 +116,5 @@ public class BaseDao<T> extends SqlSessionDaoSupport
 		PageBean<T> pageBean = new PageBean<T>(currentPage,pageSize,lists,num.intValue(),totalCount);
 		return pageBean;
 	}
+
 }

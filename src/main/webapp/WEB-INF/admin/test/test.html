@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>home</title>
+   <script src="resources/jquery/jquery-3.0.0.js"></script>
+</head>
+<body>
+<img id="image"src=""/>  
+<br/>  
+<input type="file"onchange="selectImage(this);"/>  
+<br/>  
+<input type="button"onclick="uploadImage();"value="提交"/>  
+<script>  
+    var image = '';  
+    function selectImage(file){  
+        if(!file.files || !file.files[0]){  
+            return;  
+        }  
+        var reader = new FileReader();  
+        reader.onload = function(evt){  
+            document.getElementById('image').src = evt.target.result;  
+            image = evt.target.result;  
+        }  
+        reader.readAsDataURL(file.files[0]);  
+    }  
+    function uploadImage(){  
+        image = JSON.stringify(image)  
+        $.ajax({  
+  
+            type:'POST',  
+  
+            url: '/blog/test',  
+  
+            data: {base64: image  
+            },  
+  
+            async: false,  
+  
+            dataType: 'json',  
+  
+            success: function(data){  
+alert(data.success)  
+                if(data.success){  
+  
+                    alert('上传成功');  
+  
+                }else{  
+  
+                    alert('上传失败');  
+  
+                }  
+  
+            },  
+  
+            error: function(err){  
+  
+                alert('网络故障');  
+  
+            }  
+  
+        });  
+  
+    }  
+</script>  
+<script src="jquery-1.11.1.min.js"></script>  
+</body>
+</html>

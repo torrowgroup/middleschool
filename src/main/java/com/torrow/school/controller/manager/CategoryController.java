@@ -1,14 +1,12 @@
 package com.torrow.school.controller.manager;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
-
+import com.torrow.school.entity.TbResource;
+import com.torrow.school.entity.TbUser;
 /**
  * 这个控制器是对类别进行管理的
  * @author 安李杰
@@ -40,11 +38,9 @@ public class CategoryController extends BaseController {
 	 */
 	@RequestMapping("/addCategory")
 	public String addCategory(String caName,Integer caPid,Model model){
-		log.info("测试"+caName+caPid);
 		TbCategory tbCategory=categoryService.selectCaName(caName);
 		if(tbCategory!=null) {
 			model.addAttribute("message","该类别已存在");
-			return "admin/addCategory";
 		}else {
 			TbCategory record=new TbCategory(caPid,caName);
 			categoryService.insert(record);
@@ -62,6 +58,7 @@ public class CategoryController extends BaseController {
 	@RequestMapping("/manageCategory")
     public String  manageCategory(@RequestParam(value="currentPage",defaultValue="1")int currentPage,Model model){
 		model.addAttribute("pagemsg", categoryService.findPage(currentPage));//回显分页数据
+		session.setAttribute("currentPage", currentPage);
         return "admin/managecategory";
     }
 	
@@ -84,17 +81,27 @@ public class CategoryController extends BaseController {
 	 */
 	@RequestMapping("/updateCategory")
 	public String updateCategory(Model model,String caName,Integer id) {
+		int currentPage=(int) session.getAttribute("currentPage");
 		TbCategory tbCategory=categoryService.selectCaName(caName);
 		if(tbCategory!=null) {
 			model.addAttribute("message","该类别已存在,修改失败");
-			return "admin/updatecategory";
 		}else{
 			TbCategory record=categoryService.selectByPrimaryKey(id);
 			record.setCaName(caName);
 			categoryService.updateByPrimaryKey(record);
+			TbResource tb=resourceService.selectByCaId(id);
+			if(tb!=null) {
+				tb.setCaName(caName);
+				resourceService.updateByPrimaryKey(tb);
+			}
+			TbUser user=userService.selectByCaId(id);
+			if(user!=null){
+				user.setCaName(caName);
+				userService.updateByPrimaryKey(user);
+			}
 			model.addAttribute("message","修改成功");
-		}
-		return "admin/index";
+		 }
+		return this.manageCategory(currentPage, model);
 	}
 	
 	/**
@@ -104,9 +111,17 @@ public class CategoryController extends BaseController {
 	 */
 	@RequestMapping("/deleteCategory")
 	public String deleteCategory(Model model,Integer id) {
-		log.info("P"+id);
+		int currentPage=(int) session.getAttribute("currentPage");
 		categoryService.deleteByPrimaryKey(id);
+		TbResource tb=resourceService.selectByCaId(id);
+		if(tb!=null) {
+			resourceService.deleteByCaId(id);
+		}
+		TbUser user=userService.selectByCaId(id);
+		if(user!=null){
+			userService.deleteByCaId(id);
+		}
 		model.addAttribute("message","删除成功");
-		return "admin/index";
+		return this.manageCategory(currentPage, model);
 	}
 }

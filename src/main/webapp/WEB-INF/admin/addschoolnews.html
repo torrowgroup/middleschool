@@ -6,6 +6,7 @@
   <title>home</title>
 </head>
 <body>
+<div th:text="${message}"></div>
 <form th:action="@{/news/addSchoolNews}" method="post">
 	<table>
 		<tr>
@@ -30,7 +31,6 @@
 			</td>
 		</tr>
 		<tr>
-			<td th:text="${message}"></td>
 			<td><input type="submit" value="添加"></td>
 			<td><input type="reset" value="重置"></td>
 		</tr>

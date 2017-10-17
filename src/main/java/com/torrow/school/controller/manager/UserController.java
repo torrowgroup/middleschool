@@ -1,6 +1,7 @@
 package com.torrow.school.controller.manager;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
-import com.torrow.school.entity.TbResource;
 import com.torrow.school.entity.TbUser;
 
 /**

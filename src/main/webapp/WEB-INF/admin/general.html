@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>home</title>
+</head>
+<body>
+<details>
+	<summary>学校简介管理</summary>
+	<a href="">查看学校简介</a>
+	<a th:href="@{/general/checkSchoolIntroduction}">管理学校简介</a>
+	<a th:href="@{/general/manageGeneral}">测试</a>
+</details>
+<details>
+	<summary>领导机构管理</summary>
+	<a th:href="@{/general/check}">查看领导机构</a>
+	<a href="">管理领导机构</a>
+</details>
+<details>
+	<summary>建校历史管理</summary>
+	<a href="">查看建校历史</a>
+	<a href="">管理建校历史</a>
+</details>
+<details>
+	<summary>学校荣誉管理</summary>
+	<a href="">查看学校荣誉</a>
+	<a href="">管理学校荣誉</a>
+</details>
+<details>
+	<summary>教学成果管理</summary>
+	<a href="">查看教学成果</a>
+	<a href="">管理教学成果</a>
+</details>
+<details>
+	<summary>校园风光管理</summary>
+	<a href="">查看校园风光</a>
+	<a href="">管理校园风光</a>
+</details>
+</body>
+</html>

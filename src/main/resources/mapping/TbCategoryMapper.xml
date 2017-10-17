@@ -43,6 +43,13 @@
     from tb_category
   </select>
   
+  
+  <!-- 查询所有的类别类 -->
+  <select id="selectAllCaId" resultMap="BaseResultMap">
+    select ca_id, ca_pId, ca_name, spare
+    from tb_category
+  </select>
+  
   	<!-- 根据分页数据start 和size查询数据 -->
 	<select id="findByPage" parameterType="Map" resultMap="BaseResultMap">
 		select * from tb_category
