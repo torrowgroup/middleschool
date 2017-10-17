@@ -1,9 +1,11 @@
 package com.torrow.school.controller.manager;
 import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
@@ -133,5 +135,8 @@ public class GeneralController extends BaseController{
 		}
 		return "admin/addgeneral";
 	}
+	
+	
+
 	
 }

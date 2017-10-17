@@ -1,10 +1,10 @@
 package com.torrow.school.controller.manager;
 
 import java.text.DateFormat;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,17 +49,13 @@ public class SchoolNewsController extends BaseController{
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		List<TbCategory> tbCategory=categoryService.selectAll();
-		for(TbCategory item:tbCategory){
-			if(item.getCaPid()==2){
-				if(caName.equals(item.getCaName())){
-					TbResource record=new TbResource(item.getCaId(),date,caName,reTitle,reContent);
-					resourceService.insert(record);
-					model.addAttribute("message","添加成功");
-				}else{
-					model.addAttribute("message","不存在该类别,添加失败");
-				}
-			}
+		TbCategory item=categoryService.selectCaName(caName);
+		if(!item.equals(null)) {
+			TbResource record=new TbResource(item.getCaId(),date,caName,reTitle,reContent);
+			resourceService.insert(record);
+			model.addAttribute("message","添加成功");
+		}else{
+			model.addAttribute("message","添加失败,不存在该类别");
 		}
 		return "admin/addschoolnews";
 	}
@@ -73,7 +69,7 @@ public class SchoolNewsController extends BaseController{
 	public String manageSchoolNews(@RequestParam(value="currentPage",defaultValue="1")int currentPage,Model model){
 		model.addAttribute("pagemsg",resourceService.findingByPaging(currentPage,2));//回显分页数据
 		session.setAttribute("currentPage", currentPage);
-		return "admin/manageschoolews";
+		return "admin/manageschoolnews";
 	}
 	
 	/**
