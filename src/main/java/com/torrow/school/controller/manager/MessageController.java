@@ -1,10 +1,16 @@
 
 package com.torrow.school.controller.manager;
 
+import java.io.File;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbMessage;
@@ -38,7 +44,6 @@ public class MessageController extends BaseController {
 	public String toAnswerMessage(int id, Model model) {
 		TbMessage message = messageService.selectByPrimaryKey(id);
 		model.addAttribute("message", message);
-		model.addAttribute("modeldata", "1212");
 		return "admin/answermessage";
 	}
 
@@ -46,23 +51,36 @@ public class MessageController extends BaseController {
 	@RequestMapping("reply")
 	public String reply(int id, String meReply, Model model) {
 		int boo = messageService.reply(id, meReply);
-		log.info("merely "+meReply);
+		log.info("merely " + meReply);
 		String reply = "回复成功";
 		if (boo != 1) {
 			reply = "回复失败";
 		}
-		model.addAttribute("msg",reply);
-		return this.manageMessage(1,model);
+		model.addAttribute("msg", reply);
+		return this.manageMessage(1, model);
 	}
+
 	// 留言回复
-		@RequestMapping("deleteMessage")
-		public String deleteMessage(int id,Model model) {
-			int boo = messageService.deleteByPrimaryKey(id);
-			String reply = "删除成功";
-			if (boo != 1) {
-				reply = "删除失败";
-			}
-			model.addAttribute("msg",reply);
-			return this.manageMessage(1,model);
+	@RequestMapping("deleteMessage")
+	public String deleteMessage(int id, Model model) {
+		int boo = messageService.deleteByPrimaryKey(id);
+		String reply = "删除成功";
+		if (boo != 1) {
+			reply = "删除失败";
 		}
+		model.addAttribute("msg", reply);
+		return this.manageMessage(1, model);
+	}
+
+	// 用于富文本编辑器的图片上传
+	@RequestMapping("uploadImg")
+	public void uploadImg(MultipartFile file,HttpServletResponse response) throws Exception {
+		String path = session.getServletContext().getRealPath("/static/uploadimg");
+		String fileName = file.getOriginalFilename();
+		fileName = UUID.randomUUID() +"."+ fileName.substring(fileName.lastIndexOf(".") + 1);// uuid+文件扩展名避免重名,中文名等问题
+		File uploadFile = new File(path, fileName);
+		file.transferTo(uploadFile);
+		// 返回图片的URL地址
+		response.getWriter().write(path +"/"+ fileName);
+	}
 }

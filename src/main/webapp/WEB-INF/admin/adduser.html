@@ -1,4 +1,4 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 
@@ -6,11 +6,12 @@
 <title>Home</title>
 <script type="text/javascript"
 	src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-<!-- <script type="text/javascript" th:src="@{/static/js/useruploadimg.js}"></script> -->
 <script type="text/javascript" th:src="@{/static/js/testemail.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/admin.js}"></script>
 </head>
 <body>
-	<form th:action="@{/user/addUser}" method="post">
+	<div th:text="${message}"></div>
+	<form th:action="@{/user/addUser}" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>邮箱：</td>
@@ -19,26 +20,28 @@
 			</tr>
 			<tr>
 				<td>密码：</td>
-				<td><input type="password" name="usPassword"
+				<td><input type="password" name="usPassword" id="password"
 					required="required"></td>
 			</tr>
 			<tr>
 				<td>再次输入：</td>
-				<td><input type="password" name="usPassword"
-					required="required"></td>
+				<td><input type="password" id="again" required="required" onblur="pswAgain()"></td>
 			</tr>
 			<tr>
 				<td>姓名：</td>
 				<td><input type="text" name="usName" required="required"></td>
 			</tr>
 			<tr>
-<!-- 				<td th:each=""> -->
-					
-<!-- 				</td> -->
+				<td>身份：</td>
+				<td>
+					<select name="caId">
+						<option th:each="category,categoryStart:${categoryList}" th:text="${category.caName}" th:value="${category.caId}" />
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="file" name="usPicture" id="usPicture">
+					<input type="file" name="picture" id="usPicture" required="required">
 				</td>
 			</tr>
 			<tr>

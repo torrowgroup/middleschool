@@ -54,5 +54,24 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 	public PageBean<TbCategory> findPage(int currentPage) {
 		return this.pageCut(currentPage);
 	}
+
+	@Override
+	public List<TbCategory> selectByPid(List<Integer> pidList) {
+		List<TbCategory> categoryList = this.selectAllEntity();
+		int temp = 0; //将变量放在循环外，节省空间
+		for(int i=0;i<categoryList.size();i++){	//得到所有符合用户部分的类别类
+			for(int j=0;j<pidList.size();j++){
+				if(categoryList.get(i).getCaPid()==pidList.get(j)){
+					temp=1;
+					break;
+				}
+			}
+			if(temp==0){
+				categoryList.remove(i);
+				i--;
+			}
+		}
+		return categoryList;
+	}
 	
 }

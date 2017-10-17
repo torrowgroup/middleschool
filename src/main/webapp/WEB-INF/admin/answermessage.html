@@ -8,8 +8,8 @@
 <script th:inline="javascript">
 /*<![CDATA[*/
 	window.onload=function(){
-		var me = [[${message.meReply}]];
-		editor.$txt.html(me);
+		var countent = [[${message.meReply}]];
+		editor.$txt.html(countent);
 	}
      function modifyContent() {
        var content = document.getElementById("content");   	    
@@ -17,16 +17,6 @@
    }
  /*]]>*/
 </script>
-<style>
-.tilp{
-  padding-top:20px;
-  font-size:26px;
-  text-align:center;
-  font-family:"华文行楷","微软雅黑";
-  text-shadow: 3px 3px 6px rgba(0,0,0,.4);
-
-}
-</style>
 </head>
 <body>
 <table border="1">
@@ -56,17 +46,17 @@
 		<td>回复</td>
 		<td>
 			<form th:action="@{/message/reply}"  method="post" onsubmit="modifyContent()">
-			<div style="width: 600px;">
-				<input type="hidden" name="id" th:value="${message.meId}"/>
+			<div style="width: 700px;height: 500px;">
+				<input type="hidden" name="id" th:value="${message.meId}"/>	
 				<textarea name="meReply" style="display: none;" id="content"></textarea>
-				<div id="editor"></div>
+				<div id="editor" style="height: 300px;"></div>
 				<script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
 				<script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script>
 					<script type="text/javascript">
 				        var E = window.wangEditor
 				        var editor = new E('editor')
-// 				     	editor.config.uploadImgUrl = '${rootPath}user/Participator_uploadImg'
-// 				     	editor.config.uploadImgFileName = 'myFileName'
+				     	editor.config.uploadImgUrl = 'uploadImg'
+				     	editor.config.uploadImgFileName = 'file'
 				        editor.create()
 				    </script>
 				<input type="submit" value="回复"/>

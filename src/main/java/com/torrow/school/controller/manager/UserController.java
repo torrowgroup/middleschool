@@ -2,17 +2,21 @@ package com.torrow.school.controller.manager;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.torrow.school.base.BaseController;
+import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
 import com.torrow.school.entity.TbUser;
 
@@ -40,11 +44,12 @@ public class UserController extends BaseController {
 	// 到达添加用户界面
 	@RequestMapping("toAddUser")
 	public String toAddUser(Model model) {
-		List<TbResource> resourceList = resourceService.selectAll();
-		log.info(resourceList);
-
-		model.addAttribute("resourceList", resourceList);
-		log.info("toadduser");
+		List<Integer> pidList = new ArrayList<Integer>();
+		pidList.add(3);// 将机构部3，管理员4，教师5放进集合中
+		pidList.add(4);
+		pidList.add(5);
+		List<TbCategory> list = categoryService.selectByPid(pidList);
+		model.addAttribute("categoryList", list);
 		return "admin/adduser";
 	}
 
@@ -66,16 +71,32 @@ public class UserController extends BaseController {
 
 	// 添加用户界面
 	@RequestMapping("addUser")
-	@ResponseBody
-	public String addUser(TbUser tbUser) {
-
-		return "admin/adduser";
+	public String addUser(TbUser tbUser,MultipartFile picture, Model model) throws IllegalStateException, IOException {
+		TbCategory category = categoryService.selectByPrimaryKey(tbUser.getCaId());
+		tbUser.setCaName(category.getCaName());
+		if(picture!=null){
+			String usPicture = this.uploadPicture(picture);
+			tbUser.setUsPicture(usPicture);
+		}
+		int boo = userService.addUser(tbUser);
+		if (boo == 1) {
+			model.addAttribute("message", "添加成功");
+		} else {
+			model.addAttribute("message", "添加失败");
+		}
+		return this.toAddUser(model);
 	}
 
-	// 添加用户界面
+	// 到达修改用户界面
 	@RequestMapping("toUpdateUser")
-	public String toUpdateUser(int id,Model model) {
+	public String toUpdateUser(int id, Model model) {
 		TbUser tbUser = userService.selectById(id);
+		List<Integer> pidList = new ArrayList<Integer>();
+		pidList.add(3);// 将机构部3，管理员4，教师5放进集合中
+		pidList.add(4);
+		pidList.add(5);
+		List<TbCategory> list = categoryService.selectByPid(pidList);//得到所有身份记录
+		model.addAttribute("categoryList", list);
 		model.addAttribute("user", tbUser);
 		return "admin/updateuser";
 	}
@@ -84,7 +105,8 @@ public class UserController extends BaseController {
 	@RequestMapping("deleteUser")
 	public String deleteUser(int id, Model model) {
 		TbUser tbUser = userService.selectById(id);
-		String path = session.getServletContext().getRealPath("static/uploadimg/") + tbUser.getUsPicture();
+		String path = session.getServletContext().getRealPath("static/uploadimg")+"/" + tbUser.getUsPicture();
+		log.info("path  "+path);
 		File files = new File(path);
 		if (files.exists()) {
 			files.delete();
@@ -97,29 +119,34 @@ public class UserController extends BaseController {
 		return this.manageUser(1, model);
 	}
 
+	//上传图片,返回文件名
+	public String uploadPicture(MultipartFile picture) throws IllegalStateException, IOException {
+		String path = session.getServletContext().getRealPath("/static/uploadimg");
+		String fileName = picture.getOriginalFilename();
+		fileName = UUID.randomUUID() +"."+ fileName.substring(fileName.lastIndexOf(".") + 1);// uuid+文件扩展名避免重名,中文名等问题
+		File uploadFile = new File(path, fileName);
+		picture.transferTo(uploadFile);
+		return fileName;
+	}
+
 	/**
 	 * ajax上传图片，以json响应
 	 * 
 	 * @throws @ResponseBody
 	 *             返回json数据，将pojo数据转化为json
 	 * @throws IOException
+	 * 
+	 * 			@RequestMapping("uploadPicture") public @ResponseBody
+	 *             Map<String, Object> uploadPicture(MultipartFile picture)
+	 *             throws IllegalStateException, IOException { String msg =
+	 *             "上传成功"; if (picture == null) { msg = "上传失败，服务器繁忙"; } else {
+	 *             String path =
+	 *             session.getServletContext().getRealPath("/static/uploadimg");
+	 *             String fileName = UUID.randomUUID() +
+	 *             picture.getOriginalFilename();// uuid避免重名 File uploadFile =
+	 *             new File(path, fileName); picture.transferTo(uploadFile); }
+	 *             // 将map对象转换成json类型数据 Map<String, Object> map = new
+	 *             HashMap<String, Object>(); map.put("msg", msg); return map; }
 	 */
-	@RequestMapping("uploadPicture")
-	public @ResponseBody Map<String, Object> uploadPicture(MultipartFile picture)
-			throws IllegalStateException, IOException {
-		String msg = "上传成功";
-		if (picture == null) {
-			msg = "上传失败，服务器繁忙";
-		} else {
-			String path = session.getServletContext().getRealPath("/static/uploadimg");
-			String fileName = UUID.randomUUID() + picture.getOriginalFilename();// uuid避免重名
-			File uploadFile = new File(path, fileName);
-			picture.transferTo(uploadFile);
-		}
-		// 将map对象转换成json类型数据
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("msg", msg);
-		return map;
-	}
 
 }

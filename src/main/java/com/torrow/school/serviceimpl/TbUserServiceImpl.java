@@ -46,4 +46,9 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 		return this.deleteEntity(id);
 	}
 
+	@Override
+	public int addUser(TbUser tbUser) {
+		return this.insertEntity(tbUser);
+	}
+
 }

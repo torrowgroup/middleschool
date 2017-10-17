@@ -4,49 +4,101 @@
 
 <head>
 <title>Home</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/dist/css/wangEditor.min.css}">
+<script th:inline="javascript">
+/*<![CDATA[*/
+	window.onload=function(){
+		var usIntroduction = [[${user.usIntroduction}]];//给两个富文本赋值
+		var usAchievements = [[${user.usAchievements}]];
+		introdEditor.$txt.html(usIntroduction);
+		achieveEditor.$txt.html(usAchievements);
+// 		var usSex = '${user.usSex}';//获得后台要选中的值
+// 		var majoroptions = document.getElementById("maj_majorName").options;
+	}
+     function modifyContent() {
+    	 var usIntroduction = document.getElementById("usIntroduction");
+    	 var usAchievements = document.getElementById("usAchievements");
+         usIntroduction.value = introdEditor.$txt.html();   	    
+         usAchievements.value = achieveEditor.$txt.html();
+   }
+ /*]]>*/
+</script>
 </head>
 <body>
-	<form action="">
+	<form action="" onsubmit="modifyContent()">
 		<table>
 			<tr>
-				<td>邮箱：</td>
+				<td>邮箱</td>
 				<td><input type="email" name="usEmail" id="usEmail"
-					required="required" th:onblur="'javascript:testEmail();'"></td>
+					required="required" th:onblur="'javascript:testEmail();'"
+					th:value="${user.usEmail}"></td>
 				<td><span id="testEmail"></span></td>
 			</tr>
 			<tr>
-				<td>密码：</td>
+				<td>密码</td>
 				<td><input type="password" name="usPassword"
-					required="required"></td>
+					required="required" th:value="${user.usPassword}"></td>
 			</tr>
 			<tr>
-				<td>姓名：</td>
-				<td><input type="text" name="usName" required="required"></td>
+				<td>姓名</td>
+				<td><input type="text" name="usName" required="required"
+					th:value="${user.usName}"></td>
 			</tr>
 			<tr>
-				<td></td>
+				<td>性别</td>
+				<td><input name="usSex" type="radio"  value="男" th:checked="${user.usSex=='男'}" />男 <input
+					name="usSex" type="radio" value="女" th:checked="${user.usSex=='女'}" />女</td>
+			</tr>
+			<tr>
+				<td>身份</td>
+				<td><select name="caId">
+						<option th:each="category,categoryStart:${categoryList}"
+							th:text="${category.caName}" th:value="${category.caId}" th:selected="${user.caId==category.caId}" />
+				</select></td>
+			</tr>
+			<tr>
+				<td>联系方式</td>
+				<td><input type="number" name="usPhone"
+					th:value="${user.usPhone}" /></td>
+			</tr>
+			<tr>
+				<td>照片</td>
+				<td><img alt="没有照片" width="200px;" height="50px;"
+					th:src="@{/static/uploadimg/{picture}(picture=${user.usPicture})}" /></td>
+			</tr>
+			<tr>
+				<td>简介</td>
 				<td>
-					<input name="usSex" type="radio" value="男" />男
-					<input name="usSex" type="radio" value="女" />女
+					<div style="width: 700px; height: 200px;">
+						<textarea name="usIntroduction" style="display: none;"
+							id="usIntroduction"></textarea>
+						<div id="introdEditor" style="height: 200px;"></div>
+					</div>
 				</td>
 			</tr>
 			<tr>
-				<td></td>
-				<td><input /></td>
+				<td>成就</td>
+				<td>
+					<div style="width: 700px; height: 200px;">
+						<textarea style="display: none;" name="usAchievements" id="usAchievements" th:text="${user.usAchievements}"></textarea>
+						<div id="achieveEditor" style="height: 200px;"></div>
+					</div>
+				</td>
 			</tr>
 			<tr>
-				<td></td>
-				<td><input /></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input /></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input /></td>
+				<td><input type="submit" value="确定修改"/></td>
 			</tr>
 		</table>
 	</form>
+<script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script>
+<script type="text/javascript">
+	var E = window.wangEditor
+	var introdEditor = new E('introdEditor')
+	introdEditor.create()
+	var achieveEditor = new E('achieveEditor')
+	achieveEditor.create()
+</script>
 </body>
 </html>

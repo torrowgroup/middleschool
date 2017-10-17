@@ -22,4 +22,6 @@ public interface TbUserService {
 	TbUser selectById(int id);
 	//根据id删除用户
 	int deleteById(int id);
+	//添加用户
+	int addUser(TbUser tbUser);
 }

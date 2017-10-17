@@ -30,7 +30,7 @@
 				<td th:text="${user.caId}">${user.caId }</td>
 				<td th:text="${user.caName}">${user.caName }</td>
 				<td th:text="${user.usPhone}">${user.usPhone }</td>
-				<td th:text="${user.usPicture}">${user.usPicture }</td>
+				<td><img alt="无图片" width="100px;" height="80px;" th:src="@{/static/uploadimg/{picture}(picture=${user.usPicture})}" /></td>
 				<td><a th:href="@{/user/toUpdateUser?(id=${user.usId})}">Edit</a></td>
 				<td><a th:href="@{/user/deleteUser?(id=${user.usId})}"
 					onclick="return confirm('确定要删除吗')">Delete</a></td>

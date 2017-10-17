@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -31,7 +32,6 @@ public abstract class BaseController implements Serializable {
 		if (log == null) {
 			log = Logger.getLogger(this.getClass());
 		}
-		log.info("log对象创建成功");
 	}
 
 	/*
@@ -47,6 +47,8 @@ public abstract class BaseController implements Serializable {
 	protected TbUserService userService;
 	@Resource
 	protected HttpServletRequest request;//获得request
+//	@Resource
+//	protected HttpServletResponse response;//获得response
 	@Resource
 	protected HttpSession session;	//获得session
 	
