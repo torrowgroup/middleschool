@@ -119,34 +119,33 @@ public class UserController extends BaseController {
 		return this.manageUser(1, model);
 	}
 
-	//上传图片,返回文件名
-	public String uploadPicture(MultipartFile picture) throws IllegalStateException, IOException {
-		String path = session.getServletContext().getRealPath("/static/uploadimg");
-		String fileName = picture.getOriginalFilename();
-		fileName = UUID.randomUUID() +"."+ fileName.substring(fileName.lastIndexOf(".") + 1);// uuid+文件扩展名避免重名,中文名等问题
-		File uploadFile = new File(path, fileName);
-		picture.transferTo(uploadFile);
-		return fileName;
-	}
+	// 上传图片,返回文件名
+		public String uploadPicture(MultipartFile picture) throws IllegalStateException, IOException {
+			String path = session.getServletContext().getRealPath("/static/uploadimg");
+			String fileName = picture.getOriginalFilename();
+			fileName = UUID.randomUUID() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);// uuid+文件扩展名避免重名,中文名等问题
+			File uploadFile = new File(path, fileName);
+			picture.transferTo(uploadFile);
+			return fileName;
+		}
 
-	/**
-	 * ajax上传图片，以json响应
-	 * 
-	 * @throws @ResponseBody
-	 *             返回json数据，将pojo数据转化为json
-	 * @throws IOException
-	 * 
-	 * 			@RequestMapping("uploadPicture") public @ResponseBody
-	 *             Map<String, Object> uploadPicture(MultipartFile picture)
-	 *             throws IllegalStateException, IOException { String msg =
-	 *             "上传成功"; if (picture == null) { msg = "上传失败，服务器繁忙"; } else {
-	 *             String path =
-	 *             session.getServletContext().getRealPath("/static/uploadimg");
-	 *             String fileName = UUID.randomUUID() +
-	 *             picture.getOriginalFilename();// uuid避免重名 File uploadFile =
-	 *             new File(path, fileName); picture.transferTo(uploadFile); }
-	 *             // 将map对象转换成json类型数据 Map<String, Object> map = new
-	 *             HashMap<String, Object>(); map.put("msg", msg); return map; }
-	 */
+		/**
+		 * ajax上传图片，以json响应
+		 * 
+		 * @throws @ResponseBody
+		 *             返回json数据，将pojo数据转化为json
+		 * @throws IOException
+		 * 
+		 * 			@RequestMapping("uploadPicture") public @ResponseBody Map<String,
+		 *             Object> uploadPicture(MultipartFile picture) throws
+		 *             IllegalStateException, IOException { String msg = "上传成功"; if
+		 *             (picture == null) { msg = "上传失败，服务器繁忙"; } else { String path =
+		 *             session.getServletContext().getRealPath("/static/uploadimg");
+		 *             String fileName = UUID.randomUUID() +
+		 *             picture.getOriginalFilename();// uuid避免重名 File uploadFile = new
+		 *             File(path, fileName); picture.transferTo(uploadFile); } //
+		 *             将map对象转换成json类型数据 Map<String, Object> map = new HashMap<String,
+		 *             Object>(); map.put("msg", msg); return map; }
+		 */
 
 }

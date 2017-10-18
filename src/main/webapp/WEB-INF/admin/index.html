@@ -1,45 +1,51 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>管理系统</title>
+<title>管理系统</title>
 </head>
 <body>
-<details>
-	<summary>用户管理</summary>
-	<a href="/user/toAddUser" th:href="@{/user/toAddUser}" target="mainIframe">添加用户</a><br>
-	<a th:href="@{/user/manageUser}" target="mainIframe">用户管理</a>
-</details>
-<details>
-	<summary>类别管理</summary>
-	<a th:href="@{/category/categoryjumping}" target="mainIframe">添加类别</a><br>
-	<a th:href="@{/category/manageCategory}" target="mainIframe">管理类别</a>
-</details>
-<details>
-	<summary>概括类管理</summary>
-	<a th:href="@{/general/generalJumping}"  target="mainIframe">添加概括类</a><br>
-	<a th:href="@{/general/manageGeneralJumping}">管理概括类</a>
-</details>
-<details>
-	<summary>校园新闻类管理</summary>
-	<a th:href="@{/news/newsJumping}"  target="mainIframe">添加学校新闻类</a><br>
-	<a th:href="@{/news/manageSchoolNews}" target="mainIframe">管理学校新闻类</a>
-</details>
-<details>
-	<summary>教育教研类的管理</summary>
-	<a th:href="@{/education/educationJumping}" target="mainIframe">添加教育教研</a><br>
-	<a href="" target="mainIframe">管理教育教研</a>
-</details>
-<details>
-	<summary>底部链接的管理</summary>
-	<a th:href="@{/link/linkJumping}" target="mainIframe">底部链接的添加</a>
-	<a th:href="@{/link/manageLink}" target="mainIframe">底部链接的管理</a>
-</details>
-<details>
-	<summary>留言管理</summary>
-	<a th:href="@{/message/manageMessage}" target="mainIframe">管理留言</a>
-</details>
-<iframe name="mainIframe" height="500px;" width="1500px;"></iframe>
+	<details>
+		<summary>用户管理</summary>
+		<a href="/user/toAddUser" th:href="@{/user/toAddUser}"
+			target="mainIframe">添加用户</a>
+		<br>
+		<a th:href="@{/user/manageUser}" target="mainIframe">用户管理</a>
+	</details>
+	<details>
+		<summary>类别管理</summary>
+		<a th:href="@{/category/categoryjumping}" target="mainIframe">添加类别</a>
+		<br>
+		<a th:href="@{/category/manageCategory}" target="mainIframe">管理类别</a>
+	</details>
+	<details>
+		<summary>概括类管理</summary>
+		<a th:href="@{/general/generalJumping}" target="mainIframe">添加概括类</a>
+		<br>
+		<a th:href="@{/general/manageGeneralJumping}">管理概括类</a>
+	</details>
+	<details>
+		<summary>校园新闻类管理</summary>
+		<a th:href="@{/news/newsJumping}" target="mainIframe">添加学校新闻类</a>
+		<br>
+		<a th:href="@{/news/manageSchoolNews}" target="mainIframe">管理学校新闻类</a>
+	</details>
+	<details>
+		<summary>教育教研类的管理</summary>
+		<a th:href="@{/education/educationJumping}" target="mainIframe">添加教育教研</a>
+		<br>
+		<a href="" target="mainIframe">管理教育教研</a>
+	</details>
+	<details>
+		<summary>底部链接的管理</summary>
+		<a th:href="@{/link/linkJumping}" target="mainIframe">底部链接的添加</a>
+		<a th:href="@{/link/manageLink}" target="mainIframe">底部链接的管理</a>
+	</details>
+	<details>
+		<summary>留言管理</summary>
+		<a th:href="@{/message/manageMessage}" target="mainIframe">管理留言</a>
+	</details>
+	<iframe name="mainIframe" height="500px;" width="1500px;"></iframe>
 </body>
 </html>
