@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
+
 @Controller
 @RequestMapping("/news")
-public class SchoolNewsController extends BaseController{
+public class SchoolNewsController extends BaseController {
 
 	/**
 	 * 
@@ -26,10 +27,7 @@ public class SchoolNewsController extends BaseController{
 	public String newsJumping() {
 		return "admin/addschoolnews";
 	}
-	
-	
-	
-	
+
 	/**
 	 * @param model
 	 * @param reTitle
@@ -38,10 +36,10 @@ public class SchoolNewsController extends BaseController{
 	 * @return 添加学校新闻
 	 */
 	@RequestMapping("addSchoolNews")
-	public String addSchoolNews(Model model,String reTitle,String reContent,String caName){
+	public String addSchoolNews(Model model, String reTitle, String reContent, String caName) {
 		java.text.SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date now = new Date(); 
-		DateFormat d1 = DateFormat.getDateInstance(); //默认语言（汉语）下的默认风格（MEDIUM风格，比如：2008-6-16 20:54:53）
+		Date now = new Date();
+		DateFormat d1 = DateFormat.getDateInstance(); // 默认语言（汉语）下的默认风格（MEDIUM风格，比如：2008-6-16 20:54:53）
 		String str1 = d1.format(now);
 		Date date = null;
 		try {
@@ -49,41 +47,42 @@ public class SchoolNewsController extends BaseController{
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		TbCategory item=categoryService.selectCaName(caName);
-		if(!item.equals(null)) {
-			TbResource record=new TbResource(item.getCaId(),date,caName,reTitle,reContent);
+		TbCategory item = categoryService.selectCaName(caName);
+		if (!item.equals(null)) {
+			TbResource record = new TbResource(item.getCaId(), date, caName, reTitle, reContent);
 			resourceService.insert(record);
-			model.addAttribute("message","添加成功");
-		}else{
-			model.addAttribute("message","添加失败,不存在该类别");
+			model.addAttribute("message", "添加成功");
+		} else {
+			model.addAttribute("message", "添加失败,不存在该类别");
 		}
 		return "admin/addschoolnews";
 	}
-	
+
 	/**
 	 * @param currentPage
 	 * @param model
 	 * @return 校园新闻类的管理
 	 */
 	@RequestMapping("manageSchoolNews")
-	public String manageSchoolNews(@RequestParam(value="currentPage",defaultValue="1")int currentPage,Model model){
-		model.addAttribute("pagemsg",resourceService.findingByPaging(currentPage,2));//回显分页数据
+	public String manageSchoolNews(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
+			Model model) {
+		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, 2));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
 		return "admin/manageschoolnews";
 	}
-	
+
 	/**
 	 * @param id
 	 * @param model
 	 * @return 查询一条新闻
 	 */
 	@RequestMapping("selectOneNews")
-	public String selectOneNews(int id,Model model) {
-		TbResource tb=resourceService.selectByPrimaryKey(id);
-		model.addAttribute("news",tb);
+	public String selectOneNews(int id, Model model) {
+		TbResource tb = resourceService.selectByPrimaryKey(id);
+		model.addAttribute("news", tb);
 		return "admin/schoolnews/updateschoolnews";
 	}
-	
+
 	/**
 	 * @param model
 	 * @param id
@@ -92,32 +91,33 @@ public class SchoolNewsController extends BaseController{
 	 * @return 修改学校新闻
 	 */
 	@RequestMapping("updateSchoolNews")
-	public String updateSchoolNews(Model model,int id,String reTitle,String reContent){
-		int currentPage=(int) session.getAttribute("currentPage");
-		TbResource tb=resourceService.selectByPrimaryKey(id);
-		TbResource record=new TbResource(tb.getReId(),tb.getCaId(),tb.getCaName(),reTitle,tb.getReIssuer(),tb.getReIssuingdate(),reContent);
-		int i=resourceService.updateByPrimaryKey(record);
-		if(i!=0) {
-			model.addAttribute("message","修改成功");
-		}else{
-			model.addAttribute("message","修改失败");
+	public String updateSchoolNews(Model model, int id, String reTitle, String reContent) {
+		int currentPage = (int) session.getAttribute("currentPage");
+		TbResource tb = resourceService.selectByPrimaryKey(id);
+		TbResource record = new TbResource(tb.getReId(), tb.getCaId(), tb.getCaName(), reTitle, tb.getReIssuer(),
+				tb.getReIssuingdate(), reContent);
+		int i = resourceService.updateByPrimaryKey(record);
+		if (i != 0) {
+			model.addAttribute("message", "修改成功");
+		} else {
+			model.addAttribute("message", "修改失败");
 		}
 		return this.manageSchoolNews(currentPage, model);
 	}
-	
+
 	/**
 	 * @param model
 	 * @param id
 	 * @return 删除学校新闻
 	 */
 	@RequestMapping("deleteNews")
-	public String deleteNews(Model model,int id){
-		int currentPage=(int) session.getAttribute("currentPage");
-		int i=resourceService.deleteByPrimaryKey(id);
-		if(i!=0) {
-			model.addAttribute("message","删除成功");
-		}else {
-			model.addAttribute("message","删除失败");
+	public String deleteNews(Model model, int id) {
+		int currentPage = (int) session.getAttribute("currentPage");
+		int i = resourceService.deleteByPrimaryKey(id);
+		if (i != 0) {
+			model.addAttribute("message", "删除成功");
+		} else {
+			model.addAttribute("message", "删除失败");
 		}
 		return this.manageSchoolNews(currentPage, model);
 	}

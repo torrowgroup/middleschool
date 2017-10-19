@@ -1,19 +1,14 @@
 
 package com.torrow.school.base;
-
 /**
  * @author 张金高
  */
 import java.io.Serializable;
-
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.torrow.school.service.TbCategoryService;
 import com.torrow.school.service.TbMessageService;
 import com.torrow.school.service.TbResourceService;
@@ -26,8 +21,8 @@ public abstract class BaseController implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	protected Logger log; 	//日志
-	
+	protected Logger log; // 日志
+
 	public BaseController() {
 		if (log == null) {
 			log = Logger.getLogger(this.getClass());
@@ -46,12 +41,12 @@ public abstract class BaseController implements Serializable {
 	@Resource
 	protected TbUserService userService;
 	@Resource
-	protected HttpServletRequest request;//获得request
-//	@Resource
-//	protected HttpServletResponse response;//获得response
+	protected HttpServletRequest request;// 获得request
+	// @Resource
+	// protected HttpServletResponse response;//获得response
 	@Resource
-	protected HttpSession session;	//获得session
-	
+	protected HttpSession session; // 获得session
+
 	/**
 	 * 返回一个 ModelAndView 实例
 	 * 
@@ -60,5 +55,7 @@ public abstract class BaseController implements Serializable {
 	protected ModelAndView getMV() {
 		return new ModelAndView();
 	}
+
+	
 
 }

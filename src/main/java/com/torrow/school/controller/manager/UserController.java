@@ -71,11 +71,11 @@ public class UserController extends BaseController {
 
 	// 添加用户界面
 	@RequestMapping("addUser")
-	public String addUser(TbUser tbUser,MultipartFile picture, Model model) throws IllegalStateException, IOException {
+	public String addUser(TbUser tbUser, MultipartFile picture, Model model) throws Exception{
 		TbCategory category = categoryService.selectByPrimaryKey(tbUser.getCaId());
 		tbUser.setCaName(category.getCaName());
-		if(picture!=null){
-			String usPicture = this.uploadPicture(picture);
+		if (picture != null) {
+			String usPicture = userService.uploadPicture(picture,session);
 			tbUser.setUsPicture(usPicture);
 		}
 		int boo = userService.addUser(tbUser);
@@ -95,7 +95,7 @@ public class UserController extends BaseController {
 		pidList.add(3);// 将机构部3，管理员4，教师5放进集合中
 		pidList.add(4);
 		pidList.add(5);
-		List<TbCategory> list = categoryService.selectByPid(pidList);//得到所有身份记录
+		List<TbCategory> list = categoryService.selectByPid(pidList);// 得到所有身份记录
 		model.addAttribute("categoryList", list);
 		model.addAttribute("user", tbUser);
 		return "admin/updateuser";
@@ -105,8 +105,8 @@ public class UserController extends BaseController {
 	@RequestMapping("deleteUser")
 	public String deleteUser(int id, Model model) {
 		TbUser tbUser = userService.selectById(id);
-		String path = session.getServletContext().getRealPath("static/uploadimg")+"/" + tbUser.getUsPicture();
-		log.info("path  "+path);
+		String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tbUser.getUsPicture();
+		log.info("path  " + path);
 		File files = new File(path);
 		if (files.exists()) {
 			files.delete();
@@ -117,16 +117,6 @@ public class UserController extends BaseController {
 		}
 		model.addAttribute("msg", msg);
 		return this.manageUser(1, model);
-	}
-
-	//上传图片,返回文件名
-	public String uploadPicture(MultipartFile picture) throws IllegalStateException, IOException {
-		String path = session.getServletContext().getRealPath("/static/uploadimg");
-		String fileName = picture.getOriginalFilename();
-		fileName = UUID.randomUUID() +"."+ fileName.substring(fileName.lastIndexOf(".") + 1);// uuid+文件扩展名避免重名,中文名等问题
-		File uploadFile = new File(path, fileName);
-		picture.transferTo(uploadFile);
-		return fileName;
 	}
 
 	/**

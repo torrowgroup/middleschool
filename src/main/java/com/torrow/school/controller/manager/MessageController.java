@@ -74,10 +74,10 @@ public class MessageController extends BaseController {
 
 	// 用于富文本编辑器的图片上传
 	@RequestMapping("uploadImg")
-	public void uploadImg(MultipartFile file,HttpServletResponse response) throws Exception {
+	public void uploadImg(MultipartFile file, HttpServletResponse response) throws Exception {
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
 		String fileName = file.getOriginalFilename();
-		fileName = UUID.randomUUID() +"."+ fileName.substring(fileName.lastIndexOf(".") + 1);// uuid+文件扩展名避免重名,中文名等问题
+		fileName = UUID.randomUUID() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);// uuid+文件扩展名避免重名,中文名等问题
 		File uploadFile = new File(path, fileName);
 		file.transferTo(uploadFile);
 		// 返回图片的URL地址

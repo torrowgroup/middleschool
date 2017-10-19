@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Home</title>
+</head>
+<body>
+	<div th:text="${message}"></div>
+	<form th:action="@{/general/addSchoolHistory}" method="post"
+		enctype="multipart/form-data">
+		<table>
+			<tr>
+				<td colspan="2"><input type="file" name="picture"
+					id="usPicture" required="required"></td>
+			</tr>
+			<tr>
+				<td>类别名称</td>
+				<td><input type="text" name="caName" value="建校历史"
+					readonly="readonly"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="添加"></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
