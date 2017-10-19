@@ -81,6 +81,6 @@ public class MessageController extends BaseController {
 		File uploadFile = new File(path, fileName);
 		file.transferTo(uploadFile);
 		// 返回图片的URL地址
-		response.getWriter().write(path +"/"+ fileName);
+		response.getWriter().write("/middleschool/static/uploadimg/"+ fileName);
 	}
 }
