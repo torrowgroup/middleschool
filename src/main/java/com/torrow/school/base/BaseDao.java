@@ -1,17 +1,21 @@
 package com.torrow.school.base;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.torrow.school.util.PageBean;
 
@@ -93,16 +97,6 @@ public class BaseDao<T> extends SqlSessionDaoSupport
 	 * 分页查询
 	 * @param currentPage 当前页码
 	 * @return
-	 * 
-	 * pageSize
-	 * List<Resource> listAll  10
-	 * currentPage=3
-	 * List<Resource> list 返回给前台第三页的resource
-	 * 
-	 * for(int i=(currpage-1)*pageSize;i<currpage*pageSize;i++){
-	 * 	list = listAll.get(i);
-	 * }
-	 * 
 	 */
 	public final PageBean<T> pageCut(int currentPage) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -116,5 +110,14 @@ public class BaseDao<T> extends SqlSessionDaoSupport
 		PageBean<T> pageBean = new PageBean<T>(currentPage,pageSize,lists,num.intValue(),totalCount);
 		return pageBean;
 	}
-
+	
+	// 上传图片,返回文件名
+	public String uploadP(MultipartFile picture,HttpSession session) throws Exception {
+		String path = session.getServletContext().getRealPath("/static/uploadimg");
+		String fileName = picture.getOriginalFilename();
+		fileName = UUID.randomUUID() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);// uuid+文件扩展名避免重名,中文名等问题
+		File uploadFile = new File(path, fileName);
+		picture.transferTo(uploadFile);
+		return fileName;
+	}
 }

@@ -1,69 +1,72 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Home</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/static/dist/css/wangEditor.min.css}">
+<title>Home</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/dist/css/wangEditor.min.css}">
 <script th:inline="javascript">
 /*<![CDATA[*/
 	window.onload=function(){
-		var countent = [[${message.meReply}]];
-		editor.$txt.html(countent);
+		var coutent = /*[[${message.meReply}]]*/ null;
+		editor.$txt.html(coutent);
 	}
      function modifyContent() {
-       var content = document.getElementById("content");   	    
-	   content.value = editor.$txt.html();
+    	var content = document.getElementById("content");
+	   	content.value = editor.$txt.html();
    }
  /*]]>*/
 </script>
 </head>
 <body>
-<table border="1">
-	<tr>
-		<td>标题：</td>
-		<td th:text="${message.meTitle}"></td>
-	</tr>
-	<tr>
-		<td>发布人：</td>
-		<td th:text="${message.meHide}"></td>
-	</tr>
-	<tr th:if="${message.mePicture}!=null">
-		<td>图片</td>
-		<td><img alt="加载中" src="@{/middleschool/static/uploadimg/${message.mePicture}}"></td>
-	</tr>
-	<tr>
-		<td>内容</td>
-		<td>
-			<textarea rows="" cols="" th:text="${message.meContent}"></textarea>
-		</td>
-	</tr>
-	<tr>
-		<td>留言日期：</td>
-		<td th:text="${message.meIssuingdate}"/></td>
-	</tr>
-	<tr>
-		<td>回复</td>
-		<td>
-			<form th:action="@{/message/reply}"  method="post" onsubmit="modifyContent()">
-			<div style="width: 700px;height: 500px;">
-				<input type="hidden" name="id" th:value="${message.meId}"/>	
-				<textarea name="meReply" style="display: none;" id="content"></textarea>
-				<div id="editor" style="height: 300px;"></div>
-				<script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
-				<script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script>
-					<script type="text/javascript">
-				        var E = window.wangEditor
-				        var editor = new E('editor')
-				     	editor.config.uploadImgUrl = 'uploadImg'
-				     	editor.config.uploadImgFileName = 'file'
-				        editor.create()
-				    </script>
-				<input type="submit" value="回复"/>
-				</div>
-			</form>	
-		</td>
-	</tr>
-</table>
+	<table border="1">
+		<tr>
+			<td>标题：</td>
+			<td th:text="${message.meTitle}"></td>
+		</tr>
+		<tr>
+			<td>发布人：</td>
+			<td th:text="${message.meHide}"></td>
+		</tr>
+		<tr th:if="${message.mePicture}!=null">
+			<td>图片</td>
+			<td><img alt="加载中"
+				src="@{/middleschool/static/uploadimg/${message.mePicture}}"></td>
+		</tr>
+		<tr>
+			<td>内容</td>
+			<td><textarea  th:text="${message.meContent}"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>留言日期：</td>
+			<td th:text="${message.meIssuingdate}" /></td>
+		</tr>
+		<tr>
+			<td>回复</td>
+			<td>
+				<form th:action="@{/message/reply}" method="post" onsubmit="modifyContent()">
+					<div style="width: 700px; height: 600px;">
+						<input type="hidden" name="id" th:value="${message.meId}" />
+						<textarea name="meReply" style="display: none;" id="content"></textarea>
+						<div id="editor" style="height: 350px;"></div>
+						<input type="submit" value="回复" />
+					</div>
+				</form>
+			</td>
+		</tr>
+	</table>
+	<script type="text/javascript"
+		th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/static/dist/js/wangEditor.min.js}"></script>
+	<script type="text/javascript">
+		var E = window.wangEditor
+		var editor = new E('editor')    		 
+		editor.config.uploadImgUrl = 'uploadImg'
+		editor.config.uploadImgFileName = 'file'
+		editor.create()    
+	</script>
 </body>
 </html>

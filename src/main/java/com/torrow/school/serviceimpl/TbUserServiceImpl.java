@@ -3,7 +3,11 @@ import java.util.List;
 
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.torrow.school.base.BaseDao;
 import com.torrow.school.dao.TbUserDao;
 import com.torrow.school.entity.TbUser;
@@ -51,8 +55,8 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 	public int addUser(TbUser tbUser) {
 		return this.insertEntity(tbUser);
 	}
+	@Override
 	public TbUser selectByCaId(Integer caId) {
-		
 		return tbUserDao.selectByCaId(caId);
 	}
 
@@ -64,6 +68,11 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 	@Override
 	public int updateByPrimaryKey(TbUser record) {
 		return this.updateEntity(record);
+	}
+
+	@Override
+	public String uploadPicture(MultipartFile picture, HttpSession session) throws Exception {
+		return this.uploadP(picture, session);
 	}
 
 }
