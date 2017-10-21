@@ -6,6 +6,7 @@
 <title>增加类别</title>
 </head>
 <body>
+<div th:text="${message}"></div>
 	<form th:action="@{/category/addCategory}" method="post">
 		<table>
 			<tr>
@@ -22,7 +23,6 @@
 				</select></td>
 			</tr>
 			<tr>
-				<td th:text="${message}"></td>
 				<td><input type="submit" value="添加"> <input
 					type="reset" value="重置"></td>
 			</tr>

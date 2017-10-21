@@ -1,5 +1,6 @@
 package com.torrow.school.service;
 
+import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
 import com.torrow.school.util.PageBean;
 
@@ -30,5 +31,5 @@ public interface TbResourceService {
     public PageBean<TbResource>  findPage(int currentPage);
     
     //对资源类的部分数据进行分页查看
-    public PageBean<TbResource>  findingByPaging(int currentPage,int caPid);
+    public PageBean<TbResource>  findingByPaging(int currentPage,TbCategory record);
 }

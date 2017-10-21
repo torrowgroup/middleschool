@@ -30,7 +30,7 @@ public interface TbUserService {
 	String uploadPicture(MultipartFile picture, String path)throws Exception;
 	
 	//这个方法是为了根据caId来查找的
-	TbUser selectByCaId(Integer caId);
+	TbUser selectByCaId(Integer caId);//安李杰
 	//这个方法根据caId来删除
 	int deleteByCaId(Integer caId);
 	

@@ -11,12 +11,12 @@
 		<table>
 
 			<tr>
-				<td>标题</td>
+				<td th:text="${sign}">标题</td>
 				<td><input type="text" name="reTitle"></td>
 			</tr>
 
 			<tr>
-				<td>内容</td>
+				<td th:value="${meg}">内容</td>
 				<td><input type="text" name="reContent"></td>
 			</tr>
 			<tr>
@@ -24,8 +24,6 @@
 				<td><select name="caName">
 						<option value="学校简介">学校简介</option>
 						<option value="领导机构">领导机构</option>
-						<option value="建校历史">建校历史</option>
-						<option value="学校荣誉">学校荣誉</option>
 						<option value="教学成果">教学成果</option>
 				</select></td>
 			</tr>

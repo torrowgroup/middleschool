@@ -123,7 +123,8 @@ public class CategoryController extends BaseController {
 		}
 		TbUser user = userService.selectByCaId(id);
 		if (user != null) {
-			userService.deleteByCaId(id);
+			user.setCaId(0);
+			userService.updateByPrimaryKey(user);
 		}
 		model.addAttribute("message", "删除成功");
 		return this.manageCategory(currentPage, model);
