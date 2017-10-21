@@ -1,17 +1,13 @@
 package com.torrow.school.base;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -112,8 +108,7 @@ public class BaseDao<T> extends SqlSessionDaoSupport
 	}
 	
 	// 上传图片,返回文件名
-	public String uploadP(MultipartFile picture,HttpSession session) throws Exception {
-		String path = session.getServletContext().getRealPath("/static/uploadimg");
+	public String uploadP(MultipartFile picture,String path) throws Exception {
 		String fileName = picture.getOriginalFilename();
 		fileName = UUID.randomUUID() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);// uuid+文件扩展名避免重名,中文名等问题
 		File uploadFile = new File(path, fileName);

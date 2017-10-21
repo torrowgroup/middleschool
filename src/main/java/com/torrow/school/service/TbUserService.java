@@ -1,10 +1,6 @@
 package com.torrow.school.service;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.web.multipart.MultipartFile;
-
 import com.torrow.school.entity.TbUser;
 import com.torrow.school.util.PageBean;
 /**
@@ -31,7 +27,7 @@ public interface TbUserService {
 	//修改用户
     int updateByPrimaryKey(TbUser record);
     //上传图片
-	String uploadPicture(MultipartFile picture, HttpSession session)throws Exception;
+	String uploadPicture(MultipartFile picture, String path)throws Exception;
 	
 	//这个方法是为了根据caId来查找的
 	TbUser selectByCaId(Integer caId);

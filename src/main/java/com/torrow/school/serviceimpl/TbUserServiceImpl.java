@@ -1,13 +1,8 @@
 package com.torrow.school.serviceimpl;
 import java.util.List;
-
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.torrow.school.base.BaseDao;
 import com.torrow.school.dao.TbUserDao;
 import com.torrow.school.entity.TbUser;
@@ -71,8 +66,8 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 	}
 
 	@Override
-	public String uploadPicture(MultipartFile picture, HttpSession session) throws Exception {
-		return this.uploadP(picture, session);
+	public String uploadPicture(MultipartFile picture, String path) throws Exception {
+		return this.uploadP(picture, path);
 	}
 
 }

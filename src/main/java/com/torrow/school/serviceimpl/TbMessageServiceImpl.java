@@ -4,6 +4,7 @@ package com.torrow.school.serviceimpl;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.torrow.school.base.BaseDao;
 import com.torrow.school.entity.TbMessage;
@@ -56,6 +57,11 @@ public class TbMessageServiceImpl extends BaseDao<TbMessage> implements TbMessag
 		message.setMeReply(meReply);
 		message.setMeStatus("已回复");
 		return this.updateEntity(message);
+	}
+
+	@Override
+	public String uploadImg(MultipartFile file,String path) throws Exception {
+		return this.uploadP(file,path);
 	}
 	
 
