@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>home</title>
+</head>
+<body>
+	<div th:text="${message}"></div>
+	<span th:if="${pagemsg.totalCount}==0"> 没有任何领导机构信息！ </span>
+	<div th:if="${pagemsg.totalCount}!=0">
+		<table border="1" class="table1">
+			<thead>
+				<tr>
+					<td>职务</td>
+					<td>姓名</td>
+					<td th:if="${sign}=='1'">Edit</td>
+					<td th:if="${sign}=='1'">Delete</td>
+				</tr>
+			</thead>
+			<tr th:each="general,generalStart:${pagemsg.lists}">
+				<td th:text="${general.reTitle}">${general.reTitle}</td>
+				<td th:text="${general.reContent}">${general.reContent}</td>
+				<td th:if="${sign}=='1'"><a th:href="@{/general/selectOnegeneral?(id=${general.reId})}">Edit</a></td>
+				<td th:if="${sign}=='1'"><a th:href="@{/general/deleteGeneral?(id=${general.reId})}"
+					onclick="return confirm('确定要删除吗')">Delete</a></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

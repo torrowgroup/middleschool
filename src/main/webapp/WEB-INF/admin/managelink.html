@@ -15,15 +15,15 @@
 				<tr>
 					<td>链接名称</td>
 					<td>链接地址</td>
-					<td>Edit</td>
-					<td>Delete</td>
+					<td th:if="${sign}=='1'">Edit</td>
+					<td th:if="${sign}=='1'">Delete</td>
 				</tr>
 			</thead>
 			<tr th:each="link,linkStart:${itemList}">
 				<td th:text="${link.reTitle}">${link.reTitle}</td>
 				<td th:text="${link.reContent}">${link.reContent}</td>
-				<td><a th:href="@{/link/selectOneLink?(id=${link.reId})}">Edit</a></td>
-				<td><a th:href="@{/link/deleteLink?(id=${link.reId})}"
+				<td th:if="${sign}=='1'"><a th:href="@{/link/selectOneLink?(id=${link.reId})}">Edit</a></td>
+				<td th:if="${sign}=='1'"><a th:href="@{/link/deleteLink?(id=${link.reId})}"
 					onclick="return confirm('确定要删除吗')">Delete</a></td>
 			</tr>
 		</table>

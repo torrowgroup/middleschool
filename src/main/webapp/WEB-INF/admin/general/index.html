@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>home</title>
+</head>
+<body>
+<details>
+	<summary>学校简介管理</summary>
+		<a th:href="@{/general/generalJumping}">添加学校简介</a>
+	</details>
+	<details>
+		<summary>领导机构管理</summary>
+		<a th:href="@{/general/generalJumping}">添加领导机构</a>
+		<a href="">管理领导机构</a>
+	</details>
+	<details>
+		<summary>建校历史管理</summary>
+		<a th:href="@{/general/addSchoolHistoryJumping}">添加建校历史</a>
+	</details>
+	<details>
+		<summary>学校荣誉管理</summary>
+		<a th:href="@{/general/addSchoolHonorJumping}">添加学校荣誉</a>
+	</details>
+	<details>
+		<summary>教学成果管理</summary>
+		<a th:href="@{/general/generalJumping}">添加学校简介</a>
+	</details>
+	<details>
+		<summary>校园风光管理</summary>
+		<a th:href="@{/general/addSceneryJumping}">添加校园风光</a>
+		<a th:href="@{/general/testB}">1232</a>
+	</details>
+	<details>
+		<summary>管理概括类</summary>
+<form th:action="@{/general/manageGeneral?(id=1)}" method="post">
+		<table>
+			<tr>
+				<td>类别名称</td>
+				<td><select name="caName">
+						<option value="学校简介">学校简介</option>
+						<option value="领导机构">领导机构</option>
+						<option value="建校历史">建校历史</option>
+						<option value="学校荣誉">学校荣誉</option>
+						<option value="教学成果">教学成果</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="提交"></td>
+				<td><input type="reset" name="重置"></td>
+			</tr>
+		</table>
+	</form>
+	</details>
+<details>
+		<summary>查看概括类</summary>
+<form th:action="@{/general/checkGeneral}" method="post">
+		<table>
+			<tr>
+				<td>类别名称</td>
+				<td><select name="caName">
+						<option value="学校简介">学校简介</option>
+						<option value="领导机构">领导机构</option>
+						<option value="建校历史">建校历史</option>
+						<option value="学校荣誉">学校荣誉</option>
+						<option value="教学成果">教学成果</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="提交"></td>
+				<td><input type="reset" name="重置"></td>
+			</tr>
+		</table>
+	</form>
+</details>
+</body>
+</html>

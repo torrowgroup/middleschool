@@ -19,7 +19,7 @@ import com.torrow.school.util.PageBean;
  * @2017年10月10日上午9:07:28
  */
 @Service
-public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbResourceService{
+public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbResourceService {
 
 	/**
 	 * 
@@ -28,10 +28,10 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 
 	@Resource
 	private TbCategoryDao tbCategoryDao;
-	
+
 	@Resource
 	private TbResourceDao tbResourceDao;
-	
+
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		return this.deleteEntity(id);
@@ -59,41 +59,48 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 
 	@Override
 	public PageBean<TbResource> findPage(int currentPage) {
-		
+
 		return this.pageCut(currentPage);
 	}
 
 	@Override
-	public PageBean<TbResource> findingByPaging(int currentPage,int Pid) {
-		List<TbResource> list=new ArrayList<TbResource>();//这个集合是为了把得到资源类与类别类caId相同的的数据
+	public PageBean<TbResource> findingByPaging(int currentPage, TbCategory record) {
+		List<TbResource> list = new ArrayList<TbResource>();// 这个集合是为了把得到资源类与类别类caId相同的的数据
 		int pageSize = 2;
-		List<TbCategory> tbCategory=tbCategoryDao.selectAllCaId();
-		List<TbResource> tbResource=this.selectAll();
-		for(TbCategory item:tbCategory){
-			if(!item.getCaPid().equals(null)){
-				if(item.getCaPid().equals(Pid)){
-					for(TbResource it:tbResource) {
-						if(it.getCaId().equals(item.getCaId())){
+		List<TbCategory> tbCategory = tbCategoryDao.selectAllCaId();
+		List<TbResource> tbResource = this.selectAll();
+		for (TbCategory item : tbCategory) {
+			if (!item.getCaPid().equals(null)) {
+				if (item.getCaPid().equals(record.getCaPid())) {
+					for (TbResource it : tbResource) {
+						if (it.getCaId().equals(item.getCaId())) {
+							list.add(it);
+						}
+					}
+				} else {
+					for (TbResource it : tbResource) {
+						if (it.getCaId().equals(item.getCaId()) && it.getCaName().equals(record.getCaName())) {
 							list.add(it);
 						}
 					}
 				}
 			}
 		}
-		int totalCount =list.size();//得到总记录数
+		int totalCount = list.size();// 得到总记录数
 		double tc = totalCount;
 		Double num = Math.ceil(tc / pageSize);// 向上取整
-		List<TbResource> lists=new ArrayList<TbResource>();//这个集合是为了分页显示的条数
-		for(int j=(currentPage-1)*pageSize;j<currentPage*pageSize&&j<totalCount;j++){
+		List<TbResource> lists = new ArrayList<TbResource>();// 这个集合是为了分页显示的条数
+		for (int j = (currentPage - 1) * pageSize; j < currentPage * pageSize && j < totalCount; j++) {
 			lists.add(list.get(j));
 		}
-		PageBean<TbResource> pageBean = new PageBean<TbResource>(currentPage,pageSize,lists,num.intValue(),totalCount);
+		PageBean<TbResource> pageBean = new PageBean<TbResource>(currentPage, pageSize, lists, num.intValue(),
+				totalCount);
 		return pageBean;
 	}
 
 	@Override
 	public int deleteByCaId(Integer caId) {
-		
+
 		return tbResourceDao.deleteByCaId(caId);
 	}
 

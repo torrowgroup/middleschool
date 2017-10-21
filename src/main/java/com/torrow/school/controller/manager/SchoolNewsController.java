@@ -36,7 +36,7 @@ public class SchoolNewsController extends BaseController {
 	 * @return 添加学校新闻
 	 */
 	@RequestMapping("addSchoolNews")
-	public String addSchoolNews(Model model, String reTitle, String reContent, String caName) {
+	public String addSchoolNews(Model model,TbResource tbResource) {
 		java.text.SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date now = new Date();
 		DateFormat d1 = DateFormat.getDateInstance(); // 默认语言（汉语）下的默认风格（MEDIUM风格，比如：2008-6-16 20:54:53）
@@ -47,9 +47,9 @@ public class SchoolNewsController extends BaseController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		TbCategory item = categoryService.selectCaName(caName);
+		TbCategory item = categoryService.selectCaName(tbResource.getCaName());
 		if (!item.equals(null)) {
-			TbResource record = new TbResource(item.getCaId(), date, caName, reTitle, reContent);
+			TbResource record = new TbResource(item.getCaId(), date, tbResource.getCaName(), tbResource.getReTitle(), tbResource.getReContent());
 			resourceService.insert(record);
 			model.addAttribute("message", "添加成功");
 		} else {
@@ -66,11 +66,27 @@ public class SchoolNewsController extends BaseController {
 	@RequestMapping("manageSchoolNews")
 	public String manageSchoolNews(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
 			Model model) {
-		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, 2));// 回显分页数据
+		TbCategory record=new TbCategory();
+		record.setCaPid(2);
+		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
+		model.addAttribute("sign", 1);
 		return "admin/manageschoolnews";
 	}
 
+	/**
+	 * @param currentPage
+	 * @param model
+	 * @return 查看新闻类别
+	 */
+	@RequestMapping("checkSchoolNews")
+	public String checkSchoolNewsJumping(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,Model model) {
+		TbCategory record=new TbCategory();
+		record.setCaPid(2);
+		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record));// 回显分页数据
+		session.setAttribute("currentPage", currentPage);
+		return "admin/manageschoolnews";
+	}
 	/**
 	 * @param id
 	 * @param model
@@ -91,11 +107,11 @@ public class SchoolNewsController extends BaseController {
 	 * @return 修改学校新闻
 	 */
 	@RequestMapping("updateSchoolNews")
-	public String updateSchoolNews(Model model, int id, String reTitle, String reContent) {
+	public String updateSchoolNews(Model model, int id, TbResource tbResource) {
 		int currentPage = (int) session.getAttribute("currentPage");
 		TbResource tb = resourceService.selectByPrimaryKey(id);
-		TbResource record = new TbResource(tb.getReId(), tb.getCaId(), tb.getCaName(), reTitle, tb.getReIssuer(),
-				tb.getReIssuingdate(), reContent);
+		TbResource record = new TbResource(tb.getReId(), tb.getCaId(), tb.getCaName(), tbResource.getReTitle(), tb.getReIssuer(),
+				tb.getReIssuingdate(), tbResource.getReContent());
 		int i = resourceService.updateByPrimaryKey(record);
 		if (i != 0) {
 			model.addAttribute("message", "修改成功");

@@ -32,8 +32,8 @@ public class BottomLinkController extends BaseController {
 	 * @return 底部链接的添加
 	 */
 	@RequestMapping("addLink")
-	public String addLink(String reTitle, String reContent, Model model) {
-		TbResource record = new TbResource("底部链接", reTitle, reContent);
+	public String addLink(TbResource tbResource, Model model) {
+		TbResource record = new TbResource("底部链接", tbResource.getReTitle(),tbResource.getReContent());
 		resourceService.insert(record);
 		model.addAttribute("message", "添加成功");
 		return "admin/addlink";
@@ -51,9 +51,21 @@ public class BottomLinkController extends BaseController {
 				model.addAttribute("itemList", item);
 			}
 		}
+		model.addAttribute("sign", 1);
 		return "admin/managelink";
 	}
 
+	
+	@RequestMapping("checkLink")
+	public String checkLink(Model model) {
+		List<TbResource> tbResource = resourceService.selectAll();
+		for (TbResource item : tbResource) {
+			if (item.getCaName().equals("底部链接")) {
+				model.addAttribute("itemList", item);
+			}
+		}
+		return "admin/managelink";
+	}
 	/**
 	 * @param model
 	 * @param id
@@ -74,10 +86,10 @@ public class BottomLinkController extends BaseController {
 	 * @return 修改链接
 	 */
 	@RequestMapping("updateLink")
-	public String updatelink(Model model, Integer id, String reTitle, String reContent) {
+	public String updatelink(Model model,TbResource tbResource,Integer id) {
 		TbResource record = resourceService.selectByPrimaryKey(id);
-		record.setReTitle(reTitle);
-		record.setReContent(reContent);
+		record.setReTitle(tbResource.getReTitle());
+		record.setReContent(tbResource.getReContent());
 		int i = resourceService.updateByPrimaryKey(record);
 		if (i != 0) {
 			model.addAttribute("message", "修改成功");

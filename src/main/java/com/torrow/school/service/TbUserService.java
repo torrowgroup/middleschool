@@ -26,9 +26,9 @@ public interface TbUserService {
 	int addUser(TbUser tbUser);
 	
 	//这个方法是为了根据caId来查找的
-	TbUser selectByCaId(Integer caId);
+	TbUser selectByCaId(Integer caId);//安李杰
 	//这个方法根据caId来删除
 	int deleteByCaId(Integer caId);
-	//修改
-    int updateByPrimaryKey(TbUser record);
+	//修改 
+    int updateByPrimaryKey(TbUser record);//安李杰用
 }
