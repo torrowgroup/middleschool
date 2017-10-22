@@ -1,4 +1,4 @@
- package com.torrow.school.controller.manager;
+package com.torrow.school.controller.manager;
 
 import java.io.File;
 
@@ -30,32 +30,32 @@ public class GeneralController extends BaseController {
 	 */
 	private static final long serialVersionUID = 1L;
 
-
 	/**
 	 * @param currentPage
 	 * @param model
 	 * @return 管理概括类
 	 */
 	@RequestMapping("manageGeneral")
-	public String manageGeneral(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,String caName) {
-		TbCategory record=new TbCategory();
+	public String manageGeneral(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,
+			String caName) {
+		TbCategory record = new TbCategory();
 		record.setCaName(caName);
 		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
 		session.setAttribute("caName", caName);
-		model.addAttribute("sign",1);//这个意在在查看和管理概括类界面时显示不同
-		if(caName.equals("学校荣誉")) {
+		model.addAttribute("sign", 1);// 这个意在在查看和管理概括类界面时显示不同
+		if (caName.equals("学校荣誉")) {
 			return "admin/general/manageschoolhonor";
-		} else if(caName.equals("学校简介")) {
+		} else if (caName.equals("学校简介")) {
 			return "admin/general/manageschoolintroduction";
-		} else if(caName.equals("领导机构")) {
+		} else if (caName.equals("领导机构")) {
 			return "admin/general/manageauthorities";
-		} else if(caName.equals("教学成果")) {
+		} else if (caName.equals("教学成果")) {
 			return "admin/general/manageachievements";
 		}
 		return "admin/general/manageschoolhistory";
 	}
-	
+
 	/**
 	 * @param currentPage
 	 * @param model
@@ -63,24 +63,25 @@ public class GeneralController extends BaseController {
 	 * @return 查看概括类
 	 */
 	@RequestMapping("checkGeneral")
-	public String checkGeneral(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,String caName) {
-		TbCategory record=new TbCategory();
+	public String checkGeneral(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,
+			String caName) {
+		TbCategory record = new TbCategory();
 		record.setCaName(caName);
 		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
 		session.setAttribute("caName", caName);
-		if(caName.equals("学校荣誉")) {
+		if (caName.equals("学校荣誉")) {
 			return "admin/general/manageschoolhonor";
-		} else if(caName.equals("学校简介")) {
+		} else if (caName.equals("学校简介")) {
 			return "admin/general/manageschoolintroduction";
-		} else if(caName.equals("领导机构")) {
+		} else if (caName.equals("领导机构")) {
 			return "admin/general/manageauthorities";
-		} else if(caName.equals("教学成果")) {
+		} else if (caName.equals("教学成果")) {
 			return "admin/general/manageachievements";
 		}
 		return "admin/general/manageschoolhistory";
 	}
-	
+
 	/**
 	 * @param currentPage
 	 * @param model
@@ -88,30 +89,29 @@ public class GeneralController extends BaseController {
 	 */
 	@RequestMapping("checkScenery")
 	public String checkScenery(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
-		TbCategory record=new TbCategory();
+		TbCategory record = new TbCategory();
 		record.setCaName("校园风光");
 		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record));// 回显分页数据
-		model.addAttribute("sign", 1);//为了在查看管理校园风光时是同一个界面
+		model.addAttribute("sign", 1);// 为了在查看管理校园风光时是同一个界面
 		session.setAttribute("currentPage", currentPage);
 		return "admin/general/managescenery";
 	}
-	
-	
+
 	/**
 	 * @param currentPage
 	 * @param model
-	 * @return 管理学校风光 
+	 * @return 管理学校风光
 	 */
 	@RequestMapping("manageScenery")
 	public String manageScenery(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
-		TbCategory record=new TbCategory();
+		TbCategory record = new TbCategory();
 		record.setCaName("校园风光");
 		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record));// 回显分页数据
-		model.addAttribute("sign", 1);//为了在查看管理校园风光时是同一个界面
+		model.addAttribute("sign", 1);// 为了在查看管理校园风光时是同一个界面
 		session.setAttribute("currentPage", currentPage);
 		return "admin/general/managescenery";
 	}
-	
+
 	/**
 	 * @param model
 	 * @param id
@@ -135,17 +135,17 @@ public class GeneralController extends BaseController {
 	@RequestMapping("updateGeneral")
 	public String updateGeneral(Model model, int id, TbResource tbResource) {
 		int currentPage = (int) session.getAttribute("currentPage");
-		String caName=(String)session.getAttribute("caName");
+		String caName = (String) session.getAttribute("caName");
 		TbResource tb = resourceService.selectByPrimaryKey(id);
-		TbResource record = new TbResource(tb.getReId(), tb.getCaId(), tb.getCaName(), tbResource.getReTitle(), tb.getReIssuer(),
-				tb.getReIssuingdate(), tbResource.getReContent());
+		TbResource record = new TbResource(tb.getReId(), tb.getCaId(), tb.getCaName(), tbResource.getReTitle(),
+				tb.getReIssuer(), tb.getReIssuingdate(), tbResource.getReContent());
 		int i = resourceService.updateByPrimaryKey(record);
 		if (i != 0) {
 			model.addAttribute("message", "修改成功");
 		} else {
 			model.addAttribute("message", "修改失败");
 		}
-		return this.manageGeneral(currentPage, model,caName);
+		return this.manageGeneral(currentPage, model, caName);
 	}
 
 	/**
@@ -154,33 +154,33 @@ public class GeneralController extends BaseController {
 	@RequestMapping("deleteGeneral")
 	public String deleteGeneral(Model model, int id) {
 		int currentPage = (int) session.getAttribute("currentPage");
-		String caName=(String)session.getAttribute("caName");
+		String caName = (String) session.getAttribute("caName");
 		int i = resourceService.deleteByPrimaryKey(id);
 		if (i != 0) {
 			model.addAttribute("message", "删除成功");
 		} else {
 			model.addAttribute("message", "删除失败");
 		}
-		return this.manageGeneral(currentPage, model,caName);
+		return this.manageGeneral(currentPage, model, caName);
 	}
 
 	@RequestMapping("manageGeneralJumping")
 	public String manageGeneralJumping() {
 		return "admin/general/index";
 	}
-	
+
 	/**
 	 * @param model
 	 * @return 对于资源类的添加跳转
 	 */
 	@RequestMapping("generalJumping")
-	public String resourcejumping(Model model) {
-		List<TbCategory> tb=categoryService.selectAll();
-		for(TbCategory item:tb) {
-			if(item.getCaName().equals("领导机构")) {
-				model.addAttribute("sign","职务");
-				model.addAttribute("meg","姓名");
-			}
+	public String resourcejumping(Model model, Integer id) {
+		if(id==1) {
+			model.addAttribute("sign", "职务");
+			model.addAttribute("meg", "姓名");
+		} else {
+			model.addAttribute("sign", "标题");
+			model.addAttribute("meg", "内容");
 		}
 		return "admin/general/addgeneral";
 	}
@@ -196,7 +196,8 @@ public class GeneralController extends BaseController {
 	public String addGeneral(Model model, TbResource tbResource) {
 		TbCategory item = categoryService.selectCaName(tbResource.getCaName());
 		if (!item.equals(null)) {
-			TbResource record = new TbResource(item.getCaId(), tbResource.getCaName(), tbResource.getReTitle(), tbResource.getReContent());
+			TbResource record = new TbResource(item.getCaId(), tbResource.getCaName(), tbResource.getReTitle(),
+					tbResource.getReContent());
 			resourceService.insert(record);
 			model.addAttribute("message", "添加成功");
 		} else {
@@ -204,7 +205,7 @@ public class GeneralController extends BaseController {
 		}
 		return "admin/addgeneral";
 	}
-	
+
 	/**
 	 * @return 添加学校荣誉
 	 */
@@ -212,7 +213,8 @@ public class GeneralController extends BaseController {
 	public String addAchievements(Model model, TbResource tbResource) {
 		TbCategory item = categoryService.selectCaName(tbResource.getCaName());
 		if (!item.equals(null)) {
-			TbResource record = new TbResource(item.getCaId(), tbResource.getCaName(), tbResource.getReIssuer(), tbResource.getReContent());
+			TbResource record = new TbResource(item.getCaId(), tbResource.getCaName(), tbResource.getReIssuer(),
+					tbResource.getReContent());
 			resourceService.insert(record);
 			model.addAttribute("message", "添加成功");
 		} else {
@@ -220,7 +222,7 @@ public class GeneralController extends BaseController {
 		}
 		return "admin/general/addachievements";
 	}
-	
+
 	/**
 	 * @param model
 	 * @param caName
@@ -228,19 +230,15 @@ public class GeneralController extends BaseController {
 	 * @return 学校历史的添加
 	 */
 	@RequestMapping("addSchoolHistory")
-	public String addSchoolHistory(Model model, String caName, MultipartFile picture) {
+	public String addSchoolHistory(Model model, String caName, MultipartFile picture) throws Exception{
 		TbCategory item = categoryService.selectCaName(caName);
 		if (!item.equals(null)) {
 			TbResource tb = new TbResource();
 			tb.setCaId(item.getCaId());
 			tb.setCaName(caName);
 			if (picture != null) {
-				try {
-					String reTitle = this.uploadPicture(picture);
-					tb.setReTitle(reTitle);
-				} catch (IllegalStateException | IOException e) {
-					e.printStackTrace();
-				}
+				String reTitle = userService.uploadPicture(picture,session);
+				tb.setReTitle(reTitle);
 			}
 			resourceService.insert(tb);
 			model.addAttribute("message", "添加成功");
@@ -255,15 +253,6 @@ public class GeneralController extends BaseController {
 		return "admin/general/addschoolhistory";
 	}
 
-	// 上传图片,返回文件名
-	public String uploadPicture(MultipartFile picture) throws IllegalStateException, IOException {
-		String path = session.getServletContext().getRealPath("/static/uploadimg");
-		String fileName = picture.getOriginalFilename();
-		fileName = UUID.randomUUID() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);// uuid+文件扩展名避免重名,中文名等问题
-		File uploadFile = new File(path, fileName);
-		picture.transferTo(uploadFile);
-		return fileName;
-	}
 
 	/**
 	 * @return 添加学校荣誉的跳转
@@ -272,18 +261,20 @@ public class GeneralController extends BaseController {
 	public String addSchoolHonorJumping() {
 		return "admin/general/addschoolhonor";
 	}
-	
+
 	@RequestMapping("addSceneryJumping")
 	public String addSceneryJumping() {
 		return "admin/general/addscenery";
 	}
+
 	/**
 	 * @param model
 	 * @param file
 	 * @param tbResource
 	 * @return
 	 * @throws IllegalStateException
-	 * @throws IOException 添加学校荣誉
+	 * @throws IOException
+	 *             添加学校荣誉
 	 */
 	@RequestMapping("addSchoolHonor")
 	public String addSchoolHonor(Model model, @RequestParam(value = "file", required = false) MultipartFile[] file,
@@ -293,7 +284,7 @@ public class GeneralController extends BaseController {
 			TbResource tb = new TbResource();
 			tb.setCaId(item.getCaId());
 			tb.setCaName(tbResource.getCaName());
-			if(!tbResource.getCaName().equals("校园风光")) {
+			if (!tbResource.getCaName().equals("校园风光")) {
 				tb.setReContent(tbResource.getReContent());
 			}
 			for (MultipartFile mf : file) {
@@ -313,19 +304,19 @@ public class GeneralController extends BaseController {
 		}
 		return "admin/general/addschoolhonor";
 	}
-	
+
 	/**
 	 * @param model
 	 * @param id
 	 * @return 删除学校风景
 	 */
 	@RequestMapping("deleteScenery")
-	public String deleteScenery(Model model,Integer id) {
+	public String deleteScenery(Model model, Integer id) {
 		int currentPage = (int) session.getAttribute("currentPage");
-		String caName=(String)session.getAttribute("caName");
+		String caName = (String) session.getAttribute("caName");
 		TbResource tb = resourceService.selectByPrimaryKey(id);
-		String path = session.getServletContext().getRealPath("static/uploadimg")+"/" + tb.getReTitle();
-		log.info("path  "+path);
+		String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tb.getReTitle();
+		log.info("path  " + path);
 		File files = new File(path);
 		if (files.exists()) {
 			files.delete();
@@ -335,11 +326,10 @@ public class GeneralController extends BaseController {
 			msg = "删除成功";
 		}
 		model.addAttribute("message", msg);
-		if(tb.getCaName().equals("建校历史")||tb.getCaName().equals("学校荣誉")) {
-			return this.manageGeneral(currentPage, model,caName);
+		if (tb.getCaName().equals("建校历史") || tb.getCaName().equals("学校荣誉")) {
+			return this.manageGeneral(currentPage, model, caName);
 		}
 		return this.manageScenery(currentPage, model);
 	}
 
-	
 }
