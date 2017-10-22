@@ -1,11 +1,7 @@
 
 package com.torrow.school.controller.manager;
 
-import java.io.File;
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,10 +72,7 @@ public class MessageController extends BaseController {
 	@RequestMapping("uploadImg")
 	public void uploadImg(MultipartFile file, HttpServletResponse response) throws Exception {
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
-		String fileName = file.getOriginalFilename();
-		fileName = UUID.randomUUID() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);// uuid+文件扩展名避免重名,中文名等问题
-		File uploadFile = new File(path, fileName);
-		file.transferTo(uploadFile);
+		String fileName = messageService.uploadImg(file,path);
 		// 返回图片的URL地址
 		response.getWriter().write("/middleschool/static/uploadimg/"+ fileName);
 	}

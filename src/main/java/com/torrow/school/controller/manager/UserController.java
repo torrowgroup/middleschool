@@ -2,13 +2,11 @@ package com.torrow.school.controller.manager;
 
 import java.io.File;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,11 +69,12 @@ public class UserController extends BaseController {
 
 	// 添加用户界面
 	@RequestMapping("addUser")
-	public String addUser(TbUser tbUser, MultipartFile picture, Model model) throws Exception{
+	public String addUser(TbUser tbUser, MultipartFile picture, Model model) throws Exception {
 		TbCategory category = categoryService.selectByPrimaryKey(tbUser.getCaId());
 		tbUser.setCaName(category.getCaName());
 		if (picture != null) {
-			String usPicture = userService.uploadPicture(picture,session);
+			String path = session.getServletContext().getRealPath("/static/uploadimg");
+			String usPicture = userService.uploadPicture(picture, path);
 			tbUser.setUsPicture(usPicture);
 		}
 		int boo = userService.addUser(tbUser);
@@ -89,7 +88,7 @@ public class UserController extends BaseController {
 
 	// 到达修改用户界面
 	@RequestMapping("toUpdateUser")
-	public String toUpdateUser(int id, Model model) {
+	public String toUpdateUser(int id,int page, Model model) {
 		TbUser tbUser = userService.selectById(id);
 		List<Integer> pidList = new ArrayList<Integer>();
 		pidList.add(3);// 将机构部3，管理员4，教师5放进集合中
@@ -98,9 +97,33 @@ public class UserController extends BaseController {
 		List<TbCategory> list = categoryService.selectByPid(pidList);// 得到所有身份记录
 		model.addAttribute("categoryList", list);
 		model.addAttribute("user", tbUser);
+		model.addAttribute("page", page);//得到当前页数并返回前台
 		return "admin/updateuser";
 	}
 
+	//修改用户信息
+	@RequestMapping("updateUser")
+	public String updateUser(TbUser user,int page,MultipartFile picture,Model model) throws Exception{
+		TbCategory category = categoryService.selectByPrimaryKey(user.getCaId());
+		user.setCaName(category.getCaName());//得到用户身份名称
+		if(!picture.getOriginalFilename().equals("")){//如果用户上传了图片，则换掉原来的图片 org.springframework.web.multipart.commons.CommonsMultipartFile@420199a9
+			TbUser userData = userService.selectById(user.getUsId());
+			String path = session.getServletContext().getRealPath("/static/uploadimg");
+			File file = new File(path+"/"+userData.getUsPicture());
+			if(file.exists()){	//删掉不用的图片
+				file.delete();
+			}
+			String fileName = userService.uploadPicture(picture, path);
+			user.setUsPicture(fileName);
+		}
+		int boo = userService.updateByPrimaryKey(user);
+		if(boo==1){
+			model.addAttribute("message", "修改完成");
+		} else {
+			model.addAttribute("message", "修改失败");
+		}
+		return this.manageUser(page, model);//返回管理用户当前页面
+	}
 	// 删除用户
 	@RequestMapping("deleteUser")
 	public String deleteUser(int id, Model model) {
@@ -117,6 +140,15 @@ public class UserController extends BaseController {
 		}
 		model.addAttribute("msg", msg);
 		return this.manageUser(1, model);
+	}
+
+	// 用于富文本编辑器的图片上传
+	@RequestMapping("uploadImg")
+	public void uploadImg(MultipartFile file, HttpServletResponse response) throws Exception {
+		String path = session.getServletContext().getRealPath("/static/uploadimg");
+		String fileName = userService.uploadPicture(file, path);
+		// 返回图片的URL地址
+		response.getWriter().write("/middleschool/static/uploadimg/" + fileName);
 	}
 
 	/**

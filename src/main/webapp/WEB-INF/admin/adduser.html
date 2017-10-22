@@ -7,7 +7,7 @@
 <script type="text/javascript"
 	src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" th:src="@{/static/js/testemail.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/admin.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/adduser.js}"></script>
 </head>
 <body>
 	<div th:text="${message}"></div>
@@ -25,7 +25,8 @@
 			</tr>
 			<tr>
 				<td>再次输入：</td>
-				<td><input type="password" id="again" required="required" onblur="pswAgain()"></td>
+				<td><input type="password" id="again" required="required" oninput="pswAgain()"></td>
+				<td><span id="testPassword"></span></td>
 			</tr>
 			<tr>
 				<td>姓名：</td>
