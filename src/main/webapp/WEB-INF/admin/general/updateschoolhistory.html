@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>home</title>
+</head>
+<body>
+<div th:text="${message}"></div>
+<form th:action="@{/general/updateSchoolHistory?(id=${tbResource.reId})}" method="post">
+	<table>
+		<tr>
+			<td>建校历史</td>
+			<td><img alt="无图片" width="100px;" height="80px;" th:src="@{/static/uploadimg/{picture}(picture=${tbResource.reTitle})}" /></td>
+		</tr>
+		<tr>		
+			<td><input type="file" name="picture"></td>
+		</tr>
+		<tr>
+			<td>
+				<input type="submit" value="修改">
+			</td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>

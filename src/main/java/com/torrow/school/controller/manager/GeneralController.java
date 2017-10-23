@@ -1,17 +1,13 @@
 package com.torrow.school.controller.manager;
 
 import java.io.File;
-
 import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
@@ -237,7 +233,8 @@ public class GeneralController extends BaseController {
 			tb.setCaId(item.getCaId());
 			tb.setCaName(caName);
 			if (picture != null) {
-				String reTitle = userService.uploadPicture(picture,session);
+				String path = session.getServletContext().getRealPath("/static/uploadimg");
+				String reTitle = userService.uploadPicture(picture,path);
 				tb.setReTitle(reTitle);
 			}
 			resourceService.insert(tb);
@@ -316,7 +313,6 @@ public class GeneralController extends BaseController {
 		String caName = (String) session.getAttribute("caName");
 		TbResource tb = resourceService.selectByPrimaryKey(id);
 		String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tb.getReTitle();
-		log.info("path  " + path);
 		File files = new File(path);
 		if (files.exists()) {
 			files.delete();
@@ -332,4 +328,46 @@ public class GeneralController extends BaseController {
 		return this.manageScenery(currentPage, model);
 	}
 
+	/**
+	 * @param model
+	 * @param id
+	 * @return 查询一条学校历史的记录
+	 */
+	@RequestMapping("selectOneHistory")
+	public String selectOneHistory(Model model,Integer id) {
+		TbResource tb = resourceService.selectByPrimaryKey(id);
+		model.addAttribute("tbResource",tb);
+		return "admin/general/updateschoolhistory";
+	}
+	
+	@RequestMapping("updateSchoolHistory")
+	public String updateSchoolHistory(Model model, MultipartFile picture,TbResource tbResource) throws Exception{
+		int currentPage = (int) session.getAttribute("currentPage");
+		String caName = (String) session.getAttribute("caName");
+		TbResource tb = resourceService.selectByPrimaryKey(tbResource.getReId());
+		log.info(tb.getReTitle().equals(tbResource.getReTitle())+"---------------"+tbResource.getReTitle());
+		if(tb.getReTitle().equals(tbResource.getReTitle())) {
+			model.addAttribute("message","你尚未进行修改的操作");
+			log.info("============");
+		} else {
+			String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tb.getReTitle();
+			log.info("path  " + path);
+			File files = new File(path);
+			if (files.exists()) {
+				files.delete();
+			}
+			log.info("--------"+path);
+			String p = session.getServletContext().getRealPath("/static/uploadimg");
+			String reTitle = userService.uploadPicture(picture,p);
+			tb.setReTitle(reTitle);
+			int i=resourceService.updateByPrimaryKey(tb);
+			log.info("========"+tb);
+			if(i!=0) {
+				model.addAttribute("message", "修改成功");
+			}else {
+				model.addAttribute("message", "修改失败");
+			}
+		}
+		return this.manageGeneral(currentPage,model,caName);
+	}
 }

@@ -107,7 +107,7 @@ public class BaseDao<T> extends SqlSessionDaoSupport
 		return pageBean;
 	}
 	
-	// 上传图片,返回文件名
+	// 上传图片,文件,返回文件名
 	public String uploadP(MultipartFile picture,String path) throws Exception {
 		String fileName = picture.getOriginalFilename();
 		fileName = UUID.randomUUID() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);// uuid+文件扩展名避免重名,中文名等问题

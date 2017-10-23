@@ -161,7 +161,8 @@ public class SchoolNewsController extends BaseController {
 			tb.setCaId(item.getCaId());
 			tb.setCaName(tbResource.getCaName());
 			if (picture != null) {
-				String reTitle = userService.uploadPicture(picture,session);
+				String path = session.getServletContext().getRealPath("/static/uploadimg");
+				String reTitle = userService.uploadPicture(picture,path);
 				tb.setReTitle(reTitle);
 			}
 			resourceService.insert(tb);
