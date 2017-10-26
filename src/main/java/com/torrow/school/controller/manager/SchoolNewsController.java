@@ -45,7 +45,7 @@ public class SchoolNewsController extends BaseController {
 			e.printStackTrace();
 		}
 		TbCategory item = categoryService.selectCaName(tbResource.getCaName());
-		if (!item.equals(null)) {
+		if (null!=item) {
 			TbResource record = new TbResource(item.getCaId(), date, tbResource.getCaName(), tbResource.getReTitle(), tbResource.getReContent());
 			resourceService.insert(record);
 			model.addAttribute("message", "添加成功");
@@ -156,7 +156,7 @@ public class SchoolNewsController extends BaseController {
 	@RequestMapping("upload")
 	public String upload(TbResource tbResource, MultipartFile picture, Model model) throws Exception{
 		TbCategory item = categoryService.selectCaName(tbResource.getCaName());
-		if (!item.equals(null)) {
+		if (null!=item) {
 			TbResource tb = new TbResource();
 			tb.setCaId(item.getCaId());
 			tb.setCaName(tbResource.getCaName());

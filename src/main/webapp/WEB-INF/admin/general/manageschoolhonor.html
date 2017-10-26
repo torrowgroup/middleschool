@@ -15,13 +15,15 @@
         <thead>
             <tr>
             	<td>简介</td>
-                <td>学校荣誉</td>
+           		<td>学校荣誉</td>
+           		<td th:if="${sign}=='1'">Edit</td>
                 <td th:if="${sign}=='1'">Delete</td>
             </tr>
             </thead>
                 <tr th:each="general,generalStart:${pagemsg.lists}">
                 	<td th:text="${general.reContent}">${general.reContent}</td>
                     <td><img alt="无图片" width="100px;" height="80px;" th:src="@{/static/uploadimg/{picture}(picture=${general.reTitle})}" /></td>
+                    <td th:if="${sign}=='1'"><a th:href="@{/general/selectOneHistory?(id=${general.reId})}">Edit</a></td>
                     <td th:if="${sign}=='1'"><a th:href="@{/general/deleteScenery?(id=${general.reId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
                 </tr>
         </table>    

@@ -43,7 +43,7 @@ public class CategoryController extends BaseController {
 	@RequestMapping("/addCategory")
 	public String addCategory(String caName, Integer caPid, Model model) {
 		TbCategory tbCategory = categoryService.selectCaName(caName);
-		if (tbCategory != null) {
+		if (null!=tbCategory) {
 			model.addAttribute("message", "该类别已存在");
 		} else {
 			TbCategory record = new TbCategory(caPid, caName);
@@ -87,19 +87,19 @@ public class CategoryController extends BaseController {
 	public String updateCategory(Model model, String caName, Integer id) {
 		int currentPage = (int) session.getAttribute("currentPage");
 		TbCategory tbCategory = categoryService.selectCaName(caName);
-		if (tbCategory != null) {
+		if (null!=tbCategory) {
 			model.addAttribute("message", "该类别已存在,修改失败");
 		} else {
 			TbCategory record = categoryService.selectByPrimaryKey(id);
 			record.setCaName(caName);
 			categoryService.updateByPrimaryKey(record);
 			TbResource tb = resourceService.selectByCaId(id);
-			if (tb != null) {
+			if (null!=tb) {
 				tb.setCaName(caName);
 				resourceService.updateByPrimaryKey(tb);
 			}
 			TbUser user = userService.selectByCaId(id);
-			if (user != null) {
+			if (null!=user) {
 				user.setCaName(caName);
 				userService.updateByPrimaryKey(user);
 			}
@@ -118,11 +118,11 @@ public class CategoryController extends BaseController {
 		int currentPage = (int) session.getAttribute("currentPage");
 		categoryService.deleteByPrimaryKey(id);
 		TbResource tb = resourceService.selectByCaId(id);
-		if (tb != null) {
+		if (null!=tb) {
 			resourceService.deleteByCaId(id);
 		}
 		TbUser user = userService.selectByCaId(id);
-		if (user != null) {
+		if (null!=user) {
 			user.setCaId(0);
 			userService.updateByPrimaryKey(user);
 		}

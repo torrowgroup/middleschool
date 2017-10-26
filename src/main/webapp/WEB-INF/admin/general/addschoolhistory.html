@@ -12,9 +12,7 @@
 	<form th:action="@{/general/addSchoolHistory}" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
-				<td>类别名称</td>
-				<td><input type="text" name="caName" value="建校历史"
-					readonly="readonly"></td>
+				<td><input type="hidden" name="caName" value="建校历史"></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="添加"></td>

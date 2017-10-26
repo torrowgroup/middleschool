@@ -170,15 +170,21 @@ public class GeneralController extends BaseController {
 	 * @return 对于资源类的添加跳转
 	 */
 	@RequestMapping("generalJumping")
-	public String resourcejumping(Model model, Integer id) {
-		if(id==1) {
-			model.addAttribute("sign", "职务");
-			model.addAttribute("meg", "姓名");
-		} else {
-			model.addAttribute("sign", "标题");
-			model.addAttribute("meg", "内容");
-		}
-		return "admin/general/addgeneral";
+	public String resourcejumping() {
+
+		return "admin/general/addintroduce";
+	}
+
+	@RequestMapping("generalJ")
+	public String resourcej() {
+
+		return "admin/general/addauthorities";
+	}
+
+	@RequestMapping("generalJump")
+	public String resourcejump() {
+
+		return "admin/general/addachievements";
 	}
 
 	/**
@@ -191,7 +197,7 @@ public class GeneralController extends BaseController {
 	@RequestMapping("addGeneral")
 	public String addGeneral(Model model, TbResource tbResource) {
 		TbCategory item = categoryService.selectCaName(tbResource.getCaName());
-		if (!item.equals(null)) {
+		if (null != item) {
 			TbResource record = new TbResource(item.getCaId(), tbResource.getCaName(), tbResource.getReTitle(),
 					tbResource.getReContent());
 			resourceService.insert(record);
@@ -199,7 +205,13 @@ public class GeneralController extends BaseController {
 		} else {
 			model.addAttribute("message", "不存在该类别,添加失败");
 		}
-		return "admin/addgeneral";
+		if (tbResource.getCaName().equals("领导机构")) {
+			return "admin/general/addauthorities";
+		}
+		if (tbResource.getCaName().equals("教学成果")) {
+			return "admin/general/addachievements";
+		}
+		return "admin/general/addintroduce";
 	}
 
 	/**
@@ -208,7 +220,7 @@ public class GeneralController extends BaseController {
 	@RequestMapping("addAchievements")
 	public String addAchievements(Model model, TbResource tbResource) {
 		TbCategory item = categoryService.selectCaName(tbResource.getCaName());
-		if (!item.equals(null)) {
+		if (null != item) {
 			TbResource record = new TbResource(item.getCaId(), tbResource.getCaName(), tbResource.getReIssuer(),
 					tbResource.getReContent());
 			resourceService.insert(record);
@@ -226,17 +238,15 @@ public class GeneralController extends BaseController {
 	 * @return 学校历史的添加
 	 */
 	@RequestMapping("addSchoolHistory")
-	public String addSchoolHistory(Model model, String caName, MultipartFile picture) throws Exception{
+	public String addSchoolHistory(Model model, String caName, MultipartFile picture) throws Exception {
 		TbCategory item = categoryService.selectCaName(caName);
-		if (!item.equals(null)) {
+		if (null != item) {
 			TbResource tb = new TbResource();
 			tb.setCaId(item.getCaId());
 			tb.setCaName(caName);
-			if (picture != null) {
-				String path = session.getServletContext().getRealPath("/static/uploadimg");
-				String reTitle = userService.uploadPicture(picture,path);
-				tb.setReTitle(reTitle);
-			}
+			String path = session.getServletContext().getRealPath("/static/uploadimg");
+			String reTitle = userService.uploadPicture(picture, path);
+			tb.setReTitle(reTitle);
 			resourceService.insert(tb);
 			model.addAttribute("message", "添加成功");
 		} else {
@@ -249,7 +259,6 @@ public class GeneralController extends BaseController {
 	public String addSchoolHistoryJumping() {
 		return "admin/general/addschoolhistory";
 	}
-
 
 	/**
 	 * @return 添加学校荣誉的跳转
@@ -274,17 +283,18 @@ public class GeneralController extends BaseController {
 	 *             添加学校荣誉
 	 */
 	@RequestMapping("addSchoolHonor")
-	public String addSchoolHonor(Model model, @RequestParam(value = "file", required = false) MultipartFile[] file,
-			TbResource tbResource) throws IllegalStateException, IOException {
+	public String addSchoolHonor(Model model,
+			@RequestParam(value = "picture", required = false) MultipartFile[] picture, TbResource tbResource)
+			throws IllegalStateException, IOException {
 		TbCategory item = categoryService.selectCaName(tbResource.getCaName());
-		if (!item.equals(null)) {
+		if (null != item) {
 			TbResource tb = new TbResource();
 			tb.setCaId(item.getCaId());
 			tb.setCaName(tbResource.getCaName());
 			if (!tbResource.getCaName().equals("校园风光")) {
 				tb.setReContent(tbResource.getReContent());
 			}
-			for (MultipartFile mf : file) {
+			for (MultipartFile mf : picture) {
 				if (!mf.isEmpty()) {
 					String path = session.getServletContext().getRealPath("/static/uploadimg");
 					String fileName = mf.getOriginalFilename();
@@ -298,6 +308,9 @@ public class GeneralController extends BaseController {
 			model.addAttribute("message", "添加成功");
 		} else {
 			model.addAttribute("message", "不存在该类别，添加失败");
+		}
+		if (tbResource.getCaName().equals("校园风光")) {
+			return "admin/general/addscenery";
 		}
 		return "admin/general/addschoolhonor";
 	}
@@ -334,40 +347,51 @@ public class GeneralController extends BaseController {
 	 * @return 查询一条学校历史的记录
 	 */
 	@RequestMapping("selectOneHistory")
-	public String selectOneHistory(Model model,Integer id) {
+	public String selectOneHistory(Model model, Integer id) {
 		TbResource tb = resourceService.selectByPrimaryKey(id);
-		model.addAttribute("tbResource",tb);
+		model.addAttribute("tbResource", tb);
+		if ("学校荣誉".equals(tb.getCaName())) {
+			return "admin/general/updateschoolhonor";
+		}
 		return "admin/general/updateschoolhistory";
 	}
-	
+
+	/**
+	 * @param model
+	 * @param picture
+	 * @param tbResource
+	 * @param id
+	 * @return 修改图片
+	 * @throws Exception
+	 */
 	@RequestMapping("updateSchoolHistory")
-	public String updateSchoolHistory(Model model, MultipartFile picture,TbResource tbResource) throws Exception{
+	public String updateSchoolHistory(Model model, MultipartFile picture, TbResource tbResource, Integer id)
+			throws Exception {
 		int currentPage = (int) session.getAttribute("currentPage");
 		String caName = (String) session.getAttribute("caName");
-		TbResource tb = resourceService.selectByPrimaryKey(tbResource.getReId());
-		log.info(tb.getReTitle().equals(tbResource.getReTitle())+"---------------"+tbResource.getReTitle());
-		if(tb.getReTitle().equals(tbResource.getReTitle())) {
-			model.addAttribute("message","你尚未进行修改的操作");
-			log.info("============");
-		} else {
+		TbResource tb = resourceService.selectByPrimaryKey(id);
+		if ("学校荣誉".equals(tb.getCaName())) {
+			tb.setReContent(tbResource.getReContent());
+		}
+		if (!picture.getOriginalFilename().equals("")) {
 			String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tb.getReTitle();
-			log.info("path  " + path);
 			File files = new File(path);
 			if (files.exists()) {
 				files.delete();
 			}
-			log.info("--------"+path);
 			String p = session.getServletContext().getRealPath("/static/uploadimg");
-			String reTitle = userService.uploadPicture(picture,p);
+			String reTitle = userService.uploadPicture(picture, p);
 			tb.setReTitle(reTitle);
-			int i=resourceService.updateByPrimaryKey(tb);
-			log.info("========"+tb);
-			if(i!=0) {
-				model.addAttribute("message", "修改成功");
-			}else {
-				model.addAttribute("message", "修改失败");
-			}
 		}
-		return this.manageGeneral(currentPage,model,caName);
+		int i = resourceService.updateByPrimaryKey(tb);
+		if (i != 0) {
+			model.addAttribute("message", "修改成功");
+		} else {
+			model.addAttribute("message", "修改失败");
+		}
+		if (tb.getCaName().equals("校园风光")) {
+			return this.manageScenery(currentPage, model);
+		}
+		return this.manageGeneral(currentPage, model, caName);
 	}
 }

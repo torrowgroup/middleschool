@@ -1,16 +1,17 @@
 /**
  * 
  */
+
 //图片上传预览    IE是用了滤镜。
-        function previewImage(file)
+        function previewImage1(file)
         {
           var MAXWIDTH  = 90; 
           var MAXHEIGHT = 90;
-          var div = document.getElementById('preview');
+          var div = document.getElementById('preview1');
           if (file.files && file.files[0])
           {
-              div.innerHTML ='<img id=imghead onclick=$("#previewImg").click()>';
-              var img = document.getElementById('imghead');
+              div.innerHTML ='<img id=imghead1 onclick=$("#previewImg1").click()>';
+              var img = document.getElementById('imghead1');
               img.onload = function(){
                 var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
                 img.width  =  rect.width;
@@ -27,16 +28,14 @@
             var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
             file.select();
             var src = document.selection.createRange().text;
-            div.innerHTML = '<img id=imghead>';
-            var img = document.getElementById('imghead');
+            div.innerHTML = '<img id=imghead1>';
+            var img = document.getElementById('imghead1');
             img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
             var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
             status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
             div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
           }
         }
-        
-         
         function clacImgZoomParam( maxWidth, maxHeight, width, height ){
             var param = {top:0, left:0, width:width, height:height};
             if( width>maxWidth || height>maxHeight ){
