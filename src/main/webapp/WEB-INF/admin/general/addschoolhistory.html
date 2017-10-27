@@ -4,25 +4,37 @@
 
 <head>
 <title>Home</title>
+ <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+ <script type="text/javascript" th:src="@{/static/js/upload.js}"></script>   
 </head>
 <body>
 	<div th:text="${message}"></div>
-	<form th:action="@{/general/addSchoolHistory}" method="post"
-		enctype="multipart/form-data">
+	<form th:action="@{/general/addSchoolHistory}" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
-				<td colspan="2"><input type="file" name="picture"
-					id="usPicture" required="required"></td>
-			</tr>
-			<tr>
-				<td>类别名称</td>
-				<td><input type="text" name="caName" value="建校历史"
-					readonly="readonly"></td>
+				<td><input type="hidden" name="caName" value="建校历史"></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="添加"></td>
 			</tr>
 		</table>
-	</form>
+	
+<div id="addCommodityIndex">
+             <!--input-group start-->
+            <div class="input-group row">
+                <div class="col-sm-3">
+                    <label>图片</label>
+                </div>
+                <div class="col-sm-9 big-photo">
+                	<div id="preview">
+                        <img id="imghead" border="0" src="../static/images/photo_icon.png" width="90" height="90" onclick="$('#previewImg').click();">
+                     </div>         
+                    <input type="file" name="picture" onchange="previewImage(this)" style="display: none;" id="previewImg">
+                	<!--<input id="uploaderInput" class="uploader__input" style="display: none;" type="file" accept="" multiple="">-->
+                </div>
+            </div>
+            <!--input-group end-->
+</div>
+</form>
 </body>
 </html>

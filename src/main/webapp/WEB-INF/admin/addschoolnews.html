@@ -4,10 +4,12 @@
 
 <head>
 <title>home</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/dist/css/wangEditor.min.css}">
 </head>
-<body>
+<body onload="test()">
 	<div th:text="${message}"></div>
-	<form th:action="@{/news/addSchoolNews}" method="post">
+	<form th:action="@{/news/addSchoolNews}" onsubmit="modifyContent()" method="post"  enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>标题</td>
@@ -16,6 +18,31 @@
 			<tr>
 				<td>内容</td>
 				<td><input type="text" name="reContent"></td>
+			</tr>
+			<tr>
+				<td>简介</td>
+				<td>
+					<div id="introduction">
+						<textarea style="display: none;" name="usIntroduction" 
+							id="usIntroduction" ></textarea>
+						<div id="intro" style="display:none;">
+							<div id="introdEditor" style="height: 200px;"></div>
+							<a href="#" id="introHide">完成</a>
+						</div>
+					</div>
+					<a href="#" id="introShow">查看/修改简介</a></td>
+			</tr>
+			<tr>
+				<td>成就</td>
+				<td>
+					<div  id="achievements">
+						<textarea style="display: none;" name="usAchievements" id="usAachievements"></textarea>
+						<div id="achieve" style="display:none;">
+							<div id="achieveEditor" style="height: 200px;"></div>
+							<a href="#" id="achieveHide">完成</a>
+						</div>
+					</div>
+				<a href="#" id="achieveShow">查看/修改成就</a></td>
 			</tr>
 			<tr>
 				<td>类别名称</td>
@@ -34,5 +61,18 @@
 			</tr>
 		</table>
 	</form>
+<script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/updateuser.js}" ></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+	window.onload=function(){
+		var usIntroduction = [[${user.usIntroduction}]];//给两个富文本赋值
+		var usAchievements = [[${user.usAchievements}]];
+		introdEditor.$txt.html(usIntroduction);
+		achieveEditor.$txt.html(usAchievements);
+	}
+/*]]>*/
+</script>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <script type="text/javascript" th:src="@{/static/js/testemail.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/adduser.js}"></script>
 </head>
-<body>
+<body> 
 	<div th:text="${message}"></div>
 	<form th:action="@{/user/addUser}" method="post" enctype="multipart/form-data">
 		<table>
@@ -50,5 +50,6 @@
 			</tr>
 		</table>
 	</form>
+
 </body>
 </html>

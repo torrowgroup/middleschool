@@ -1,7 +1,5 @@
 package com.torrow.school.controller.manager;
-
 import java.text.DateFormat;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,11 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.multipart.MultipartFile;
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
-
 @Controller
 @RequestMapping("/news")
 public class SchoolNewsController extends BaseController {
@@ -48,7 +45,7 @@ public class SchoolNewsController extends BaseController {
 			e.printStackTrace();
 		}
 		TbCategory item = categoryService.selectCaName(tbResource.getCaName());
-		if (!item.equals(null)) {
+		if (null!=item) {
 			TbResource record = new TbResource(item.getCaId(), date, tbResource.getCaName(), tbResource.getReTitle(), tbResource.getReContent());
 			resourceService.insert(record);
 			model.addAttribute("message", "添加成功");
@@ -136,5 +133,43 @@ public class SchoolNewsController extends BaseController {
 			model.addAttribute("message", "删除失败");
 		}
 		return this.manageSchoolNews(currentPage, model);
+	}
+	
+	/**
+	 * @return 上传的跳转
+	 */
+	@RequestMapping("uploadJumping")
+	public String uploadJumping() {
+		
+		return "admin/uploadmanage";
+	}
+	
+	
+	/*userService.uploadPicture(picture,session);*/
+	/**
+	 * @param tbResource
+	 * @param picture
+	 * @param model
+	 * @return  上传的操作
+	 * @throws Exception
+	 */
+	@RequestMapping("upload")
+	public String upload(TbResource tbResource, MultipartFile picture, Model model) throws Exception{
+		TbCategory item = categoryService.selectCaName(tbResource.getCaName());
+		if (null!=item) {
+			TbResource tb = new TbResource();
+			tb.setCaId(item.getCaId());
+			tb.setCaName(tbResource.getCaName());
+			if (picture != null) {
+				String path = session.getServletContext().getRealPath("/static/uploadimg");
+				String reTitle = userService.uploadPicture(picture,path);
+				tb.setReTitle(reTitle);
+			}
+			resourceService.insert(tb);
+			model.addAttribute("message", "添加成功");
+		} else {
+			model.addAttribute("message", "不存在该类别，添加失败");
+		}
+		return "admin/uploadmanage";
 	}
 }
