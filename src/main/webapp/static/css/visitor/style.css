@@ -204,7 +204,7 @@ body{
     overflow:hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    background: url("../images/pont.jpg") no-repeat left center;
+    background: url("../../images/visitor/pont.jpg") no-repeat left center; 
 }
 .mainBbody>li>span{
     float: right;

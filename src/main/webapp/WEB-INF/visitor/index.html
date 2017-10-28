@@ -6,12 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>郑州一二二中学</title>
     <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/static/css/style.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/static/css/visitor/style.css}" type="text/css">
+    <script th:src="@{/static/js/visitor/jquery.min.js}"></script>
+    <script th:src="@{/static/js/visitor/bootstrap.min.js}"></script>
+    <script th:src="@{/static/js/visitor/carousel.js}"></script>
+    <script th:src="@{/static/js/visitor/notice.js}"></script>
+    <script th:src="@{/static/js/visitor/scroll.js}"></script>
 </head>
 <body>
     <div class="container header">
         <div class="logo">
-            <img th:src="@{/static/images/logo.jpg}" alt="加载中">
+            <img th:src="@{/static/images/visitor/logo.jpg}" alt="加载中">
         </div>
         <div class="headerRight">
             <p>距离中招200天</p>
@@ -22,12 +27,12 @@
     <!--导航条-->
     <div class="navBox">
         <ul class="navUl">
-            <li class="navLi hidden-xs"><a href="#">首页</a></li>
+            <li class="navLi hidden-xs"><a th:href="@{/index}">首页</a></li>
             <li class="navLi">
-                <a href="#">学校概况</a>
+                <a th:href="@{/visitor/viewSchoolIntroduction}">学校概况</a>
                 <ul class="navSecondUl">
-                    <li><a href="#">学校简介</a></li>
-                    <li><a href="#">领导机构</a></li>
+                    <li><a th:href="@{/visitor/viewSchoolIntroduction}">学校简介</a></li>
+                    <li><a th:href="@{/visitor/view}">领导机构</a></li>
                     <li><a href="#">建校历史</a></li>
                     <li><a href="#">学校荣誉</a></li>
                     <li><a href="#">教学成果</a></li>
@@ -92,15 +97,15 @@
         <!-- 轮播（Carousel）项目 -->
         <div class="carousel-inner">
             <div class="item active">
-                <img th:src="@{/static/images/ba1.png" alt="First slide">
+                <img th:src="@{/static/images/visitor/ba1.png}" alt="First slide">
                 <div class="carousel-caption">校园1</div>
             </div>
             <div class="item">
-                <img th:src="@{/static/images/ba2.png" alt="Second slide">
+                <img th:src="@{/static/images/visitor/ba2.png}" alt="Second slide">
                 <div class="carousel-caption">校园2</div>
             </div>
             <div class="item">
-                <img th:src="@{/static/images/ba1.png" alt="Third slide">
+                <img th:src="@{/static/images/visitor/ba1.png}" alt="Third slide">
                 <div class="carousel-caption">校园3</div>
             </div>
         </div>
@@ -136,7 +141,7 @@
                     <p>学校概况：我校成立学校概况：我校成立学校概况：我校成立学校</p>
                     <a href="">
                         <div class="mainImg">
-                            <img th:src="@{/static/images/mc1.jpg" alt="">
+                            <img th:src="@{/static/images/visitor/mc1.jpg}" alt="">
                         </div>
                     </a>
                 </div>
@@ -145,7 +150,7 @@
                     <p>学校概况：我校成立学校概况：我校成立学校概况：我校成立学校</p>
                     <a href="">
                         <div class="mainImg">
-                            <img th:src="@{/static/images/mc2.jpg" alt="">
+                            <img th:src="@{/static/images/visitor/mc2.jpg}" alt="">
                         </div>
                     </a>
 
@@ -155,7 +160,7 @@
                     <p>学校概况：我校成立学校概况：我校成立学校概况：我校成立学校</p>
                     <a href="">
                         <div class="mainImg">
-                            <img th:src="@{/static/images/mc3.jpg" alt="">
+                            <img th:src="@{/static/images/visitor/mc3.jpg}" alt="">
                         </div>
                     </a>
                 </div>
@@ -164,7 +169,7 @@
                     <p>学校概况：我校成立学校概况：我校成立学校概况：我校成立学校</p>
                     <a href="">
                         <div class="mainImg">
-                            <img th:src="@{/static/images/mc4.jpg" alt="">
+                            <img th:src="@{/static/images/visitor/mc4.jpg}" alt="">
                         </div>
                     </a>
                 </div>
@@ -257,12 +262,15 @@
                         <a href="">名师推荐<span class="pull-right">&gt; 更多</span></a>
                     </div>
                     <div class="teacher1">
-                        <img th:src="@{/static/images/teacher1.jpg" alt="">
+                        <img th:src="@{/static/images/visitor/teacher1.jpg}" alt="">
                         <span>物理教研主任：王某某</span>
                     </div>
                     <div class="teacher2">
-                        <img th:src="@{/static/images/teacher2.jpg" alt="">
-                        <span>英语研主任：张某某</span></div>
+                    	<a href="#">
+	                        <img th:src="@{/static/images/visitor/teacher2.jpg}" alt="">
+	                        <span>英语研主任：张某某</span>
+	                    </a>
+                        </div>
                 </div>
             </div>
         </div>
@@ -277,37 +285,37 @@
                     <ul class="scrollUl1">
                         <li>
                             <a href="#">
-                                <img th:src="@{/static/images/mc1.jpg" alt="">
+                                <img th:src="@{/static/images/visitor/mc1.jpg}" alt="">
                                 <span>小的蝴蝶飞来飞去。野花遍地是：杂样儿，有名字的，没名字的，散在</span>
                             </a>
-                        </li>
-                        <li>
+                        </li> 
+                         <li>
                             <a href="#">
-                                <img th:src="@{/static/images/mc2.jpg" alt="">
+                                <img th:src="@{/static/images/visitor/mc2.jpg}" alt="">
                                 <span>吹面不寒杨柳风</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <img th:src="@{/static/images/mc3.jpg" alt="">
+                                <img th:src="@{/static/images/visitor/mc3.jpg}" alt="">
                                 <span>雨是最寻常的，一下就是三两天。可别恼。看，像牛牦，像花针，像细</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <img th:src="@{/static/images/mc4.jpg" alt="">
+                                <img th:src="@{/static/images/visitor/mc4.jpg}" alt="">
                                 <span>雨是最寻常的，一下就是三两天。可别恼。看，像牛牦，像花针，像细</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <img th:src="@{/static/images/mc5.jpg" alt="">
+                                <img th:src="@{/static/images/visitor/mc5.jpg}" alt="">
                                 <span>雨是最寻常的，一下就是三两天。可别恼。看，像牛牦，像花针，像细</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <img th:src="@{/static/images/mc6.jpg" alt="">
+                                <img th:src="@{/static/images/visitor/mc6.jpg}" alt="">
                                 <span>雨是最寻常的，一下就是三两天。可别恼。看，像牛牦，像花针，像细</span>
                             </a>
                         </li>
@@ -320,7 +328,7 @@
     <div class="footer">
         <div class="container footerBox">
             <div class="row">
-                <div class="col-sm-3 col-xs-6 footerBox1 hidden-xs"><img th:src="@{/static/images/bottomlogo.png" alt=""></div>
+                <div class="col-sm-3 col-xs-6 footerBox1 hidden-xs"><img th:src="@{/static/images/visitor/bottomlogo.png}" alt=""></div>
                 <div class="col-sm-3 col-xs-6 footerBox1">
                     <h3>联系我们:</h3>
                     <p>电话：56565656</p>
@@ -343,10 +351,5 @@
             </div>
         </div>
     </div>
-    <script th:src="@{/static/js/visitor/jquery.min.js}"></script>
-    <script th:src="@{/static/js/visitor/bootstrap.min.js}"></script>
-    <script th:src="@{/static/js/visitor/carousel.js}"></script>
-    <script th:src="@{/static/js/visitor/notice.js}"></script>
-    <script th:src="@{/static/js/visitor/scroll.js}"></script>
 </body>
 </html>

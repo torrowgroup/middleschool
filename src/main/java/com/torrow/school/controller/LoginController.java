@@ -42,7 +42,7 @@ public class LoginController extends BaseController {
 	/**
 	 * @return web-app下jsp用于跳转到登录界面
 	 */
-	@RequestMapping("/login")
+	@RequestMapping("login")
 	public String login(){
 		log.info("登录");
 		return "index";
@@ -50,7 +50,7 @@ public class LoginController extends BaseController {
 	/**
 	 * @return web-app下jsp用于跳转到游客首页界面
 	 */
-	@RequestMapping("/index")
+	@RequestMapping("index")
 	public String index(){
 		return "visitor/index";
 	}
