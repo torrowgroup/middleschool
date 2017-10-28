@@ -16,17 +16,18 @@
 			$("#achieve").hide();
 		})
 	});
+
 	var E = window.wangEditor
 	var introdEditor = new E('introdEditor')
 	introdEditor.config.uploadImgUrl = 'uploadImg'
 	introdEditor.config.uploadImgFileName = 'file'
 	introdEditor.create()
-	
+
 	var achieveEditor = new E('achieveEditor')
 	achieveEditor.config.uploadImgUrl = 'uploadImg'
 	achieveEditor.config.uploadImgFileName = 'file'
 	achieveEditor.create()
-	
+		
 	function modifyContent() {// 将两个富文本的值赋值给textarea
 		var usIntroduction = document.getElementById("usIntroduction");
 		var usAchievements = document.getElementById("usAachievements");

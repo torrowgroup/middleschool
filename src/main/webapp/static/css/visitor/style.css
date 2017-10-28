@@ -1,0 +1,408 @@
+body, ul, li, h3, img, p, dl, dt, dd {
+    margin: 0px;
+    padding: 0px;
+    font-family: "微软雅黑";
+}
+body{
+    background-color: #fff;
+}
+.header{
+    max-width: 1000px;
+    padding: 28px 0 17px 0;
+    position: relative;
+    margin: 0 auto;
+}
+.logo{
+    width: 50%;
+}
+.logo img{
+    width: 100%;
+}
+.headerRight{
+    position: absolute;
+    right:0;
+    top:28px;
+    color: #3c3c3c;
+}
+.headerRight p{
+    font-size: 12px;
+    line-height: 20px;
+    text-align: right;
+}
+.navBox{
+    width: 100%;
+    background-color: rgb(48,64,91);
+}
+.navUl{
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    list-style: none;
+    display: block;
+    width: 100%;
+    font-size: 0;
+    background-color: rgb(48,64,91);
+}
+
+.navBox .navUl .navLi{
+    display: inline-block;
+    zoom:1;
+    width: 11.111%;
+    font-size: 14px;
+    text-align: center;
+    height: 42px;
+}
+.navBox .navUl .navLi>a{
+    display: block;
+    padding:0;
+    margin: 0;
+    height: 100%;
+    line-height: 42px;
+    color: white;
+    text-decoration: none;
+    overflow: hidden;
+}
+.navBox .navUl .navLi:hover {
+    background: #121822;
+    border-top: 2px solid #f10000;
+    overflow: hidden;
+}
+.navBox .navUl .navLi:hover .navSecondUl{
+    display: block;
+    background-color: #121822;
+}
+.navSecondUl{
+    top:42px;
+    width: 15%;
+    display: none;
+    z-index: 80;
+    list-style: none;
+    position: absolute;
+    text-align: center;
+}
+.navSecondUl>li{
+    list-style: none;
+    line-height: 32px;
+}
+.navSecondUl>li>a{
+    color: white;
+    display: block;
+    height: 100%;
+    text-decoration: none;
+}
+.navSecondUl>li:hover{
+    background-color: rgb(48,64,91);
+}
+.navSecondUl>li>a:hover{
+    color:white;
+}
+#myCarousel .carousel-inner .item>img{
+    width: 100%;
+}
+.notice{
+    width: 100%;
+}
+.winBox{
+    max-width: 1000px;
+    height: 30px;
+    position: relative;
+    margin:0 auto;
+    overflow: hidden;
+}
+.winBox>span{
+    position: absolute;
+    top:9px;
+    background-color: white;
+    left:0;
+    z-index: 20;
+}
+.noticeUl{
+    list-style: none;
+    position: absolute;
+    width: 1500px;
+    height: 40px;
+    top:0;
+    left: 0;
+    overflow: hidden;
+}
+.noticeUl>li{
+    display: inline-block;
+    line-height: 40px;
+    zoom: 1;
+}
+.mainBox{
+    width: 100%;
+    margin-top:20px;
+}
+.mainCenter{
+    max-width: 1000px;
+}
+.mainLeft>h3>a{
+    text-decoration: none;
+    color: rgb(48,64,91);
+    font-size: 20px;
+    font-family: "微软雅黑";
+    font-weight: 600;
+}
+.mainLeft>p{
+    margin: 10px 0;
+    font-size: 12px;
+}
+.mainImg{
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: rebeccapurple;
+}
+.mainImg img{
+    width: 100%;
+}
+.mainTop{
+    margin-bottom: 25px;
+}
+.mainBheader{
+    width: 100%;
+    height: 33px;
+    background-color: rgb(79,193,233);
+    overflow: hidden;
+}
+.mainBheader>a{
+    text-decoration: none;
+    padding:0 10px;
+    color: white;
+    line-height: 33px;
+    font-size: 14px;
+    font-weight: 600;
+}
+.mainBheader>a>span{
+    padding-right: 10px;
+    font-size: 12px;
+    font-weight: 900;
+}
+.mainBheader>a>span{
+    font-size: 12px;
+    font-weight: 200;
+}
+.mainBbody{
+    padding-top:15px;
+    list-style: none;
+    overflow: hidden;
+}
+.mainBbody>li{
+    list-style: none;
+    clear: both;
+}
+.mainBbody>li>a{
+    display: inline-block;
+    text-decoration: none;
+    width: 70%;
+    padding-left:15px;
+    font-size: 14px;
+    font-family: 微软雅黑;
+    color:#0e0c74;
+    height: 30px;
+    line-height: 30px;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background: url("../../images/visitor/pont.jpg") no-repeat left center; 
+}
+.mainBbody>li>span{
+    float: right;
+    text-align: right;
+    width: 30%;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    font-size: 12px;
+}
+.changeColor{
+    background-color:rgb(69,170,112)!important;
+}
+.changeColor1{
+    background-color:rgb(233,144,79)!important;
+}
+.teacher1{
+    position: relative;
+    width: 100%;
+    height: 135px;
+    background-color: red;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+.teacher1 img{
+    width: 100%;
+}
+.teacher1>span{
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    background-color: rgba(48,64,91,.7);
+    bottom: 0;
+    color:white;
+    line-height: 30px;
+    padding-left: 10px;
+}
+.teacher2{
+    position: relative;
+    width: 100%;
+    height: 135px;
+    background-color: red;
+    overflow: hidden;
+}
+.teacher2 img{
+    width: 100%;
+}
+.teacher2>span{
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    background-color: rgba(48,64,91,.7);
+    bottom: 0;
+    color:white;
+    line-height: 30px;
+    padding-left: 10px;
+}
+.sBox{
+    padding:0;
+    margin:10px auto 0 auto;
+    max-width: 1000px;
+    height: 150px;
+    border: 1px solid rgb(99,6,95);
+}
+.sBox1{
+    max-width: 1000px;
+    height: 150px;
+    overflow: hidden;
+}
+.scroll{
+    width: 20000px;
+    height: 100%;
+}
+.sBox1 ul{
+    list-style: none;
+    margin: 0;
+    padding:0;
+    font-size: 0;
+    float: left;
+}
+.sBox1 ul li {
+    position: relative;
+    list-style: none;
+    display: inline-block;
+    float: left;
+    width: 225px;
+    height: 150px;
+    font-size: 16px;
+    margin-right: 10px;
+    zoom: 1;
+}
+.sBox1 ul li>a{
+    text-decoration: none;
+    margin: 0;
+    padding:0;
+}
+.sBox1 ul li span{
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    height: 20px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 20px;
+    bottom:0;
+    color:white;
+    background-color: rgba(99,6,95,.7);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.newsScroll {
+    max-width: 1000px;
+    margin: 20px auto 0px auto;
+    padding:0 15px;
+    overflow: hidden;
+}
+.changeColor2{
+    background-color: rgb(99,6,95);
+}
+.footer{
+    width: 100%;
+    margin-top:20px;
+    margin-bottom: 2px;
+    background-color: rgb(48,64,91);
+}
+.footerBox{
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-top:20px;
+    /*padding-bottom: 20px;*/
+}
+.footerBox1{
+    margin-bottom: 20px;
+}
+.footerBox1>img{
+    width: 100%;
+}
+.footerBox1>h3{
+    font-size: 14px;
+    color:white;
+    line-height: 20px;
+}
+.footerBox1>p{
+    color: #afbbce;
+    font-size: 12px;
+    line-height: 20px;
+}
+.footerBox1>p>a{
+    color: #afbbce;
+    text-decoration: none;
+}
+.footerBox1>h3>a{
+    font-size: 14px;
+    color:white;
+    line-height: 20px;
+}
+
+
+
+
+
+
+
+
+@media (min-width: 768px) {
+    .logo{
+        width: 29.5%;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .navBox .navUl .navLi{
+        width: 22.222%;
+        font-size: 14px;
+        text-align: center;
+        height: 42px;
+    }
+    .navBox .navUl .navLi:hover .navSecondUl{
+        display: none;
+    }
+    .navUl{
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 1000px){
+    .newsScroll{
+        display: none;
+    }
+}
+
+@media (max-width: 1200px){
+    .newsScroll{
+        padding: 0 30px;
+    }
+}

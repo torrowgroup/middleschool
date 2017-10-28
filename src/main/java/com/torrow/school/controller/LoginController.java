@@ -25,7 +25,7 @@ public class LoginController extends BaseController {
 	 * @param model
 	 * @return 登陆的方法
 	 */
-	@RequestMapping("login")
+	@RequestMapping("userLogin")
 	public String login(String usEmail,String usPassword,Model model){
 		TbUser tbUser=userService.login(usEmail,usPassword);
 		if(tbUser!=null) {
@@ -40,11 +40,18 @@ public class LoginController extends BaseController {
 	
 	
 	/**
-	 * @return web-app下jsp用于跳转
+	 * @return web-app下jsp用于跳转到登录界面
 	 */
-	@RequestMapping("/index")
-	public String index(){
-		log.info("项目启动");
+	@RequestMapping("login")
+	public String login(){
+		log.info("登录");
 		return "index";
+	}
+	/**
+	 * @return web-app下jsp用于跳转到游客首页界面
+	 */
+	@RequestMapping("index")
+	public String index(){
+		return "visitor/index";
 	}
 }
