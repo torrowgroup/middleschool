@@ -6,6 +6,21 @@
   <title>home</title>
 </head>
 <body>
-	
+<details>
+		<summary>添加校园新闻类</summary>
+		<a th:href="@{/news/addNewsJumping}" target="mainIframe">添加学校新闻类</a>
+		<br>
+		<a th:href="@{/news/checkSchoolNews}" target="mainIframe">查看学校新闻类</a>
+		<br>
+		<a th:href="@{/news/uploadJumping}" target="mainIframe">上传类</a>
+</details>	
+<details>
+		<summary>校园新闻类管理</summary>
+		<div th:each="category,categoryStart:${categoryList}">
+				<a th:href="@{/news/manageSchoolNews?(id=${category.caId})}" th:text="${category.caName}"></a>
+		</div>
+		<br>
+</details>
+<iframe name="mainIframe" height="500px;" width="1500px;"></iframe>
 </body>
 </html>

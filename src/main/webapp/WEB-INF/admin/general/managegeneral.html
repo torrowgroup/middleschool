@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>home</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/dist/css/wangEditor.min.css}">
+</head>
+<body>
+<div id="introEditor" style="border: 1px solid #ccc;" contenteditable="false"></div>
+<script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>	
+<script type="text/javascript" th:src="@{/static/js/wangEditor.min.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+	window.onload=function(){
+		var E = window.wangEditor
+		var editor = new E('div1', '#introEditor') // 两个参数也可以传入 elem 对象，class 选择器
+		editor.create()
+		
+		var reContent = [[${tbResource.reContent}]];//给两个富文本赋值
+		editor.txt.html(reContent);
+	}
+	
+	
+/*]]>*/
+</script>
+</body>
+</html>

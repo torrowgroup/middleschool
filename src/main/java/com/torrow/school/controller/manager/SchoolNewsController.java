@@ -40,14 +40,18 @@ public class SchoolNewsController extends BaseController {
 		Date date=new Date();
 		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		if (null != item) {
-			TbResource record = new TbResource(item.getCaId(), date, tbResource.getCaName(), tbResource.getReTitle(),
+			TbResource record = new TbResource(item.getCaId(), date, item.getCaName(), tbResource.getReTitle(),
 					tbResource.getReContent());
-			resourceService.insert(record);
-			model.addAttribute("message", "添加成功");
+			int i=resourceService.insert(record);
+			if(i!=0) {
+				model.addAttribute("message", "添加成功");
+			}else {
+				model.addAttribute("message", "添加失败");
+			}
 		} else {
 			model.addAttribute("message", "添加失败,不存在该类别");
 		}
-		return "admin/schoolnews/addschoolnews";
+		return this.newsJumping(model);
 	}
 
 	/**
@@ -166,7 +170,15 @@ public class SchoolNewsController extends BaseController {
 		}
 		return "admin/schoolnews/uploadmanage";
 	}
-
+	@RequestMapping("manageJumping")
+	public String manageJumping(Model model) {
+		int Pid = 2;
+		List<TbCategory> list = categoryService.queryByPid(Pid);
+		model.addAttribute("categoryList", list);
+		return "admin/schoolnews/index";
+	}
+	
+	
 	// 用于富文本编辑器的图片上传
 	@RequestMapping("uploadImg")
 	public void uploadImg(MultipartFile file, HttpServletResponse response) throws Exception {

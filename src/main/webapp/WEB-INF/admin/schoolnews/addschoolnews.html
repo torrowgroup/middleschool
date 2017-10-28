@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css"
 	th:href="@{/static/dist/css/wangEditor.min.css}">
 </head>
-<body onload="test()">
+<body>
 	<div th:text="${message}"></div>
 	<form th:action="@{/news/addSchoolNews}" onsubmit="modifyContent()" method="post"  enctype="multipart/form-data">
 		<table>
