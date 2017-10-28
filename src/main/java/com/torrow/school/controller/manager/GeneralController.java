@@ -1,8 +1,12 @@
 package com.torrow.school.controller.manager;
 
 import java.io.File;
+
 import java.io.IOException;
-import java.util.UUID;
+import java.util.*;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +35,7 @@ public class GeneralController extends BaseController {
 	 * @param model
 	 * @return 管理概括类
 	 */
-	@RequestMapping("manageGeneral")
+	@RequestMapping("manageGeneral11")
 	public String manageGeneral(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,
 			String caName) {
 		TbCategory record = new TbCategory();
@@ -161,7 +165,10 @@ public class GeneralController extends BaseController {
 	}
 
 	@RequestMapping("manageGeneralJumping")
-	public String manageGeneralJumping() {
+	public String manageGeneralJumping(Model model) {
+		int Pid = 1;
+		List<TbCategory> list = categoryService.queryByPid(Pid);
+		model.addAttribute("categoryList", list);
 		return "admin/general/index";
 	}
 
@@ -194,26 +201,19 @@ public class GeneralController extends BaseController {
 	 * @param caName
 	 * @return 概括类的添加
 	 */
-	@RequestMapping("addGeneral")
-	public String addGeneral(Model model, TbResource tbResource) {
-		TbCategory item = categoryService.selectCaName(tbResource.getCaName());
-		if (null != item) {
-			TbResource record = new TbResource(item.getCaId(), tbResource.getCaName(), tbResource.getReTitle(),
-					tbResource.getReContent());
-			resourceService.insert(record);
-			model.addAttribute("message", "添加成功");
-		} else {
-			model.addAttribute("message", "不存在该类别,添加失败");
-		}
-		if (tbResource.getCaName().equals("领导机构")) {
-			return "admin/general/addauthorities";
-		}
-		if (tbResource.getCaName().equals("教学成果")) {
-			return "admin/general/addachievements";
-		}
-		return "admin/general/addintroduce";
-	}
-
+	/*
+	 * @RequestMapping("addGeneral") public String addGeneral(Model model,
+	 * TbResource tbResource) { TbCategory item =
+	 * categoryService.selectCaName(tbResource.getCaName()); if (null != item) {
+	 * TbResource record = new TbResource(item.getCaId(), tbResource.getCaName(),
+	 * tbResource.getReTitle(), tbResource.getReContent());
+	 * resourceService.insert(record); model.addAttribute("message", "添加成功"); } else
+	 * { model.addAttribute("message", "不存在该类别,添加失败"); } if
+	 * (tbResource.getCaName().equals("领导机构")) { return
+	 * "admin/general/addauthorities"; } if (tbResource.getCaName().equals("教学成果"))
+	 * { return "admin/general/addachievements"; } return
+	 * "admin/general/addintroduce"; }
+	 */
 	/**
 	 * @return 添加学校荣誉
 	 */
@@ -314,7 +314,19 @@ public class GeneralController extends BaseController {
 		}
 		return "admin/general/addschoolhonor";
 	}
-
+	
+	/**
+	 * @param model
+	 * @param id
+	 * @return 管理除了学校风光以外的所有
+	 */
+	@RequestMapping("manageGeneral")
+	public String manage(Model model,Integer id) {
+		TbResource tb = resourceService.selectByCaId(id);
+		model.addAttribute("tbResource", tb);
+		return "";
+	}
+	
 	/**
 	 * @param model
 	 * @param id
@@ -393,5 +405,49 @@ public class GeneralController extends BaseController {
 			return this.manageScenery(currentPage, model);
 		}
 		return this.manageGeneral(currentPage, model, caName);
+	}
+
+	/**
+	 * @param model
+	 * @return 添加类别类的跳转
+	 */
+	@RequestMapping("addGeneralJumping")
+	public String addGeneralJumping(Model model) {
+		int Pid = 1;
+		List<TbCategory> list = categoryService.queryByPid(Pid);
+		model.addAttribute("categoryList", list);
+		return "admin/general/addgeneral";
+	}
+
+	@RequestMapping("addGeneral")
+	public String addGeneral(Model model, @RequestParam(value = "picture", required = false) MultipartFile[] picture,
+			TbResource tbResource) throws IllegalStateException, IOException {
+		TbResource tbresource = resourceService.selectByCaId(tbResource.getCaId());
+		if (null != tbresource) {
+			model.addAttribute("message", tbresource.getCaName() + "已存在");
+			return this.addGeneralJumping(model);
+		}
+		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
+		if (null != item) {
+			TbResource tb = new TbResource();
+			tb.setCaId(item.getCaId());
+			tb.setCaName(item.getCaName());
+			tb.setReContent(tbResource.getReContent());
+			resourceService.insert(tb);
+			model.addAttribute("message", "添加成功");
+		} else {
+			model.addAttribute("message", "不存在该类别，添加失败");
+		}
+
+		return this.addGeneralJumping(model);
+	}
+
+	// 用于富文本编辑器的图片上传
+	@RequestMapping("uploadImg")
+	public void uploadImg(MultipartFile file, HttpServletResponse response) throws Exception {
+		String path = session.getServletContext().getRealPath("/static/uploadimg");
+		String fileName = userService.uploadPicture(file, path);
+		// 返回图片的URL地址
+		response.getWriter().write("/middleschool/static/uploadimg/" + fileName);
 	}
 }

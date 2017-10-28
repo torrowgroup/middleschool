@@ -32,7 +32,7 @@ public class CategoryController extends BaseController {
 	@RequestMapping("categoryjumping")
 	public String jumping() {
 		log.info("跳转");
-		return "admin/addcategory";
+		return "admin/category/addcategory";
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class CategoryController extends BaseController {
 			categoryService.insert(record);
 			model.addAttribute("message", "添加成功");
 		}
-		return "admin/addcategory";
+		return "admin/category/addcategory";
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class CategoryController extends BaseController {
 			Model model) {
 		model.addAttribute("pagemsg", categoryService.findPage(currentPage));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
-		return "admin/managecategory";
+		return "admin/category/managecategory";
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class CategoryController extends BaseController {
 	public String selectOneCategory(Integer id, Model model) {
 		TbCategory category = categoryService.selectByPrimaryKey(id);
 		model.addAttribute("category", category);
-		return "admin/updatecategory";
+		return "admin/category/updatecategory";
 	}
 
 	/**
