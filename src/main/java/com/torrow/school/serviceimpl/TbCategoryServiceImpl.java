@@ -1,4 +1,5 @@
 package com.torrow.school.serviceimpl;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -69,6 +70,18 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 			if(temp==0){
 				categoryList.remove(i);
 				i--;
+			}
+		}
+		return categoryList;
+	}
+
+	@Override
+	public List<TbCategory> queryByPid(int Pid) {
+		List<TbCategory> categoryList = new ArrayList<TbCategory>();
+		List<TbCategory> list=this.selectAllEntity();
+		for(TbCategory item:list) {
+			if(item.getCaPid()==Pid) {
+				categoryList.add(item);
 			}
 		}
 		return categoryList;

@@ -46,7 +46,7 @@ public class BaseDao<T> extends SqlSessionDaoSupport
 	}
     
     //这是为了让父类获得SqlSessionFactory实例以便获得SqlSession，该实例已在spring-mybatis.xml配置
-    @Resource
+	@Resource
     public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory){
          super.setSqlSessionFactory(sqlSessionFactory);
     }

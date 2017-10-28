@@ -23,7 +23,7 @@ public class BottomLinkController extends BaseController {
 	 */
 	@RequestMapping("linkJumping")
 	public String linkJumping() {
-		return "admin/addlink";
+		return "admin/bottomlink/addlink";
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class BottomLinkController extends BaseController {
 		TbResource record = new TbResource("底部链接", tbResource.getReTitle(),tbResource.getReContent());
 		resourceService.insert(record);
 		model.addAttribute("message", "添加成功");
-		return "admin/addlink";
+		return "admin/bottomlink/addlink";
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class BottomLinkController extends BaseController {
 			}
 		}
 		model.addAttribute("sign", 1);
-		return "admin/managelink";
+		return "admin/bottomlink/managelink";
 	}
 
 	
@@ -64,7 +64,7 @@ public class BottomLinkController extends BaseController {
 				model.addAttribute("itemList", item);
 			}
 		}
-		return "admin/managelink";
+		return "admin/bottomlink/managelink";
 	}
 	/**
 	 * @param model
@@ -75,7 +75,7 @@ public class BottomLinkController extends BaseController {
 	public String selectOnelink(Model model, Integer id) {
 		TbResource tb = resourceService.selectByPrimaryKey(id);
 		model.addAttribute("link", tb);
-		return "admin/updatelink";
+		return "admin/bottomlink/updatelink";
 	}
 
 	/**

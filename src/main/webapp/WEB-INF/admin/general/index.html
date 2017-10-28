@@ -7,7 +7,14 @@
 </head>
 <body>
 <details>
-	<summary>学校简介管理</summary>
+	<summary>概括类管理</summary>
+		<a th:href="@{/general/addGeneralJumping}" target="mainIframe">添加概括类</a>
+		<div th:each="category,categoryStart:${categoryList}">
+				<a th:href="@{/general/manageGeneral?(id=${category.caId})}" th:text="${category.caName}"></a>
+		</div>
+		<!-- <div th:each="category,categoryStart:${categoryList}" th:text="${category.caName}" th:value="${category.caId}" ></div> -->
+	</details>
+	<!-- <summary>学校简介管理</summary>
 		<a th:href="@{/general/generalJumping}">添加学校简介</a>
 	</details>
 	<details>
@@ -30,7 +37,7 @@
 		<summary>校园风光管理</summary>
 		<a th:href="@{/general/addSceneryJumping}">添加校园风光</a>
 		<a th:href="@{/general/manageScenery}">管理校园风光</a>
-	</details>
+	</details> -->
 	<details>
 		<summary>管理概括类</summary>
 <form th:action="@{/general/manageGeneral?(id=1)}" method="post">
@@ -73,5 +80,6 @@
 		</table>
 	</form>
 </details>
+<iframe name="mainIframe" height="500px;" width="1500px;"></iframe>
 </body>
 </html>

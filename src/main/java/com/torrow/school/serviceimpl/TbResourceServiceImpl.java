@@ -62,8 +62,6 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 		return this.pageCut(currentPage);
 	}
 
-	
-	
 	@Override
 	public PageBean<TbResource> findingByPaging(int currentPage, TbCategory record) {
 		List<TbResource> list = new ArrayList<TbResource>();// 这个集合是为了把得到资源类与类别类caId相同的的数据
