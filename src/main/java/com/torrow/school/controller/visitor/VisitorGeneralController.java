@@ -31,12 +31,10 @@ public class VisitorGeneralController extends BaseController {
 	 * @return
 	 * 查看学校简介
 	 */
-	@RequestMapping("viewSchoolIntroduction")
-	public String viewSchoolIntroduction(Model model){
-		TbCategory record = new TbCategory();
-		record.setCaName("学校简介");
-		PageBean<TbResource> page = resourceService.findingByPaging(1, record);
-		model.addAttribute("pagemsg", page);// 回显分页数据
+	@RequestMapping("viewGeneral")
+	public String viewSchoolIntroduction(String generalName,Model model){
+		TbResource resource = resourceService.selectOne("");
+		model.addAttribute("resource", resource);// 回显分页数据
 		return "visitor/schoolintroduction";
 	}
 	

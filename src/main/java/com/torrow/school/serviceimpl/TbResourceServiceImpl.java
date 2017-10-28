@@ -101,7 +101,6 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 
 	@Override
 	public int deleteByCaId(Integer caId) {
-
 		return tbResourceDao.deleteByCaId(caId);
 	}
 
@@ -111,9 +110,9 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	}
 
 	@Override
-	public TbResource selectOne() {
-		asa
-		return null;
+	public TbResource selectOne(String generalName) {
+		TbCategory category = tbCategoryDao.findCategoryByCaName(generalName);
+		return this.selectByCaId(category.getCaId());
 	}
 
 }

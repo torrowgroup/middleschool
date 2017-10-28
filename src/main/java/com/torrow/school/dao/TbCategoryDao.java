@@ -10,7 +10,7 @@ public interface TbCategoryDao {
 	
 
 	//查看类别名称是否重复
-	public TbCategory findCategoryByCaName(@Param("caName")String caName);
+	public TbCategory findCategoryByCaName(@Param("caName")String caName);//张金高用于根据类别类名称获得类别类
 
 	public List<TbCategory> selectAllCaId();
 

@@ -18,7 +18,7 @@ public interface TbResourceService {
     //得到所有资源类
     List<TbResource> selectAll();
     //得到单条资源类，目前用于概括类
-    TbResource selectOne();
+    TbResource selectOne(String generalName);
     
     //为了查看一条信息
     TbResource selectByPrimaryKey(Integer id);
