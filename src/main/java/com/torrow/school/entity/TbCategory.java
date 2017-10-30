@@ -17,7 +17,7 @@ public class TbCategory implements Serializable {
 
 	private Integer caId;	//类别类编号
 
-    private Integer caPid;	//类别类父id，概括类1，新闻类2，机构部(语文教研组，数学教研组)3，管理员4，教师5,
+    private Integer caPid;	//类别类父id，概括类1，新闻类2，机构部(语文教研组，数学教研组)3，管理员4，教师5,6，通知公告,7,校园风光类
   
     private String caName;	//类别名称
 

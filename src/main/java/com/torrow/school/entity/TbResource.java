@@ -53,6 +53,14 @@ public class TbResource implements Serializable {
 		this.reContent = reContent;
 	}
 	
+	public TbResource(Integer caId,String caName,
+			String reContent) {
+		super();
+		this.caId = caId;
+		this.caName = caName;
+		this.reContent = reContent;
+	}
+	
 	public TbResource(Integer caId,String caName, String reTitle,
 			String reContent) {
 		super();

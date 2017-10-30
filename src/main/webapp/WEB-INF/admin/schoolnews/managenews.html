@@ -11,9 +11,10 @@
 	<button onclick="bian()">点我一下</button>
 	<button>清空操作</button>
 	<div th:text="${message}"></div>
-	<form th:action="@{/general/updateGeneral}" onSubmit="return modifyContent();"
+	<form th:action="@{/news/updateSchoolNews}" onSubmit="return modifyContent();"
 		method="post" enctype="multipart/form-data">
 		<input type="hidden" name="reId" th:value="${tbResource.reId}">
+		<input type="text" name="reTitle" th:value="${tbResource.reTitle}">
 		<textarea style="display: none;" name="reContent" id="a"></textarea>
 		<div id="introEditor" style="border: 1px solid #ccc;"
 			contenteditable="false"></div>

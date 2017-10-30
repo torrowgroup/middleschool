@@ -1,4 +1,5 @@
 package com.torrow.school.controller.manager;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -61,9 +62,10 @@ public class SchoolNewsController extends BaseController {
 	 */
 	@RequestMapping("manageSchoolNews")
 	public String manageSchoolNews(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
-			Model model) {
+			Model model,Integer id) {
 		TbCategory record = new TbCategory();
-		record.setCaPid(2);
+//		record.setCaPid(2);
+		record.setCaId(id);
 		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
 		model.addAttribute("sign", 1);
@@ -93,8 +95,13 @@ public class SchoolNewsController extends BaseController {
 	@RequestMapping("selectOneNews")
 	public String selectOneNews(int id, Model model) {
 		TbResource tb = resourceService.selectByPrimaryKey(id);
-		model.addAttribute("news", tb);
-		return "admin/schoolnews/updateschoolnews";
+		if (null != tb) {
+			model.addAttribute("tbResource", tb);
+		} else {
+			model.addAttribute("message", "该名称不存在");
+			return "admin/schoolnews/index";
+		}
+		return "admin/schoolnews/managenews";
 	}
 
 	/**
@@ -105,23 +112,25 @@ public class SchoolNewsController extends BaseController {
 	 * @return 修改学校新闻
 	 */
 	@RequestMapping("updateSchoolNews")
-	public String updateSchoolNews(Model model, int id, TbResource tbResource) {
-		int currentPage = (int) session.getAttribute("currentPage");
-		TbResource tb = resourceService.selectByPrimaryKey(id);
-		TbResource record = new TbResource(tb.getReId(), tb.getCaId(), tb.getCaName(), tbResource.getReTitle(),
-				tb.getReIssuer(), tb.getReIssuingdate(), tbResource.getReContent());
-		int i = resourceService.updateByPrimaryKey(record);
-		if (i != 0) {
-			model.addAttribute("message", "修改成功");
-		} else {
-			model.addAttribute("message", "修改失败");
-		}
-		return this.manageSchoolNews(currentPage, model);
+	public String updateGeneral(Model model, @RequestParam(value = "picture", required = false) MultipartFile[] picture,
+			TbResource tbResource) throws IllegalStateException, IOException {
+		TbResource tb = resourceService.selectByPrimaryKey(tbResource.getReId());
+		if (null != tb) {
+			tb.setReContent(tbResource.getReContent());
+			tb.setReTitle(tbResource.getReTitle());
+			int i=resourceService.updateByPrimaryKey(tb);
+			if(i!=0) {
+				model.addAttribute("message", "保存成功");
+			}else {
+				model.addAttribute("message", "保存失败");
+			}
+		} 
+		return this.manageJumping(model);
 	}
 
 	/**
 	 * @param model
-	 * @param id
+	 * @param id---------
 	 * @return 删除学校新闻
 	 */
 	@RequestMapping("deleteNews")
@@ -133,7 +142,7 @@ public class SchoolNewsController extends BaseController {
 		} else {
 			model.addAttribute("message", "删除失败");
 		}
-		return this.manageSchoolNews(currentPage, model);
+		return this.manageSchoolNews(currentPage, model,1);
 	}
 
 	/**

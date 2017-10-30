@@ -19,7 +19,6 @@
 		<div th:each="category,categoryStart:${categoryList}">
 				<a th:href="@{/news/manageSchoolNews?(id=${category.caId})}" th:text="${category.caName}"></a>
 		</div>
-		<br>
 </details>
 <iframe name="mainIframe" height="500px;" width="1500px;"></iframe>
 </body>
