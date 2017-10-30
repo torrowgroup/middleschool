@@ -8,7 +8,6 @@
 	th:href="@{/static/dist/css/wangEditor.min.css}">
 </head>
 <body>
-<<<<<<< HEAD
 <div id="introEditor" style="border: 1px solid #ccc;" contenteditable="false"></div>
 <script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>	
 <script type="text/javascript" th:src="@{/static/js/wangEditor.min.js}"></script>
@@ -22,10 +21,7 @@
 		var reContent = [[${tbResource.reContent}]];//给两个富文本赋值
 		editor.txt.html(reContent);
 	}
-	
-	
 /*]]>*/
-=======
 	<button onclick="bian()">点我一下</button>
 	<button>清空操作</button>
 	<div th:text="${message}"></div>
@@ -52,8 +48,6 @@
 		var oIn = document.getElementById('introEditor');
 		oA.value = oIn.innerHTML;
 	}
-	
->>>>>>> 93a1cc3fd5822a11ce666b4dd80486d302a4dbad
 </script>
 </body>
 </html>
