@@ -8,30 +8,13 @@
 	th:href="@{/static/dist/css/wangEditor.min.css}">
 </head>
 <body>
-<<<<<<< HEAD
-<div id="introEditor" style="border: 1px solid #ccc;" contenteditable="false"></div>
-<script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>	
-<script type="text/javascript" th:src="@{/static/js/wangEditor.min.js}"></script>
-<script th:inline="javascript">
-/*<![CDATA[*/
-	window.onload=function(){
-		var E = window.wangEditor
-		var editor = new E('div1', '#introEditor') // 两个参数也可以传入 elem 对象，class 选择器
-		editor.create()
-		
-		var reContent = [[${tbResource.reContent}]];//给两个富文本赋值
-		editor.txt.html(reContent);
-	}
-	
-	
-/*]]>*/
-=======
 	<button onclick="bian()">点我一下</button>
 	<button>清空操作</button>
 	<div th:text="${message}"></div>
-	<form th:action="@{/general/updateGeneral}" onSubmit="return modifyContent();"
+	<form th:action="@{/news/updateSchoolNews}" onSubmit="return modifyContent();"
 		method="post" enctype="multipart/form-data">
 		<input type="hidden" name="reId" th:value="${tbResource.reId}">
+		<input type="text" name="reTitle" th:value="${tbResource.reTitle}">
 		<textarea style="display: none;" name="reContent" id="a"></textarea>
 		<div id="introEditor" style="border: 1px solid #ccc;"
 			contenteditable="false"></div>
@@ -53,7 +36,6 @@
 		oA.value = oIn.innerHTML;
 	}
 	
->>>>>>> 93a1cc3fd5822a11ce666b4dd80486d302a4dbad
 </script>
 </body>
 </html>

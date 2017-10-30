@@ -78,13 +78,14 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 					}
 				} else {
 					for (TbResource it : tbResource) {
-						if (it.getCaId().equals(item.getCaId()) && it.getCaName().equals(record.getCaName())) {
+						if (it.getCaId().equals(item.getCaId()) && it.getCaId().equals(record.getCaId())) {
 							list.add(it);
 						}
 					}
 				}
 			}
 		}
+		log.info("================="+record.getCaPid());
 		int totalCount = list.size();// 得到总记录数
 		double tc = totalCount;
 		Double num = Math.ceil(tc / pageSize);// 向上取整

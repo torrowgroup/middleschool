@@ -16,6 +16,7 @@
 		<div th:each="category,categoryStart:${categoryList}">
 				<a th:href="@{/general/manageGeneral?(id=${category.caId})}" th:text="${category.caName}"></a>
 		</div>
+<<<<<<< HEAD
 	</details>
 	<details>
 		<summary>查看概括类</summary>
@@ -38,6 +39,12 @@
 		</table>
 	</form>
 </details>
+=======
+		<div th:each="category,categoryStart:${sceneryList}">
+				<a th:href="@{/general/manageScenery}" th:text="${category.caName}"></a>
+		</div>
+	</details>
+>>>>>>> 93a1cc3fd5822a11ce666b4dd80486d302a4dbad
 <iframe name="mainIframe" height="500px;" width="1500px;"></iframe>
 </body>
 </html>

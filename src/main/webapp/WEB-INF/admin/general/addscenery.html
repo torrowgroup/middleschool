@@ -6,18 +6,19 @@
 <title>Home</title>
 <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 <script type="text/javascript" th:src="@{/static/js/upload.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/upload1.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/upload2.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/upload3.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/upload4.js}"></script>
 </head>
 <body>
 	<div th:text="${message}"></div>
-	<form th:action="@{/general/addSchoolHonor}" method="post"
+	<form th:action="@{/general/addSchoolScenery}" method="post"
 		enctype="multipart/form-data">
 		<table>
 			<tr>
-				<td><input type="hidden" name="caName" value="校园风光"></td>
+				<td><input type="text" name="caId" th:value="${tb.caId}"></td>
+				<td><input type="text" name="caName" th:value="${tb.caName}"></td>
+			</tr>
+			<tr>
+				<td>风景名</td>
+				<td><input type="text" name="reTitle"></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="添加"></td>
@@ -41,8 +42,8 @@
 			</div>
 			<!--input-group end-->
 		</div>
-		<div id="addCommodityIndex">
-			<!--input-group start-->
+		<!-- <div id="addCommodityIndex">
+			input-group start
 			<div class="input-group row">
 				<div class="col-sm-3">
 					<label>图片1</label>
@@ -54,13 +55,13 @@
 					</div>
 					<input type="file" name="picture" onchange="previewImage1(this)"
 						style="display: none;" id="previewImg1">
-					<!--<input id="uploaderInput" class="uploader__input" style="display: none;" type="file" accept="" multiple="">-->
+					<input id="uploaderInput" class="uploader__input" style="display: none;" type="file" accept="" multiple="">
 				</div>
 			</div>
-			<!--input-group end-->
+			input-group end
 		</div>
 		<div id="addCommodityIndex">
-			<!--input-group start-->
+			input-group start
 			<div class="input-group row">
 				<div class="col-sm-3">
 					<label>图片2</label>
@@ -72,13 +73,13 @@
 					</div>
 					<input type="file" name="picture" onchange="previewImage2(this)"
 						style="display: none;" id="previewImg2">
-					<!--<input id="uploaderInput" class="uploader__input" style="display: none;" type="file" accept="" multiple="">-->
+					<input id="uploaderInput" class="uploader__input" style="display: none;" type="file" accept="" multiple="">
 				</div>
 			</div>
-			<!--input-group end-->
+			input-group end
 		</div>
 		<div id="addCommodityIndex">
-			<!--input-group start-->
+			input-group start
 			<div class="input-group row">
 				<div class="col-sm-3">
 					<label>图片3</label>
@@ -90,13 +91,13 @@
 					</div>
 					<input type="file" name="picture" onchange="previewImage3(this)"
 						style="display: none;" id="previewImg3">
-					<!--<input id="uploaderInput" class="uploader__input" style="display: none;" type="file" accept="" multiple="">-->
+					<input id="uploaderInput" class="uploader__input" style="display: none;" type="file" accept="" multiple="">
 				</div>
 			</div>
-			<!--input-group end-->
+			input-group end
 		</div>
 		<div id="addCommodityIndex">
-			<!--input-group start-->
+			input-group start
 			<div class="input-group row">
 				<div class="col-sm-3">
 					<label>图片4</label>
@@ -108,11 +109,11 @@
 					</div>
 					<input type="file" name="picture" onchange="previewImage4(this)"
 						style="display: none;" id="previewImg4">
-					<!--<input id="uploaderInput" class="uploader__input" style="display: none;" type="file" accept="" multiple="">-->
+					<input id="uploaderInput" class="uploader__input" style="display: none;" type="file" accept="" multiple="">
 				</div>
 			</div>
-			<!--input-group end-->
-		</div>
+			input-group end
+		</div> -->
 	</form>
 </body>
 </html>

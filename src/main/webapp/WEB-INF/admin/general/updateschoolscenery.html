@@ -6,18 +6,17 @@
 <title>home</title>
 <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 <script type="text/javascript" th:src="@{/static/js/upload.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/upload1.js}"></script>
 </head>
 <body>
 	<div th:text="${message}"></div>
 	<form
-		th:action="@{/general/updateSchoolHistory?(id=${tbResource.reId})}"
+		th:action="@{/general/updateSchoolScenery?(id=${tb.reId})}"
 		method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
-				<td>内容</td>
-				<td><input type="text" name="reContent"
-					th:value="${tbResource.reContent}" /></td>
+				<td>简介</td>
+				<td><input type="text" name="reTitle"
+					th:value="${tb.reTitle}" /></td>
 			</tr>
 		</table>
 		<div id="addCommodityIndex">
@@ -29,7 +28,7 @@
 				<div class="col-sm-9 big-photo">
 					<div id="preview">
 						<img alt="无图片" id="imghead" border="0"
-							th:src="@{/static/uploadimg/{picture}(picture=${tbResource.reTitle})}"
+							th:src="@{/static/uploadimg/{picture}(picture=${tb.reContent})}"
 							width="90" height="90" onclick="$('#previewImg').click();">
 					</div>
 					<input type="file" name="picture" onchange="previewImage(this)"
@@ -40,6 +39,7 @@
 			<!--input-group end-->
 		</div>
 		<input type="submit" value="修改">
+        <a th:href="@{/general/deleteScenery?(id=${tb.reId})}" onclick="return confirm('确定要删除吗')">Delete</a>
 	</form>
 </body>
 </html>
