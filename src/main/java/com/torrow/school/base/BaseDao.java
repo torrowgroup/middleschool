@@ -12,7 +12,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.torrow.school.util.PageBean;
 
 /**
@@ -115,4 +114,5 @@ public class BaseDao<T> extends SqlSessionDaoSupport
 		picture.transferTo(uploadFile);
 		return fileName;
 	}
+	
 }

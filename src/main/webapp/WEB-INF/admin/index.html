@@ -49,6 +49,11 @@
 		<summary>留言管理</summary>
 		<a th:href="@{/message/manageMessage}" target="mainIframe">管理留言</a>
 	</details>
+	<details>
+		<summary>个人中心</summary>
+		<a th:href="@{/user/viewMe}" target="mainIframe">个人信息</a>
+		<a th:href="@{/user/loginOut}" target="mainIframe">退出</a>
+	</details>
 	<iframe name="mainIframe" height="500px;" width="1500px;"></iframe>
 </body>
 </html>

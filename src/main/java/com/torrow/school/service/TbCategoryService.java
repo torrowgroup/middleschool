@@ -1,9 +1,11 @@
 package com.torrow.school.service;
 
+import java.util.List;
+
+import org.springframework.ui.Model;
+
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.util.PageBean;
-
-import java.util.List;
 
 public interface TbCategoryService {
 	//张金高
@@ -11,6 +13,8 @@ public interface TbCategoryService {
     List<TbCategory> selectAll();
     //根据所有用户部门得到所有用户类别类 安李杰用
     List<TbCategory> selectByPid(List<Integer> pidList);
+    //将学校概括，校园新闻，教育教研等封装进model
+    void getCategory(Model model);
 	
 	//删除类别信息
     int deleteByPrimaryKey(Integer id);

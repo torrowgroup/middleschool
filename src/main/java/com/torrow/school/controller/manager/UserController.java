@@ -141,7 +141,18 @@ public class UserController extends BaseController {
 		model.addAttribute("msg", msg);
 		return this.manageUser(1, model);
 	}
-
+	
+	@RequestMapping("viewMe")
+	public String viewMe(Model model){
+		List<Integer> pidList = new ArrayList<Integer>();
+		pidList.add(3);// 将机构部3，管理员4，教师5放进集合中
+		pidList.add(4);
+		pidList.add(5);
+		List<TbCategory> list = categoryService.selectByPid(pidList);// 得到所有身份记录
+		model.addAttribute("categoryList", list);//将身份封装进model
+		return "admin/user/viewme";
+	}
+	
 	// 用于富文本编辑器的图片上传
 	@RequestMapping("uploadImg")
 	public void uploadImg(MultipartFile file, HttpServletResponse response) throws Exception {

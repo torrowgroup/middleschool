@@ -110,6 +110,10 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	@Override
 	public TbResource selectOne(String generalName) {
 		TbCategory category = tbCategoryDao.findCategoryByCaName(generalName);
+		log.info("----"+category);
+		if(category.getCaId()==0){
+			return null;
+		}
 		return this.selectByCaId(category.getCaId());
 	}
 

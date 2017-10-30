@@ -27,7 +27,7 @@
 	achieveEditor.config.uploadImgUrl = 'uploadImg'
 	achieveEditor.config.uploadImgFileName = 'file'
 	achieveEditor.create()
-		
+
 	function modifyContent() {// 将两个富文本的值赋值给textarea
 		var usIntroduction = document.getElementById("usIntroduction");
 		var usAchievements = document.getElementById("usAachievements");

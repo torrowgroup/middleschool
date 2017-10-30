@@ -29,36 +29,27 @@
         <ul class="navUl">
             <li class="navLi hidden-xs"><a th:href="@{/index}">首页</a></li>
             <li class="navLi">
-                <a th:href="@{/visitor/viewSchoolIntroduction}">学校概况</a>
+                <a href="#">学校概况</a>
                 <ul class="navSecondUl">
-                    <li><a th:href="@{/visitor/viewSchoolIntroduction}">学校简介</a></li>
-                    <li><a th:href="@{/visitor/view}">领导机构</a></li>
-                    <li><a href="#">建校历史</a></li>
-                    <li><a href="#">学校荣誉</a></li>
-                    <li><a href="#">教学成果</a></li>
-                    <li><a href="#">校园风光</a></li>
+                    <li th:each="general,generals:${generals}">
+                    	<a th:href="@{/visitor/viewGeneral?(gName= ${general.caName})}" th:text="${general.caName}">学校概况</a>
+                    </li>
                 </ul>
             </li>
             <li class="navLi">
                 <a href="#">校园新闻</a>
                 <ul class="navSecondUl">
-                    <li><a href="#">校园新闻</a></li>
-                    <li><a href="#">教育动态</a></li>
-                    <li><a href="#">德育专题</a></li>
-                    <li><a href="#">学生管理</a></li>
-                    <li><a href="#">学校发展</a></li>
-                    <li><a href="#">教师成长</a></li>
+                    <li th:each="news,newsStart:${schoolNews}">
+                    	<a th:href="@{/visitor/viewGeneral?(gName= ${news.caName})}" th:text="${news.caName}">学校概况</a>
+                    </li>
                 </ul>
             </li>
             <li class="navLi">
                 <a href="#">教育教研</a>
                 <ul class="navSecondUl">
-                    <li><a href="#">语文教研</a></li>
-                    <li><a href="#">数学教研</a></li>
-                    <li><a href="#">外语教研</a></li>
-                    <li><a href="#">理化生教研</a></li>
-                    <li><a href="#">政史地教研</a></li>
-                    <li><a href="#">音体美教研</a></li>
+                    <li th:each="education,educations:${educations}">
+                    	<a th:href="@{/visitor/viewGeneral?(gName= ${education.caName})}" th:text="${education.caName}">学校概况</a>
+               		</li>
                 </ul>
             </li>
             <li class="navLi">

@@ -1,8 +1,12 @@
 package com.torrow.school.serviceimpl;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
 import com.torrow.school.base.BaseDao;
 import com.torrow.school.dao.TbCategoryDao;
 import com.torrow.school.entity.TbCategory;
@@ -59,8 +63,9 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 	@Override
 	public List<TbCategory> selectByPid(List<Integer> pidList) {
 		List<TbCategory> categoryList = this.selectAllEntity();
-		int temp = 0; //将变量放在循环外，节省空间
+		int temp; //将变量放在循环外，节省空间
 		for(int i=0;i<categoryList.size();i++){	//得到所有符合用户部分的类别类
+			temp = 0;
 			for(int j=0;j<pidList.size();j++){
 				if(categoryList.get(i).getCaPid()==pidList.get(j)){
 					temp=1;
@@ -85,6 +90,27 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 			}
 		}
 		return categoryList;
+	}
+	
+	
+	public void getCategory(Model model){
+		List<TbCategory> category = this.selectAll();
+		List<TbCategory> generals = new ArrayList<TbCategory>();//概括类
+		List<TbCategory> schoolNews = new ArrayList<TbCategory>();//校园新闻
+		List<TbCategory> educations = new ArrayList<TbCategory>();//教育教研处 教研组
+//		List<TbCategory> generals = new ArrayList<TbCategory>();
+		for(int i=0;i<category.size();i++){
+			if(category.get(i).getCaPid()==1){
+				generals.add(category.get(i));
+			} else if(category.get(i).getCaPid()==2) {
+				schoolNews.add(category.get(i));
+			} else if(category.get(i).getCaPid()==3){
+				educations.add(category.get(i));
+			}
+		}
+		model.addAttribute("generals", generals);
+		model.addAttribute("schoolNews", schoolNews);
+		model.addAttribute("educations", educations);
 	}
 	
 }

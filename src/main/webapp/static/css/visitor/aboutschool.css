@@ -1,0 +1,76 @@
+.centerImg{
+    width: 100%;
+    background-color: #8050a0;
+}
+.centerImg img{
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+}
+.mainbox1{
+    margin-top: 20px;
+}
+.schollabout{
+    width: 1000px;
+    margin: 0 auto;
+}
+.schollabout .schollleft{
+    float: left;
+    width: 200px;
+    padding: 10px 0px;
+    font-size: 16px;
+    border-left: 2px solid rgb(48,64,91);
+    /*background-color: red;*/
+}
+.schollabout .schollright{
+    float: right;
+    width: 750px;
+}
+.location{
+    font: 12px '微软雅黑';
+    color: #707070;
+    letter-spacing: 1px;
+}
+.location>a{
+    color: #707070;
+}
+.location>a:hover{
+    text-decoration: none;
+}
+.titlesc{
+    width: 100%;
+    font: 22px '微软雅黑';
+    text-align: center;
+    padding: 20px 0px;
+    letter-spacing: 5px;
+    color: rgb(48,64,91);
+}
+.schollcontent{
+    text-indent: 28px;
+}
+.schollcontent>p{
+    padding-bottom: 20px;
+}
+.schoolcenter{
+    list-style: none;
+}
+.schollleft>h3{
+    padding: 0 0 15px 20px;
+}
+.schoolcenter>li{
+    list-style: none;
+}
+.schoolcenter>li>a{
+    display: block;
+    padding: 15px 35px;
+    font-family: '微软雅黑';
+    color: #000;
+}
+
+.schoolcenter>li>a:hover{
+    text-decoration: none;
+    background-color: #d9fab4;
+}
+.active1{
+    background-color: #d9fab4;
+}

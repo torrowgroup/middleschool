@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Home</title>
+</head>
+<body>
+	<table>
+			<tr>
+				<td><a href="#"></a>修改密码</td>
+			</tr>
+			<tr>
+				<td>邮箱</td>
+				<td>
+					<input type="email" id="usEmail" th:value="${session.user.usEmail}" maxlength="25">
+					<span id="testEmail"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>姓名</td>
+				<td><input type="text" name="usName" required="required"
+					th:value="${session.user.usName}" maxlength="10"></td>
+			</tr>
+			<tr>
+				<td>性别</td>
+				<td><input name="usSex" type="radio"  value="男" th:checked="${session.user.usSex=='男'}" />男 <input
+					name="usSex" type="radio" value="女" th:checked="${session.user.usSex=='女'}" />女</td>
+			</tr>
+			<tr>
+				<td>身份</td>
+				<td th:text="${session.user.caName}"></td>
+			</tr>
+			<tr>
+				<td>联系方式</td>
+				<td><input type="text" name="usPhone" maxlength="11" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" 
+					th:value="${session.user.usPhone}" /></td>
+			</tr>
+			<tr>
+				<td>照片</td>
+				<td>
+					<input type="hidden" name="usPicture" th:value="${session.user.usPicture}"/>
+					<img alt="没有照片" width="200px;" height="50px;"
+					th:src="@{/static/uploadimg/{picture}(picture=${session.user.usPicture})}" />
+					<input type="file" name="picture"/>
+				</td>
+			</tr>
+			<tr>
+				<td>简介</td>
+				<td><a href="#" id="introShow">查看简介</a></td>
+			</tr>
+			<tr>
+				<td>成就</td>
+				<td><a href="#" id="achieveShow">查看成就</a></td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" id="update" onclick=""  value="修改"/>
+				</td>
+			</tr>
+		</table>            
+<script th:inline="javascript">
+/*<![CDATA[*/
+	window.onload=function(){
+		var usIntroduction = [[${session.user.usIntroduction}]];//给两个富文本赋值
+		var usAchievements = [[${session.user.usAchievements}]];
+		introdEditor.$txt.html(usIntroduction);
+		achieveEditor.$txt.html(usAchievements);
+	}
+/*]]>*/
+</script>
+</body>
+</html>

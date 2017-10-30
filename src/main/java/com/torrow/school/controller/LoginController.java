@@ -1,8 +1,13 @@
 package com.torrow.school.controller;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.torrow.school.base.BaseController;
+import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbUser;
 
 /**
@@ -30,7 +35,7 @@ public class LoginController extends BaseController {
 		TbUser tbUser=userService.login(usEmail,usPassword);
 		if(tbUser!=null) {
 			model.addAttribute("msg", "登录成功");
-			session.setAttribute("tbUser",tbUser);
+			session.setAttribute("user",tbUser);
 		}else{
 			model.addAttribute("msg", "用户名或密码错误");
 			return "index";
@@ -51,7 +56,8 @@ public class LoginController extends BaseController {
 	 * @return web-app下jsp用于跳转到游客首页界面
 	 */
 	@RequestMapping("index")
-	public String index(){
+	public String index(Model model){
+		categoryService.getCategory(model);
 		return "visitor/index";
 	}
 }

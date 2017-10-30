@@ -1,14 +1,15 @@
 
 package com.torrow.school.controller.visitor;
 
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.torrow.school.base.BaseController;
-import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
-import com.torrow.school.util.PageBean;
 
 /**
  * @author 张金高
@@ -30,21 +31,15 @@ public class VisitorGeneralController extends BaseController {
 	 * @param model
 	 * @return
 	 * 查看学校简介
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping("viewGeneral")
-	public String viewSchoolIntroduction(String generalName,Model model){
-		TbResource resource = resourceService.selectOne("");
-		model.addAttribute("resource", resource);// 回显分页数据
-		return "visitor/schoolintroduction";
+	public ModelAndView viewSchoolIntroduction(String gName,Model model) throws UnsupportedEncodingException{
+		gName = new String(gName.getBytes("iso-8859-1"),"UTF-8");
+		TbResource resource = resourceService.selectOne(gName);
+		categoryService.getCategory(model);//将学校概括等封装进model
+		model.addAttribute("resource", resource);
+		return new ModelAndView("visitor/schoolgeneral");
 	}
 	
-	
-	/**
-	 * @return
-	 * 查看学校
-	 */
-	@RequestMapping("viewManageAuthorities")
-	public String viewManageAuthorities(){
-		return "";
-	}
 }
