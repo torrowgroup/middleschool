@@ -314,19 +314,24 @@ public class GeneralController extends BaseController {
 		}
 		return "admin/general/addschoolhonor";
 	}
-	
+
 	/**
 	 * @param model
 	 * @param id
 	 * @return 管理除了学校风光以外的所有
 	 */
 	@RequestMapping("manageGeneral")
-	public String manage(Model model,Integer id) {
+	public String manage(Model model, Integer id) {
 		TbResource tb = resourceService.selectByCaId(id);
-		model.addAttribute("tbResource", tb);
-		return "";
+		if (null != tb) {
+			model.addAttribute("tbResource", tb);
+		} else {
+			model.addAttribute("message", "该名称不存在");
+			return this.manageGeneralJumping(model);
+		}
+		return "admin/general/managegeneral";
 	}
-	
+
 	/**
 	 * @param model
 	 * @param id
