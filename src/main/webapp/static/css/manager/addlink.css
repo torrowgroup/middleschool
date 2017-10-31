@@ -1,0 +1,10 @@
+body{
+	margin:0;
+	padding: 0;
+}
+table{
+	width: 300px;
+	height: 120px;
+	margin :0 auto;
+	margin-top: 10%;
+}

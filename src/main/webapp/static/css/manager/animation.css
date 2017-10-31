@@ -1,0 +1,72 @@
+.anima{
+    width: 100%;
+    height: 480px;
+      /*background-color: orange;*/
+}
+.aaa{
+    width: 14%;
+    height: 240px;
+    background: url(../../images/manager/ani.png);
+    background-repeat: no-repeat;
+    margin-left:3%;
+    margin-top:240px;
+    float:left;  
+}
+.aaa{
+    -webkit-animation:swinging 15s ease-in-out 0s infinite;
+    -moz-animation:swinging 15s ease-in-out 0s infinite;
+    animation:swinging 15s ease-in-out 0s infinite;
+    -webkit-transform-origin:50% 100%;
+    -moz-transform-origin:50% 100%;
+    transform-origin:50% 100%;
+}
+
+@-webkit-keyframes swinging{
+    0% { -webkit-transform: rotate(0); }
+    10% { -webkit-transform: rotate(8deg); }
+    20% { -webkit-transform: rotate(-7deg); }
+    30% { -webkit-transform: rotate(8deg); }
+    40% { -webkit-transform: rotate(-7deg); }
+    50% { -webkit-transform: rotate(8deg); }
+    60% { -webkit-transform: rotate(-7deg); }
+    70% { -webkit-transform: rotate(8deg); }
+    80% { -webkit-transform: rotate(-7deg); }
+    90% { -webkit-transform: rotate(8deg); }
+    100% { -webkit-transform: rotate(-7deg); } 
+}
+ 
+@-moz-keyframes swinging{
+    0% { -webkit-transform: rotate(0); }
+    10% { -webkit-transform: rotate(8deg); }
+    20% { -webkit-transform: rotate(-7deg); }
+    30% { -webkit-transform: rotate(8deg); }
+    40% { -webkit-transform: rotate(-7deg); }
+    50% { -webkit-transform: rotate(8deg); }
+    60% { -webkit-transform: rotate(-7deg); }
+    70% { -webkit-transform: rotate(8deg); }
+    80% { -webkit-transform: rotate(-7deg); }
+    90% { -webkit-transform: rotate(8deg); }
+    100% { -webkit-transform: rotate(-7deg); } 
+}
+ 
+@keyframes swinging{
+   0% { -webkit-transform: rotate(0); }
+    10% { -webkit-transform: rotate(8deg); }
+    20% { -webkit-transform: rotate(-7deg); }
+    30% { -webkit-transform: rotate(8deg); }
+    40% { -webkit-transform: rotate(-7deg); }
+    50% { -webkit-transform: rotate(8deg); }
+    60% { -webkit-transform: rotate(-7deg); }
+    70% { -webkit-transform: rotate(8deg); }
+    80% { -webkit-transform: rotate(-7deg); }
+    90% { -webkit-transform: rotate(8deg); }
+    100% { -webkit-transform: rotate(-7deg); } 
+}
+.bbb{
+    width: 140px;
+    height: 120px;
+    /*background-color: red;*/
+    float: left;
+    margin-top: 200px;
+    z-index: 100;
+}

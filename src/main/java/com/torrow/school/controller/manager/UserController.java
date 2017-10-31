@@ -153,6 +153,15 @@ public class UserController extends BaseController {
 		return "admin/user/viewme";
 	}
 	
+	/**
+	 * @return
+	 * 加载欢迎界面
+	 */
+	@RequestMapping("toWelcome")
+	public String toWelcome() {
+		return "admin/animation";
+	}
+	
 	// 用于富文本编辑器的图片上传
 	@RequestMapping("uploadImg")
 	public void uploadImg(MultipartFile file, HttpServletResponse response) throws Exception {
