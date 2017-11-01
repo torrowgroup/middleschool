@@ -61,7 +61,7 @@ public class CategoryController extends BaseController {
 	@RequestMapping("/manageCategory")
 	public String manageCategory(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
 			Model model) {
-		model.addAttribute("pagemsg", categoryService.findPage(currentPage));// 回显分页数据
+		model.addAttribute("pagemsg", categoryService.findPage(currentPage,2));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
 		return "admin/category/managecategory";
 	}

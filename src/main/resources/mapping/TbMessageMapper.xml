@@ -6,7 +6,7 @@
     <result column="me_title" jdbcType="VARCHAR" property="meTitle" />
     <result column="me_picture" jdbcType="VARCHAR" property="mePicture" />
     <result column="me_hide" jdbcType="VARCHAR" property="meHide" />
-    <result column="me_issuingdate" jdbcType="TIMESTAMP" property="meIssuingdate" />
+    <result column="me_issuingdate" jdbcType="VARCHAR" property="meIssuingdate" />
     <result column="me_status" jdbcType="VARCHAR" property="meStatus" />
     <result column="spare" jdbcType="VARCHAR" property="spare" />
     <result column="me_content" jdbcType="LONGVARCHAR" property="meContent" />
@@ -24,7 +24,7 @@
       spare, me_content, me_reply
       )
     values ( #{meTitle,jdbcType=VARCHAR}, #{mePicture,jdbcType=VARCHAR}, 
-      #{meHide,jdbcType=VARCHAR}, #{meIssuingdate,jdbcType=TIMESTAMP}, #{meStatus,jdbcType=VARCHAR}, 
+      #{meHide,jdbcType=VARCHAR}, #{meIssuingdate,jdbcType=VARCHAR}, #{meStatus,jdbcType=VARCHAR}, 
       #{spare,jdbcType=VARCHAR}, #{meContent,jdbcType=LONGVARCHAR}, #{meReply,jdbcType=LONGVARCHAR}
       )
   </insert>
@@ -34,7 +34,7 @@
     set me_title = #{meTitle,jdbcType=VARCHAR},
       me_picture = #{mePicture,jdbcType=VARCHAR},
       me_hide = #{meHide,jdbcType=VARCHAR},
-      me_issuingdate = #{meIssuingdate,jdbcType=TIMESTAMP},
+      me_issuingdate = #{meIssuingdate,jdbcType=VARCHAR},
       me_status = #{meStatus,jdbcType=VARCHAR},
       spare = #{spare,jdbcType=VARCHAR},
       me_content = #{meContent,jdbcType=LONGVARCHAR},

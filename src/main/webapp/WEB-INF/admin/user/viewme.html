@@ -8,24 +8,19 @@
 <body>
 	<table>
 			<tr>
-				<td><a href="#"></a>修改密码</td>
+				<td><a th:href="@{/user/toUpdatePsw}">修改密码</a></td>
 			</tr>
 			<tr>
 				<td>邮箱</td>
-				<td>
-					<input type="email" id="usEmail" th:value="${session.user.usEmail}" maxlength="25">
-					<span id="testEmail"></span>
-				</td>
+				<td th:text="${session.user.usEmail}"></td>
 			</tr>
 			<tr>
 				<td>姓名</td>
-				<td><input type="text" name="usName" required="required"
-					th:value="${session.user.usName}" maxlength="10"></td>
+				<td th:text="${session.user.usName}"></td>
 			</tr>
 			<tr>
 				<td>性别</td>
-				<td><input name="usSex" type="radio"  value="男" th:checked="${session.user.usSex=='男'}" />男 <input
-					name="usSex" type="radio" value="女" th:checked="${session.user.usSex=='女'}" />女</td>
+				<td th:text="${session.user.usSex=='男'}"></td>
 			</tr>
 			<tr>
 				<td>身份</td>
@@ -33,8 +28,7 @@
 			</tr>
 			<tr>
 				<td>联系方式</td>
-				<td><input type="text" name="usPhone" maxlength="11" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" 
-					th:value="${session.user.usPhone}" /></td>
+				<td th:text="${session.user.usPhone}"></td>
 			</tr>
 			<tr>
 				<td>照片</td>
@@ -55,19 +49,9 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="button" id="update" onclick=""  value="修改"/>
+					<a href="#">修改基本信息</a>
 				</td>
 			</tr>
-		</table>            
-<script th:inline="javascript">
-/*<![CDATA[*/
-	window.onload=function(){
-		var usIntroduction = [[${session.user.usIntroduction}]];//给两个富文本赋值
-		var usAchievements = [[${session.user.usAchievements}]];
-		introdEditor.$txt.html(usIntroduction);
-		achieveEditor.$txt.html(usAchievements);
-	}
-/*]]>*/
-</script>
+		</table>
 </body>
 </html>

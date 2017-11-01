@@ -35,8 +35,8 @@ public class UserController extends BaseController {
 	// 查找所有用户，分页
 	@RequestMapping("manageUser")
 	public String manageUser(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
-		model.addAttribute("pagemsg", userService.findPage(currentPage));// 回显分页数据
-		return "admin/manageuser";
+		model.addAttribute("pagemsg", userService.findPage(currentPage,5));// 回显分页数据
+		return "admin/user/manageuser";
 	}
 
 	// 到达添加用户界面
@@ -48,7 +48,7 @@ public class UserController extends BaseController {
 		pidList.add(5);
 		List<TbCategory> list = categoryService.selectByPid(pidList);
 		model.addAttribute("categoryList", list);
-		return "admin/adduser";
+		return "admin/user/adduser";
 	}
 
 	// 验证用户邮箱是否被添加过
@@ -98,7 +98,7 @@ public class UserController extends BaseController {
 		model.addAttribute("categoryList", list);
 		model.addAttribute("user", tbUser);
 		model.addAttribute("page", page);//得到当前页数并返回前台
-		return "admin/updateuser";
+		return "admin/user/updateuser";
 	}
 
 	//修改用户信息
@@ -126,10 +126,9 @@ public class UserController extends BaseController {
 	}
 	// 删除用户
 	@RequestMapping("deleteUser")
-	public String deleteUser(int id, Model model) {
+	public String deleteUser(int id, int page,Model model) {
 		TbUser tbUser = userService.selectById(id);
 		String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tbUser.getUsPicture();
-		log.info("path  " + path);
 		File files = new File(path);
 		if (files.exists()) {
 			files.delete();
@@ -139,9 +138,14 @@ public class UserController extends BaseController {
 			msg = "删除成功";
 		}
 		model.addAttribute("msg", msg);
-		return this.manageUser(1, model);
+		return this.manageUser(page, model);
 	}
 	
+	/**
+	 * @param model
+	 * @return
+	 * 查看个人资料
+	 */
 	@RequestMapping("viewMe")
 	public String viewMe(Model model){
 		List<Integer> pidList = new ArrayList<Integer>();
@@ -155,8 +159,21 @@ public class UserController extends BaseController {
 	
 	/**
 	 * @return
-	 * 加载欢迎界面
+	 *  修改个人资料
 	 */
+	public String toUpdatePassword(){
+		return "admin/user/updateme";
+	}
+	
+	/**
+	 * @return
+	 * 修改个人密码
+	 */
+	public String toUpdatePsw(){
+		return "admin/user/updateme";
+	}
+	
+	
 	@RequestMapping("toWelcome")
 	public String toWelcome() {
 		return "admin/animation";

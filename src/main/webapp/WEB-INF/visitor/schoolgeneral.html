@@ -1,4 +1,4 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -8,8 +8,8 @@
     <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/static/css/visitor/style.css}" type="text/css">
 	<link rel="stylesheet" th:href="@{/static/css/visitor/aboutschool.css}" type="text/css">
-    <script th:src="@{/static/js/visitor/jquery.min.js}"></script>
-    <script th:src="@{/static/js/visitor/bootstrap.min.js}"></script>
+    <script th:src="@{/static/js/jquery.min.js}"></script>
+    <script th:src="@{/static/js/bootstrap.min.js}"></script>
 </head>
 <body>
 <div class="container header">
@@ -30,15 +30,15 @@
             <a href="#">学校概况</a>
             <ul class="navSecondUl">
                 <li th:each="general,generals:${generals}">
-                  <a th:href="@{/visitor/viewGeneral?(gName= ${general.caName})}"   th:text="${general.caName}">学校概况</a>
+                  <a th:href="@{/visitor/viewGeneral?(gId= ${general.caId})}"   th:text="${general.caName}">学校概况</a>
                 </li>
             </ul>
         </li>
         <li class="navLi">
             <a href="#">校园新闻</a>
             <ul class="navSecondUl">
-               <li th:each="general,generals:${schoolNews}">
-                    	<a th:href="@{/visitor/viewGeneral?(gName= ${general.caName})}" th:text="${general.caName}">学校概况</a>
+               <li th:each="news,newStart:${schoolNews}">
+                    <a th:href="@{/visitor/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
                </li>
             </ul>
         </li>
@@ -88,9 +88,9 @@
         <div class="schollleft">
             <h3>学校概况</h3>
             <ul class="schoolcenter">
-                <li><a href="#" class="active1">学校简介</a></li>
+<!--                 <li><a href="#" class="active1">学校简介</a></li> -->
                 <li th:each="general,generals:${generals}">
-                  <a th:href="@{/visitor/viewGeneral?(gName= ${general.caName})}"   th:text="${general.caName}">学校概况</a>
+                  <a th:href="@{/visitor/viewGeneral?(gId= ${general.caId}	)}"   th:text="${general.caName}">学校概况</a>
                 </li>
             </ul>
         </div>

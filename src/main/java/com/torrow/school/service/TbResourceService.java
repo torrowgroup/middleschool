@@ -9,7 +9,7 @@ public interface TbResourceService {
     //得到所有资源类
     List<TbResource> selectAll();
     //得到单条资源类，目前用于概括类
-    TbResource selectOne(String generalName);
+    TbResource selectOne(Integer gId);
 
     //为了查看一条信息
     TbResource selectByPrimaryKey(Integer id);
@@ -18,9 +18,9 @@ public interface TbResourceService {
     //修改
     int updateByPrimaryKey(TbResource record);
     //对资源类的分页查看
-    public PageBean<TbResource>  findPage(int currentPage);
+    public PageBean<TbResource>  findPage(int currentPage,int pageSize);
     //对资源类的部分数据进行分页查看
-    public PageBean<TbResource>  findingByPaging(int currentPage,TbCategory record);
+    public PageBean<TbResource>  findingByPaging(int currentPage,TbCategory record);//张金高用
     //根据id来删除资源类
     int deleteByPrimaryKey(Integer id);
     //插入资源类

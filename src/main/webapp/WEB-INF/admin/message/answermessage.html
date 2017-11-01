@@ -6,18 +6,6 @@
 <title>Home</title>
 <link rel="stylesheet" type="text/css"
 	th:href="@{/static/dist/css/wangEditor.min.css}">
-<script th:inline="javascript">
-/*<![CDATA[*/
-	window.onload=function(){
-		var coutent = /*[[${message.meReply}]]*/ null;
-		editor.$txt.html(coutent);
-	}
-     function modifyContent() {
-    	var content = document.getElementById("content");
-	   	content.value = editor.$txt.html();
-   }
- /*]]>*/
-</script>
 </head>
 <body>
 	<table border="1">
@@ -36,8 +24,7 @@
 		</tr>
 		<tr>
 			<td>内容</td>
-			<td><textarea  th:text="${message.meContent}"></textarea>
-			</td>
+			<td><textarea th:text="${message.meContent}"></textarea></td>
 		</tr>
 		<tr>
 			<td>留言日期：</td>
@@ -46,9 +33,11 @@
 		<tr>
 			<td>回复</td>
 			<td>
-				<form th:action="@{/message/reply}" method="post" onsubmit="modifyContent()">
+				<form th:action="@{/message/reply}" method="post"
+					onsubmit="modifyContent()">
 					<div style="width: 700px; height: 600px;">
 						<input type="hidden" name="id" th:value="${message.meId}" />
+						<input type="hidden" name="page" th:value="${page}" />
 						<textarea name="meReply" style="display: none;" id="content"></textarea>
 						<div id="editor" style="height: 350px;"></div>
 						<input type="submit" value="回复" />
@@ -61,12 +50,20 @@
 		th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
 	<script type="text/javascript"
 		th:src="@{/static/dist/js/wangEditor.min.js}"></script>
-	<script type="text/javascript">
-		var E = window.wangEditor
-		var editor = new E('editor')    		 
-		editor.config.uploadImgUrl = 'uploadImg'
-		editor.config.uploadImgFileName = 'file'
-		editor.create()    
+	<script th:inline="javascript">
+			var E = window.wangEditor
+			var editor = new E('editor')
+			editor.config.uploadImgUrl = 'uploadImg'
+			editor.config.uploadImgFileName = 'file'
+			editor.create()
+			
+			var coutent = /*[[${message.meReply}]]*/;
+			editor.$txt.html(coutent);
+			
+			function modifyContent() {
+				var content = document.getElementById("content");
+				content.value = editor.$txt.html();
+			}
 	</script>
 </body>
 </html>

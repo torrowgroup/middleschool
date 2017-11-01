@@ -37,10 +37,10 @@
 					<a href="" class="out"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a>
                     <ul class="nav nav-second-level" style="display: none">
 	                    <li>
-	                      <a href="/user/toAddUser" th:href="@{/user/toAddUser}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加用户</a>
+	                      <a href="/user/toAddUser" th:href="@{/user/toAddUser}"  target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加用户</a>
 	                    </li>
 	                    <li>
-	                      <a th:href="@{/user/manageUser}"  target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a>
+	                      <a th:href="@{/user/manageUser}"  target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a>
 	                    </li>
                     </ul>
 				</li>
@@ -49,10 +49,10 @@
 					<a href="" class="out"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类别管理</a>
                     <ul class="nav nav-second-level" >
 	                    <li>
-	                      <a th:href="@{/category/categoryjumping}" target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加类别</a>
+	                      <a th:href="@{/category/categoryjumping}" target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加类别</a>
 	                    </li>
 	                    <li>
-	                      <a th:href="@{/category/manageCategory}" target="ie" class="out1"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理类别</a>
+	                      <a th:href="@{/category/manageCategory}" target="ie" class="out2"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理类别</a>
 	                    </li>
                     </ul>
 				</li>
@@ -138,10 +138,10 @@
 					<a href="" class="out"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;底部链接管理</a>
                     <ul class="nav nav-second-level" style="display: none">
 	                    <li>
-	                      <a th:href="@{/link/linkJumping}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加链接</a>
+	                      <a th:href="@{/link/linkJumping}"  target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加链接</a>
 	                    </li>
 	                    <li>
-	                      <a th:href="@{/link/manageLink}"  target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;链接管理</a>
+	                      <a th:href="@{/link/manageLink}"  target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;链接管理</a>
 	                    </li>
                     </ul>
 				</li>
@@ -150,10 +150,10 @@
 					<a href="" class="out"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;留言管理</a>
                     <ul class="nav nav-second-level" >
 	                    <li>
-	                      <a th:href="@{/message/manageMessage}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理留言</a>
+	                      <a th:href="@{/message/manageMessage}"  target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理留言</a>
 	                    </li>
 	                     <li>
-	                      <a href="answermessage.html"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回复留言</a>
+	                      <a href="answermessage.html"  target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回复留言</a>
 	                    </li>
                     </ul>
 				</li>
@@ -245,7 +245,10 @@ getdates();
 	<details>
 		<summary>校园新闻类管理</summary>
 		<a th:href="@{/news/manageJumping}" target="mainIframe">校园新闻的管理</a>
+<<<<<<< HEAD
+=======
 		<a th:href="@{/news/manageJumping}">校园新闻的管理</a>
+>>>>>>> 36fb0677a8514ecf313168e5056401d563caa0b4
 	</details>
 	<details>
 		<summary>教育教研类的管理</summary>

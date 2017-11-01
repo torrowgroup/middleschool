@@ -7,9 +7,11 @@
 		var again = $("#again").val();
 		if(password==again){
 			$("#add").attr("disabled", false); 
-			$("#testPassword").html("1");
+			$("#okAgain").show();
+			$("#wrongAgain").hide();
 		} else {
 			$("#add").attr("disabled", true);
-			$("#testPassword").html("0");
+			$("#okAgain").hide();
+			$("#wrongAgain").show();
 		}
 	}
