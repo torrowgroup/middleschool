@@ -100,7 +100,7 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 		List<TbCategory> educations = new ArrayList<TbCategory>();//教育教研处 教研组
 //		List<TbCategory> generals = new ArrayList<TbCategory>();
 		for(int i=0;i<category.size();i++){
-			if(category.get(i).getCaPid()==1){
+			if(category.get(i).getCaPid()==1||category.get(i).getCaPid()==7){
 				generals.add(category.get(i));
 			} else if(category.get(i).getCaPid()==2) {
 				schoolNews.add(category.get(i));

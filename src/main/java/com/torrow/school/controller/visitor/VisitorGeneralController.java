@@ -2,9 +2,7 @@
 package com.torrow.school.controller.visitor;
 
 import java.io.UnsupportedEncodingException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,8 +39,12 @@ public class VisitorGeneralController extends BaseController {
 	 */
 	@RequestMapping("viewGeneral")
 	public ModelAndView viewGeneral(Integer gId,Model model) throws UnsupportedEncodingException{
-		TbResource resource = resourceService.selectOne(gId);
 		categoryService.getCategory(model);//将学校概括等封装进model
+		TbCategory category = categoryService.selectByPrimaryKey(gId);
+		if(category.getCaPid()==7){
+			List<TbResource> resourceList = resourceService.findingByPaging(currentPage, record);
+		}
+		TbResource resource = resourceService.selectOne(gId);
 		model.addAttribute("resource", resource);
 		return new ModelAndView("visitor/schoolgeneral");
 	}
