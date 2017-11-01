@@ -47,8 +47,8 @@ public class TbMessageServiceImpl extends BaseDao<TbMessage> implements TbMessag
 	}
 
 	@Override
-	public PageBean<TbMessage> findPage(int currentPage) {
-		return this.pageCut(currentPage);
+	public PageBean<TbMessage> findPage(int currentPage,int pageSize) {
+		return this.pageCut(currentPage,pageSize);
 	}
 
 	@Override

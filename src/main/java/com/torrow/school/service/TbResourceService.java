@@ -18,7 +18,7 @@ public interface TbResourceService {
     //修改
     int updateByPrimaryKey(TbResource record);
     //对资源类的分页查看
-    public PageBean<TbResource>  findPage(int currentPage);
+    public PageBean<TbResource>  findPage(int currentPage,int pageSize);
     //对资源类的部分数据进行分页查看
     public PageBean<TbResource>  findingByPaging(int currentPage,TbCategory record);//张金高用
     //根据id来删除资源类

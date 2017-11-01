@@ -56,8 +56,8 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 	}
 
 	@Override
-	public PageBean<TbCategory> findPage(int currentPage) {
-		return this.pageCut(currentPage);
+	public PageBean<TbCategory> findPage(int currentPage,int pageSize) {
+		return this.pageCut(currentPage,pageSize);
 	}
 
 	@Override

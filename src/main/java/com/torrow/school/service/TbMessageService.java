@@ -25,7 +25,7 @@ public interface TbMessageService {
 	// 修改留言
 	int updateByPrimaryKey(TbMessage record);
 	// 得到所有留言，分页
-	PageBean<TbMessage> findPage(int currentPage);
+	PageBean<TbMessage> findPage(int currentPage,int pageSize);
 	// 留言回复
 	int reply(int id, String meReply);
 	// 富文本上传图片

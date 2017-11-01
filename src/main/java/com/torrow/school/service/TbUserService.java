@@ -13,7 +13,7 @@ import com.torrow.school.util.PageBean;
  */
 public interface TbUserService {
 	// 得到分页
-	PageBean<TbUser> findPage(int currentPage);
+	PageBean<TbUser> findPage(int currentPage,int pageSize);
 	// 得到所有的用户
 	List<TbUser> selectAll();
 	// 根据id得到用户

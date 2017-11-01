@@ -27,7 +27,7 @@ public interface TbCategoryService {
     //进行查询类别名称
 	public TbCategory selectCaName(String caName);
 	//类别信息分页显示
-	public PageBean<TbCategory>  findPage(int currentPage);
+	public PageBean<TbCategory>  findPage(int currentPage,int pageSize);
 	//通过传进去父id来查询信息安李杰加
 	public List<TbCategory> queryByPid(int Pid);
 }

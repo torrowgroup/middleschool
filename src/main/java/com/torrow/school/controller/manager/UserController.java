@@ -35,7 +35,7 @@ public class UserController extends BaseController {
 	// 查找所有用户，分页
 	@RequestMapping("manageUser")
 	public String manageUser(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
-		model.addAttribute("pagemsg", userService.findPage(currentPage));// 回显分页数据
+		model.addAttribute("pagemsg", userService.findPage(currentPage,5));// 回显分页数据
 		return "admin/user/manageuser";
 	}
 

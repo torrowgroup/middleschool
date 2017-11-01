@@ -27,8 +27,8 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 	}
 
 	@Override
-	public PageBean<TbUser> findPage(int currentPage) {
-		return this.pageCut(currentPage);		
+	public PageBean<TbUser> findPage(int currentPage,int pageSize) {
+		return this.pageCut(currentPage,pageSize);		
 	}
 
 	@Override

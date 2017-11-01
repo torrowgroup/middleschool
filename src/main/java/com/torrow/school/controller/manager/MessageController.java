@@ -31,7 +31,7 @@ public class MessageController extends BaseController {
 	// 查看所有留言，分页
 	@RequestMapping("manageMessage")
 	public String manageMessage(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
-		model.addAttribute("messagePage", messageService.findPage(currentPage));// 回显分页数据
+		model.addAttribute("messagePage", messageService.findPage(currentPage,5));// 回显分页数据
 		return "admin/message/managemessage";
 	}
 

@@ -58,8 +58,8 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	}
 
 	@Override
-	public PageBean<TbResource> findPage(int currentPage) {
-		return this.pageCut(currentPage);
+	public PageBean<TbResource> findPage(int currentPage,int pageSize) {
+		return this.pageCut(currentPage,pageSize);
 	}
 
 	@Override
@@ -109,10 +109,6 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 
 	@Override
 	public TbResource selectOne(Integer gId) {
-//		TbCategory category = tbCategoryDao.findCategoryByCaName(generalName);
-//		if(category.getCaId()==0){
-//			return null;
-//		}
 		return this.selectByCaId(gId);
 	}
 

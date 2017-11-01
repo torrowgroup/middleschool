@@ -93,9 +93,9 @@ public class BaseDao<T> extends SqlSessionDaoSupport
 	 * @param currentPage 当前页码
 	 * @return
 	 */
-	public final PageBean<T> pageCut(int currentPage) {
+	public final PageBean<T> pageCut(int currentPage,int pageSize) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		int pageSize = 2;
+//		int pageSize = 2;
 		int totalCount = getSqlSession().selectOne(this.getNameSpace()+".selectCount");//得到总记录数
 		double tc = totalCount;
 		Double num = Math.ceil(tc / pageSize);// 向上取整
