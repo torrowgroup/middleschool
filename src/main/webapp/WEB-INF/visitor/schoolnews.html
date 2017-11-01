@@ -31,7 +31,7 @@
             <a href="#">学校概况</a>
               <ul class="navSecondUl">
                     <li th:each="general,generals:${generals}">
-                    	<a th:href="@{/visitor/viewGeneral?(gName= ${general.caName})}" th:text="${general.caName}">学校概况</a>
+                    	<a th:href="@{/visitor/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
                     </li>
               </ul>
         </li>
@@ -116,31 +116,14 @@
                 <div class="pagingRight">
                     <span>跳转到</span>
                     <div class="selectBox">
-                        <span>1 <i class="glyphicon glyphicon-chevron-down pull-right" style="line-height: 30px"></i></span>
+                        <span th:text="${news.currPage}"> <i class="glyphicon glyphicon-chevron-down pull-right" style="line-height: 30px"></i></span>
                         <ul class="selectBoxUl">
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
-                            <li><a href="">1</a></li>
+                         	<li th:each="i:${#numbers.sequence(1,news.totalPage)}">
+                         		<a href="" th:text="${i}"></a>
+                         	</li>
                         </ul>
                     </div>
-                    <span>页 共2000页</span>
+                    <span>页 共<span th:text="${news.totalPage}"></span>页</span>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -151,7 +134,7 @@
 <div class="footer">
     <div class="container footerBox">
         <div class="row">
-            <div class="col-sm-3 col-xs-6 footerBox1 hidden-xs"><img src="./images/bottomlogo.png" alt=""></div>
+            <div class="col-sm-3 col-xs-6 footerBox1 hidden-xs"><img th:src="@{/static/images/visitor/bottomlogo.png}" alt=""></div>
             <div class="col-sm-3 col-xs-6 footerBox1">
                 <h3>联系我们:</h3>
                 <p>电话：56565656</p>
@@ -175,6 +158,5 @@
     </div>
 </div>
 </body>
-<script src="./js/select.js">
-</script>
+<script th:src="@{/static/js/visitor/select.js}"></script>
 </html>

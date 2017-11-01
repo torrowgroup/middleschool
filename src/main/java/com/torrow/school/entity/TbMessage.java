@@ -17,7 +17,7 @@ public class TbMessage implements Serializable {
 
     private String meHide;	//是否匿名，匿名则“匿名”，否则内容为留言人填写的个人信息
 
-    private Date meIssuingdate;	//留言日期
+    private String meIssuingdate;	//留言日期
 
     private String meStatus;	//留言状态(未回复，已回复)
 
@@ -31,7 +31,7 @@ public class TbMessage implements Serializable {
 		super();
 	}
 
-	public TbMessage( String meTitle, String mePicture, String meHide, Date meIssuingdate, String meStatus,
+	public TbMessage( String meTitle, String mePicture, String meHide, String meIssuingdate, String meStatus,
 			String meContent, String meReply, String spare) {
 		super();
 		this.meTitle = meTitle;
@@ -76,11 +76,11 @@ public class TbMessage implements Serializable {
 		this.meHide = meHide;
 	}
 
-	public Date getMeIssuingdate() {
+	public String getMeIssuingdate() {
 		return meIssuingdate;
 	}
 
-	public void setMeIssuingdate(Date meIssuingdate) {
+	public void setMeIssuingdate(String meIssuingdate) {
 		this.meIssuingdate = meIssuingdate;
 	}
 
