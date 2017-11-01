@@ -20,7 +20,7 @@ public interface TbResourceService {
     //对资源类的分页查看
     public PageBean<TbResource>  findPage(int currentPage,int pageSize);
     //对资源类的部分数据进行分页查看
-    public PageBean<TbResource>  findingByPaging(int currentPage,TbCategory record);//张金高用
+    public PageBean<TbResource>  findingByPaging(int currentPage,TbCategory record,int pageSize);//张金高用
     //根据id来删除资源类
     int deleteByPrimaryKey(Integer id);
     //插入资源类

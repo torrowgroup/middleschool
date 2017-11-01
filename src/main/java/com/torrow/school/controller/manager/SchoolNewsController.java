@@ -70,7 +70,7 @@ public class SchoolNewsController extends BaseController {
 		TbCategory record = new TbCategory();
 //		record.setCaPid(2);
 		record.setCaId(id);
-		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record));// 回显分页数据
+		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,10));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
 		model.addAttribute("sign", 1);
 		return "admin/schoolnews/manageschoolnews";
@@ -86,7 +86,7 @@ public class SchoolNewsController extends BaseController {
 			Model model) {
 		TbCategory record = new TbCategory();
 		record.setCaPid(2);
-		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record));// 回显分页数据
+		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,10));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
 		return "admin/schoolnews/manageschoolnews";
 	}

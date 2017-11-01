@@ -3,7 +3,6 @@ package com.torrow.school.controller.visitor;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +41,7 @@ public class VisitorGeneralController extends BaseController {
 		categoryService.getCategory(model);//将学校概括等封装进model
 		TbCategory category = categoryService.selectByPrimaryKey(gId);
 		if(category.getCaPid()==7){
-			List<TbResource> resourceList = resourceService.findingByPaging(currentPage, record);
+//			List<TbResource> resourceList = resourceService.findingByPaging(1, record,10);
 		}
 		TbResource resource = resourceService.selectOne(gId);
 		model.addAttribute("resource", resource);
@@ -61,7 +60,7 @@ public class VisitorGeneralController extends BaseController {
 			Model model,Integer nId) {
 		TbCategory record = new TbCategory();
 		record.setCaId(nId);
-		PageBean<TbResource> resourceLists = resourceService.findingByPaging(currentPage, record);
+		PageBean<TbResource> resourceLists = resourceService.findingByPaging(currentPage, record,10);
 		categoryService.getCategory(model);//将概括，新闻等封装进model，供下拉菜单使用
 		model.addAttribute("news", resourceLists);
 		return new ModelAndView("visitor/schoolnews");
