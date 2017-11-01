@@ -1,5 +1,7 @@
 package com.torrow.school.controller.manager;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -38,10 +40,12 @@ public class SchoolNewsController extends BaseController {
 	 */
 	@RequestMapping("addSchoolNews")
 	public String addSchoolNews(Model model, TbResource tbResource) {
-		Date date=new Date();
+		Date date = new Date();
+		DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd"); //HH表示24小时制；  
+        String Date = dFormat.format(date);
 		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		if (null != item) {
-			TbResource record = new TbResource(item.getCaId(), date, item.getCaName(), tbResource.getReTitle(),
+			TbResource record = new TbResource(item.getCaId(), Date, item.getCaName(), tbResource.getReTitle(),
 					tbResource.getReContent());
 			int i=resourceService.insert(record);
 			if(i!=0) {

@@ -7,7 +7,7 @@
     <result column="ca_name" jdbcType="VARCHAR" property="caName" />
     <result column="re_title" jdbcType="VARCHAR" property="reTitle" />
     <result column="re_issuer" jdbcType="VARCHAR" property="reIssuer" />
-    <result column="re_issuingdate" jdbcType="TIMESTAMP" property="reIssuingdate" />
+    <result column="re_issuingdate" jdbcType="VARCHAR" property="reIssuingdate" />
     <result column="spare" jdbcType="VARCHAR" property="spare" />
     <result column="re_content" jdbcType="LONGVARCHAR" property="reContent" />
   </resultMap>
@@ -27,7 +27,7 @@
       re_title, re_issuer, re_issuingdate, 
       spare, re_content)
     values ( #{caId,jdbcType=INTEGER}, #{caName,jdbcType=VARCHAR}, 
-      #{reTitle,jdbcType=VARCHAR}, #{reIssuer,jdbcType=VARCHAR}, #{reIssuingdate,jdbcType=TIMESTAMP}, 
+      #{reTitle,jdbcType=VARCHAR}, #{reIssuer,jdbcType=VARCHAR}, #{reIssuingdate,jdbcType=VARCHAR}, 
       #{spare,jdbcType=VARCHAR}, #{reContent,jdbcType=LONGVARCHAR})
   </insert>
   
@@ -37,7 +37,7 @@
       ca_name = #{caName,jdbcType=VARCHAR},
       re_title = #{reTitle,jdbcType=VARCHAR},
       re_issuer = #{reIssuer,jdbcType=VARCHAR},
-      re_issuingdate = #{reIssuingdate,jdbcType=TIMESTAMP},
+      re_issuingdate = #{reIssuingdate,jdbcType=VARCHAR},
       spare = #{spare,jdbcType=VARCHAR},
       re_content = #{reContent,jdbcType=LONGVARCHAR}
     where re_id = #{reId,jdbcType=INTEGER}
