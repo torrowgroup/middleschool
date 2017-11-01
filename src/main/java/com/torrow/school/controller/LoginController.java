@@ -1,15 +1,12 @@
 package com.torrow.school.controller;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbUser;
-
 /**
  * 
  * @author 张金高
@@ -36,6 +33,15 @@ public class LoginController extends BaseController {
 		if(tbUser!=null) {
 			model.addAttribute("msg", "登录成功");
 			session.setAttribute("user",tbUser);
+			int Pid=1;//概括类的
+			List<TbCategory> list=categoryService.queryByPid(Pid);
+			int id=7;//校园风光
+			List<TbCategory> item=categoryService.queryByPid(id);
+			int Pd = 2;//新闻类
+			List<TbCategory> news = categoryService.queryByPid(Pd);
+			model.addAttribute("newsList", news);
+			model.addAttribute("generalList", list);
+			model.addAttribute("sceneryList", item);
 		}else{
 			model.addAttribute("msg", "用户名或密码错误");
 			return "index";

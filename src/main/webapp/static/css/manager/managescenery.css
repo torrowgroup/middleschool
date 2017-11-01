@@ -1,0 +1,61 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+.box{
+	width: 70%;
+	height: 600px;
+	margin:0 auto;
+	/*background-color: red;	*/
+}
+.aa{
+	width: 40%;
+	height: 200px;
+	margin-top:60px;
+	margin-left: 6%;
+	/*background-color: blue;*/
+	float: left;
+}
+.aa img{
+	width: 100%;
+	height: 100%;
+}
+.bb{
+	width: 40%;
+	height: 200px;
+	margin-top: 60px;
+	margin-left: 6%;
+	/*background-color: blue;*/
+	float: left;
+}
+.bb img{
+	width: 100%;
+	height: 100%;
+}
+.cc{
+	width: 40%;
+	height: 200px;
+	margin-top: 20px;
+	margin-left: 6%;
+	/*background-color: blue;*/
+	float: left;
+}
+.cc img{
+	width: 100%;
+	height: 100%;
+}
+.dd{
+	width: 40%;
+	height: 200px;
+	margin-top:20px;
+	margin-left: 6%;
+	/*background-color: blue;*/
+	float: left;
+}
+.dd img{
+	width: 100%;
+	height: 100%;
+}
+h1{
+	text-align: center;
+}

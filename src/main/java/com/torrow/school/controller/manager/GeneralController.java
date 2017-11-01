@@ -166,7 +166,7 @@ public class GeneralController extends BaseController {
 			model.addAttribute("tbResource", tb);
 		} else {
 			model.addAttribute("message", "该名称不存在");
-			return this.manageGeneralJumping(model);
+			return "admin/animation";
 		}
 		return "admin/general/managegeneral";
 	}
@@ -258,7 +258,8 @@ public class GeneralController extends BaseController {
 			return this.addGeneralJumping(model);
 		}
 		if (null != item) {
-			TbResource tb = new TbResource(item.getCaId(),item.getCaName(),tbResource.getReContent());
+			Date date=new Date();
+			TbResource tb = new TbResource(item.getCaId(),date,item.getCaName(),tbResource.getReTitle(),tbResource.getReContent());
 			resourceService.insert(tb);
 			model.addAttribute("message", "添加成功");
 		} else {

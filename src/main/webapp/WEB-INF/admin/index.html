@@ -4,9 +4,228 @@
 
 <head>
 <title>管理系统</title>
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/manager/index.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
+<script th:src="@{/static/js/manager/jquery.min.js}"></script>
+<script th:src="@{/static/js/manager/bootstrap.min.js}"></script>
 </head>
-<body>
-	<details>
+<body onload="getdates()">
+	<div class="topper">
+		<div class="one">
+			<p>&nbsp;郑州市第一二二中学</p>
+		</div>  
+		<div class="mid"></div>
+		<div class="two"> 
+		<ul class="a"><!-- class="nav nav-pills" -->
+			<li><a href="#">简介</a></li>
+			<li><a href="#">消息<span class="badge">3</span></a></li>
+			<li><a href="login.html"><span class="glyphicon glyphicon-off"></span>退出</a></li>
+			<li><div class="le_1"><img src="" alt=""></div></li>
+									
+		</ul>
+		</div>
+	</div><!-- 头部结束 -->
+	<div class="box"><!-- 左侧菜单和iframe -->
+		<div class="sidebar-collapse">
+			<ul class="nav" id="main-menu">
+				<li>
+					<div id="date" style="color: white;font-size: 24px;text-align: center;margin-top: 30px;">
+					</div>
+				</li>
+				<!-- 用户管理 -->
+				<li class="lione">
+					<a href="" class="out"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a>
+                    <ul class="nav nav-second-level" style="display: none">
+	                    <li>
+	                      <a href="/user/toAddUser" th:href="@{/user/toAddUser}"  target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加用户</a>
+	                    </li>
+	                    <li>
+	                      <a th:href="@{/user/manageUser}"  target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a>
+	                    </li>
+                    </ul>
+				</li>
+				<!-- 类别管理 -->
+				<li>
+					<a href="" class="out"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类别管理</a>
+                    <ul class="nav nav-second-level" >
+	                    <li>
+	                      <a th:href="@{/category/categoryjumping}" target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加类别</a>
+	                    </li>
+	                    <li>
+	                      <a th:href="@{/category/manageCategory}" target="ie" class="out2"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理类别</a>
+	                    </li>
+                    </ul>
+				</li>
+				<!-- 概括类管理 -->
+				<li>
+					<a href="" class="out"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;概括管理</a>
+					<ul class="nav nav-second-level">
+	                    <li>
+	                      <a th:href="@{/general/addGeneralJumping}"  target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加概括</a>
+	                    </li>
+	                    <li>
+	                      <a href="#" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理概括</a>
+		                    <ul class="nav nav-third-level" >
+			                    <!-- <li>
+			                      <a href="manageschoolintroduction.html" class="out1" target="ie"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学校简介管理</a>
+			                    </li> -->
+			   <!--                  <li>
+			                      <a href="manageauthorities.html"  target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;领导机构管理</a>
+			                    </li>
+			                    <li>
+			                      <a href="schoolhistory.html" target="ie"  class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;建校历史管理</a>
+			                    </li>
+			                    <li>
+			                      <a href="schoolhonor.html" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学校荣誉管理</a>
+			                    </li>
+			                    <li>
+			                      <a href="teachachievement.html" target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;教学成果管理</a>
+			                    </li>
+			                    <li>
+			                      <a href="managescenery.html" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校园风光管理</a>
+			                    </li> -->
+		             	   <li>
+	                      <!-- <a href="managescenery.html" target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校园风光管理</a> -->
+	                      <div th:each="category,categoryStart:${generalList}">
+								<a th:href="@{/general/manageGeneral?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out2" ><span class="glyphicon glyphicon-list-alt"></span></a>
+						  </div>
+						  <div th:each="category,categoryStart:${sceneryList}">
+								<a th:href="@{/general/manageScenery}" th:text="${category.caName}" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span></a>
+						  </div>
+						  </li>
+						 </ul>
+	                    </li>
+                    </ul>
+				</li>
+				<!-- 新闻管理 -->
+				<li class="lione">
+					<a href="" class="out"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;新闻管理</a>
+                    <ul class="nav nav-second-level" style="display: none">
+                    	<li>
+	                      <a th:href="@{/news/addNewsJumping}"  target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加新闻</a>
+	                    </li>
+	                    <li>
+	                      <a href="#" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理新闻</a>
+		                    <ul class="nav nav-third-level" >
+	                    <!-- <li>
+	                      <a href="adduser.html"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加用户</a>
+	                    </li> -->
+	                    <li>
+	                      <!-- <a href="manageuser.html"  target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a> -->
+	                     <li>
+	                      <div th:each="category,categoryStart:${newsList}">
+							   <a th:href="@{/news/manageSchoolNews?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span></a>
+						  </div>
+						  </li>
+						  </ul>
+	                    </li>
+                    </ul>
+				</li>
+				<!-- 教育教研管理 -->
+				<li class="lione">
+					<a href="" class="out"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;教育教研管理</a>
+                    <ul class="nav nav-second-level" style="display: none">
+	                    <li>
+	                      <a th:href="@{/general/addGeneralJumping}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加用户</a>
+	                    </li>
+	                    <li>
+	                      <a href="manageuser.html"  target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a>
+	                    </li>
+                    </ul>
+				</li>
+				<!-- 底部链接管理 -->
+				<li class="lione">
+					<a href="" class="out"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;底部链接管理</a>
+                    <ul class="nav nav-second-level" style="display: none">
+	                    <li>
+	                      <a th:href="@{/link/linkJumping}"  target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加链接</a>
+	                    </li>
+	                    <li>
+	                      <a th:href="@{/link/manageLink}"  target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;链接管理</a>
+	                    </li>
+                    </ul>
+				</li>
+				<!-- 留言管理 -->
+				<li>
+					<a href="" class="out"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;留言管理</a>
+                    <ul class="nav nav-second-level" >
+	                    <li>
+	                      <a th:href="@{/message/manageMessage}"  target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理留言</a>
+	                    </li>
+	                     <li>
+	                      <a href="answermessage.html"  target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回复留言</a>
+	                    </li>
+                    </ul>
+				</li>
+ 			</ul>
+		</div><!-- 左侧菜单 -->
+		<iframe th:src="@{/user/toWelcome}"   id="ifr" name="ie">
+		</iframe><!-- iframe标签 -->
+	</div>
+</body>
+<script>
+ 	var ifr = document.getElementById('ifr');
+    function aa(a){
+    	ifr.src = a + '.html';
+  }
+</script>
+<script>
+    $(document).ready(function(){
+        $('.out').click(function(e) {
+            $(this).next().stop().slideToggle()
+            e.preventDefault();
+        })
+        $('.out').hover(function(){
+   	 		$(this).css("backgroundColor", "#012349");
+ 		})
+ 		  $('.out1').hover(function(){
+   	 		$(this).css("backgroundColor", "#012349");
+ 		})
+    });
+
+	
+</script>
+<script>
+    $(document).ready(function(){
+        $('.out1').click(function(e) {
+            $(this).next().stop().slideToggle()
+            e.preventDefault();
+        })
+        $('.out1').hover(function(){
+   	 		$(this).css("backgroundColor", "#012349");
+ 		})
+ 		  $('.out2').hover(function(){
+   	 		$(this).css("backgroundColor", "#012349");
+ 		})
+    });
+</script>
+<script language="javascript">
+
+function getdates()
+{
+var w_array=new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+var d=new Date();
+var year=d.getFullYear();
+var month=d.getMonth()+1;
+var day=d.getDate();
+var week=d.getDay();
+var h=d.getHours();
+var mins=d.getMinutes();
+var s=d.getSeconds();
+
+if(month<10) month="0" + month
+if(day<10) month="0" + day
+if(h<10) h="0" + h
+if(mins<10) mins="0" + mins
+if(s<10) s="0" + s
+
+var shows=" <span>"  + h + ":" + mins + ":" + s + " " + w_array[week] + "</span>";
+document.getElementById("date").innerHTML=shows;
+setTimeout("getdates()",1000);
+}
+getdates();
+</script> 
+	<!-- <details>
 		<summary>用户管理</summary>
 		<a href="/user/toAddUser" th:href="@{/user/toAddUser}"
 			target="mainIframe">添加用户</a>
@@ -26,6 +245,10 @@
 	<details>
 		<summary>校园新闻类管理</summary>
 		<a th:href="@{/news/manageJumping}" target="mainIframe">校园新闻的管理</a>
+<<<<<<< HEAD
+=======
+		<a th:href="@{/news/manageJumping}">校园新闻的管理</a>
+>>>>>>> 36fb0677a8514ecf313168e5056401d563caa0b4
 	</details>
 	<details>
 		<summary>教育教研类的管理</summary>
@@ -48,6 +271,5 @@
 		<a th:href="@{/user/viewMe}" target="mainIframe">个人信息</a>
 		<a th:href="@{/user/loginOut}" target="mainIframe">退出</a>
 	</details>
-	<iframe name="mainIframe" height="500px;" width="1500px;"></iframe>
-</body>
+	<iframe name="mainIframe" height="500px;" width="1500px;"></iframe> -->
 </html>

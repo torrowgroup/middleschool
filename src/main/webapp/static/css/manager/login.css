@@ -1,0 +1,52 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+
+.box{
+	width: 100%;
+	height: 650px;
+	background-image: url(../../images/manager/login.jpg);
+	background-size: 100% 100%;
+}
+.logo{
+	/*width: 30%;*/
+	max-width: 400px;
+	height: 38%;
+	background-color: white;
+	border-radius: 8px;
+	position:relative;
+	margin:0 auto;
+	padding: 20px;
+	top: 45%;
+}
+span{
+	margin-left: 18%;
+
+}
+input{
+	margin-left: 5%;
+
+}
+.user{
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+}
+.righ{
+	font-size: 12px;
+	margin-left: 20%;
+	color: gray;
+}
+.but{
+	margin-left: 28%;
+	cursor:pointer;
+	/*color: #333366;*/
+	border-radius: 6px;
+	border: 1px solid #012349;
+	
+}
+a{
+	text-decoration: none;
+
+}

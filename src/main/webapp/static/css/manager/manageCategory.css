@@ -1,0 +1,19 @@
+body{
+	margin: 0;
+	height: 0;
+}
+table{
+	
+	/*height: 300px;*/
+	margin-top: 8%;
+	/*margin-left: 35%;*/
+	border: 1px solid gray;
+}
+td{
+	text-align: center;
+	height: 30px;
+	/*vertical-align: middle;*/
+}
+th{
+	text-align: center;
+}

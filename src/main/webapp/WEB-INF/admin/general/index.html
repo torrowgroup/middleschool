@@ -16,35 +16,11 @@
 		<div th:each="category,categoryStart:${categoryList}">
 				<a th:href="@{/general/manageGeneral?(id=${category.caId})}" th:text="${category.caName}"></a>
 		</div>
-<<<<<<< HEAD
 	</details>
-	<details>
-		<summary>查看概括类</summary>
-<form th:action="@{/general/checkGeneral}" method="post">
-		<table>
-			<tr>
-				<td>类别名称</td>
-				<td><select name="caName">
-						<option value="学校简介">学校简介</option>
-						<option value="领导机构">领导机构</option>
-						<option value="建校历史">建校历史</option>
-						<option value="学校荣誉">学校荣誉</option>
-						<option value="教学成果">教学成果</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="提交"></td>
-				<td><input type="reset" name="重置"></td>
-			</tr>
-		</table>
-	</form>
-</details>
-=======
+	
 		<div th:each="category,categoryStart:${sceneryList}">
 				<a th:href="@{/general/manageScenery}" th:text="${category.caName}"></a>
 		</div>
-	</details>
->>>>>>> 93a1cc3fd5822a11ce666b4dd80486d302a4dbad
 <iframe name="mainIframe" height="500px;" width="1500px;"></iframe>
 </body>
 </html>

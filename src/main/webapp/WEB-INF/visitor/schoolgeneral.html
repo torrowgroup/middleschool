@@ -90,7 +90,7 @@
             <ul class="schoolcenter">
 <!--                 <li><a href="#" class="active1">学校简介</a></li> -->
                 <li th:each="general,generals:${generals}">
-                  <a th:href="@{/visitor/viewGeneral?(gId= ${general.caId})}"   th:text="${general.caName}">学校概况</a>
+                  <a th:href="@{/visitor/viewGeneral?(gId= ${general.caId}	)}"   th:text="${general.caName}">学校概况</a>
                 </li>
             </ul>
         </div>

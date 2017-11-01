@@ -6,37 +6,57 @@
 <title>home</title>
 <link rel="stylesheet" type="text/css"
 	th:href="@{/static/dist/css/wangEditor.min.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/css/manager/managegeneral.css}">	
 </head>
 <body>
-<<<<<<< HEAD
-<div id="introEditor" style="border: 1px solid #ccc;" contenteditable="false"></div>
-<script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>	
-<script type="text/javascript" th:src="@{/static/js/wangEditor.min.js}"></script>
-<script th:inline="javascript">
-/*<![CDATA[*/
-	window.onload=function(){
-		var E = window.wangEditor
-		var editor = new E('div1', '#introEditor') // 两个参数也可以传入 elem 对象，class 选择器
-		editor.create()
-		
-		var reContent = [[${tbResource.reContent}]];//给两个富文本赋值
-		editor.txt.html(reContent);
-	}
-	
-	
-/*]]>*/
-=======
-	<button onclick="bian()">点我一下</button>
-	<button>清空操作</button>
-	<div th:text="${message}"></div>
-	<form th:action="@{/general/updateGeneral}" onSubmit="return modifyContent();"
+<div th:text="${message}"></div>
+<div class="total">
+<form th:action="@{/general/updateGeneral}" onSubmit="return modifyContent();"
 		method="post" enctype="multipart/form-data">
 		<input type="hidden" name="reId" th:value="${tbResource.reId}">
+		<div  class="inner">
+			<div class="top"><p><input type="text" name="reTitle" th:value="${tbResource.reTitle}"></p></div>
+			<div class="ziti">
+				<input type="text" name="reIssuingdate" th:value="${#dates.format(tbResource.reIssuingdate,'yyyy-MM-dd')}" readonly="readonly">
+				【字体：<a href="javascript:doZoom(16)">大</a> 
+				<a href="javascript:doZoom(14)">中</a> 
+				<a href="javascript:doZoom(12)">小</a>】
+				&nbsp;&nbsp;<a href="javascript:;"onclick="CloseWebPage()">【关闭窗口】</a>
+				&nbsp;&nbsp;<a onclick=window.print() style="cursor:hand">【打印该页】</a>
+				<button onclick="bian()">点我一下</button>
+				<button>清空操作</button>
+<!-- 				<input type="submit" value="保存"> -->
+		   </div>
+		 </div>
 		<textarea style="display: none;" name="reContent" id="a"></textarea>
 		<div id="introEditor" style="border: 1px solid #ccc;"
 			contenteditable="false"></div>
-		<input type="submit" value="保存">
 	</form>
+</div>
+</body>
+<script type="text/javascript">
+function CloseWebPage(){
+ if (navigator.userAgent.indexOf("MSIE") > 0) {
+  if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {
+   window.opener = null;
+   window.close();
+  } else {
+   window.open('', '_top');
+   window.top.close();
+  }
+ }
+ else if (navigator.userAgent.indexOf("Firefox") > 0) {
+  window.location.href = 'about:blank ';
+ } else {
+  window.opener = null;
+  window.open('', '_self', '');
+  window.close();
+ }
+}
+function doZoom(size)
+{document.getElementById('zoom').style.fontSize=size+'px';}
+</script>
 	<script type="text/javascript"
 		th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
 	<script th:inline="javascript">
@@ -52,8 +72,6 @@
 		var oIn = document.getElementById('introEditor');
 		oA.value = oIn.innerHTML;
 	}
-	
->>>>>>> 93a1cc3fd5822a11ce666b4dd80486d302a4dbad
 </script>
 </body>
 </html>

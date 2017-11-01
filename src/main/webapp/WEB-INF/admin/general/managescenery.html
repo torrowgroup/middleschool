@@ -4,6 +4,7 @@
 
 <head>
   <title>home</title>
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/manager/managescenery.css}">
 </head>
 <body>
 <div th:text="${message}"></div>
@@ -11,17 +12,17 @@
         没有任何校园风光信息！
     </span>
  <div th:if ="${pagemsg.totalCount}!=0">
-        <table border="1"  class="table1">   
-        <thead>
+        <!-- <table border="1"  class="table1">   --> 
+        <!-- <thead>
             <tr>
                 <td>校园风光</td>
             </tr>
-            </thead>
-                <tr th:each="general,generalStart:${pagemsg.lists}">
-                    <td><a th:href="@{/general/selectOneScenery?(id=${general.reId})}"><img alt="无图片" width="100px;" height="80px;" th:src="@{/static/uploadimg/{picture}(picture=${general.reContent})}" /></a></td>
-                </tr>
-        </table>    
-    </div>
+            </thead> -->
+                <div th:each="general,generalStart:${pagemsg.lists}">
+                    <div class="box"><a th:href="@{/general/selectOneScenery?(id=${general.reId})}"><img alt="无图片" width="100px;" height="80px;" th:src="@{/static/uploadimg/{picture}(picture=${general.reContent})}" /></a></div>
+                </div>
+<!--         </table> -->   
+    </div> 
 <table>
 <tr>
 <td class="td2">
