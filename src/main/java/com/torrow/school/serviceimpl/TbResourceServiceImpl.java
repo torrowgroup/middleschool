@@ -85,7 +85,6 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 				}
 			}
 		}
-		log.info("================="+record.getCaPid());
 		int totalCount = list.size();// 得到总记录数
 		double tc = totalCount;
 		Double num = Math.ceil(tc / pageSize);// 向上取整
@@ -109,13 +108,12 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	}
 
 	@Override
-	public TbResource selectOne(String generalName) {
-		TbCategory category = tbCategoryDao.findCategoryByCaName(generalName);
-		log.info("----"+category);
-		if(category.getCaId()==0){
-			return null;
-		}
-		return this.selectByCaId(category.getCaId());
+	public TbResource selectOne(Integer gId) {
+//		TbCategory category = tbCategoryDao.findCategoryByCaName(generalName);
+//		if(category.getCaId()==0){
+//			return null;
+//		}
+		return this.selectByCaId(gId);
 	}
 
 }

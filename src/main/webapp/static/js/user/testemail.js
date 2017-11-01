@@ -7,21 +7,27 @@
 	}
 	var testEmail = function() {
 		var email = $('#usEmail').prop("value");
-		if(email!=usEmail){
+		if(email!=usEmail&&email.length!=0){
 			$.ajax({
 				type : 'post',
 				url : '/middleschool/user/testEmail',
 				data : {email:email},
 				contentType:'application/x-www-form-urlencoded', //contentType很重要
 				success : function(data) {
-	                $("#testEmail").html(data.msg);
-				},
-				error : function(data) {
-					 $("#testEmail").html(data.msg);
+					if(data.msg==1){
+						$("#ok").show();
+						$("#wrong").hide();
+						$("#add").attr("disabled", false);
+					} else {
+						$("#wrong").show();
+						$("#ok").hide();
+						$("#add").attr("disabled", true);
+					}
 				}
 			});
 		} else {
-			$("#testEmail").html("");
+			$("#ok").hide();
+			$("#wrong").hide();
 		}
 	};
 	

@@ -36,7 +36,7 @@
 				<td><button th:name="${user.usIntroduction}" onclick="show(this)">预览</button></td>
 				<td><button th:name="${user.usAchievements}" onclick="show(this)">预览</button></td>
 				<td><a th:href="@{/user/toUpdateUser?(id=${user.usId},page=${pagemsg.currPage})}">Edit</a></td>
-				<td><a th:href="@{/user/deleteUser?(id=${user.usId})}"
+				<td><a th:href="@{/user/deleteUser?(id=${user.usId},page=${pagemsg.currPage})}"
 					onclick="return confirm('确定要删除吗')">Delete</a></td>
 			</tr>
 		</table>
@@ -58,7 +58,6 @@
 			</span></td>
 		</tr>
 	</table>
-<script type="text/javascript" th:src="@{/static/js/manageuser.js}"></script>
 <script type="text/javascript">
 	function show(obj) {
 		document.getElementById('introEditor').style.display="block";

@@ -22,8 +22,8 @@
 			<td th:text="${message.meIssuingdate}">发布时间</td>
 			<td th:text="${message.meStatus}">状态</td>
 			<td><a
-				th:href="@{/message/toAnswerMessage?(id=${message.meId})}">回复</a></td>
-			<td><a th:href="@{/message/deleteMessage?(id=${message.meId})}">删除</a></td>
+				th:href="@{/message/toAnswerMessage?(id=${message.meId},page=${messagePage.currPage})}">回复</a></td>
+			<td><a th:href="@{/message/deleteMessage?(id=${message.meId},page=${messagePage.currPage})}">删除</a></td>
 		</tr>
 	</table>
 	<table>

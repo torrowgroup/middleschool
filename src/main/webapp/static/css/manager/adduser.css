@@ -1,0 +1,39 @@
+	body{
+			margin: 0;
+			padding: 0;
+		}
+		.demo{
+			width:400px;
+			height: 350px;
+			/*border: 1px solid gray;*/
+			font-weight: bold;
+			margin: 0 auto;
+			margin-top: 100px;
+		}
+		input{
+			width: 200px;
+			height: 30px;
+			border: 1px solid black;
+			border-radius: 3px;
+			margin-top:10px;
+		}
+		.demo_1{
+			width: 202px;
+			height: 30px;
+			border: 1px solid black;
+			border-radius: 3px;
+			margin-top:10px;
+		}
+		.button input{
+			width: 60px;
+			height: 30px;
+			background-color: 	#C0C0C0;
+			/*margin-left:160px;	*/
+			float: right;
+		}
+		/* td{
+			text-align:center;
+		}  */
+        /* td{
+        	height:50px;   
+        } */
