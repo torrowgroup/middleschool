@@ -3,6 +3,8 @@ package com.torrow.school.controller.manager;
 import java.io.File;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -258,8 +260,10 @@ public class GeneralController extends BaseController {
 			return this.addGeneralJumping(model);
 		}
 		if (null != item) {
-			Date date=new Date();
-			TbResource tb = new TbResource(item.getCaId(),date,item.getCaName(),tbResource.getReTitle(),tbResource.getReContent());
+			Date date = new Date();
+			DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd"); //HH表示24小时制；  
+	        String Date = dFormat.format(date); 
+			TbResource tb = new TbResource(item.getCaId(),Date,item.getCaName(),tbResource.getReTitle(),tbResource.getReContent());
 			resourceService.insert(tb);
 			model.addAttribute("message", "添加成功");
 		} else {

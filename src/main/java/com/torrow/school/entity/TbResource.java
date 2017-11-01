@@ -3,7 +3,6 @@ package com.torrow.school.entity;
 import java.io.Serializable;
 
 
-import java.util.Date;
 /*
  * 资源类
  */
@@ -21,7 +20,7 @@ public class TbResource implements Serializable {
 
     private String reIssuer;	//发布人或者通知对象
 
-    private Date reIssuingdate;	//发布日期
+    private String reIssuingdate;	//发布日期
 
     private String reContent;	//内容
     
@@ -31,7 +30,7 @@ public class TbResource implements Serializable {
 		super();
 	}
 
-	public TbResource(Integer reId,Integer caId, String caName, String reTitle, String reIssuer, Date reIssuingdate,
+	public TbResource(Integer reId,Integer caId, String caName, String reTitle, String reIssuer, String reIssuingdate,
 			String reContent) {
 		super();
 		this.reId=reId;
@@ -43,7 +42,7 @@ public class TbResource implements Serializable {
 		this.reContent = reContent;
 	}
 
-	public TbResource(Integer caId, Date reIssuingdate,String caName, String reTitle,
+	public TbResource(Integer caId, String reIssuingdate,String caName, String reTitle,
 			String reContent) {
 		super();
 		this.caId = caId;
@@ -118,11 +117,11 @@ public class TbResource implements Serializable {
 		this.reIssuer = reIssuer;
 	}
 
-	public Date getReIssuingdate() {
+	public String getReIssuingdate() {
 		return reIssuingdate;
 	}
 
-	public void setReIssuingdate(Date reIssuingdate) {
+	public void setReIssuingdate(String reIssuingdate) {
 		this.reIssuingdate = reIssuingdate;
 	}
 

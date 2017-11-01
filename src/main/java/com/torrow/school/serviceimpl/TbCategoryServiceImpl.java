@@ -46,7 +46,6 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 
 	@Override
 	public int updateByPrimaryKey(TbCategory record) {
-		log.info(record+"7744");
 		return this.updateEntity(record);
 	}
 	
