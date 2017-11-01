@@ -59,30 +59,41 @@
 				<!-- 概括类管理 -->
 				<li>
 					<a href="" class="out"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;概括管理</a>
-                    <ul class="nav nav-second-level" >
+					<ul class="nav nav-second-level">
 	                    <li>
-	                     <!--  <a href="manageschoolintroduction.html" class="out1" target="ie"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学校简介管理</a>
+	                      <a th:href="@{/general/addGeneralJumping}"  target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加概括</a>
 	                    </li>
 	                    <li>
-	                      <a href="manageauthorities.html"  target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;领导机构管理</a>
-	                    </li>
-	                    <li>
-	                      <a href="schoolhistory.html" target="ie"  class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;建校历史管理</a>
-	                    </li>
-	                    <li>
-	                      <a href="schoolhonor.html" target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学校荣誉管理</a>
-	                    </li>
-	                    <li>
-	                      <a href="teachachievement.html" target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;教学成果管理</a>
-	                    </li>
-	                    <li>
-	                      <a href="managescenery.html" target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校园风光管理</a> -->
+	                      <a href="#" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理概括</a>
+		                    <ul class="nav nav-third-level" >
+			                    <!-- <li>
+			                      <a href="manageschoolintroduction.html" class="out1" target="ie"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学校简介管理</a>
+			                    </li> -->
+			   <!--                  <li>
+			                      <a href="manageauthorities.html"  target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;领导机构管理</a>
+			                    </li>
+			                    <li>
+			                      <a href="schoolhistory.html" target="ie"  class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;建校历史管理</a>
+			                    </li>
+			                    <li>
+			                      <a href="schoolhonor.html" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学校荣誉管理</a>
+			                    </li>
+			                    <li>
+			                      <a href="teachachievement.html" target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;教学成果管理</a>
+			                    </li>
+			                    <li>
+			                      <a href="managescenery.html" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校园风光管理</a>
+			                    </li> -->
+		             	   <li>
+	                      <!-- <a href="managescenery.html" target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校园风光管理</a> -->
 	                      <div th:each="category,categoryStart:${generalList}">
-								<a th:href="@{/general/manageGeneral?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span></a>
+								<a th:href="@{/general/manageGeneral?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out2" ><span class="glyphicon glyphicon-list-alt"></span></a>
 						  </div>
 						  <div th:each="category,categoryStart:${sceneryList}">
-								<a th:href="@{/general/manageScenery}" th:text="${category.caName}" target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span></a>
+								<a th:href="@{/general/manageScenery}" th:text="${category.caName}" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span></a>
 						  </div>
+						  </li>
+						 </ul>
 	                    </li>
                     </ul>
 				</li>
@@ -90,14 +101,23 @@
 				<li class="lione">
 					<a href="" class="out"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;新闻管理</a>
                     <ul class="nav nav-second-level" style="display: none">
+                    	<li>
+	                      <a th:href="@{/news/addNewsJumping}"  target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加新闻</a>
+	                    </li>
+	                    <li>
+	                      <a href="#" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理新闻</a>
+		                    <ul class="nav nav-third-level" >
 	                    <!-- <li>
 	                      <a href="adduser.html"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加用户</a>
 	                    </li> -->
 	                    <li>
 	                      <!-- <a href="manageuser.html"  target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a> -->
+	                     <li>
 	                      <div th:each="category,categoryStart:${newsList}">
-							   <a th:href="@{/news/manageSchoolNews?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span></a>
+							   <a th:href="@{/news/manageSchoolNews?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span></a>
 						  </div>
+						  </li>
+						  </ul>
 	                    </li>
                     </ul>
 				</li>
@@ -164,6 +184,20 @@
     });
 
 	
+</script>
+<script>
+    $(document).ready(function(){
+        $('.out1').click(function(e) {
+            $(this).next().stop().slideToggle()
+            e.preventDefault();
+        })
+        $('.out1').hover(function(){
+   	 		$(this).css("backgroundColor", "#012349");
+ 		})
+ 		  $('.out2').hover(function(){
+   	 		$(this).css("backgroundColor", "#012349");
+ 		})
+    });
 </script>
 <script language="javascript">
 

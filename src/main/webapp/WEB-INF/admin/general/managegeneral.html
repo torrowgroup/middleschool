@@ -18,14 +18,14 @@
 		<div  class="inner">
 			<div class="top"><p><input type="text" name="reTitle" th:value="${tbResource.reTitle}"></p></div>
 			<div class="ziti">
-				<input type="text" name="reIssuingdate" th:value="${tbResource.reIssuingdate}" readonly="readonly">
+				<input type="text" name="reIssuingdate" th:value="${#dates.format(tbResource.reIssuingdate,'yyyy-MM-dd')}" readonly="readonly">
 				【字体：<a href="javascript:doZoom(16)">大</a> 
 				<a href="javascript:doZoom(14)">中</a> 
 				<a href="javascript:doZoom(12)">小</a>】
 				&nbsp;&nbsp;<a href="javascript:;"onclick="CloseWebPage()">【关闭窗口】</a>
 				&nbsp;&nbsp;<a onclick=window.print() style="cursor:hand">【打印该页】</a>
 				<button onclick="bian()">点我一下</button>
-				<button>清空操作</button> 
+				<button>清空操作</button>
 				<input type="submit" value="保存">
 		   </div>
 		 </div>
