@@ -1,7 +1,6 @@
 package com.torrow.school.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 /*
  * 留言板类
  */

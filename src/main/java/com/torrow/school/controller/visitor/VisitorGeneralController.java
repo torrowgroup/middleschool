@@ -2,10 +2,6 @@
 package com.torrow.school.controller.visitor;
 
 import java.io.UnsupportedEncodingException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,7 +55,7 @@ public class VisitorGeneralController extends BaseController {
 			Model model,Integer nId) {
 		TbCategory record = new TbCategory();
 		record.setCaId(nId);
-		PageBean<TbResource> resourceLists = resourceService.findingByPaging(currentPage, record);
+		PageBean<TbResource> resourceLists = resourceService.findingByPaging(currentPage, record,10);
 		categoryService.getCategory(model);//将概括，新闻等封装进model，供下拉菜单使用
 		model.addAttribute("news", resourceLists);
 		return new ModelAndView("visitor/schoolnews");

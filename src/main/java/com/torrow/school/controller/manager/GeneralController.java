@@ -41,7 +41,7 @@ public class GeneralController extends BaseController {
 	public String manageScenery(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
 		TbCategory record = new TbCategory();
 		record.setCaPid(7);
-		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record));// 回显分页数据
+		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,4));// 回显分页数据
 		model.addAttribute("sign", 1);// 为了在查看管理校园风光时是同一个界面
 		session.setAttribute("currentPage", currentPage);
 		return "admin/general/managescenery";
