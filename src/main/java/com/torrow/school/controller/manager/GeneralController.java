@@ -179,10 +179,10 @@ public class GeneralController extends BaseController {
 	 * @return 删除学校风景
 	 */
 	@RequestMapping("deleteScenery")
-	public String deleteScenery(Model model, Integer id) {
+	public String deleteScenery(Model model,Integer id) {
 		int currentPage = (int) session.getAttribute("currentPage");
 		TbResource tb = resourceService.selectByPrimaryKey(id);
-		String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tb.getReTitle();
+		String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tb.getReContent();
 		File files = new File(path);
 		if (files.exists()) {
 			files.delete();
@@ -211,7 +211,7 @@ public class GeneralController extends BaseController {
 		int currentPage = (int) session.getAttribute("currentPage");
 		TbResource tb = resourceService.selectByPrimaryKey(id);
 		if (!picture.getOriginalFilename().equals("")) {
-			String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tb.getReTitle();
+			String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tb.getReContent();
 			File files = new File(path);
 			if (files.exists()) {
 				files.delete();

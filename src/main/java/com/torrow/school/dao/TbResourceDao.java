@@ -1,9 +1,6 @@
 package com.torrow.school.dao;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
-
 import com.torrow.school.entity.TbResource;
 
 /**
