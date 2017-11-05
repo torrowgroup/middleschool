@@ -7,10 +7,11 @@
     <title>郑州一二二中学</title>
     <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/static/css/visitor/style.css}" type="text/css">
-	<link rel="stylesheet" th:href="@{/static/css/visitor/aboutschool.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/static/css/visitor/aboutschool.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/static/css/visitor/schoolnews.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/static/css/visitor/views.css}" type="text/css">
     <script th:src="@{/static/js/jquery.min.js}"></script>
     <script th:src="@{/static/js/bootstrap.min.js}"></script>
-    <link rel="stylesheet" th:href="@{/static/css/visitor/schoolnews.css}" type="text/css">
 </head>
 <body>
 <div class="container header">
@@ -26,7 +27,7 @@
 <!--导航条-->
 <div class="navBox">
     <ul class="navUl">
-        <li class="navLi hidden-xs"><a th:href="@{/index}">首页</a></li>
+       	<li class="navLi hidden-xs"><a th:href="@{/index}">首页</a></li>
         <li class="navLi">
             <a href="#">学校概况</a>
               <ul class="navSecondUl">
@@ -84,52 +85,51 @@
 <div class="mainbox1">
     <div class="schollabout">
         <div class="schollleft">
-            <h3>校园新闻</h3>
+            <h3>学校概括</h3>
             <ul class="schoolcenter">
-<!--                 <li><a href="#" class="active1">校园新闻</a></li> -->
-				<li><a id="ad" href="#" th:name="111">jdsoajn</a></li>
-               	<li th:each="news,newsStart:${schoolNews}">
-                    	<a class="newA" th:name="${news.caId}" th:href="@{/visitor/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
+                <li th:each="general,generals:${generals}">
+                  	<a th:href="@{/visitor/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
                 </li>
             </ul>
         </div>
         <div class="schollright">
-            <div class="location"><a th:href="@{/index}">首页</a>.<a href="#" th:text="${useCategory.caName}">校园新闻</a></div>
-            <div th:if="${news.totalPage==0}">
-            	<h3 class="titlesc">暂没有相关内容</h3>
+            <div class="location"><a th:href="@{/index.html}">首页</a>.<a href="#" th:text="${useCategory.caName}">校园风光</a></div>
+			<div th:if="${views.totalCount}==0">
+            	<h3 class="titlesc" >暂没有相关内容</h3>
             </div>
-            <div th:if="${news.totalPage>0}">
-	            <h3 class="titlesc" th:text="${news.lists[0].caName}">校园新闻</h3>
-	            <div class="newscontent">
-	                <ul class="newscontentUl">
-	                 	<li th:each="resource,resoueStart:${news.lists}">
-	                 		<a id="news" th:href="@{/visitor/newDetails?(rId=${resource.reId},nId=${resource.caId})}" th:text="${resource.reTitle}"></a><span th:text="${resource.reIssuingdate}"></span>
-	                 	</li>
-	                </ul>
-	                <div class="clearfix"></div>
+            <div th:if="${views.totalCount}>0">
+	            <h3 class="titlesc">校园风光</h3>
+	            <div class="tourcontent">
+	                <a th:each="resource,resourceStart:${views.lists}" th:href="@{/visitor/viewsDetails?(pId=${resource.reId},nId=${useCategory.caId})}">
+	                	<div class="tourDiv">
+	                		<img alt="" th:src="@{/static/uploadimg/{picture}(picture=${resource.reContent})}">
+	                		<p th:text="${resource.reTitle}"></p>
+	                	</div>
+	                </a>
 	            </div>
-	            <div class="paging1">
-	                <ul class="pagingUl">
+	            <div class="clearfix"></div>
+	            <div class="paging1" th:if="${views.totalPage>0}">
+	                <ul class="pagingUl" >
 	                    <li><a href="">&laquo;</a></li>
-	                    <li th:each="i:${#numbers.sequence(1,news.totalPage)}" th:if="${i > news.currPage-3} and ${i < news.currPage+3}" >
-	                    	<a th:href="@{/visitor/viewNews?(currentPage=${i},nId=${news.lists[0].caId})}" th:text="${i}">#</a>
+	                    <li th:each="i:${#numbers.sequence(1,views.totalPage)}" th:if="${i > views.currPage-3} and ${i < views.currPage+3}" >
+	                    	<a th:href="@{/visitor/viewGeneral?(currentPage=${i},gId=${views.lists[0].caId})}" th:text="${i}">#</a>
 	                    </li>
 	                    <li><a href="">&raquo;</a></li>
 	                </ul>
 	                <div class="pagingRight">
 	                    <span>跳转到</span>
 	                    <div class="selectBox">
-	                        <span th:text="${news.currPage}"> <i class="glyphicon glyphicon-chevron-down pull-right" style="line-height: 30px"></i></span>
+	                        <span ><span th:text="${views.currPage}"></span> <i class="glyphicon glyphicon-chevron-down pull-right" style="line-height: 30px"></i></span>
 	                        <ul class="selectBoxUl">
-	                         	<li th:each="i:${#numbers.sequence(1,news.totalPage)}">
-	                         		<a href="#" th:onclick="'turnPageNew(this);'" th:name="${news.lists[0].caId}" th:text="${i}"></a>
+								<li th:if="${views.totalPage>0}" th:each="i:${#numbers.sequence(1,views.totalPage)}">
+	                         		<a href="#" th:onclick="'turnPageView(this);'" th:name="${views.lists[0].caId}" th:text="${i}"></a>
 	                         	</li>
 	                        </ul>
 	                    </div>
-	                    <span>页 共<span th:text="${news.totalPage}"></span>页</span>
+	                    <span>页 共<span th:text="${views.totalPage}"></span>页</span>
 	                </div>
-	            </div>
-	           </div>
+            	</div>
+            </div>
             <div class="clearfix"></div>
         </div>
     </div>
@@ -161,21 +161,6 @@
         </div>
     </div>
 </div>
-</body>
 <script th:src="@{/static/js/visitor/select.js}"></script>
-<script th:inline="javascript">
-	var nId = /*[[${nId}]]*/;
-	console.info(nId);
-	var newA = $('.newA');
-	for(var i=0;i<newA.length;i++){
-// 		console.info(newA[i]);
-// 		console.info(newA[i].name);
-// 		if(nId==newA[i].name){
-// 			this.addClass("active1");
-// 		}
-	}
-// 	$('#ad').addClass("active1");
-// 	var a = $('#ad').attr("name");
-// 	console.info(a);
-</script>
+</body>
 </html>

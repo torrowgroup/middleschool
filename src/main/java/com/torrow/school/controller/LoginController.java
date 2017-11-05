@@ -63,7 +63,7 @@ public class LoginController extends BaseController {
 	 */
 	@RequestMapping("index")
 	public String index(Model model){
-		categoryService.getCategory(model);
+		categoryService.getCategory(0,model);
 		return "visitor/index";
 	}
 }

@@ -2,7 +2,7 @@
 package com.torrow.school.controller.visitor;
 
 import java.io.UnsupportedEncodingException;
-import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,17 +31,19 @@ public class VisitorGeneralController extends BaseController {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * @param currentPage 查看校园风光时用于分页
+	 * @param gId	得到用户选中的功能项
 	 * @param model
 	 * @return
-	 * 查看学校简介
-	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping("viewGeneral")
-	public ModelAndView viewGeneral(Integer gId,Model model) throws UnsupportedEncodingException{
-		categoryService.getCategory(model);//将学校概括等封装进model
+	public ModelAndView viewGeneral(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,Integer gId,Model model) {
+		categoryService.getCategory(gId,model);//将学校概括等封装进model
 		TbCategory category = categoryService.selectByPrimaryKey(gId);
-		if(category.getCaPid()==7){
-//			List<TbResource> resourceList = resourceService.findingByPaging(1, record,10);
+		if(category.getCaPid()==7){	 //查看校园风光时调用
+			PageBean<TbResource> resourceList = resourceService.findingByPaging(currentPage, category,6);
+			model.addAttribute("views", resourceList);
+			return new ModelAndView("visitor/schoolviews");
 		}
 		TbResource resource = resourceService.selectOne(gId);
 		model.addAttribute("resource", resource);
@@ -50,6 +52,7 @@ public class VisitorGeneralController extends BaseController {
 
 	/**
 	 * @param nName	得到新闻类别
+	 * @param nId	接受用户查看的功能
 	 * @param model
 	 * @return
 	 * @throws UnsupportedEncodingException
@@ -60,9 +63,40 @@ public class VisitorGeneralController extends BaseController {
 			Model model,Integer nId) {
 		TbCategory record = new TbCategory();
 		record.setCaId(nId);
-		PageBean<TbResource> resourceLists = resourceService.findingByPaging(currentPage, record,10);
-		categoryService.getCategory(model);//将概括，新闻等封装进model，供下拉菜单使用
+		PageBean<TbResource> resourceLists = resourceService.findingByPaging(currentPage, record,2);
+		categoryService.getCategory(nId,model);//将概括，新闻等封装进model，供下拉菜单使用
 		model.addAttribute("news", resourceLists);
+//		model.addAttribute("nId", nId);	//将被选中的功能项放进model，以便前台确定被选中的项
 		return new ModelAndView("visitor/schoolnews");
+	}
+	
+	/**
+	 * @param pId	获得图片资源类的id
+	 * @param nId	接受用户查看的功能
+	 * @param model
+	 * @return  查看校园风光的详情
+	 */
+	@RequestMapping("viewsDetails")
+	public ModelAndView viewsDetails(Integer pId,Integer nId,Model model) {
+		TbResource resource = resourceService.selectByPrimaryKey(pId);
+		model.addAttribute("resource", resource);//将图片放进model
+		categoryService.getCategory(nId,model);//将概括，新闻等封装进model，供下拉菜单使用
+		model.addAttribute("nId", nId);	//将被选中的功能项放进model，以便前台确定被选中的项
+		return new ModelAndView("visitor/viewdetails");
+	}
+	
+	/**
+	 * @param rId	接受用户查看的具体的新闻id
+	 * @param nId	接受用户查看的功能
+	 * @param model
+	 * @return 		查看新闻详情
+	 */
+	@RequestMapping("newDetails")
+	public ModelAndView newDetails(Integer rId,Integer nId,Model model){
+		TbResource resource = resourceService.selectByPrimaryKey(rId);
+		model.addAttribute("resource", resource);
+		categoryService.getCategory(nId,model);//将概括，新闻等封装进model，供下拉菜单使用
+		model.addAttribute("nId", nId);	//将被选中的功能项放进model，以便前台确定被选中的项
+		return new ModelAndView("visitor/newdetails");
 	}
 }
