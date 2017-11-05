@@ -14,6 +14,11 @@ import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
 
+/**
+ * @author 安李杰
+ *	这里边有校园新闻和通知公告
+ * @2017年11月2日上午8:26:18
+ */
 @Controller
 @RequestMapping("/news")
 public class SchoolNewsController extends BaseController {
@@ -23,6 +28,10 @@ public class SchoolNewsController extends BaseController {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * @param model
+	 * @return 添加新闻类的跳转
+	 */
 	@RequestMapping("addNewsJumping")
 	public String newsJumping(Model model) {
 		int Pid=2;
@@ -56,13 +65,16 @@ public class SchoolNewsController extends BaseController {
 		} else {
 			model.addAttribute("message", "添加失败,不存在该类别");
 		}
+		if(item.getCaPid()==6) {
+			return this.addNoticeJumping(model);
+		}
 		return this.newsJumping(model);
 	}
 
 	/**
 	 * @param currentPage
 	 * @param model
-	 * @return 校园新闻类的管理
+	 * @return 校园新闻类/学校公告的管理
 	 */
 	@RequestMapping("manageSchoolNews")
 	public String manageSchoolNews(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
@@ -73,21 +85,6 @@ public class SchoolNewsController extends BaseController {
 		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,10));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
 		model.addAttribute("sign", 1);
-		return "admin/schoolnews/manageschoolnews";
-	}
-
-	/**
-	 * @param currentPage
-	 * @param model
-	 * @return 查看新闻类别
-	 */
-	@RequestMapping("checkSchoolNews")
-	public String checkSchoolNewsJumping(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
-			Model model) {
-		TbCategory record = new TbCategory();
-		record.setCaPid(2);
-		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,10));// 回显分页数据
-		session.setAttribute("currentPage", currentPage);
 		return "admin/schoolnews/manageschoolnews";
 	}
 
@@ -174,8 +171,8 @@ public class SchoolNewsController extends BaseController {
 			tb.setCaName(tbResource.getCaName());
 
 			String path = session.getServletContext().getRealPath("/static/uploadimg");
-			String reTitle = userService.uploadPicture(picture, path);
-			tb.setReTitle(reTitle);
+			String reContent = userService.uploadPicture(picture, path);
+			tb.setReContent(reContent);
 			resourceService.insert(tb);
 			model.addAttribute("message", "添加成功");
 		} else {
@@ -183,6 +180,10 @@ public class SchoolNewsController extends BaseController {
 		}
 		return "admin/schoolnews/uploadmanage";
 	}
+	/**
+	 * @param model
+	 * @return 在管理新闻时从数据库类别类查出来的新闻名称
+	 */
 	@RequestMapping("manageJumping")
 	public String manageJumping(Model model) {
 		int Pid = 2;
@@ -199,5 +200,38 @@ public class SchoolNewsController extends BaseController {
 		String fileName = userService.uploadPicture(file, path);
 		// 返回图片的URL地址
 		response.getWriter().write("/middleschool/static/uploadimg/" + fileName);
+	}
+	
+//	---------------------------------------------------以下写的是通知公告类
+	/**
+	 * @param model
+	 * @return 添加学校公告类的跳转
+	 */
+	@RequestMapping("addNoticeJumping")
+	public String addNoticeJumping(Model model) {
+		int Pid=6;
+		List<TbCategory> list=categoryService.queryByPid(Pid);
+		if(!list.isEmpty()) {
+			model.addAttribute("categoryList", list);
+		} else {
+			model.addAttribute("message","该类别名称不存在");
+		}
+		return "admin/schoolnews/addschoolnews";
+	}
+	
+	/**
+	 * @param model
+	 * @return 进入管理通知公告类的跳转
+	 */
+	@RequestMapping("noticeJumping")
+	public String noticeJumping(Model model) {
+		int Pid = 6;
+		List<TbCategory> list = categoryService.queryByPid(Pid);
+		if(!list.isEmpty()) {
+			model.addAttribute("categoryList", list);
+		}else {
+			model.addAttribute("message","该类别名称不存在");
+		}
+		return "admin/notice/index";
 	}
 }
