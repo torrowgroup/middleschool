@@ -92,13 +92,17 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 	}
 	
 	
-	public void getCategory(Model model){
+	public void getCategory(Integer rId,Model model){
 		List<TbCategory> category = this.selectAll();
 		List<TbCategory> generals = new ArrayList<TbCategory>();//概括类
 		List<TbCategory> schoolNews = new ArrayList<TbCategory>();//校园新闻
 		List<TbCategory> educations = new ArrayList<TbCategory>();//教育教研处 教研组
 //		List<TbCategory> generals = new ArrayList<TbCategory>();
+		log.info("rId : "+rId+" category:"+category);
 		for(int i=0;i<category.size();i++){
+			if(rId!=0&&category.get(i).getCaId()==rId){	//得到用户使用的类别类，并保存在model中
+				model.addAttribute("useCategory", category.get(i));
+			}
 			if(category.get(i).getCaPid()==1||category.get(i).getCaPid()==7){
 				generals.add(category.get(i));
 			} else if(category.get(i).getCaPid()==2) {
