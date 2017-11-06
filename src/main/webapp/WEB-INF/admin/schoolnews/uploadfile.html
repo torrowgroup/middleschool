@@ -6,30 +6,30 @@
   <title>home</title>
 </head>
 <body>
+<div th:if="${sign}=='1'">请先去类别管理中添加相应类别</div>
+<div th:if="${sign}!='1'">
 <div th:text="${message}"></div>
 <form th:action="@{/news/upload}" method="post" enctype="multipart/form-data">
 	<table>
+		<tr>
+			<td>上传名称</td>
+			<td><input type="text" name="reTitle"></td>
+		</tr>
 		<tr>
 			<td>选择文件:</td>
 			<td><input type="file" name="picture" width="120px"></td>  
 		</tr>
 		<tr>
 			<td>类别名称</td>
-			<td><select name="caName">
-				<option value="学生管理">学生管理</option>
-				<option value="教师成长">教师成长</option>
-				<option value="语文教研">语文教研</option>
-				<option value="数学教研">数学教研</option>
-				<option value="外语教研">外语教研</option>
-				<option value="理化生教研">理化生教研</option>
-				<option value="政史地教研">政史地教研</option>
-				<option value="音体美教研">音体美教研</option>
-			</select></td>
+			<td><select name="caId">
+						<option th:each="category,categoryStart:${uploadList}" th:text="${category.caName}" th:value="${category.caId}" />
+				 </select></td>
 		</tr>
 		<tr>
 			 <td><input type="submit" value="上传"></td>  
 		</tr>
 	</table>
 </form>
+</div>
 </body>
 </html>

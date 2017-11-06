@@ -39,6 +39,12 @@ public class LoginController extends BaseController {
 			List<TbCategory> item=categoryService.queryByPid(id);
 			int Pd = 2;//新闻类
 			List<TbCategory> news = categoryService.queryByPid(Pd);
+			int d=9;//学生管理、教师上传
+			List<TbCategory> upload = categoryService.queryByPid(d);
+			int i=3;
+			List<TbCategory> education = categoryService.queryByPid(i);
+			model.addAttribute("educationList",education);
+			model.addAttribute("uploadList",upload);
 			model.addAttribute("newsList", news);
 			model.addAttribute("generalList", list);
 			model.addAttribute("sceneryList", item);

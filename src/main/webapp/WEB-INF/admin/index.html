@@ -116,6 +116,9 @@
 	                      <div th:each="category,categoryStart:${newsList}">
 							   <a th:href="@{/news/manageSchoolNews?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span></a>
 						  </div>
+						  <div th:each="category,categoryStart:${uploadList}">
+							   <a th:href="@{/news/manageUpload?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span></a>
+						  </div>
 						  </li>
 						  </ul>
 	                    </li>
@@ -126,10 +129,12 @@
 					<a href="" class="out"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;教育教研管理</a>
                     <ul class="nav nav-second-level" style="display: none">
 	                    <li>
-	                      <a th:href="@{/general/addGeneralJumping}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加用户</a>
+	                      <a th:href="@{/news/educationJumpping}"  target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;增加教育教研</a>
 	                    </li>
 	                    <li>
-	                      <a href="manageuser.html"  target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a>
+	                      <div th:each="category,categoryStart:${educationList}">
+							   <a th:href="@{/news/manageUpload?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span></a>
+						  </div>
 	                    </li>
                     </ul>
 				</li>

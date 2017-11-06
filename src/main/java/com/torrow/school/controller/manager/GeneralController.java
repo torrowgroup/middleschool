@@ -19,7 +19,7 @@ import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
 
 /**
- * @author 安李杰
+ * @author 安李杰 管理概括类、管理轮播图
  *
  * @2017年10月10日上午8:04:46
  */
@@ -46,7 +46,21 @@ public class GeneralController extends BaseController {
 		session.setAttribute("currentPage", currentPage);
 		return "admin/general/managescenery";
 	}
-
+	
+	/**
+	 * @param currentPage
+	 * @param model
+	 * @return 管理图片轮播图
+	 */
+	@RequestMapping("managePicture")
+	public String managePicture(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
+		TbCategory record = new TbCategory();
+		record.setCaPid(10);
+		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,4));// 回显分页数据
+		model.addAttribute("sign", 1);// 为了在查看管理轮播图时是同一个界面
+		session.setAttribute("currentPage", currentPage);
+		return "admin/managepicture/managepicture";
+	}
 	
 	/**
 	 * @param model
@@ -114,34 +128,68 @@ public class GeneralController extends BaseController {
 	@RequestMapping("manageGeneralJumping")
 	public String manageGeneralJumping(Model model) {
 		int Pid=1;
-		List<TbCategory> list=categoryService.queryByPid(Pid);
 		int id=7;
+		List<TbCategory> list=categoryService.queryByPid(Pid);
 		List<TbCategory> item=categoryService.queryByPid(id);
-		model.addAttribute("categoryList", list);
-		model.addAttribute("sceneryList", item);
+		if(!list.isEmpty()&&!item.isEmpty()) {
+			model.addAttribute("categoryList", list);
+			model.addAttribute("sceneryList", item);
+		}else {
+			model.addAttribute("message", "该类别名称不存在");
+		}
 		return "admin/general/index";
 	}
 
 	/**
 	 * @param model
+	 * @return 图片类的上传
+	 */
+	@RequestMapping("uploadPictureJumping")
+	public String uploadPictureJumping(Model model) {
+		int Pid=10;//查询概括类
+		List<TbCategory> list=categoryService.queryByPid(Pid);
+		if(!list.isEmpty()) {
+			model.addAttribute("uploadList", list);
+		} else {
+			model.addAttribute("message","该类别名称不存在");
+		}
+		return "admin/managepicture/upload";
+	}
+	
+	/**
+	 * @param model
 	 * @param caName
 	 * @param picture
-	 * @return 学校风光的添加
+	 * @return 学校风光的添加 ,图片轮播图的添加
 	 */
 	@RequestMapping("addSchoolScenery")
 	public String addSchoolHistory(Model model,MultipartFile picture,TbResource tbResource) throws Exception {
+		TbCategory tbCategory = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
-		String reContent = userService.uploadPicture(picture, path);	
-		TbResource tb = new TbResource(tbResource.getCaId(),tbResource.getCaName(),tbResource.getReTitle(),reContent);
-		int i=resourceService.insert(tb);
-		if(i!=0) {
-			model.addAttribute("message", "添加成功");
-		}else {
-			model.addAttribute("message", "添加失败");
+		String reContent = userService.uploadPicture(picture, path);
+		if(tbCategory.getCaPid()==7) {
+			TbResource tb = new TbResource(tbResource.getCaId(),tbResource.getCaName(),tbResource.getReTitle(),reContent);
+			int i=resourceService.insert(tb);
+			if(i!=0) {
+				model.addAttribute("message", "添加成功");
+			}else {
+				model.addAttribute("message", "添加失败");
+			}
+		} else if(tbCategory.getCaPid()==10){
+			TbResource tb = new TbResource(tbResource.getCaId(),tbCategory.getCaName(),reContent);
+			int i=resourceService.insert(tb);
+			if(i!=0) {
+				model.addAttribute("message", "添加成功");
+			}else {
+				model.addAttribute("message", "添加失败");
+			}
+		}
+		if(tbCategory.getCaPid()==10) {
+			return this.uploadPictureJumping(model);
 		}
 		return this.addSceneryJumping(model);
 	}
-
+	
 	/**
 	 * @return 添加校园风光的跳转
 	 */
@@ -238,7 +286,12 @@ public class GeneralController extends BaseController {
 	public String addGeneralJumping(Model model) {
 		int Pid=1;//查询概括类
 		List<TbCategory> list=categoryService.queryByPid(Pid);
-		model.addAttribute("categoryList", list);
+		if(!list.isEmpty()) {
+			model.addAttribute("categoryList", list);
+		} else {
+//			model.addAttribute("message","该类别名称不存在");
+			model.addAttribute("sign", 1);
+		}
 		return "admin/general/addgeneral";
 	}
 
@@ -269,7 +322,6 @@ public class GeneralController extends BaseController {
 		} else {
 			model.addAttribute("message", "不存在该类别，添加失败");
 		}
-
 		return this.addGeneralJumping(model);
 	}
 
