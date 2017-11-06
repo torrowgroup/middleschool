@@ -22,7 +22,6 @@ public class TbCategory implements Serializable {
 	 * 图片（轮播、校徽等）10,
 	 */
     private Integer caPid;
-    						
     	
     private String caName;	//类别名称
 

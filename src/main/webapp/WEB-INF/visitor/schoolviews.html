@@ -88,7 +88,7 @@
             <h3>学校概括</h3>
             <ul class="schoolcenter">
                 <li th:each="general,generals:${generals}">
-                  	<a th:href="@{/visitor/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
+                  	<a th:name="${general.caId}" th:href="@{/visitor/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
                 </li>
             </ul>
         </div>
@@ -162,5 +162,9 @@
     </div>
 </div>
 <script th:src="@{/static/js/visitor/select.js}"></script>
+<script th:inline="javascript">
+	var nId = /*[[${useCategory.caId}]]*/;
+	$("a[name="+nId+"]").addClass("active1");
+</script>
 </body>
 </html>

@@ -25,3 +25,5 @@
 		var name = obj.name;
 		window.location.href = "viewGeneral?currentPage="+text+"&gId="+name;
 	}
+	
+	
