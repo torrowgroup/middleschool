@@ -16,7 +16,7 @@ import com.torrow.school.entity.TbResource;
 
 /**
  * @author 安李杰
- *	这里边有校园新闻和通知公告
+ *	这里边有校园新闻和通知公告、教育教研类的管理也在这一块
  * @2017年11月2日上午8:26:18
  */
 @Controller
@@ -36,10 +36,46 @@ public class SchoolNewsController extends BaseController {
 	public String newsJumping(Model model) {
 		int Pid=2;
 		List<TbCategory> list=categoryService.queryByPid(Pid);
-		model.addAttribute("categoryList", list);
+		if(!list.isEmpty()) {
+			model.addAttribute("categoryList", list);
+		} else {
+			model.addAttribute("sign",1);
+		}
 		return "admin/schoolnews/addschoolnews";
 	}
+	
+	/**
+	 * @param model
+	 * @return 对于学生管理和教师成长的上传
+	 */
+	@RequestMapping("uploadJumpping")
+	public String uploadJumpping(Model model){
+		int Pid=9;
+		List<TbCategory> list=categoryService.queryByPid(Pid);
+		if(!list.isEmpty()) {
+			model.addAttribute("uploadList", list);
+		}else {
+			model.addAttribute("sign",1);
+		}
+		return "admin/schoolnews/uploadfile";
+	}
 
+	/**
+	 * @param model
+	 * @return 教育教研类的跳转
+	 */
+	@RequestMapping("educationJumpping")
+	public String educationJumpping(Model model) {
+		int Pid=3;
+		List<TbCategory> list=categoryService.queryByPid(Pid);
+		if(!list.isEmpty()) {
+			model.addAttribute("uploadList", list);
+		}else {
+			model.addAttribute("sign",1);
+		}
+		return "educationoffice/uploadfile";
+	}
+	
 	/**
 	 * @param model
 	 * @param reTitle
@@ -87,7 +123,25 @@ public class SchoolNewsController extends BaseController {
 		model.addAttribute("sign", 1);
 		return "admin/schoolnews/manageschoolnews";
 	}
-
+	
+	
+	/**
+	 * @param currentPage
+	 * @param model
+	 * @return 上传类的管理
+	 */
+	@RequestMapping("manageUpload")
+	public String manageUpload(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
+			Model model,Integer id) {
+		TbCategory record = new TbCategory();
+//		record.setCaPid(2);
+		record.setCaId(id);
+		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,10));// 回显分页数据
+		session.setAttribute("currentPage", currentPage);
+		model.addAttribute("sign", 1);
+		return "admin/schoolnews/manageupload";
+	}
+	
 	/**
 	 * @param id
 	 * @param model
@@ -131,7 +185,7 @@ public class SchoolNewsController extends BaseController {
 
 	/**
 	 * @param model
-	 * @param id---------
+	 * @param
 	 * @return 删除学校新闻
 	 */
 	@RequestMapping("deleteNews")
@@ -147,15 +201,6 @@ public class SchoolNewsController extends BaseController {
 	}
 
 	/**
-	 * @return 上传的跳转
-	 */
-	@RequestMapping("uploadJumping")
-	public String uploadJumping() {
-
-		return "admin/schoolnews/uploadmanage";
-	}
-
-	/**
 	 * @param tbResource
 	 * @param picture
 	 * @param model
@@ -164,21 +209,17 @@ public class SchoolNewsController extends BaseController {
 	 */
 	@RequestMapping("upload")
 	public String upload(TbResource tbResource, MultipartFile picture, Model model) throws Exception {
-		TbCategory item = categoryService.selectCaName(tbResource.getCaName());
+		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		if (null != item) {
-			TbResource tb = new TbResource();
-			tb.setCaId(item.getCaId());
-			tb.setCaName(tbResource.getCaName());
-
 			String path = session.getServletContext().getRealPath("/static/uploadimg");
 			String reContent = userService.uploadPicture(picture, path);
-			tb.setReContent(reContent);
+			TbResource tb = new TbResource(item.getCaId(),item.getCaName(),tbResource.getReTitle(),reContent);
 			resourceService.insert(tb);
 			model.addAttribute("message", "添加成功");
 		} else {
 			model.addAttribute("message", "不存在该类别，添加失败");
 		}
-		return "admin/schoolnews/uploadmanage";
+		return this.uploadJumpping(model);
 	}
 	/**
 	 * @param model
@@ -187,8 +228,15 @@ public class SchoolNewsController extends BaseController {
 	@RequestMapping("manageJumping")
 	public String manageJumping(Model model) {
 		int Pid = 2;
+		int id=9;
 		List<TbCategory> list = categoryService.queryByPid(Pid);
-		model.addAttribute("categoryList", list);
+		List<TbCategory> item = categoryService.queryByPid(id);
+		if(!list.isEmpty()&&!item.isEmpty()) {
+			model.addAttribute("categoryList", list);
+			model.addAttribute("itemList",item);
+		} else {
+			model.addAttribute("message","该名称不存在");
+		}
 		return "admin/schoolnews/index";
 	}
 	
@@ -214,7 +262,7 @@ public class SchoolNewsController extends BaseController {
 		if(!list.isEmpty()) {
 			model.addAttribute("categoryList", list);
 		} else {
-			model.addAttribute("message","该类别名称不存在");
+			model.addAttribute("sign",1);
 		}
 		return "admin/schoolnews/addschoolnews";
 	}

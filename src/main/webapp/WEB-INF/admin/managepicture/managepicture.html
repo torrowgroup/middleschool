@@ -1,0 +1,51 @@
+  <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>home</title>
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/manager/managescenery.css}">
+</head>
+<body>
+<div th:text="${message}"></div>
+<span th:if ="${pagemsg.totalCount}==0">
+        没有任何校园风光信息！
+    </span>
+ <div th:if ="${pagemsg.totalCount}!=0">
+        <table border="1"  class="table1">   
+        <thead>
+            <tr>
+                <td>校园风光</td>
+                <td>删除</td>
+            </tr>
+            </thead>
+                <tr th:each="general,generalStart:${pagemsg.lists}">
+                    <td><img alt="无图片" width="100px;" height="80px;" th:src="@{/static/uploadimg/{picture}(picture=${general.reContent})}" /></td>
+                	<td><a th:href="@{/general/deleteScenery?(id=${general.reId})}">delete</a></td>
+                </tr>
+        </table>   
+    </div> 
+<table>
+<tr>
+<td class="td2">
+   <span th:if ="${pagemsg.currPage != 1}">
+           <a th:href="@{/general/manageScenery?(currentPage=1)}">[首页]</a>&nbsp;&nbsp;
+           <a th:href="@{/general/manageScenery?(currentPage=${pagemsg.currPage-1})}">[上一页]</a>&nbsp;&nbsp;
+	</span>	
+	<span th:if="${pagemsg.currPage == 1}">
+		[首页][上一页]
+	</span>
+	<span th:each="i:${#numbers.sequence(1,pagemsg.totalPage)}">
+			<a th:if="${i > pagemsg.currPage-3} and ${i < pagemsg.currPage+3}"  th:href="@{/general/manageScenery?(currentPage=${i})}"th:text="${i}">#</a>
+	</span>
+    <span th:if ="${pagemsg.currPage < pagemsg.totalPage}">
+           <a th:href="@{/general/manageScenery?(currentPage=${pagemsg.currPage+1})}">[下一页]</a>&nbsp;&nbsp;
+	</span>
+	<span th:if="${pagemsg.currPage >= pagemsg.totalPage}">
+		[下一页]
+	</span>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -8,7 +8,9 @@
 	th:href="@{/static/dist/css/wangEditor.min.css}">
 </head>
 <body>
+<div th:if="${sign}=='1'">请先去类别管理中添加相应类别</div>
 <div th:text="${message}"></div>
+<div th:if="${sign}!='1'">
 <form th:action="@{/general/addGeneral}"  onsubmit="modifyContent()" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
@@ -46,5 +48,6 @@
 <script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/addnews.js}" ></script>
+</div>
 </body>
 </html>
