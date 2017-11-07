@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
 import com.torrow.school.base.BaseDao;
 import com.torrow.school.dao.TbCategoryDao;
 import com.torrow.school.dao.TbResourceDao;
@@ -111,4 +113,48 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 		return this.selectByCaId(gId);
 	}
 
+	@Override
+	public void getResource(List<TbCategory> categoryList, Model model) {
+		List<Integer> caIdNews = new ArrayList<Integer>();//学校新闻类别类的id
+		for(int i=0;i<categoryList.size();i++){
+			if(categoryList.get(i).getCaPid()==2) {
+				caIdNews.add(categoryList.get(i).getCaId()); 
+			}
+		}
+		List<TbResource> sNews = new ArrayList<TbResource>();//学校新闻，按倒序得到，只要8条
+		List<TbResource> allResources = this.selectAll();
+		for(int i=allResources.size()-1;i>=0;i--){	//倒序得到资源类
+			for(int j=0;j<caIdNews.size();j++){
+				if(sNews.size()<8&allResources.get(i).getCaId()==caIdNews.get(j)){//当资源类属于新闻时取出
+					String content = this.getPicture(allResources.get(i).getReContent());//将图片从富文本中得到并暂存于资源类内容中,没有图片的新闻不要
+					if(content!=null){
+						allResources.get(i).setReContent(content);
+						sNews.add(allResources.get(i));
+					}
+				}
+			}
+		}
+		model.addAttribute("sNews", sNews);
+	}
+
+	/**
+	 * @param content
+	 * @return 	
+	 * 用于从富文本中分离图片，此方法仅存在于该类中，接口层没有相应方法
+	 */
+	public String getPicture(String content){	
+		String img = "<img alt=\"\" src=";// \"\"是为了加入""
+		int startIndex = content.indexOf(img);
+		String contentTemp="";//用于存放从富文本中得到的图片
+		if(startIndex!=-1){
+			int stopIndex = content.indexOf("\">",startIndex);
+			for(int i=startIndex+img.length();i<stopIndex;i++){
+				contentTemp +=  content.charAt(i);
+			}
+			log.info(contentTemp);
+		} else  {
+			return null;
+		}
+		return contentTemp;
+	}
 }

@@ -15,7 +15,8 @@ public interface TbCategoryService {
     List<TbCategory> selectByPid(List<Integer> pidList);
     //将学校概括，校园新闻，教育教研等封装进model,追加用户点击的功能项
     void getCategory(Integer rId,Model model);
-	
+
+    
 	//删除类别信息
     int deleteByPrimaryKey(Integer id);
     //插入类别
@@ -30,4 +31,5 @@ public interface TbCategoryService {
 	public PageBean<TbCategory>  findPage(int currentPage,int pageSize);
 	//通过传进去父id来查询信息安李杰加
 	public List<TbCategory> queryByPid(int Pid);
+	
 }
