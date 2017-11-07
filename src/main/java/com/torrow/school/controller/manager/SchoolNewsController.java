@@ -16,7 +16,7 @@ import com.torrow.school.entity.TbResource;
 
 /**
  * @author 安李杰
- *	这里边有校园新闻和通知公告、教育教研类的管理也在这一块
+ *	这里边有校园新闻和通知公告、教育教研类的管理也在这一块、校园文学也在这一块
  * @2017年11月2日上午8:26:18
  */
 @Controller
@@ -59,7 +59,8 @@ public class SchoolNewsController extends BaseController {
 		}
 		return "admin/schoolnews/uploadfile";
 	}
-
+	
+	
 	/**
 	 * @param model
 	 * @return 教育教研类的跳转
@@ -100,6 +101,9 @@ public class SchoolNewsController extends BaseController {
 			}
 		} else {
 			model.addAttribute("message", "添加失败,不存在该类别");
+		}
+		if(item.getCaPid()==3||item.getCaPid()==5) {
+			return this.sendPrivateNoticeJumping(model);
 		}
 		if(item.getCaPid()==6) {
 			return this.addNoticeJumping(model);
@@ -231,7 +235,7 @@ public class SchoolNewsController extends BaseController {
 		int id=9;
 		List<TbCategory> list = categoryService.queryByPid(Pid);
 		List<TbCategory> item = categoryService.queryByPid(id);
-		if(!list.isEmpty()&&!item.isEmpty()) {
+		if(!list.isEmpty()||!item.isEmpty()) {
 			model.addAttribute("categoryList", list);
 			model.addAttribute("itemList",item);
 		} else {
@@ -261,6 +265,25 @@ public class SchoolNewsController extends BaseController {
 		List<TbCategory> list=categoryService.queryByPid(Pid);
 		if(!list.isEmpty()) {
 			model.addAttribute("categoryList", list);
+		} else {
+			model.addAttribute("sign",1);
+		}
+		return "admin/schoolnews/addschoolnews";
+	}
+	
+	/**
+	 * @param model
+	 * @return 
+	 */
+	@RequestMapping("sendPrivateNoticeJumping")
+	public String sendPrivateNoticeJumping(Model model) {
+		int Pid=3;
+		int p=5;
+		List<TbCategory> list=categoryService.queryByPid(Pid);
+		List<TbCategory> item=categoryService.queryByPid(p);
+		if(!list.isEmpty()||!item.isEmpty()) {
+			model.addAttribute("categoryList", list);
+			model.addAttribute("itemList",item);
 		} else {
 			model.addAttribute("sign",1);
 		}

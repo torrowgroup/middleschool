@@ -131,7 +131,7 @@ public class GeneralController extends BaseController {
 		int id=7;
 		List<TbCategory> list=categoryService.queryByPid(Pid);
 		List<TbCategory> item=categoryService.queryByPid(id);
-		if(!list.isEmpty()&&!item.isEmpty()) {
+		if(!list.isEmpty()||!item.isEmpty()) {
 			model.addAttribute("categoryList", list);
 			model.addAttribute("sceneryList", item);
 		}else {
