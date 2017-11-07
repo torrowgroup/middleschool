@@ -31,7 +31,7 @@
             <a href="#">学校概况</a>
               <ul class="navSecondUl">
                     <li th:each="general,generals:${generals}">
-                    	<a th:href="@{/visitorGN/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
+                    	<a th:href="@{/visitor/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
                     </li>
               </ul>
         </li>
@@ -39,7 +39,7 @@
             <a href="#">校园新闻</a>
              <ul class="navSecondUl">
                     <li th:each="news,newsStart:${schoolNews}">
-                    	<a th:href="@{/visitorGN/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
+                    	<a th:href="@{/visitor/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
                     </li>
              </ul>
         </li>
@@ -47,7 +47,7 @@
             <a href="#">教育教研</a>
                 <ul class="navSecondUl">
                     <li th:each="education,educations:${educations}">
-                    	<a th:href="@{/visitorGN/viewNews?(gName= ${education.caName})}" th:text="${education.caName}">学校概况</a>
+                    	<a th:href="@{/visitor/viewNews?(gName= ${education.caName})}" th:text="${education.caName}">学校概况</a>
                		</li>
                 </ul>
         </li>
@@ -83,14 +83,6 @@
 
 <div class="mainbox1">
     <div class="schollabout">
-        <div class="schollleft">
-            <h3>校园新闻</h3>
-            <ul class="schoolcenter">
-               	<li th:each="news,newsStart:${schoolNews}">
-                    	<a th:name="${news.caId}" th:href="@{/visitorGN/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
-                </li>
-            </ul>
-        </div>
         <div class="schollright">
             <div class="location"><a th:href="@{/index}">首页</a>.<a href="#" th:text="${useCategory.caName}">校园新闻</a></div>
             <div th:if="${news.totalPage==0}">
@@ -101,7 +93,7 @@
 	            <div class="newscontent">
 	                <ul class="newscontentUl">
 	                 	<li th:each="resource,resoueStart:${news.lists}">
-	                 		<a id="news" th:href="@{/visitorGN/newDetails?(rId=${resource.reId},nId=${resource.caId})}" th:text="${resource.reTitle}"></a><span th:text="${resource.reIssuingdate}"></span>
+	                 		<a id="news" th:href="@{/visitor/newDetails?(rId=${resource.reId},nId=${resource.caId})}" th:text="${resource.reTitle}"></a><span th:text="${resource.reIssuingdate}"></span>
 	                 	</li>
 	                </ul>
 	                <div class="clearfix"></div>
@@ -110,7 +102,7 @@
 	                <ul class="pagingUl">
 	                    <li><a href="">&laquo;</a></li>
 	                    <li th:each="i:${#numbers.sequence(1,news.totalPage)}" th:if="${i > news.currPage-3} and ${i < news.currPage+3}" >
-	                    	<a th:href="@{/visitorGN/viewNews?(currentPage=${i},nId=${news.lists[0].caId})}" th:text="${i}">#</a>
+	                    	<a th:href="@{/visitor/viewNews?(currentPage=${i},nId=${news.lists[0].caId})}" th:text="${i}">#</a>
 	                    </li>
 	                    <li><a href="">&raquo;</a></li>
 	                </ul>

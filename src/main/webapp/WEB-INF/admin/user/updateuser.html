@@ -55,7 +55,7 @@
 					<input type="hidden" name="usPicture" th:value="${user.usPicture}"/>
 					<img alt="没有照片" width="200px;" height="50px;"
 					th:src="@{/static/uploadimg/{picture}(picture=${user.usPicture})}" />
-					<input type="file" name="picture"/>
+					<input type="file" name="picture" accept="image/*"/>
 				</td>
 			</tr>
 			<tr>

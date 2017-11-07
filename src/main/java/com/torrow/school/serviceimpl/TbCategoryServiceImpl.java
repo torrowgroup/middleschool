@@ -95,7 +95,7 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 	public void getCategory(Integer rId,Model model){
 		List<TbCategory> category = this.selectAll();
 		List<TbCategory> generals = new ArrayList<TbCategory>();//概括类
-		List<TbCategory> schoolNews = new ArrayList<TbCategory>();//校园新闻
+		List<TbCategory> schoolNews = new ArrayList<TbCategory>();//校园新闻包括上传类里面的学生管理和教师管理
 		List<TbCategory> educations = new ArrayList<TbCategory>();//教育教研处 教研组
 //		List<TbCategory> generals = new ArrayList<TbCategory>();
 //		log.info("rId : "+rId+" category:"+category);

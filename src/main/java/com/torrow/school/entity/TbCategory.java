@@ -22,7 +22,7 @@ public class TbCategory implements Serializable {
 	 * 图片（轮播、校徽等）10,资源下载 11
 	 */
     private Integer caPid;
-    	
+    
     private String caName;	//类别名称
 
     private String spare;	//备用

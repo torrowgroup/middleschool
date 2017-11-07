@@ -31,7 +31,7 @@
             <a href="#">学校概况</a>
               <ul class="navSecondUl">
                     <li th:each="general,generals:${generals}">
-                    	<a th:href="@{/visitor/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
+                    	<a th:href="@{/visitorGN/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
                     </li>
               </ul>
         </li>
@@ -39,7 +39,7 @@
             <a href="#">校园新闻</a>
              <ul class="navSecondUl">
                     <li th:each="news,newsStart:${schoolNews}">
-                    	<a th:href="@{/visitor/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
+                    	<a th:href="@{/visitorGN/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
                     </li>
              </ul>
         </li>
@@ -47,7 +47,7 @@
             <a href="#">教育教研</a>
                 <ul class="navSecondUl">
                     <li th:each="education,educations:${educations}">
-                    	<a th:href="@{/visitor/viewNews?(gName= ${education.caName})}" th:text="${education.caName}">学校概况</a>
+                    	<a th:href="@{/visitorGN/viewNews?(gName= ${education.caName})}" th:text="${education.caName}">学校概况</a>
                		</li>
                 </ul>
         </li>
@@ -88,12 +88,12 @@
             <h3>学校概括</h3>
             <ul class="schoolcenter">
                 <li th:each="general,generals:${generals}">
-                  	<a th:href="@{/visitor/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
+                  	<a th:href="@{/visitorGN/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
                 </li>
             </ul>
         </div>
         <div class="schollright">
-            <div class="location"><a th:href="@{/index.html}">首页</a>.<a th:href="@{/visitor/viewGeneral?(gId= ${useCategory.caId})}" th:text="${useCategory.caName}">校园风光</a></div>
+            <div class="location"><a th:href="@{/index.html}">首页</a>.<a th:href="@{/visitorGN/viewGeneral?(gId= ${useCategory.caId})}" th:text="${useCategory.caName}">校园风光</a></div>
             <div th:if="${resource.reContent}==null">
             	<h3 class="titlesc">没有图片</h3>
             </div>
