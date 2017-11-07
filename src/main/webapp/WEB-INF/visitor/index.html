@@ -280,35 +280,12 @@
                                 <span>小的蝴蝶飞来飞去。野花遍地是：杂样儿，有名字的，没名字的，散在</span>
                             </a>
                         </li> 
-                         <li>
-                            <a href="#">
-                                <img th:src="@{/static/images/visitor/mc2.jpg}" alt="">
-                                <span>吹面不寒杨柳风</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img th:src="@{/static/images/visitor/mc3.jpg}" alt="">
-                                <span>雨是最寻常的，一下就是三两天。可别恼。看，像牛牦，像花针，像细</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img th:src="@{/static/images/visitor/mc4.jpg}" alt="">
-                                <span>雨是最寻常的，一下就是三两天。可别恼。看，像牛牦，像花针，像细</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img th:src="@{/static/images/visitor/mc5.jpg}" alt="">
-                                <span>雨是最寻常的，一下就是三两天。可别恼。看，像牛牦，像花针，像细</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img th:src="@{/static/images/visitor/mc6.jpg}" alt="">
-                                <span>雨是最寻常的，一下就是三两天。可别恼。看，像牛牦，像花针，像细</span>
-                            </a>
+                        <li th:each="new,newStart:${sNews}">
+                        	<a href="#">
+<!--                         		<img th:src="@{/static/uploadimg/{picture}(picture=${new.reContent})}" alt="暂无图片"> -->
+                        		<img th:src="@{/static/images/visitor/mc1.jpg}" alt="">
+<!--                         		<span th:text="${new.reTitle}">新闻标题</span>	 -->
+                        	</a>
                         </li>
                     </ul>
                     <ul class="scrollUl2"></ul>

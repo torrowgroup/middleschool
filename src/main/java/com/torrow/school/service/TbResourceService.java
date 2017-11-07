@@ -4,12 +4,17 @@ import com.torrow.school.entity.TbResource;
 import com.torrow.school.util.PageBean;
 import java.util.List;
 
+import org.springframework.ui.Model;
+
 public interface TbResourceService {
     //张金高
     //得到所有资源类
     List<TbResource> selectAll();
     //得到单条资源类，目前用于概括类
     TbResource selectOne(Integer gId);
+    //得到8条新闻，8条公告等
+    void getResource(List<TbCategory> categoryList, Model model);
+    
 
     //为了查看一条信息
     TbResource selectByPrimaryKey(Integer id);
@@ -27,4 +32,5 @@ public interface TbResourceService {
     int insert(TbResource record);
     //根据caId来删除
     int deleteByCaId(Integer caId);
+	
 }

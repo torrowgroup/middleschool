@@ -35,7 +35,7 @@ public class VisitorGeneralController extends BaseController {
 	 */
 	@RequestMapping("viewGeneral")
 	public ModelAndView viewGeneral(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,Integer gId,Model model) {
-		categoryService.getCategory(gId,model);//将学校概括等封装进model
+		categoryService.getCategory(gId,model);//将学校概括等菜单项封装进model，以及用户选择的功能项
 		TbCategory category = categoryService.selectByPrimaryKey(gId);
 		if(category.getCaPid()==7){	 //查看校园风光时调用
 			PageBean<TbResource> resourceList = resourceService.findingByPaging(currentPage, category,6);
@@ -61,9 +61,8 @@ public class VisitorGeneralController extends BaseController {
 		TbCategory record = new TbCategory();
 		record.setCaId(nId);
 		PageBean<TbResource> resourceLists = resourceService.findingByPaging(currentPage, record,2);
-		categoryService.getCategory(nId,model);//将概括，新闻等封装进model，供下拉菜单使用
+		categoryService.getCategory(nId,model);//将概括，新闻等封装进model，供下拉菜单使用，以及用户选择的功能项
 		model.addAttribute("news", resourceLists);
-//		model.addAttribute("nId", nId);	//将被选中的功能项放进model，以便前台确定被选中的项
 		return new ModelAndView("visitor/schoolnews");
 	}
 	
@@ -77,8 +76,7 @@ public class VisitorGeneralController extends BaseController {
 	public ModelAndView viewsDetails(Integer pId,Integer nId,Model model) {
 		TbResource resource = resourceService.selectByPrimaryKey(pId);
 		model.addAttribute("resource", resource);//将图片放进model
-		categoryService.getCategory(nId,model);//将概括，新闻等封装进model，供下拉菜单使用
-		model.addAttribute("nId", nId);	//将被选中的功能项放进model，以便前台确定被选中的项
+		categoryService.getCategory(nId,model);//将概括，新闻等封装进model，供下拉菜单使用，以及用户选择的功能项
 		return new ModelAndView("visitor/viewdetails");
 	}
 	
@@ -92,8 +90,7 @@ public class VisitorGeneralController extends BaseController {
 	public ModelAndView newDetails(Integer rId,Integer nId,Model model){
 		TbResource resource = resourceService.selectByPrimaryKey(rId);
 		model.addAttribute("resource", resource);
-		categoryService.getCategory(nId,model);//将概括，新闻等封装进model，供下拉菜单使用
-		model.addAttribute("nId", nId);	//将被选中的功能项放进model，以便前台确定被选中的项
+		categoryService.getCategory(nId,model);//将概括，新闻等封装进model，供下拉菜单使用，以及用户选择的功能项
 		return new ModelAndView("visitor/newdetails");
 	}
 }
