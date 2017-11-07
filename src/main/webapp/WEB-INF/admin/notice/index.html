@@ -7,10 +7,10 @@
 </head>
 <body>
 <div th:text="${message}"></div>
-<!-- <details>
-		<summary>添加通知</summary>
-		<a th:href="@{/news/addNoticeJumping}" target="mainIframe">添加学校新闻类</a>
-</details>	 -->
+<details>
+		<summary>私发通知</summary>
+		<a th:href="@{/news/sendPrivateNoticeJumping}" target="mainIframe">私发通知</a>
+</details>	
 <details>
 		<summary>通知公告管理</summary>
 		<div th:each="category,categoryStart:${categoryList}">

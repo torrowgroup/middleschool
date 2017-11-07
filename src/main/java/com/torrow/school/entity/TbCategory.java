@@ -19,7 +19,7 @@ public class TbCategory implements Serializable {
 
 	/* 类别类父id，概括类1，新闻类2，机构部(语文教研组，数学教研组)3，
 	 * 管理员4，教师5,通知公告6,校园风光类7,底部链接8,上传类(学生管理和教师成长)9,
-	 * 图片（轮播、校徽等）10,
+	 * 图片（轮播、校徽等）10,资源下载11,校园文学12,
 	 */
     private Integer caPid;
     	
