@@ -45,12 +45,9 @@
         <li class="navLi">
             <a href="#">教育教研</a>
             <ul class="navSecondUl">
-                <li><a href="#">语文教研</a></li>
-                <li><a href="#">数学教研</a></li>
-                <li><a href="#">外语教研</a></li>
-                <li><a href="#">理化生教研</a></li>
-                <li><a href="#">政史地教研</a></li>
-                <li><a href="#">音体美教研</a></li>
+                 <li th:each="education,educations:${educations}">
+                    	<a th:href="@{/visitorGN/viewNews?(gName= ${education.caName})}" th:text="${education.caName}">学校概况</a>
+               	</li>
             </ul>
         </li>
         <li class="navLi">
@@ -88,10 +85,8 @@
         <div class="schollleft">
              <h3>校园新闻</h3>
             <ul class="schoolcenter">
-<!--                 <li><a href="#" class="active1">校园新闻</a></li> -->
-				<li><a id="ad" href="#" th:name="111">jdsoajn</a></li>
                	<li th:each="news,newsStart:${schoolNews}">
-                    	<a class="newA" th:name="${news.caId}" th:href="@{/visitorGN/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
+                    	<a th:name="${news.caId}" th:href="@{/visitorGN/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
                 </li>
             </ul>
         </div>
@@ -138,6 +133,8 @@
 	window.onload = function (){
 		var resource = /*[[${resource}]]*/ null;
 		$('#reContent').html(resource.reContent);
+		var nId = /*[[${useCategory.caId}]]*/;
+		$("a[name="+nId+"]").addClass("active1");
 	}
 </script>
 </body>

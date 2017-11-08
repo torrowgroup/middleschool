@@ -105,7 +105,7 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 			}
 			if(category.get(i).getCaPid()==1||category.get(i).getCaPid()==7){
 				generals.add(category.get(i));
-			} else if(category.get(i).getCaPid()==2) {
+			} else if(category.get(i).getCaPid()==2||category.get(i).getCaPid()==9) {
 				schoolNews.add(category.get(i));
 			} else if(category.get(i).getCaPid()==3){
 				educations.add(category.get(i));

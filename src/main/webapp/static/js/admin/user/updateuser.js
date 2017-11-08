@@ -1,16 +1,18 @@
 /**
- * 
+ * 修改用户和修改个人资料
  */
 	// 隐藏显示简介和成就富文本
 	$(function() {
 		$("#introShow").click(function() {
 			$("#intro").show();
+			$("#achieve").hide();
 		})
 		$("#introHide").click(function() {
 			$("#intro").hide();
 		})
 		$("#achieveShow").click(function() {
 			$("#achieve").show();
+			$("#intro").hide();
 		})
 		$("#achieveHide").click(function() {
 			$("#achieve").hide();

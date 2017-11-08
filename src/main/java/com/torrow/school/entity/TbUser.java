@@ -24,7 +24,7 @@ public class TbUser implements Serializable {
 	public TbUser() {
 		super();
 	}
-
+	
 	public TbUser( String usEmail, String usPassword, String usName, String usSex, Integer caId,
 			String caName, String usPhone, String usPicture, String usIntroduction, String usAchievements,
 			String spare) {
