@@ -14,7 +14,7 @@
 	<form th:action="@{/news/updateSchoolNews}" onSubmit="return modifyContent();"
 		method="post" enctype="multipart/form-data">
 		<input type="hidden" name="reId" th:value="${tbResource.reId}">
-		<input type="text" name="reTitle" th:value="${tbResource.reTitle}">
+		<input type="text" name="reTitle" th:value="${tbResource.reTitle}" required="required">
 		<input type="text" name="reIssuingdate" th:value="${tbResource.reIssuingdate}" readonly="readonly">
 		<textarea style="display: none;" name="reContent" id="a"></textarea>
 		<div id="introEditor" style="border: 1px solid #ccc;"

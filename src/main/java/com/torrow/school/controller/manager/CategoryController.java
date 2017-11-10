@@ -31,7 +31,6 @@ public class CategoryController extends BaseController {
 	 */
 	@RequestMapping("categoryjumping")
 	public String jumping() {
-		log.info("跳转");
 		return "admin/category/addcategory";
 	}
 
@@ -117,14 +116,14 @@ public class CategoryController extends BaseController {
 	public String deleteCategory(Model model, Integer id) {
 		int currentPage = (int) session.getAttribute("currentPage");
 		categoryService.deleteByPrimaryKey(id);
+		TbCategory tbCategory = categoryService.selectByPrimaryKey(id);
 		TbResource tb = resourceService.selectByCaId(id);
 		if (null!=tb) {
 			resourceService.deleteByCaId(id);
 		}
 		TbUser user = userService.selectByCaId(id);
-		if (null!=user) {
-			user.setCaId(0);
-			userService.updateByPrimaryKey(user);
+		if (null!=user&&tbCategory.getCaPid()!=4) {
+			userService.deleteByCaId(id);
 		}
 		model.addAttribute("message", "删除成功");
 		return this.manageCategory(currentPage, model);

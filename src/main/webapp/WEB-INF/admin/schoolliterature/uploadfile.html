@@ -11,18 +11,18 @@
 <div th:text="${message}"></div>
 <form th:action="@{/news/upload}" method="post" enctype="multipart/form-data">
 	<table>
-		<tr>
+		<!-- <tr>
 			<td>上传名称</td>
-			<td><input type="text" name="reTitle"></td>
-		</tr>
+			<td><input type="text" name="reTitle" required="required"></td>
+		</tr> -->
 		<tr>
 			<td>选择文件:</td>
-			<td><input type="file" name="picture" width="120px"></td>  
+			<td><input type="file" name="file" width="120px" required="required"></td>  
 		</tr>
 		<tr>
 			<td>类别名称</td>
 			<td><select name="caId">
-						<option th:each="category,categoryStart:${uploadList}" th:text="${category.caName}" th:value="${category.caId}" />
+						<option th:each="category,categoryStart:${categoryList}" th:text="${category.caName}" th:value="${category.caId}" />
 				 </select></td>
 		</tr>
 		<tr>

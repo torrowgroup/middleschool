@@ -16,7 +16,7 @@
 		method="post" enctype="multipart/form-data">
 		<input type="hidden" name="reId" th:value="${tbResource.reId}">
 		<div  class="inner">
-			<div class="top"><p><input type="text" name="reTitle" th:value="${tbResource.reTitle}"></p></div>
+			<div class="top"><p><input type="text" name="reTitle" th:value="${tbResource.reTitle}" required="required"></p></div>
 			<div class="ziti">
 				<input type="text" name="reIssuingdate" th:value="${tbResource.reIssuingdate}" readonly="readonly">
 				【字体：<a href="javascript:doZoom(16)">大</a> 

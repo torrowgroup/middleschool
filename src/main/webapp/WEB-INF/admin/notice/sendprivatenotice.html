@@ -15,7 +15,7 @@
 		<table>
 			<tr>
 				<td>标题</td>
-				<td><input type="text" name="reTitle"></td>
+				<td><input type="text" name="reTitle" required="required" maxlength="25"></td>
 			</tr>
 			<tr>
 				<td>内容</td>
@@ -29,7 +29,7 @@
 					</div>
 			</tr>
 			<tr>
-				<td>名称</td>
+				<td>对象</td>
 				<td>
 					<select name="caId">
 						<option th:each="category,categoryStart:${categoryList}" th:text="${category.caName}" th:value="${category.caId}" />

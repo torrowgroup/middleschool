@@ -10,7 +10,11 @@
 <div th:text="${message}"></div>
 	<form th:action="@{/link/addLink}" method="post">
 		<table>
-
+			<tr>
+				<td><input type="hidden" name="caName" th:value="${link.caName}">
+					<input type="hidden" name="caId" th:value="${link.caId}">
+				</td>
+			</tr>
 			<tr>
 				<td>链接名称</td>
 				<td><input type="text" name="reTitle"></td>
