@@ -32,7 +32,7 @@ public class LoginController extends BaseController {
 		TbUser tbUser=userService.login(usEmail,usPassword);
 		if(tbUser!=null) {
 			model.addAttribute("msg", "登录成功");
-			session.setAttribute("user",tbUser);
+			session.setAttribute("manager",tbUser);
 			int Pid=1;//概括类的
 			List<TbCategory> list=categoryService.queryByPid(Pid);
 			int id=7;//校园风光

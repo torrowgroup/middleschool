@@ -21,7 +21,6 @@
                 <tr th:each="news,newsStart:${pagemsg.lists}">
                 	<td th:text="${news.reTitle}">${news.reTitle}</td>
                 	<td><a th:href="@{/general/deleteScenery?(id=${news.reId})}">delete</a></td>
-                	<td><a th:href="@{/news/down?(id=${news.reId})}">下载</a></td>
                 </tr>
         </table>    
     </div>

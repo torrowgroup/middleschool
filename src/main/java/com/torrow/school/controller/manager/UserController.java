@@ -1,18 +1,20 @@
 package com.torrow.school.controller.manager;
 
 import java.io.File;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
@@ -106,7 +108,7 @@ public class UserController extends BaseController {
 	public String updateUser(TbUser user,int page,MultipartFile picture,Model model) throws Exception{
 		TbCategory category = categoryService.selectByPrimaryKey(user.getCaId());
 		user.setCaName(category.getCaName());//得到用户身份名称
-		if(!picture.getOriginalFilename().equals("")){//如果用户上传了图片，则换掉原来的图片 org.springframework.web.multipart.commons.CommonsMultipartFile@420199a9
+		if(!picture.getOriginalFilename().equals("")){//如果用户上传了图片，则换掉原来的图片
 			TbUser userData = userService.selectById(user.getUsId());
 			String path = session.getServletContext().getRealPath("/static/uploadimg");
 			File file = new File(path+"/"+userData.getUsPicture());
@@ -161,16 +163,52 @@ public class UserController extends BaseController {
 	 * @return
 	 *  修改个人资料
 	 */
-	public String toUpdatePassword(){
-		return "admin/user/updateme";
+	@RequestMapping("toUpdateMe")
+	public ModelAndView toUpdateMe(){
+		return new ModelAndView("admin/user/updateme");
+	}
+
+	/**
+	 * @param user 以对象得到修改的值
+	 * @param picture 得到用户替换的图片
+	 * @param model 
+	 * @return	修改个人资料
+	 * @throws Exception 
+	 */
+	@RequestMapping("updateMe")
+	public ModelAndView updateMe(TbUser user,MultipartFile picture,Model model) throws Exception{
+		TbUser me = (TbUser)session.getAttribute("manager");
+		user.setUsId(me.getUsId());//封装前台此界面不能修改的项
+		user.setCaId(me.getCaId());
+		user.setCaName(me.getCaName());
+		user.setUsPassword(me.getUsPassword());
+		user.setUsPicture(me.getUsPicture());
+		if(!picture.getOriginalFilename().equals("")){//如果用户上传了图片，则换掉原来的图片
+			String path = session.getServletContext().getRealPath("/static/uploadimg");
+			File file = new File(path+"/"+me.getUsPicture());
+			if(file.exists()){	//删掉不用的图片
+				file.delete();
+			}
+			String fileName = userService.uploadPicture(picture, path);
+			user.setUsPicture(fileName);
+		}
+		int boo = userService.updateByPrimaryKey(user);
+		if(boo==1){
+			model.addAttribute("message", "修改完成");
+			session.setAttribute("manager", user);
+		} else {
+			model.addAttribute("message", "修改失败");
+		}
+		return new ModelAndView("admin/user/updateme");
 	}
 	
 	/**
 	 * @return
 	 * 修改个人密码
 	 */
-	public String toUpdatePsw(){
-		return "admin/user/updateme";
+	@RequestMapping("toUpdatePsw")
+	public ModelAndView toUpdatePsw(){
+		return new ModelAndView("admin/user/updateme");
 	}
 	
 	

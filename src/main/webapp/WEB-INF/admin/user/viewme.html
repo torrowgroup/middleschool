@@ -8,50 +8,66 @@
 <body>
 	<table>
 			<tr>
-				<td><a th:href="@{/user/toUpdatePsw}">修改密码</a></td>
-			</tr>
-			<tr>
 				<td>邮箱</td>
-				<td th:text="${session.user.usEmail}"></td>
+				<td th:text="${session.manager.usEmail}"></td>
 			</tr>
 			<tr>
 				<td>姓名</td>
-				<td th:text="${session.user.usName}"></td>
+				<td th:text="${session.manager.usName}"></td>
 			</tr>
 			<tr>
 				<td>性别</td>
-				<td th:text="${session.user.usSex=='男'}"></td>
+				<td th:text="${session.manager.usSex=='男'}"></td>
 			</tr>
 			<tr>
 				<td>身份</td>
-				<td th:text="${session.user.caName}"></td>
+				<td th:text="${session.manager.caName}"></td>
 			</tr>
 			<tr>
 				<td>联系方式</td>
-				<td th:text="${session.user.usPhone}"></td>
+				<td th:text="${session.manager.usPhone}"></td>
 			</tr>
 			<tr>
 				<td>照片</td>
 				<td>
-					<input type="hidden" name="usPicture" th:value="${session.user.usPicture}"/>
 					<img alt="没有照片" width="200px;" height="50px;"
-					th:src="@{/static/uploadimg/{picture}(picture=${session.user.usPicture})}" />
-					<input type="file" name="picture"/>
+					th:src="@{/static/uploadimg/{picture}(picture=${session.manager.usPicture})}" />
 				</td>
 			</tr>
 			<tr>
 				<td>简介</td>
-				<td><a href="#" id="introShow">查看简介</a></td>
+				<td><a href="#" id="introShow" th:onclick="'showIntro(this)'">查看简介</a></td>
 			</tr>
 			<tr>
 				<td>成就</td>
-				<td><a href="#" id="achieveShow">查看成就</a></td>
+				<td><a href="#" id="achieveShow" th:onclick="'showIntro(this)'">查看成就</a></td>
 			</tr>
 			<tr>
-				<td>
-					<a href="#">修改基本信息</a>
-				</td>
+				<td><a th:href="@{/user/toUpdateMe}">修改基本信息</a></td>
+				<td><a th:href="@{/user/toUpdatePsw}">修改密码</a></td>
 			</tr>
 		</table>
+		<div id="viewDetails" style="display: none;">
+			<div id="introAchieve"></div>
+			<button id="hideDetails">隐藏</button>
+		</div>
+<script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+<script th:inline="javascript">
+	function showIntro(obj){
+		if(obj.id=='introShow'){
+			obj = /*[[${session.manager.usIntroduction}]]*/;
+		} else {
+			obj = /*[[${session.manager.usAchievements}]]*/;
+		}
+		$('#viewDetails').show();
+		if(obj==null||obj==""){
+			obj="无";
+		}
+		$('#introAchieve').html(obj);
+	}
+	$('#hideDetails').click(function(){
+		$('#viewDetails').hide();
+	});
+</script>
 </body>
 </html>

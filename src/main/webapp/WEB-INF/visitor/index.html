@@ -32,7 +32,7 @@
                 <a href="#">学校概况</a>
                 <ul class="navSecondUl">
                     <li th:each="general,generals:${generals}">
-                    	<a th:href="@{/visitor/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
+                    	<a th:href="@{/visitorGN/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
                     </li>
                 </ul>
             </li>
@@ -40,7 +40,7 @@
                 <a href="#">校园新闻</a>
                 <ul class="navSecondUl">
                     <li th:each="news,newsStart:${schoolNews}">
-                    	<a th:href="@{/visitor/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
+                    	<a th:href="@{/visitorGN/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
                     </li>
                 </ul>
             </li>
@@ -48,7 +48,7 @@
                 <a href="#">教育教研</a>
                 <ul class="navSecondUl">
                     <li th:each="education,educations:${educations}">
-                    	<a th:href="@{/visitor/viewNews?(gName= ${education.caName})}" th:text="${education.caName}">学校概况</a>
+                    	<a th:href="@{/visitorGN/viewNews?(gName= ${education.caName})}" th:text="${education.caName}">学校概况</a>
                		</li>
                 </ul>
             </li>
@@ -107,19 +107,10 @@
            data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
     </div>
     <div class="notice">
-        <div class="winBox">
+        <div class="winBox" id="noticeDiv">
             <span>通知：</span>
             <ul class="noticeUl">
-                <li>雨是最寻常的，一下就是三两天。可别恼</li>
-                <li>树叶却绿得发亮，小草也青得</li>
-                <li>地上的孩子也多了</li>
-                <li>天像小姑娘，花枝招展的笑着走着</li>
-                <li>擞抖擞精神，各做各的一份事儿去</li>
-                <li>雨是最寻常的，一下就是三两天。可别恼</li>
-                <li>树叶却绿得发亮，小草也青得</li>
-                <li>地上的孩子也多了</li>
-                <li>天像小姑娘，花枝招展的笑着走着</li>
-                <li>擞抖擞精神，各做各的一份事儿去</li>
+               <li id="noticeFirst"></li>
             </ul>
             <ul class="noticeUl1"></ul>
         </div>
@@ -170,40 +161,12 @@
                     <div class="row mainBottom">
                         <div class="col-sm-6 col-xs-12">
                             <div class="mainBheader changeColor">
-                                <a href="">公告 |notice<span class="pull-right">&gt; 更多</span></a>
+                                <a th:href="@{/visitorNE/viewNotices}">公告 |notice<span class="pull-right">&gt; 更多</span></a>
                             </div>
                             <ul class="mainBbody">
-                                <li>
-                                    <a href="">还有各种花的香，都在微微润湿青得逼你的眼</a>
-                                    <span>2017-10-12</span>
-                                </li>
-                                <li>
-                                    <a href="">顶上全笼着一层薄烟。树叶却绿得发亮，小草也青得逼你的眼</a>
-                                    <span>2017-10-20</span>
-                                </li>
-                                <li>
-                                    <a href="">顶上全笼着一层薄烟。树叶却绿得发亮，小草也青得逼你的眼</a>
-                                    <span>2017-10-20</span>
-                                </li>
-                                <li>
-                                    <a href="">顶上全笼着一层薄烟。树叶却绿得发亮，小草也青得逼你的眼</a>
-                                    <span>2017-10-20</span>
-                                </li>
-                                <li>
-                                    <a href="">顶上全笼着一层薄烟。树叶却绿得发亮，小草也青得逼你的眼</a>
-                                    <span>2017-10-20</span>
-                                </li>
-                                <li>
-                                    <a href="">顶上全笼着一层薄烟。树叶却绿得发亮，小草也青得逼你的眼</a>
-                                    <span>2017-10-20</span>
-                                </li>
-                                <li>
-                                    <a href="">顶上全笼着一层薄烟。树叶却绿得发亮，小草也青得逼你的眼</a>
-                                    <span>2017-10-20</span>
-                                </li>
-                                <li>
-                                    <a href="">顶上全笼着一层薄烟。树叶却绿得发亮，小草也青得逼你的眼</a>
-                                    <span>2017-10-20</span>
+                                <li th:each="notice,noticeStart:${notices}">
+                                    <a href="" th:text="${notice.reTitle}">公告</a>
+                                    <span th:text="${notice.reIssuingdate}">发布时间</span>
                                 </li>
                             </ul>
                         </div>
@@ -319,5 +282,13 @@
             </div>
         </div>
     </div>
+<script th:inline="javascript">
+	var notice = /*[[${notices}]]*/;
+	if(notice.size!=0){	//如果有通知，显示最新一条，没有就隐藏通知栏
+		$('#noticeFirst').html(notice[0].reContent);
+	} else {
+		$('#noticeDiv').hide();
+	}
+</script>
 </body>
 </html>

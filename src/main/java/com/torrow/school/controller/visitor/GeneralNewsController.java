@@ -16,11 +16,11 @@ import com.torrow.school.util.PageBean;
  *
  * 2017年10月27日上午11:43:45
  * 
- * 游客浏览概括类
+ * 游客浏览概括类新闻类控制层
  */
 @Controller
-@RequestMapping("/visitor")
-public class VisitorGeneralController extends BaseController {
+@RequestMapping("/visitorGN")
+public class GeneralNewsController extends BaseController {
 
 	/**
 	 * 
@@ -60,7 +60,7 @@ public class VisitorGeneralController extends BaseController {
 			Model model,Integer nId) {
 		TbCategory record = new TbCategory();
 		record.setCaId(nId);
-		PageBean<TbResource> resourceLists = resourceService.findingByPaging(currentPage, record,2);
+		PageBean<TbResource> resourceLists = resourceService.findingByPaging(currentPage, record,10);
 		categoryService.getCategory(nId,model);//将概括，新闻等封装进model，供下拉菜单使用，以及用户选择的功能项
 		model.addAttribute("news", resourceLists);
 		return new ModelAndView("visitor/schoolnews");

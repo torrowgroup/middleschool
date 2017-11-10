@@ -19,9 +19,17 @@
 		<ul class="a"><!-- class="nav nav-pills" -->
 			<li><a href="#">简介</a></li>
 			<li><a href="#">消息<span class="badge">3</span></a></li>
-			<li><a href="login.html"><span class="glyphicon glyphicon-off"></span>退出</a></li>
-			<li><div class="le_1"><img src="" alt=""></div></li>
-									
+			<li><a th:href="@{/user/loginOut}" target="ie">
+					<span class="glyphicon glyphicon-off"></span>退出
+				</a>
+			</li>
+			<li>
+				<div class="le_1">
+					<a th:href="@{/user/viewMe}" target="ie">
+						<img th:src="@{/static/uploadimg/{picture}(picture=${session.manager.usPicture})}" alt="没有图片">
+					</a>
+				</div>
+			</li>
 		</ul>
 		</div>
 	</div><!-- 头部结束 -->

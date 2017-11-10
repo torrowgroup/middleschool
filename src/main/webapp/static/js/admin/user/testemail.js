@@ -17,11 +17,11 @@
 					if(data.msg==1){
 						$("#ok").show();
 						$("#wrong").hide();
-						$("#add").attr("disabled", false);
+						$("#sure").attr("disabled", false);
 					} else {
 						$("#wrong").show();
 						$("#ok").hide();
-						$("#add").attr("disabled", true);
+						$("#sure").attr("disabled", true);
 					}
 				}
 			});

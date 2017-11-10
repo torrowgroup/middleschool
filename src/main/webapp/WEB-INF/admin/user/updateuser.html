@@ -4,8 +4,7 @@
 
 <head>
 <title>Home</title>
-<link rel="stylesheet" type="text/css"
-	th:href="@{/static/dist/css/wangEditor.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/dist/css/wangEditor.min.css}">
 </head>
 <body onload="test()">
 	<form th:action="@{/user/updateUser}" onsubmit="modifyContent()" method="post" enctype="multipart/form-data">
@@ -17,7 +16,8 @@
 				<td>
 					<input type="email" name="usEmail" id="usEmail"   th:oninput="'testEmail()'"
 					required="required"	th:value="${user.usEmail}" maxlength="25">
-					<span id="testEmail"></span>
+					<span id="ok" class="glyphicon glyphicon-ok" style="display: none;"></span>
+					<span id="wrong" class="glyphicon glyphicon-remove" style="display: none;"></span>
 				</td>
 			</tr>
 			<tr>
@@ -53,9 +53,14 @@
 				<td>照片</td>
 				<td>
 					<input type="hidden" name="usPicture" th:value="${user.usPicture}"/>
-					<img alt="没有照片" width="200px;" height="50px;"
-					th:src="@{/static/uploadimg/{picture}(picture=${user.usPicture})}" />
-					<input type="file" name="picture"/>
+					<div class="col-sm-9 big-photo">
+							<div id="preview">
+								<img id="imghead" border="0" th:src="@{/static/uploadimg/{picture}(picture=${user.usPicture})}"
+									width="90" height="90" onclick="$('#previewImg').click();">
+							</div>
+							<input type="file" name="picture" onchange="previewImage(this)"
+								style="display: none;" id="previewImg" accept="image/*">
+						</div>
 				</td>
 			</tr>
 			<tr>
@@ -84,15 +89,16 @@
 				<a href="#" id="achieveShow">查看/修改成就</a></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="提交"/></td>
+				<td><input type="submit" id="sure" value="提交"/></td>
 			</tr>
 		</table>
 	</form>
 
 <script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/user/updateuser.js}" ></script>
-<script type="text/javascript" th:src="@{/static/js/user/testemail.js}" ></script>
+<script type="text/javascript" th:src="@{/static/js/admin/user/updateuser.js}" ></script>
+<script type="text/javascript" th:src="@{/static/js/upload.js}" ></script>
+<script type="text/javascript" th:src="@{/static/js/admin/user/testemail.js}" ></script>
 <script th:inline="javascript">
 /*<![CDATA[*/
 	window.onload=function(){

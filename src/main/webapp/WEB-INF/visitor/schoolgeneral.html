@@ -30,7 +30,7 @@
             <a href="#">学校概况</a>
             <ul class="navSecondUl">
                 <li th:each="general,generals:${generals}">
-                  <a th:href="@{/visitor/viewGeneral?(gId= ${general.caId})}"   th:text="${general.caName}">学校概况</a>
+                  <a th:href="@{/visitorGN/viewGeneral?(gId= ${general.caId})}"   th:text="${general.caName}">学校概况</a>
                 </li>
             </ul>
         </li>
@@ -38,7 +38,7 @@
             <a href="#">校园新闻</a>
             <ul class="navSecondUl">
                <li th:each="news,newStart:${schoolNews}">
-                    <a th:href="@{/visitor/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
+                    <a th:href="@{/visitorGN/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
                </li>
             </ul>
         </li>
@@ -46,7 +46,7 @@
             <a href="#">教育教研</a>
             <ul class="navSecondUl">
                 <li th:each="education,educations:${educations}">
-                  	<a th:href="@{/visitor/viewNews?(gName= ${education.caName})}" th:text="${education.caName}">学校概况</a>
+                  	<a th:href="@{/visitorGN/viewNews?(gName= ${education.caName})}" th:text="${education.caName}">学校概况</a>
                	</li>
             </ul>
         </li>
@@ -86,7 +86,7 @@
             <h3>学校概况</h3>
             <ul class="schoolcenter">
                 <li th:each="general,generals:${generals}">
-                  <a th:name="${general.caId}" th:href="@{/visitor/viewGeneral?(gId= ${general.caId})}"   th:text="${general.caName}">学校概况</a>
+                  <a th:name="${general.caId}" th:href="@{/visitorGN/viewGeneral?(gId= ${general.caId})}"   th:text="${general.caName}">学校概况</a>
                 </li>
             </ul>
         </div>
@@ -130,10 +130,10 @@
     </div>
 </div>
 <script th:inline="javascript">
-	window.onload = function (){
+// 	window.onload = function (){
 		var resource = /*[[${resource}]]*/ null;
 		$('#reContent').html(resource.reContent);
-	}
+// 	}
 	var nId = /*[[${useCategory.caId}]]*/;
 	$("a[name="+nId+"]").addClass("active1");
 </script>

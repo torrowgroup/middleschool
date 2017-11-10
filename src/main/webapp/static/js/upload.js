@@ -15,7 +15,6 @@
                 var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
                 img.width  =  rect.width;
                 img.height =  rect.height;
-//                 img.style.marginLeft = rect.left+'px';
                 img.style.marginTop = rect.top+'px';
               }
               var reader = new FileReader();

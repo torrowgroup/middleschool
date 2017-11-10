@@ -31,7 +31,7 @@
             <a href="#">学校概况</a>
               <ul class="navSecondUl">
                     <li th:each="general,generals:${generals}">
-                    	<a th:href="@{/visitor/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
+                    	<a th:href="@{/visitorGN/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
                     </li>
               </ul>
         </li>
@@ -39,7 +39,7 @@
             <a href="#">校园新闻</a>
              <ul class="navSecondUl">
                     <li th:each="news,newsStart:${schoolNews}">
-                    	<a th:href="@{/visitor/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
+                    	<a th:href="@{/visitorGN/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
                     </li>
              </ul>
         </li>
@@ -47,7 +47,7 @@
             <a href="#">教育教研</a>
                 <ul class="navSecondUl">
                     <li th:each="education,educations:${educations}">
-                    	<a th:href="@{/visitor/viewNews?(gName= ${education.caName})}" th:text="${education.caName}">学校概况</a>
+                    	<a th:href="@{/visitorGN/viewNews?(gName= ${education.caName})}" th:text="${education.caName}">学校概况</a>
                		</li>
                 </ul>
         </li>
@@ -87,7 +87,7 @@
             <h3>校园新闻</h3>
             <ul class="schoolcenter">
                	<li th:each="news,newsStart:${schoolNews}">
-                    	<a class="newA"  th:name="${news.caId}" th:href="@{/visitor/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
+                    	<a th:name="${news.caId}" th:href="@{/visitorGN/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
                 </li>
             </ul>
         </div>
@@ -101,7 +101,7 @@
 	            <div class="newscontent">
 	                <ul class="newscontentUl">
 	                 	<li th:each="resource,resoueStart:${news.lists}">
-	                 		<a id="news" th:href="@{/visitor/newDetails?(rId=${resource.reId},nId=${resource.caId})}" th:text="${resource.reTitle}"></a><span th:text="${resource.reIssuingdate}"></span>
+	                 		<a id="news" th:href="@{/visitorGN/newDetails?(rId=${resource.reId},nId=${resource.caId})}" th:text="${resource.reTitle}"></a><span th:text="${resource.reIssuingdate}"></span>
 	                 	</li>
 	                </ul>
 	                <div class="clearfix"></div>
@@ -110,7 +110,7 @@
 	                <ul class="pagingUl">
 	                    <li><a href="">&laquo;</a></li>
 	                    <li th:each="i:${#numbers.sequence(1,news.totalPage)}" th:if="${i > news.currPage-3} and ${i < news.currPage+3}" >
-	                    	<a th:href="@{/visitor/viewNews?(currentPage=${i},nId=${news.lists[0].caId})}" th:text="${i}">#</a>
+	                    	<a th:href="@{/visitorGN/viewNews?(currentPage=${i},nId=${news.lists[0].caId})}" th:text="${i}">#</a>
 	                    </li>
 	                    <li><a href="">&raquo;</a></li>
 	                </ul>
@@ -120,7 +120,7 @@
 	                        <span th:text="${news.currPage}"> <i class="glyphicon glyphicon-chevron-down pull-right" style="line-height: 30px"></i></span>
 	                        <ul class="selectBoxUl">
 	                         	<li th:each="i:${#numbers.sequence(1,news.totalPage)}">
-	                         		<a href="#" th:onclick="'turnPageNew(this);'" th:name="${news.lists[0].caId}" th:text="${i}"></a>
+	                         		<a href="#" th:onclick="'turnPageNew(this);'" th:id="${news.lists[0].caId}" th:text="${i}"></a>
 	                         	</li>
 	                        </ul>
 	                    </div>
@@ -160,7 +160,6 @@
     </div>
 </div>
 <script th:src="@{/static/js/visitor/select.js}"></script>
-<script th:src="@{/static/js/visitor/choosefunction.js}"></script>
 <script th:inline="javascript">
 	var nId = /*[[${useCategory.caId}]]*/;
 	$("a[name="+nId+"]").addClass("active1");

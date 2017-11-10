@@ -10,7 +10,7 @@
 <body>
 	<div class="demo">
 	<div th:text="${message}"></div>
-		<form th:action="@{/user/addUser}" method="post" enctype="multipart/form-data">
+		<form th:action="@{/user/addUser}" method="post" enctype="multipart/form-data" th:onsubmit="'javascript:checkPicture(this);'">
 			<table>
 				<tr height="60px">
 					<td><span>邮箱</span></td>
@@ -47,19 +47,28 @@
 				</tr>
 				<tr height="60px">
 					<td><span>选择图片</span></td>
-					<td><input type="file" name="picture" id="usPicture" required="required"></td>
+					<td>
+						<div class="col-sm-9 big-photo">
+							<div id="preview">
+								<img id="imghead" border="0" src="../static/images/photo_icon.png"
+									width="90" height="90" onclick="$('#previewImg').click();">
+							</div>
+							<input type="file" name="picture" onchange="previewImage(this)"
+								style="display: none;" id="previewImg" accept="image/*">
+						</div>
+					</td>
 				</tr>
 				<tr height="60px">
 					<td colspan="2">
-						<div class="button"><input type="submit" id="add" value="添加" ></div>
+						<div class="button"><input type="submit" id="sure" value="添加" ></div>
 					</td>
-					
 				</tr>
 			</table>
 		</form>
 	</div>
 <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/user/testemail.js}"></script>
-<script type="text/javascript" th:src="@{/static/js/user/adduser.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/admin/user/testemail.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/admin/user/adduser.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/upload.js}"></script>
 </body>
 </html>
