@@ -70,4 +70,9 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 		return this.uploadP(picture, path);
 	}
 
+	@Override
+	public TbUser selectByEmail(String email) {
+		return tbUserDao.selectByEmail(email);
+	}
+
 }

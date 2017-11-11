@@ -14,7 +14,7 @@
 			<table>
 				<tr height="60px">
 					<td><span>邮箱</span></td>
-					<td><input type="email" name="usEmail" id="usEmail" required="required" th:oninput="'javascript:testEmail();'" ></td>
+					<td><input type="email" name="usEmail" id="usEmail" required="required" th:oninput="'javascript:testEmail();'" maxlength="25" ></td>
 					<td>
 						<span id="ok" class="glyphicon glyphicon-ok" style="display: none;"></span>
 						<span id="wrong" class="glyphicon glyphicon-remove" style="display: none;"></span>
@@ -23,19 +23,19 @@
 				<tr height="60px">
 					<td><span>密码</span></td>
 					<td><input type="password" name="usPassword" id="password"
-					required="required"></td>
+					required="required" maxlength="20"></td>
 				</tr>
 				<tr height="60px">
 					<td><span>再次输入</span></td>
-					<td><input type="password" id="again" required="required" th:oninput="'javascript:pswAgain();'"></td>
 					<td>
+						<input type="password" id="again" required="required" th:oninput="'javascript:pswAgain();'">
 						<span id="okAgain" class="glyphicon glyphicon-ok" style="display: none;"></span>
 						<span id="wrongAgain" class="glyphicon glyphicon-remove" style="display: none;"></span>
 					</td>
 				</tr>
 				<tr height="60px">
 					<td><span>姓名</span></td>
-					<td><input type="text" name="usName" required="required"></td>
+					<td><input type="text" name="usName" required="required" maxlength="10"></td>
 				</tr>
 				<tr height="60px">
 					<td><span>身份</span></td>

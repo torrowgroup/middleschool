@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Home</title>
+<title>找回密码</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/css/bootstrap.css}">
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<form th:action="@{/testCode}">
+		<table>
+			<tr>
+				<td>登录邮箱</td>
+				<td><input type="email" name="usEmail" id="usEmail"
+					maxlength="25" placeholder="邮箱"> <span id="message"></span></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="testCode" id="testCode" required
+					maxlength="10" /></td>
+				<td><a href="#" th:onclick="'getTestCode()'" id="getTestCode">获取验证码</a></td>
+			</tr>
+		</table>
+		<table>
+			<tr>
+				<td><span id="message" th:text="${message}"></span></td>
+			</tr>
+			<tr>
+				<td><input type="submit" id="sure" value="下一步" /></td>
+				<td><a th:href="@{/login}"><< 返回登录</a></td>
+			</tr>
+	</table>
+	</form>
+	<script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/static/js/forgetpassword.js}"></script>
+</body>
+</html>
