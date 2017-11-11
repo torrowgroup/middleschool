@@ -69,5 +69,7 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 	public String uploadPicture(MultipartFile picture, String path) throws Exception {
 		return this.uploadP(picture, path);
 	}
+	
+	
 
 }

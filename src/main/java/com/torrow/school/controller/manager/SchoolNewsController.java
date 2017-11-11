@@ -93,6 +93,7 @@ public class SchoolNewsController extends BaseController {
 	@RequestMapping("addSchoolNews")
 	public String addSchoolNews(Model model, TbResource tbResource) {
 		TbResource retitle = resourceService.selectByReTitle(tbResource.getReTitle());
+		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		if(null!=retitle) {
 			model.addAttribute("message", "该名称已存在，添加失败");
 			return this.newsJumping(model);
@@ -100,7 +101,6 @@ public class SchoolNewsController extends BaseController {
 		Date date = new Date();
 		DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd"); //HH表示24小时制；  
         String Date = dFormat.format(date);
-		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		if (null != item) {
 			TbResource record = new TbResource(item.getCaId(), Date, item.getCaName(), tbResource.getReTitle(),
 					tbResource.getReContent());
@@ -112,9 +112,6 @@ public class SchoolNewsController extends BaseController {
 			}
 		} else {
 			model.addAttribute("message", "添加失败,不存在该类别");
-		}
-		if(item.getCaPid()==3||item.getCaPid()==5) {
-			return this.sendPrivateNoticeJumping(model);
 		}
 		if(item.getCaPid()==6) {
 			return this.addNoticeJumping(model);
@@ -227,9 +224,9 @@ public class SchoolNewsController extends BaseController {
 		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		if (null != item) {
 			String path = session.getServletContext().getRealPath("/static/uploadimg");
-			String reContent = userService.uploadPicture(file, path);
+			String reContent = resourceService.uploadFile(file, path);
 			TbResource resource = resourceService.selectByReContent(reContent);
-			if(null==resource) {
+			if(null!=resource) {
 				model.addAttribute("message","该文件已存在,上传失败");
 				return this.uploadJumpping(model);
 			}
@@ -265,7 +262,7 @@ public class SchoolNewsController extends BaseController {
 	@RequestMapping("uploadImg")
 	public void uploadImg(MultipartFile file, HttpServletResponse response) throws Exception {
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
-		String fileName = userService.uploadPicture(file, path);
+		String fileName = resourceService.uploadPicture(file, path);
 		// 返回图片的URL地址
 		response.getWriter().write("/middleschool/static/uploadimg/" + fileName);
 	}
@@ -287,24 +284,6 @@ public class SchoolNewsController extends BaseController {
 		return "admin/schoolnews/addschoolnews";
 	}
 	
-	/**
-	 * @param model
-	 * @return 
-	 */
-	@RequestMapping("sendPrivateNoticeJumping")
-	public String sendPrivateNoticeJumping(Model model) {
-		int Pid=3;
-		int p=5;
-		List<TbCategory> list=categoryService.queryByPid(Pid);
-		List<TbCategory> item=categoryService.queryByPid(p);
-		if(!list.isEmpty()||!item.isEmpty()) {
-			model.addAttribute("categoryList", list);
-			model.addAttribute("itemList",item);
-		} else {
-			model.addAttribute("sign",1);
-		}
-		return "admin/notice/sendprivatenotice";
-	}
 	
 	/**
 	 * @param model
@@ -362,25 +341,6 @@ public class SchoolNewsController extends BaseController {
      */  
     @RequestMapping("/down")  
     public void down(HttpServletRequest request,HttpServletResponse response,int id) throws Exception{  
-    	TbResource tb = resourceService.selectByPrimaryKey(id);
-    	//模拟文件，myfile.txt为需要下载的文件  
-        String fileName = request.getSession().getServletContext().getRealPath("/static/uploadimg")+"/" + tb.getReContent(); 
-        //获取输入流  
-        InputStream bis = new BufferedInputStream(new FileInputStream(new File(fileName)));  
-        //假如以中文名下载的话  
-        String filename = "下载文件.txt";  
-        //转码，免得文件名中文乱码  
-        filename = URLEncoder.encode(filename,"UTF-8");  
-        //设置文件下载头  
-        response.addHeader("Content-Disposition", "attachment;filename=" + filename);    
-        //1.设置文件ContentType类型，这样设置，会自动判断下载文件类型    
-        response.setContentType("multipart/form-data");   
-        BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());  
-        int len = 0;  
-        while((len = bis.read()) != -1){  
-            out.write(len);  
-            out.flush();  
-        }  
-        out.close();  
+    	resourceService.down(request, response, id);
     }  
 }

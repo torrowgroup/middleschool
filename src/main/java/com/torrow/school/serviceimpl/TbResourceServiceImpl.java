@@ -4,8 +4,12 @@ package com.torrow.school.serviceimpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.torrow.school.base.BaseDao;
 import com.torrow.school.dao.TbCategoryDao;
@@ -176,5 +180,20 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	public TbResource selectByReContent(String reContent) {
 		
 		return tbResourceDao.selectByContent(reContent);
+	}
+	
+	@Override
+	public String uploadPicture(MultipartFile picture, String path) throws Exception {
+		return this.uploadP(picture, path);
+	}
+	
+	@Override
+	public String uploadFile(MultipartFile file, String path) throws Exception {
+		return this.uploadF(file, path);
+	}
+
+	@Override
+	public void down(HttpServletRequest request, HttpServletResponse response, int id) throws Exception {
+		this.download(request,response,id);
 	}
 }

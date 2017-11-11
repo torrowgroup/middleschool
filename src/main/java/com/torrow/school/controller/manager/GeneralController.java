@@ -166,7 +166,7 @@ public class GeneralController extends BaseController {
 	public String addSchoolHistory(Model model,MultipartFile picture,TbResource tbResource) throws Exception {
 		TbCategory tbCategory = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
-		String reContent = userService.uploadPicture(picture, path);
+		String reContent = resourceService.uploadPicture(picture, path);
 		if(tbCategory.getCaPid()==7) {
 			TbResource tb = new TbResource(tbResource.getCaId(),tbResource.getCaName(),tbResource.getReTitle(),reContent);
 			int i=resourceService.insert(tb);
@@ -265,7 +265,7 @@ public class GeneralController extends BaseController {
 				files.delete();
 			}
 			String p = session.getServletContext().getRealPath("/static/uploadimg");
-			String reContent = userService.uploadPicture(picture, p);
+			String reContent = resourceService.uploadPicture(picture, p);
 			tb.setReContent(reContent);
 		}
 		tb.setReTitle(tbResource.getReTitle());
@@ -329,7 +329,7 @@ public class GeneralController extends BaseController {
 	@RequestMapping("uploadImg")
 	public void uploadImg(MultipartFile file, HttpServletResponse response) throws Exception {
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
-		String fileName = userService.uploadPicture(file, path);
+		String fileName = resourceService.uploadPicture(file, path);
 		// 返回图片的URL地址
 		response.getWriter().write("/middleschool/static/uploadimg/" + fileName);
 	}
