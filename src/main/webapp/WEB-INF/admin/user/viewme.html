@@ -6,6 +6,7 @@
   <title>Home</title>
 </head>
 <body>
+<span th:text="${message}"></span>
 	<table>
 			<tr>
 				<td>邮箱</td>
@@ -17,7 +18,7 @@
 			</tr>
 			<tr>
 				<td>性别</td>
-				<td th:text="${session.manager.usSex=='男'}"></td>
+				<td th:text="${session.manager.usSex}"></td>
 			</tr>
 			<tr>
 				<td>身份</td>

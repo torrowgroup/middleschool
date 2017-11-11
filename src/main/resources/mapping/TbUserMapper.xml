@@ -117,5 +117,10 @@
 	<select id="selectCount" resultType="int">
 		select count(*) from tb_user
 	</select>
+	
+	<!-- 根据邮箱得到用户 -->
+	<select id="selectByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select * from tb_user where us_email = #{email}
+	</select>
 
 </mapper>

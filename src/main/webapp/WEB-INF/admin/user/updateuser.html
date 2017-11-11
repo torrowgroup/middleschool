@@ -5,8 +5,9 @@
 <head>
 <title>Home</title>
 <link rel="stylesheet" type="text/css" th:href="@{/static/dist/css/wangEditor.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
 </head>
-<body onload="test()">
+<body>
 	<form th:action="@{/user/updateUser}" onsubmit="modifyContent()" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="usId" th:value="${user.usId}"/>
 		<input type="hidden" name="page" th:value="${page}"/>
@@ -93,7 +94,7 @@
 			</tr>
 		</table>
 	</form>
-
+<script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/admin/user/updateuser.js}" ></script>

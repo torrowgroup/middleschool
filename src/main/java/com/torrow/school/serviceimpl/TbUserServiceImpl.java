@@ -72,4 +72,9 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 	
 	
 
+	@Override
+	public TbUser selectByEmail(String email) {
+		return tbUserDao.selectByEmail(email);
+	}
+
 }

@@ -199,18 +199,37 @@ public class UserController extends BaseController {
 		} else {
 			model.addAttribute("message", "修改失败");
 		}
-		return new ModelAndView("admin/user/updateme");
+		return new ModelAndView("admin/user/viewme");
 	}
 	
 	/**
 	 * @return
-	 * 修改个人密码
+	 * 到达修改个人密码界面
 	 */
 	@RequestMapping("toUpdatePsw")
 	public ModelAndView toUpdatePsw(){
-		return new ModelAndView("admin/user/updateme");
+		return new ModelAndView("admin/user/updatepsw");
 	}
 	
+	/**
+	 * @param oldPsw 旧密码
+	 * @param password 新密码
+	 * @param model
+	 * @return 修改密码
+	 */
+	@RequestMapping("updatePsw")
+	public ModelAndView updatePsw(String oldPsw,String password,Model model){
+		TbUser me = (TbUser)session.getAttribute("manager");
+		if(me.getUsPassword().equals(oldPsw)){
+			me.setUsPassword(password);
+			if(userService.updateByPrimaryKey(me)==1){
+				model.addAttribute("message", "修改成功");
+			}
+			return new ModelAndView("admin/user/viewme");
+		}
+		model.addAttribute("message", "旧密码错误");
+		return new ModelAndView("admin/user/updatepsw");
+	}
 	
 	@RequestMapping("toWelcome")
 	public String toWelcome() {

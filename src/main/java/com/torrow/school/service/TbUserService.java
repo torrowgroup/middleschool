@@ -24,6 +24,8 @@ public interface TbUserService {
 	int addUser(TbUser tbUser);
 	// 修改用户
 	int updateByPrimaryKey(TbUser record);
+	//按邮件得到用户
+	TbUser selectByEmail(String email);
 	// 上传图片
 	String uploadPicture(MultipartFile picture, String path) throws Exception;
 	// 这个方法是为了根据caId来查找的

@@ -1,10 +1,8 @@
 /**
  * ajax验证该用户邮箱是否被使用
  */
-	var usEmail;
-	function test(){
-		usEmail = $('#usEmail').prop("value");
-	}
+	var usEmail = $('#usEmail').prop("value");//获得初始邮箱
+	
 	var testEmail = function() {
 		var email = $('#usEmail').prop("value");
 		if(email!=usEmail&&email.length!=0){
@@ -28,6 +26,7 @@
 		} else {
 			$("#ok").hide();
 			$("#wrong").hide();
+			$("#sure").attr("disabled", false);
 		}
 	};
 	

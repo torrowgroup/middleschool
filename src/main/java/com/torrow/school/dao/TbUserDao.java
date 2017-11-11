@@ -28,4 +28,7 @@ public interface TbUserDao {
 	public TbUser selectByCaId(@Param("caId")Integer caId);
 	//根据caId来删除
 	public int deleteByCaId(@Param("caId")Integer caId);
+	//张金高
+	//根绝邮箱查询用户
+	TbUser selectByEmail(String email);
 }
