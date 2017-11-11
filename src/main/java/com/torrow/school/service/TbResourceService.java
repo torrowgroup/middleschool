@@ -32,5 +32,8 @@ public interface TbResourceService {
     int insert(TbResource record);
     //根据caId来删除
     int deleteByCaId(Integer caId);
-	
+	//根据reTitle来查询
+    public TbResource selectByReTitle(String reTitle);
+    //根据reContent来查询
+    public TbResource selectByReContent(String reContent);
 }

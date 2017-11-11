@@ -22,6 +22,16 @@
     where ca_id = #{caId,jdbcType=INTEGER}
   </delete>
   
+  	<!--根据reTitle来查询  -->
+  	<select id="selectByTitle"   parameterType="java.lang.String"  resultMap="BaseResultMap">
+		select * from tb_resource where re_title = #{reTitle}
+	</select>
+	
+  	<!--根据reContent来查询 -->
+  	<select id="selectByContent"   parameterType="java.lang.String"  resultMap="BaseResultMap">
+		select * from tb_resource where re_content = #{reContent}
+	</select>
+	
   <insert id="insert" parameterType="com.torrow.school.entity.TbResource">
     insert into tb_resource (ca_id, ca_name, 
       re_title, re_issuer, re_issuingdate, 

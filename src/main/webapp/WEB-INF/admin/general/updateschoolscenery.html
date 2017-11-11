@@ -16,7 +16,7 @@
 			<tr>
 				<td>简介</td>
 				<td><input type="text" name="reTitle"
-					th:value="${tb.reTitle}" /></td>
+					th:value="${tb.reTitle}" required="required"/></td>
 			</tr>
 		</table>
 		<div id="addCommodityIndex">
@@ -32,7 +32,7 @@
 							width="90" height="90" onclick="$('#previewImg').click();">
 					</div>
 					<input type="file" name="picture" onchange="previewImage(this)"
-						style="display: none;" id="previewImg">
+						style="display: none;" id="previewImg" required="required"/>
 					<!--<input id="uploaderInput" class="uploader__input" style="display: none;" type="file" accept="" multiple="">-->
 				</div>
 			</div>

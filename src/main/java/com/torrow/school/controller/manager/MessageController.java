@@ -48,7 +48,6 @@ public class MessageController extends BaseController {
 	@RequestMapping("reply")
 	public String reply(int id, String meReply, int page,Model model) {
 		int boo = messageService.reply(id, meReply);
-		log.info("merely " + meReply);
 		String reply = "回复成功";
 		if (boo != 1) {
 			reply = "回复失败";

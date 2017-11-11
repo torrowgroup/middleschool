@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>登录界面</title>
+  <title>登录</title>
   <link rel="stylesheet" type="text/css" th:href="@{/static/css/manager/login.css}">
   <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
   <script th:src="@{/static/js/jquery.min.js}"></script>
@@ -43,7 +43,7 @@
 						   placeholder="请输入密码">
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group" style="margin-top:40px;">
 				<div class="col-sm-offset-2 col-sm-10">
 					<div class="checkbox">
 						<label>
@@ -54,9 +54,11 @@
 
 				</div>
 			</div>
+			<!-- 返回错误信息的部分 -->
+			<div th:text="${msg}" style="position:relative;top:-60px;text-align:center;background-color:#fff;"></div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<a href="index.html" style="text-decoration: none;"><input type="submit" value="login" class="but" style="background: #012349;color: white;width: 66px;height: 24px;" onclick = "checkUser();" /></a>
+					<a href="#" style="text-decoration: none;"><input type="submit" value="login" class="but" style="background: #012349;color: white;width: 66px;height: 24px;" onclick = "checkUser();" /></a>
 				</div>
 			</div>
 		</form>

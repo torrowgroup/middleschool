@@ -19,7 +19,7 @@
     values ( #{caPid,jdbcType=INTEGER}, #{caName,jdbcType=VARCHAR}, 
       #{spare,jdbcType=VARCHAR})
   </insert>
-  	<!--添加类别  -->
+  	<!--查询类别跟据caName  -->
   	<select id="findCategoryByCaName"   parameterType="java.lang.String"  resultMap="BaseResultMap">
 		select * from tb_category where ca_name = #{caName}
 	</select>

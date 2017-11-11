@@ -165,4 +165,16 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 		}
 		return contentTemp;
 	}
+
+	@Override
+	public TbResource selectByReTitle(String reTitle) {
+		
+		return tbResourceDao.selectByTitle(reTitle);
+	}
+
+	@Override
+	public TbResource selectByReContent(String reContent) {
+		
+		return tbResourceDao.selectByContent(reContent);
+	}
 }

@@ -16,5 +16,9 @@ public interface TbResourceDao {
 	public int deleteByCaId(@Param("caId")Integer caId);
 
 	public TbResource selectByCaId(@Param("caId")Integer caId);
+	//根据reTitle来查询
+	public TbResource selectByTitle(@Param("reTitle")String reTitle);
+
+	public TbResource selectByContent(@Param("reContent")String reContent);
 	
 }

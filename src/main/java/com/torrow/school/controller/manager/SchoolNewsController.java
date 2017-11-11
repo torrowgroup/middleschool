@@ -1,9 +1,17 @@
 package com.torrow.school.controller.manager;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,8 +67,6 @@ public class SchoolNewsController extends BaseController {
 		}
 		return "admin/schoolnews/uploadfile";
 	}
-	
-	
 	/**
 	 * @param model
 	 * @return 教育教研类的跳转
@@ -86,6 +92,11 @@ public class SchoolNewsController extends BaseController {
 	 */
 	@RequestMapping("addSchoolNews")
 	public String addSchoolNews(Model model, TbResource tbResource) {
+		TbResource retitle = resourceService.selectByReTitle(tbResource.getReTitle());
+		if(null!=retitle) {
+			model.addAttribute("message", "该名称已存在，添加失败");
+			return this.newsJumping(model);
+		}
 		Date date = new Date();
 		DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd"); //HH表示24小时制；  
         String Date = dFormat.format(date);
@@ -124,7 +135,7 @@ public class SchoolNewsController extends BaseController {
 		record.setCaId(id);
 		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,10));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
-		model.addAttribute("sign", 1);
+		model.addAttribute("zid", id);
 		return "admin/schoolnews/manageschoolnews";
 	}
 	
@@ -212,12 +223,17 @@ public class SchoolNewsController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping("upload")
-	public String upload(TbResource tbResource, MultipartFile picture, Model model) throws Exception {
+	public String upload(TbResource tbResource, MultipartFile file, Model model) throws Exception {
 		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		if (null != item) {
 			String path = session.getServletContext().getRealPath("/static/uploadimg");
-			String reContent = userService.uploadPicture(picture, path);
-			TbResource tb = new TbResource(item.getCaId(),item.getCaName(),tbResource.getReTitle(),reContent);
+			String reContent = userService.uploadPicture(file, path);
+			TbResource resource = resourceService.selectByReContent(reContent);
+			if(null==resource) {
+				model.addAttribute("message","该文件已存在,上传失败");
+				return this.uploadJumpping(model);
+			}
+			TbResource tb = new TbResource(item.getCaId(),item.getCaName(),file.getOriginalFilename(),reContent);
 			resourceService.insert(tb);
 			model.addAttribute("message", "添加成功");
 		} else {
@@ -287,7 +303,7 @@ public class SchoolNewsController extends BaseController {
 		} else {
 			model.addAttribute("sign",1);
 		}
-		return "admin/schoolnews/addschoolnews";
+		return "admin/notice/sendprivatenotice";
 	}
 	
 	/**
@@ -305,4 +321,66 @@ public class SchoolNewsController extends BaseController {
 		}
 		return "admin/notice/index";
 	}
+//	----------------------------------------------------------
+	/**
+	 * @param model
+	 * @return 校园文学类的跳转
+	 */
+	@RequestMapping("literatureJumping")
+	public String literatureJumping(Model model) {
+		int Pid = 12;
+		List<TbCategory> list = categoryService.queryByPid(Pid);
+		if(!list.isEmpty()) {
+			model.addAttribute("categoryList", list);
+		}else {
+			model.addAttribute("message","该类别名称不存在");
+		}
+		return "admin/schoolliterature/uploadfile";
+	}
+	
+	/**
+	 * @param model
+	 * @return 管理校园文学
+	 */
+	@RequestMapping("manageliteratureJumping")
+	public String manageliteratureJumping(Model model) {
+		int Pid = 12;
+		List<TbCategory> list = categoryService.queryByPid(Pid);
+		if(!list.isEmpty()) {
+			model.addAttribute("categoryList", list);
+		}else {
+			model.addAttribute("message","该类别名称不存在");
+		}
+		return "admin/schoolliterature/index";
+	}
+	
+	/**  
+     * 文件下载功能  
+     * @param request  
+     * @param response  
+     * @throws Exception  
+     */  
+    @RequestMapping("/down")  
+    public void down(HttpServletRequest request,HttpServletResponse response,int id) throws Exception{  
+    	TbResource tb = resourceService.selectByPrimaryKey(id);
+    	//模拟文件，myfile.txt为需要下载的文件  
+        String fileName = request.getSession().getServletContext().getRealPath("/static/uploadimg")+"/" + tb.getReContent(); 
+        //获取输入流  
+        InputStream bis = new BufferedInputStream(new FileInputStream(new File(fileName)));  
+        //假如以中文名下载的话  
+        String filename = "下载文件.txt";  
+        //转码，免得文件名中文乱码  
+        filename = URLEncoder.encode(filename,"UTF-8");  
+        //设置文件下载头  
+        response.addHeader("Content-Disposition", "attachment;filename=" + filename);    
+        //1.设置文件ContentType类型，这样设置，会自动判断下载文件类型    
+        response.setContentType("multipart/form-data");   
+        BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());  
+        int len = 0;  
+        while((len = bis.read()) != -1){  
+            out.write(len);  
+            out.flush();  
+        }  
+        out.close();  
+    }  
 }
