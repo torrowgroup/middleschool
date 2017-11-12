@@ -92,6 +92,7 @@ public class SchoolNewsController extends BaseController {
 	 */
 	@RequestMapping("addSchoolNews")
 	public String addSchoolNews(Model model, TbResource tbResource) {
+		log.info("--------------"+tbResource);
 		TbResource retitle = resourceService.selectByReTitle(tbResource.getReTitle());
 		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		if(null!=retitle) {
@@ -113,6 +114,7 @@ public class SchoolNewsController extends BaseController {
 		} else {
 			model.addAttribute("message", "添加失败,不存在该类别");
 		}
+		log.info("----------");
 		if(item.getCaPid()==6) {
 			return this.addNoticeJumping(model);
 		}
