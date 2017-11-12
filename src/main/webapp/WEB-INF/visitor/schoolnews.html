@@ -92,7 +92,7 @@
             </ul>
         </div>
         <div class="schollright">
-            <div class="location"><a th:href="@{/index}">首页</a>.<a href="#" th:text="${useCategory.caName}">校园新闻</a></div>
+            <div class="location"><a th:href="@{/index}">首页</a><span th:if="${useCategory!=null}">.<a href="#" th:text="${useCategory.caName}">校园新闻</a></span></div>
             <div th:if="${news.totalPage==0}">
             	<h3 class="titlesc">暂没有相关内容</h3>
             </div>
@@ -106,13 +106,23 @@
 	                </ul>
 	                <div class="clearfix"></div>
 	            </div>
-	            <div class="paging1">
+	            <div class="paging1" th:if="${news.totalPage>0}">
 	                <ul class="pagingUl">
-	                    <li><a href="">&laquo;</a></li>
+	                    <li th:if="${news.currPage-1>0}">
+	                    	<a th:href="@{/visitorGN/viewNews?(currentPage=${news.currPage-1},nId=${news.lists[0].caId})}">&laquo;</a>
+	                    </li>
+	                     <li th:if="${news.currPage-1==0}">
+	                     <a href="#">&laquo;</a>
+	                     </li>
 	                    <li th:each="i:${#numbers.sequence(1,news.totalPage)}" th:if="${i > news.currPage-3} and ${i < news.currPage+3}" >
 	                    	<a th:href="@{/visitorGN/viewNews?(currentPage=${i},nId=${news.lists[0].caId})}" th:text="${i}">#</a>
 	                    </li>
-	                    <li><a href="">&raquo;</a></li>
+	                   <li th:if="${news.currPage+1<=news.totalPage}">
+	                    	<a th:href="@{/visitorGN/viewNews?(currentPage=${news.currPage+1},nId=${news.lists[0].caId})}">&raquo;</a>
+	                    </li>
+	                    <li th:if="${news.currPage+1>news.totalPage}">
+	                     	<a href="#">&raquo;</a>
+	                    </li>
 	                </ul>
 	                <div class="pagingRight">
 	                    <span>跳转到</span>
@@ -161,8 +171,10 @@
 </div>
 <script th:src="@{/static/js/visitor/select.js}"></script>
 <script th:inline="javascript">
-	var nId = /*[[${useCategory.caId}]]*/;
-	$("a[name="+nId+"]").addClass("active1");
+	var useCategory = /*[[${useCategory}]]*/;
+	if(useCategory!=null){
+		$("a[name="+useCategory.caId+"]").addClass("active1");		
+	}
 </script>
 </body>
 </html>

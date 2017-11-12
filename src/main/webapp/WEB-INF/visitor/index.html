@@ -32,7 +32,7 @@
                 <a href="#">学校概况</a>
                 <ul class="navSecondUl">
                     <li th:each="general,generals:${generals}">
-                    	<a th:href="@{/visitorGN/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
+                    	<a th:href="@{/visitorGN/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}" target="_blank">学校概况</a>
                     </li>
                 </ul>
             </li>
@@ -40,7 +40,7 @@
                 <a href="#">校园新闻</a>
                 <ul class="navSecondUl">
                     <li th:each="news,newsStart:${schoolNews}">
-                    	<a th:href="@{/visitorGN/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
+                    	<a th:href="@{/visitorGN/viewNews?(nId= ${news.caId})}" th:text="${news.caName}" target="_blank">学校新闻</a>
                     </li>
                 </ul>
             </li>
@@ -48,7 +48,7 @@
                 <a href="#">教育教研</a>
                 <ul class="navSecondUl">
                     <li th:each="education,educations:${educations}">
-                    	<a th:href="@{/visitorGN/viewNews?(gName= ${education.caName})}" th:text="${education.caName}">学校概况</a>
+                    	<a th:href="@{/visitorGN/viewNews?(gName= ${education.caName})}" th:text="${education.caName}" target="_blank">教育教研</a>
                		</li>
                 </ul>
             </li>
@@ -106,15 +106,6 @@
         <a class="carousel-control right" href="#myCarousel"
            data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
     </div>
-    <div class="notice">
-        <div class="winBox" id="noticeDiv">
-            <span>通知：</span>
-            <ul class="noticeUl">
-               <li id="noticeFirst"></li>
-            </ul>
-            <ul class="noticeUl1"></ul>
-        </div>
-    </div>
     <div class="mainBox">
         <div class="container mainCenter">
             <div class="row mainTop">
@@ -161,11 +152,11 @@
                     <div class="row mainBottom">
                         <div class="col-sm-6 col-xs-12">
                             <div class="mainBheader changeColor">
-                                <a th:href="@{/visitorNE/viewNotices}">公告 |notice<span class="pull-right">&gt; 更多</span></a>
+                           <a th:href="@{/visitorNE/viewNotices?(nId= 6)}" target="_blank">公告 |notice<span class="pull-right">&gt; 更多</span></a>
                             </div>
                             <ul class="mainBbody">
                                 <li th:each="notice,noticeStart:${notices}">
-                                    <a href="" th:text="${notice.reTitle}">公告</a>
+                                    <a th:href="@{/visitorNE/noticeDetails?(rId=${notice.reId},nId=${notice.caId})}" th:text="${notice.reTitle}" target="_blank">公告</a>
                                     <span th:text="${notice.reIssuingdate}">发布时间</span>
                                 </li>
                             </ul>
@@ -231,23 +222,16 @@
     </div>
     <div class="newsScroll">
         <div class="mainBheader changeColor2">
-            <a href="">图片新闻<span class="pull-right">&gt; 更多</span></a>
+            <a th:href="@{/visitorGN/moreNews}">图片新闻<span class="pull-right">&gt; 更多</span></a>
         </div>
         <div class="sBox">
             <div class="sBox1">
                 <div class="scroll">
                     <ul class="scrollUl1">
-                        <li>
-                            <a href="#">
-                                <img th:src="@{/static/images/visitor/mc1.jpg}" alt="">
-                                <span>小的蝴蝶飞来飞去。野花遍地是：杂样儿，有名字的，没名字的，散在</span>
-                            </a>
-                        </li> 
-                        <li th:each="new,newStart:${sNews}">
-                        	<a href="#">
-<!--                         		<img th:src="@{/static/uploadimg/{picture}(picture=${new.reContent})}" alt="暂无图片"> -->
-                        		<img th:src="@{/static/images/visitor/mc1.jpg}" alt="">
-<!--                         		<span th:text="${new.reTitle}">新闻标题</span>	 -->
+                        <li th:each="resource,resourceStart:${sNews}">
+                        	<a th:href="@{/visitorGN/newDetails?(rId=${resource.reId},nId=${resource.caId})}">
+                        		<img th:src="@{${resource.reContent}}" alt="暂无图片" style="width: 100%;height: 100%;">
+                        		<span th:text="${resource.reTitle}">新闻标题</span>	
                         	</a>
                         </li>
                     </ul>
@@ -282,13 +266,5 @@
             </div>
         </div>
     </div>
-<script th:inline="javascript">
-	var notice = /*[[${notices}]]*/;
-	if(notice.size!=0){	//如果有通知，显示最新一条，没有就隐藏通知栏
-		$('#noticeFirst').html(notice[0].reContent);
-	} else {
-		$('#noticeDiv').hide();
-	}
-</script>
 </body>
 </html>

@@ -83,17 +83,12 @@
 <div class="mainbox1">
     <div class="schollabout">
         <div class="schollleft">
-            <h3>学校概况</h3>
-            <ul class="schoolcenter">
-                <li th:each="general,generals:${generals}">
-                  <a th:name="${general.caId}" th:href="@{/visitorGN/viewGeneral?(gId= ${general.caId})}"   th:text="${general.caName}">学校概况</a>
-                </li>
-            </ul>
+            <h3>公告</h3>
         </div>
         <div class="schollright">
-            <div class="location"><a th:href="@{/index}">首页</a>.<a href="#" th:text="${useCategory.caName}">学校概况</a></div>
+            <div class="location"><a th:href="@{/index}">首页</a>.<a th:href="@{/visitorNE/viewNotices?(nId= 6)}" th:text="${useCategory.caName}">通知公告</a></div>
             <div th:if="${resource}!=null">
-	            <h3 class="titlesc" th:text="${resource.reTitle}">学校概括</h3>
+	            <h3 class="titlesc" th:text="${resource.reTitle}">通知公告</h3>
 	            <div class="schollcontent" id="reContent" >暂没有相关内容</div>
             </div>
             <div th:if="${resource}==null">
