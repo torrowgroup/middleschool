@@ -1,11 +1,6 @@
 package com.torrow.school.controller.manager;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -85,6 +80,28 @@ public class SchoolNewsController extends BaseController {
 	
 	/**
 	 * @param model
+	 * @param id
+	 * @return 删除文件的
+	 */
+	@RequestMapping("deleteFile")
+	public String deleteScenery(Model model,Integer id) {
+		int currentPage = (int) session.getAttribute("currentPage");
+		TbResource tb = resourceService.selectByPrimaryKey(id);
+		String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tb.getReContent();
+		File files = new File(path);
+		if (files.exists()) {
+			files.delete();
+		}
+		String msg = "删除失败";
+		if (resourceService.deleteByPrimaryKey(id) == 1) {
+			msg = "删除成功";
+		}
+		model.addAttribute("message", msg);
+		return this.manageUpload(currentPage, model,tb.getCaId());
+	}
+	
+	/**
+	 * @param model
 	 * @param reTitle
 	 * @param reContent
 	 * @param caName
@@ -92,7 +109,6 @@ public class SchoolNewsController extends BaseController {
 	 */
 	@RequestMapping("addSchoolNews")
 	public String addSchoolNews(Model model, TbResource tbResource) {
-		log.info("--------------"+tbResource);
 		TbResource retitle = resourceService.selectByReTitle(tbResource.getReTitle());
 		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		if(null!=retitle) {
@@ -114,7 +130,6 @@ public class SchoolNewsController extends BaseController {
 		} else {
 			model.addAttribute("message", "添加失败,不存在该类别");
 		}
-		log.info("----------");
 		if(item.getCaPid()==6) {
 			return this.addNoticeJumping(model);
 		}
@@ -168,7 +183,10 @@ public class SchoolNewsController extends BaseController {
 			model.addAttribute("tbResource", tb);
 		} else {
 			model.addAttribute("message", "该名称不存在");
-			return "admin/schoolnews/index";
+		}
+		TbCategory tbCategory = categoryService.selectByPrimaryKey(tb.getCaId());
+		if(tbCategory.getCaPid()==6) {
+			model.addAttribute("sign",1);
 		}
 		return "admin/schoolnews/managenews";
 	}
@@ -194,7 +212,7 @@ public class SchoolNewsController extends BaseController {
 				model.addAttribute("message", "保存失败");
 			}
 		} 
-		return this.manageJumping(model);
+		return this.selectOneNews(tbResource.getReId(),model);
 	}
 
 	/**
@@ -205,15 +223,48 @@ public class SchoolNewsController extends BaseController {
 	@RequestMapping("deleteNews")
 	public String deleteNews(Model model, int id) {
 		int currentPage = (int) session.getAttribute("currentPage");
+		TbResource tb = resourceService.selectByPrimaryKey(id);
 		int i = resourceService.deleteByPrimaryKey(id);
 		if (i != 0) {
 			model.addAttribute("message", "删除成功");
 		} else {
 			model.addAttribute("message", "删除失败");
 		}
-		return this.manageSchoolNews(currentPage, model,1);
+		return this.manageSchoolNews(currentPage, model,tb.getCaId());
 	}
 
+	/**
+	 * @param model
+	 * @return 资源下载的跳转
+	 */
+	@RequestMapping("downLoadjumpping")
+	public String downLoadjumpping(Model model) {
+		int Pid=11;
+		List<TbCategory> list=categoryService.queryByPid(Pid);
+		if(!list.isEmpty()) {
+			model.addAttribute("categoryList", list);
+		} else {
+			model.addAttribute("sign",1);
+		}
+		return "admin/download/uploadfile";
+	}
+	
+	/**
+	 * @param model
+	 * @return 管理资源下载的跳转
+	 */
+	@RequestMapping("manageDownLoadJumpping")
+	public String manageDownLoadJumpping(Model model) {
+		int Pid=11;
+		List<TbCategory> list=categoryService.queryByPid(Pid);
+		if(!list.isEmpty()) {
+			model.addAttribute("categoryList", list);
+		} else {
+			model.addAttribute("sign",1);
+		}
+		return "admin/download/index";
+	}
+	
 	/**
 	 * @param tbResource
 	 * @param picture
@@ -238,27 +289,21 @@ public class SchoolNewsController extends BaseController {
 		} else {
 			model.addAttribute("message", "不存在该类别，添加失败");
 		}
+		//校园文学
+		if(item.getCaPid()==12) {
+			return this.literatureJumping(model);
+		}
+		//教育教研
+		if(item.getCaPid()==3) {
+			return this.educationJumpping(model);
+		}
+		//资源类的下载
+		if(item.getCaPid()==11) {
+			return this.downLoadjumpping(model);
+		}
 		return this.uploadJumpping(model);
 	}
-	/**
-	 * @param model
-	 * @return 在管理新闻时从数据库类别类查出来的新闻名称
-	 */
-	@RequestMapping("manageJumping")
-	public String manageJumping(Model model) {
-		int Pid = 2;
-		int id=9;
-		List<TbCategory> list = categoryService.queryByPid(Pid);
-		List<TbCategory> item = categoryService.queryByPid(id);
-		if(!list.isEmpty()||!item.isEmpty()) {
-			model.addAttribute("categoryList", list);
-			model.addAttribute("itemList",item);
-		} else {
-			model.addAttribute("message","该名称不存在");
-		}
-		return "admin/schoolnews/index";
-	}
-	
+
 	
 	// 用于富文本编辑器的图片上传
 	@RequestMapping("uploadImg")

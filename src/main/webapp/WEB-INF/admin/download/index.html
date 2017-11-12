@@ -6,15 +6,10 @@
   <title>home</title>
 </head>
 <body>
-<div th:text="${message}"></div>
 <details>
-		<summary>通知</summary>
-		<a th:href="@{/news/sendPrivateNoticeJumping}" target="mainIframe">私发通知</a>
-</details>	
-<details>
-		<summary>通知公告管理</summary>
+		<summary>资源类的下载管理</summary>
 		<div th:each="category,categoryStart:${categoryList}">
-				<a th:href="@{/news/manageSchoolNews?(id=${category.caId})}" th:text="${category.caName}"></a>
+				<a th:href="@{/news/manageUpload?(id=${category.caId})}" th:text="${category.caName}"></a>
 		</div>
 		<br>
 </details>

@@ -62,37 +62,6 @@ public class GeneralController extends BaseController {
 		return "admin/managepicture/managepicture";
 	}
 	
-	/**
-	 * @param model
-	 * @param id
-	 * @param reTitle
-	 * @param reContent
-	 * @param caName
-	 * @return 对于概括类进行修改的操作
-	 */
-	@RequestMapping("updateGeneral")
-	public String updateGeneral(Model model, @RequestParam(value = "picture", required = false) MultipartFile[] picture,
-			TbResource tbResource) throws IllegalStateException, IOException {
-		if(tbResource.getReContent().equals(null)) {
-			int i=resourceService.deleteByPrimaryKey(tbResource.getReId());
-			if(i!=0) {
-				model.addAttribute("message", "保存成功");
-			}else {
-				model.addAttribute("message", "保存失败");
-			}
-		}
-		TbResource tb = resourceService.selectByPrimaryKey(tbResource.getReId());
-		if (null != tb) {
-			tb.setReContent(tbResource.getReContent());
-			int i=resourceService.updateByPrimaryKey(tb);
-			if(i!=0) {
-				model.addAttribute("message", "保存成功");
-			}else {
-				model.addAttribute("message", "保存失败");
-			}
-		} 
-		return this.manage(model,tb.getCaId());
-	}
 	
 	/**
 	 * @param model
@@ -105,22 +74,7 @@ public class GeneralController extends BaseController {
 		model.addAttribute("tb",tb);
 		return "admin/general/updateschoolscenery";
 	}
-	/**
-	 * @return 删除概括类
-	 *//*
-	@RequestMapping("deleteGeneral")
-	public String deleteGeneral(Model model, int id) {
-		int currentPage = (int) session.getAttribute("currentPage");
-		int i = resourceService.deleteByPrimaryKey(id);
-		if (i != 0) {
-			model.addAttribute("message", "删除成功");
-		} else {
-			model.addAttribute("message", "删除失败");
-		}
-		//return this.manageGeneral(currentPage, model, caName);
-		return  "";
-	}*/
-
+	
 	
 	/**
 	 * @param model
@@ -202,7 +156,37 @@ public class GeneralController extends BaseController {
 		}
 		return "admin/general/managegeneral";
 	}
+	
+	/**
+	 * @return 删除概括类
+	 */
+	@RequestMapping("deleteGeneral")
+	public String deleteGeneral(Model model, int id) {
+		int l = resourceService.deleteByPrimaryKey(id);
+		if (l != 0) {
+			model.addAttribute("message", "删除成功");
+		} else {
+			model.addAttribute("message", "删除失败");
+		}
+		int Pid=1;//概括类的
+		List<TbCategory> list=categoryService.queryByPid(Pid);
+		int idd=7;//校园风光
+		List<TbCategory> item=categoryService.queryByPid(idd);
+		int Pd = 2;//新闻类
+		List<TbCategory> news = categoryService.queryByPid(Pd);
+		int d=9;//学生管理、教师上传
+		List<TbCategory> upload = categoryService.queryByPid(d);
+		int i=3;
+		List<TbCategory> education = categoryService.queryByPid(i);
+		model.addAttribute("educationList",education);
+		model.addAttribute("uploadList",upload);
+		model.addAttribute("newsList", news);
+		model.addAttribute("generalList", list);
+		model.addAttribute("sceneryList", item);
+		return  "admin/index";
+	}
 
+	
 	/**
 	 * @param model
 	 * @param id
@@ -306,7 +290,40 @@ public class GeneralController extends BaseController {
 		}
 		return this.addGeneralJumping(model);
 	}
-
+	
+	/**
+	 * @param model
+	 * @param id
+	 * @param reTitle
+	 * @param reContent
+	 * @param caName
+	 * @return 对于概括类进行修改的操作
+	 */
+	@RequestMapping("updateGeneral")
+	public String updateGeneral(Model model, @RequestParam(value = "picture", required = false) MultipartFile[] picture,
+			TbResource tbResource) throws IllegalStateException, IOException {
+		if(tbResource.getReContent().equals(null)) {
+			int i=resourceService.deleteByPrimaryKey(tbResource.getReId());
+			if(i!=0) {
+				model.addAttribute("message", "保存成功");
+			}else {
+				model.addAttribute("message", "保存失败");
+			}
+		}
+		TbResource tb = resourceService.selectByPrimaryKey(tbResource.getReId());
+		if (null != tb) {
+			tb.setReContent(tbResource.getReContent());
+			int i=resourceService.updateByPrimaryKey(tb);
+			if(i!=0) {
+				model.addAttribute("message", "保存成功");
+			}else {
+				model.addAttribute("message", "保存失败");
+			}
+		} 
+		return this.manage(model,tb.getCaId());
+	}
+	
+	
 	// 用于富文本编辑器的图片上传
 	@RequestMapping("uploadImg")
 	public void uploadImg(MultipartFile file, HttpServletResponse response) throws Exception {
