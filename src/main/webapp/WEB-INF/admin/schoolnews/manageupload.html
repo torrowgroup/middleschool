@@ -16,11 +16,12 @@
             <tr>
                 <td>上传的名称</td>
                 <td>删除</td>
+                <td>下载</td>
             </tr>
             </thead>
                 <tr th:each="news,newsStart:${pagemsg.lists}">
                 	<td th:text="${news.reTitle}">${news.reTitle}</td>
-                	<td><a th:href="@{/general/deleteScenery?(id=${news.reId})}">delete</a></td>
+                	<td><a th:href="@{/news/deleteFile?(id=${news.reId})}">delete</a></td>
                 	<td><a th:href="@{/news/down?(id=${news.reId})}">下载</a></td>
                 </tr>
         </table>    

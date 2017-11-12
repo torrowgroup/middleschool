@@ -1,10 +1,15 @@
 package com.torrow.school.service;
 import com.torrow.school.entity.TbCategory;
+
 import com.torrow.school.entity.TbResource;
 import com.torrow.school.util.PageBean;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface TbResourceService {
     //张金高
@@ -36,4 +41,10 @@ public interface TbResourceService {
     public TbResource selectByReTitle(String reTitle);
     //根据reContent来查询
     public TbResource selectByReContent(String reContent);
+    //上传图片
+    public String uploadPicture(MultipartFile picture, String path) throws Exception;
+    //上传文件
+    public String uploadFile(MultipartFile file, String path) throws Exception;
+    //文件的下载
+    public void down(HttpServletRequest request,HttpServletResponse response,int id) throws Exception;
 }

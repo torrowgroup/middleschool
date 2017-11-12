@@ -7,11 +7,13 @@
 <link rel="stylesheet" type="text/css"
 	th:href="@{/static/dist/css/wangEditor.min.css}">
 <link rel="stylesheet" type="text/css"
-	th:href="@{/static/css/manager/managegeneral.css}">	
+	th:href="@{/static/css/admin/managegeneral.css}">	
 </head>
 <body>
 <div th:text="${message}"></div>
 <div class="total">
+<button onclick="bian()">点我一下</button>
+<a th:href="@{/general/deleteScenery?(id=${tbResource.reId})}" onclick="return confirm('确定要删除吗')">Delete</a>
 <form th:action="@{/general/updateGeneral}" onSubmit="return modifyContent();"
 		method="post" enctype="multipart/form-data">
 		<input type="hidden" name="reId" th:value="${tbResource.reId}">
@@ -24,9 +26,7 @@
 				<a href="javascript:doZoom(12)">小</a>】
 				&nbsp;&nbsp;<a href="javascript:;"onclick="CloseWebPage()">【关闭窗口】</a>
 				&nbsp;&nbsp;<a onclick=window.print() style="cursor:hand">【打印该页】</a>
-				<button onclick="bian()">点我一下</button>
-				<button>清空操作</button>
-<!-- 				<input type="submit" value="保存"> -->
+				<input type="submit" value="保存">
 		   </div>
 		 </div>
 		<textarea style="display: none;" name="reContent" id="a"></textarea>

@@ -11,11 +11,12 @@
 <div th:if="${sign}=='1'">请先去类别管理中添加相应类别</div>
 <div th:text="${message}"></div>
 <div th:if="${sign}!='1'">
+<a th:href="@{/general/addSceneryJumping}" target="ie" class="out1" style="margin-left:900px;">添加校园风光</a>
 <form th:action="@{/general/addGeneral}"  onsubmit="modifyContent()" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>标题</td>
-				<td><input type="text" name="reTitle" required="required" maxlength="6"></td>
+				<td><input type="text" name="reTitle" required="required" maxlength="10"></td>
 			</tr>
 			<tr>
 				<td>内容</td>
@@ -35,9 +36,6 @@
 						<option th:each="category,categoryStart:${categoryList}" th:text="${category.caName}" th:value="${category.caId}" />
 					</select>
 				</td>
-			</tr>
-			<tr>
-				<td><a th:href="@{/general/addSceneryJumping}" target="ie" class="out1">添加校园风光</a></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="添加"></td>

@@ -4,7 +4,7 @@
 
 <head>
   <title>home</title>
-<link rel="stylesheet" type="text/css" th:href="@{/static/css/manager/managescenery.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/managescenery.css}">
 </head>
 <body>
 <div th:text="${message}"></div>
@@ -12,16 +12,18 @@
         没有任何校园风光信息！
     </span>
  <div th:if ="${pagemsg.totalCount}!=0">
-        <!-- <table border="1"  class="table1">   --> 
-        <!-- <thead>
+        <table border="1"  class="table1">   
+        <thead>
             <tr>
                 <td>校园风光</td>
+                <td>删除</td>
             </tr>
-            </thead> -->
-                <div th:each="general,generalStart:${pagemsg.lists}">
-                    <div class="box"><a th:href="@{/general/selectOneScenery?(id=${general.reId})}"><img alt="无图片" width="100px;" height="80px;" th:src="@{/static/uploadimg/{picture}(picture=${general.reContent})}" /></a></div>
-                </div>
-<!--         </table> -->   
+            </thead>
+                <tr th:each="general,generalStart:${pagemsg.lists}">
+                    <td><a th:href="@{/general/selectOneScenery?(id=${general.reId})}"><img alt="无图片" width="100px;" height="80px;" th:src="@{/static/uploadimg/{picture}(picture=${general.reContent})}" /></a></td>
+                	<td><a th:href="@{/general/deleteScenery?(id=${general.reId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
+                </tr>
+        </table>   
     </div> 
 <table>
 <tr>

@@ -1,11 +1,6 @@
 package com.torrow.school.controller.manager;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -85,6 +80,28 @@ public class SchoolNewsController extends BaseController {
 	
 	/**
 	 * @param model
+	 * @param id
+	 * @return 删除文件的
+	 */
+	@RequestMapping("deleteFile")
+	public String deleteScenery(Model model,Integer id) {
+		int currentPage = (int) session.getAttribute("currentPage");
+		TbResource tb = resourceService.selectByPrimaryKey(id);
+		String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tb.getReContent();
+		File files = new File(path);
+		if (files.exists()) {
+			files.delete();
+		}
+		String msg = "删除失败";
+		if (resourceService.deleteByPrimaryKey(id) == 1) {
+			msg = "删除成功";
+		}
+		model.addAttribute("message", msg);
+		return this.manageUpload(currentPage, model,tb.getCaId());
+	}
+	
+	/**
+	 * @param model
 	 * @param reTitle
 	 * @param reContent
 	 * @param caName
@@ -93,6 +110,7 @@ public class SchoolNewsController extends BaseController {
 	@RequestMapping("addSchoolNews")
 	public String addSchoolNews(Model model, TbResource tbResource) {
 		TbResource retitle = resourceService.selectByReTitle(tbResource.getReTitle());
+		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		if(null!=retitle) {
 			model.addAttribute("message", "该名称已存在，添加失败");
 			return this.newsJumping(model);
@@ -100,7 +118,6 @@ public class SchoolNewsController extends BaseController {
 		Date date = new Date();
 		DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd"); //HH表示24小时制；  
         String Date = dFormat.format(date);
-		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		if (null != item) {
 			TbResource record = new TbResource(item.getCaId(), Date, item.getCaName(), tbResource.getReTitle(),
 					tbResource.getReContent());
@@ -112,9 +129,6 @@ public class SchoolNewsController extends BaseController {
 			}
 		} else {
 			model.addAttribute("message", "添加失败,不存在该类别");
-		}
-		if(item.getCaPid()==3||item.getCaPid()==5) {
-			return this.sendPrivateNoticeJumping(model);
 		}
 		if(item.getCaPid()==6) {
 			return this.addNoticeJumping(model);
@@ -169,7 +183,10 @@ public class SchoolNewsController extends BaseController {
 			model.addAttribute("tbResource", tb);
 		} else {
 			model.addAttribute("message", "该名称不存在");
-			return "admin/schoolnews/index";
+		}
+		TbCategory tbCategory = categoryService.selectByPrimaryKey(tb.getCaId());
+		if(tbCategory.getCaPid()==6) {
+			model.addAttribute("sign",1);
 		}
 		return "admin/schoolnews/managenews";
 	}
@@ -195,7 +212,7 @@ public class SchoolNewsController extends BaseController {
 				model.addAttribute("message", "保存失败");
 			}
 		} 
-		return this.manageJumping(model);
+		return this.selectOneNews(tbResource.getReId(),model);
 	}
 
 	/**
@@ -206,15 +223,48 @@ public class SchoolNewsController extends BaseController {
 	@RequestMapping("deleteNews")
 	public String deleteNews(Model model, int id) {
 		int currentPage = (int) session.getAttribute("currentPage");
+		TbResource tb = resourceService.selectByPrimaryKey(id);
 		int i = resourceService.deleteByPrimaryKey(id);
 		if (i != 0) {
 			model.addAttribute("message", "删除成功");
 		} else {
 			model.addAttribute("message", "删除失败");
 		}
-		return this.manageSchoolNews(currentPage, model,1);
+		return this.manageSchoolNews(currentPage, model,tb.getCaId());
 	}
 
+	/**
+	 * @param model
+	 * @return 资源下载的跳转
+	 */
+	@RequestMapping("downLoadjumpping")
+	public String downLoadjumpping(Model model) {
+		int Pid=11;
+		List<TbCategory> list=categoryService.queryByPid(Pid);
+		if(!list.isEmpty()) {
+			model.addAttribute("categoryList", list);
+		} else {
+			model.addAttribute("sign",1);
+		}
+		return "admin/download/uploadfile";
+	}
+	
+	/**
+	 * @param model
+	 * @return 管理资源下载的跳转
+	 */
+	@RequestMapping("manageDownLoadJumpping")
+	public String manageDownLoadJumpping(Model model) {
+		int Pid=11;
+		List<TbCategory> list=categoryService.queryByPid(Pid);
+		if(!list.isEmpty()) {
+			model.addAttribute("categoryList", list);
+		} else {
+			model.addAttribute("sign",1);
+		}
+		return "admin/download/index";
+	}
+	
 	/**
 	 * @param tbResource
 	 * @param picture
@@ -227,9 +277,9 @@ public class SchoolNewsController extends BaseController {
 		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		if (null != item) {
 			String path = session.getServletContext().getRealPath("/static/uploadimg");
-			String reContent = userService.uploadPicture(file, path);
+			String reContent = resourceService.uploadFile(file, path);
 			TbResource resource = resourceService.selectByReContent(reContent);
-			if(null==resource) {
+			if(null!=resource) {
 				model.addAttribute("message","该文件已存在,上传失败");
 				return this.uploadJumpping(model);
 			}
@@ -239,33 +289,27 @@ public class SchoolNewsController extends BaseController {
 		} else {
 			model.addAttribute("message", "不存在该类别，添加失败");
 		}
+		//校园文学
+		if(item.getCaPid()==12) {
+			return this.literatureJumping(model);
+		}
+		//教育教研
+		if(item.getCaPid()==3) {
+			return this.educationJumpping(model);
+		}
+		//资源类的下载
+		if(item.getCaPid()==11) {
+			return this.downLoadjumpping(model);
+		}
 		return this.uploadJumpping(model);
 	}
-	/**
-	 * @param model
-	 * @return 在管理新闻时从数据库类别类查出来的新闻名称
-	 */
-	@RequestMapping("manageJumping")
-	public String manageJumping(Model model) {
-		int Pid = 2;
-		int id=9;
-		List<TbCategory> list = categoryService.queryByPid(Pid);
-		List<TbCategory> item = categoryService.queryByPid(id);
-		if(!list.isEmpty()||!item.isEmpty()) {
-			model.addAttribute("categoryList", list);
-			model.addAttribute("itemList",item);
-		} else {
-			model.addAttribute("message","该名称不存在");
-		}
-		return "admin/schoolnews/index";
-	}
-	
+
 	
 	// 用于富文本编辑器的图片上传
 	@RequestMapping("uploadImg")
 	public void uploadImg(MultipartFile file, HttpServletResponse response) throws Exception {
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
-		String fileName = userService.uploadPicture(file, path);
+		String fileName = resourceService.uploadPicture(file, path);
 		// 返回图片的URL地址
 		response.getWriter().write("/middleschool/static/uploadimg/" + fileName);
 	}
@@ -287,24 +331,6 @@ public class SchoolNewsController extends BaseController {
 		return "admin/schoolnews/addschoolnews";
 	}
 	
-	/**
-	 * @param model
-	 * @return 
-	 */
-	@RequestMapping("sendPrivateNoticeJumping")
-	public String sendPrivateNoticeJumping(Model model) {
-		int Pid=3;
-		int p=5;
-		List<TbCategory> list=categoryService.queryByPid(Pid);
-		List<TbCategory> item=categoryService.queryByPid(p);
-		if(!list.isEmpty()||!item.isEmpty()) {
-			model.addAttribute("categoryList", list);
-			model.addAttribute("itemList",item);
-		} else {
-			model.addAttribute("sign",1);
-		}
-		return "admin/notice/sendprivatenotice";
-	}
 	
 	/**
 	 * @param model
@@ -362,25 +388,6 @@ public class SchoolNewsController extends BaseController {
      */  
     @RequestMapping("/down")  
     public void down(HttpServletRequest request,HttpServletResponse response,int id) throws Exception{  
-    	TbResource tb = resourceService.selectByPrimaryKey(id);
-    	//模拟文件，myfile.txt为需要下载的文件  
-        String fileName = request.getSession().getServletContext().getRealPath("/static/uploadimg")+"/" + tb.getReContent(); 
-        //获取输入流  
-        InputStream bis = new BufferedInputStream(new FileInputStream(new File(fileName)));  
-        //假如以中文名下载的话  
-        String filename = "下载文件.txt";  
-        //转码，免得文件名中文乱码  
-        filename = URLEncoder.encode(filename,"UTF-8");  
-        //设置文件下载头  
-        response.addHeader("Content-Disposition", "attachment;filename=" + filename);    
-        //1.设置文件ContentType类型，这样设置，会自动判断下载文件类型    
-        response.setContentType("multipart/form-data");   
-        BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());  
-        int len = 0;  
-        while((len = bis.read()) != -1){  
-            out.write(len);  
-            out.flush();  
-        }  
-        out.close();  
+    	resourceService.down(request, response, id);
     }  
 }
