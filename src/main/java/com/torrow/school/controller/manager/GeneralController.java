@@ -91,7 +91,7 @@ public class GeneralController extends BaseController {
 				model.addAttribute("message", "保存失败");
 			}
 		} 
-		return this.manageGeneralJumping(model);
+		return this.manage(model,tb.getCaId());
 	}
 	
 	/**
@@ -121,25 +121,7 @@ public class GeneralController extends BaseController {
 		return  "";
 	}*/
 
-	/**
-	 * @param model
-	 * @return 管理学校简介的跳转
-	 */
-	@RequestMapping("manageGeneralJumping")
-	public String manageGeneralJumping(Model model) {
-		int Pid=1;
-		int id=7;
-		List<TbCategory> list=categoryService.queryByPid(Pid);
-		List<TbCategory> item=categoryService.queryByPid(id);
-		if(!list.isEmpty()||!item.isEmpty()) {
-			model.addAttribute("categoryList", list);
-			model.addAttribute("sceneryList", item);
-		}else {
-			model.addAttribute("message", "该类别名称不存在");
-		}
-		return "admin/general/index";
-	}
-
+	
 	/**
 	 * @param model
 	 * @return 图片类的上传
@@ -215,7 +197,7 @@ public class GeneralController extends BaseController {
 		if (null != tb) {
 			model.addAttribute("tbResource", tb);
 		} else {
-			model.addAttribute("message", "该名称不存在");
+			model.addAttribute("message", "您还没有添加这方面的内容,请先在概括类中添加该项内容");
 			return "admin/animation";
 		}
 		return "admin/general/managegeneral";
