@@ -281,7 +281,15 @@ public class SchoolNewsController extends BaseController {
 			TbResource resource = resourceService.selectByReContent(reContent);
 			if(null!=resource) {
 				model.addAttribute("message","该文件已存在,上传失败");
-				return this.uploadJumpping(model);
+				if(item.getCaPid()==9) {
+					return this.uploadJumpping(model);
+				}else if(item.getCaPid()==11){
+					return downLoadjumpping(model);
+				}else if(item.getCaPid()==12) {
+					return this.literatureJumping(model);
+				}else if(item.getCaPid()==3){
+					return this.educationJumpping(model);
+				}
 			}
 			TbResource tb = new TbResource(item.getCaId(),item.getCaName(),file.getOriginalFilename(),reContent);
 			resourceService.insert(tb);
