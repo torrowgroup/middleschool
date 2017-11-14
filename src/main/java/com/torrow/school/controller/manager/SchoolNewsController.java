@@ -113,7 +113,11 @@ public class SchoolNewsController extends BaseController {
 		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		if(null!=retitle) {
 			model.addAttribute("message", "该名称已存在，添加失败");
-			return this.newsJumping(model);
+			if(item.getCaPid()==2) {
+				return this.newsJumping(model);
+			}else if(item.getCaPid()==6){
+				return this.addNoticeJumping(model);
+			}
 		}
 		Date date = new Date();
 		DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd"); //HH表示24小时制；  
