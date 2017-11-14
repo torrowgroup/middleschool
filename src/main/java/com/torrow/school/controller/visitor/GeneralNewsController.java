@@ -2,6 +2,8 @@ package com.torrow.school.controller.visitor;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -117,5 +119,13 @@ public class GeneralNewsController extends BaseController {
 		return this.viewNews(1,model, caId);
 	}
 	
-	
+	/**
+	 * @param id 下载文件id
+	 * @throws Exception
+	 * 下载学生管理和教师成长的内容 
+	 */
+	@RequestMapping("downloadNews")
+	public void downloadNews(int id,HttpServletResponse response) throws Exception{
+		resourceService.down(request, response, id);
+	}
 }

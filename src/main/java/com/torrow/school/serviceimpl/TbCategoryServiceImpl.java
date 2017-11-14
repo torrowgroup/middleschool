@@ -97,7 +97,7 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 		List<TbCategory> generals = new ArrayList<TbCategory>();//概括类
 		List<TbCategory> schoolNews = new ArrayList<TbCategory>();//校园新闻包括上传类里面的学生管理和教师管理
 		List<TbCategory> educations = new ArrayList<TbCategory>();//教育教研处 教研组
-//		List<TbCategory> generals = new ArrayList<TbCategory>();
+		List<TbCategory> literature = new ArrayList<TbCategory>();//校园文学
 //		log.info("rId : "+rId+" category:"+category);
 		for(int i=0;i<category.size();i++){
 			if(rId!=null&&rId!=0&&category.get(i).getCaId()==rId){	//得到用户使用的类别类，并保存在model中
@@ -110,11 +110,14 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 				schoolNews.add(category.get(i));
 			} else if(category.get(i).getCaPid()==3){
 				educations.add(category.get(i));
+			} else if(category.get(i).getCaPid()==12){
+				literature.add(category.get(i));
 			}
 		}
 		model.addAttribute("generals", generals);
 		model.addAttribute("schoolNews", schoolNews);
 		model.addAttribute("educations", educations);
+		model.addAttribute("literature", literature);
 	}
 	
 }

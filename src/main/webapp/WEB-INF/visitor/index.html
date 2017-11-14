@@ -48,15 +48,16 @@
                 <a href="#">教育教研</a>
                 <ul class="navSecondUl">
                     <li th:each="education,educations:${educations}">
-                    	<a th:href="@{/visitorGN/viewNews?(gName= ${education.caName})}" th:text="${education.caName}" target="_blank">教育教研</a>
+                    	<a th:href="@{/visitorNE/viewEducation?(rId= ${education.caId})}" th:text="${education.caName}" target="_blank">教育教研</a>
                		</li>
                 </ul>
             </li>
             <li class="navLi">
                 <a href="#">校园文学</a>
                 <ul class="navSecondUl">
-                    <li><a href="#">学生园地</a></li>
-                    <li><a href="#">教师园地</a></li>
+                    <li th:each="literature,literatureS:${literature}">
+                    	<a href="#" th:text="${literature.caName}">校园文学</a>
+                    </li>
                 </ul>
             </li>
             <li class="navLi">

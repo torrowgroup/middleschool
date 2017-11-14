@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>郑州一二二中学</title>
+    <title>郑州一二二中学-新闻</title>
     <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/static/css/visitor/style.css}" type="text/css">
 	<link rel="stylesheet" th:href="@{/static/css/visitor/aboutschool.css}" type="text/css">
@@ -95,7 +95,7 @@
             <div th:if="${resource}!=null">
 	            <h3 class="titlesc" th:text="${resource.reTitle}">新闻标题</h3>
 	            <div th:if="${download}">
-	            	<a href="">
+	            	<a th:href="@{/visitorGN/downloadNews?(id=${resource.reId})}">
 	            		<div class="schollcontent" id="reContent">暂没有相关内容</div>
 	            	</a>
 	            </div>

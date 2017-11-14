@@ -3,6 +3,8 @@ package com.torrow.school.controller.visitor;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,13 +40,14 @@ public class NoticeEducateController extends BaseController{
 			Model model,Integer nId) {
 		List<TbCategory> recordList = categoryService.queryByPid(nId);//根据pId得到单个类别类
 		TbCategory record = null;
+		PageBean<TbResource> resourceLists = new PageBean<TbResource>();
 		if(recordList==null||recordList.size()==0){
-			model.addAttribute("message", "暂时没有公告");
+			model.addAttribute("message", "暂时没有内容");
 			return new ModelAndView("visitor/notices");
 		} else {
 			record = recordList.get(0);
+			resourceLists = resourceService.findingByPaging(currentPage, record,10);
 		}
-		PageBean<TbResource> resourceLists = resourceService.findingByPaging(currentPage, record,10);
 		categoryService.getCategory(record.getCaId(),model);//将概括，新闻等封装进model，供下拉菜单使用，以及用户选择的功能项
 		model.addAttribute("noticesList", resourceLists);
 		return new ModelAndView("visitor/notices");
@@ -65,4 +68,30 @@ public class NoticeEducateController extends BaseController{
 		return new ModelAndView("visitor/noticedetails");
 	}
 
+	/**
+	 * @param rId 类别类id
+	 * @return
+	 * 	得到教研组内容
+	 */
+	@RequestMapping("viewEducation")
+	public ModelAndView viewEducation(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
+			Model model,Integer rId){
+		TbCategory category = new TbCategory();
+		category.setCaId(rId);
+		PageBean<TbResource> resourceList = resourceService.findingByPaging(currentPage, category, 10);
+		log.info("category:"+category+" resourceList "+resourceList);
+		categoryService.getCategory(rId,model);//将概括，新闻等封装进model，供下拉菜单使用，以及用户选择的功能项
+		model.addAttribute("resourceList", resourceList);
+		return new ModelAndView("visitor/education");
+	}
+	
+	
+	/**
+	 * @param rId 下载文件的id
+	 * 	下载教育教研
+	 */
+	@RequestMapping("downEducation")
+	public void downEducation(int rId,HttpServletResponse response) throws Exception{
+		resourceService.down(request, response, rId);
+	}
 }
