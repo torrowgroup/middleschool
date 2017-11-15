@@ -31,5 +31,4 @@ public interface TbCategoryService {
 	public PageBean<TbCategory>  findPage(int currentPage,int pageSize);
 	//通过传进去父id来查询信息安李杰加
 	public List<TbCategory> queryByPid(int Pid);
-	
 }

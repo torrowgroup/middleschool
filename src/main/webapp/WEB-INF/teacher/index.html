@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>home</title>
+</head>
+<body>
+<span>校园文学上传</span>
+<a th:href="@{/news/literatureJumping}" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校园文学的上传</a><span>政教处管理上传的</span>
+<span>管理上传的校园文学</span>
+<div th:each="category,categoryStart:${literatureList}">
+	<a th:href="@{/news/manageUpload?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span></a>
+</div>
+<span>资源下载管理</span>
+<div th:each="category,categoryStart:${downloadList}">
+	<a th:href="@{/news/manageUpload?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span></a>
+</div>
+</body>
+</html>
