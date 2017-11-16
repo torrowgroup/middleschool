@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>home</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/dist/css/wangEditor.min.css}">
+</head>
+<body>
+<div th:if="${sign}=='1'">请先去类别管理中添加相应类别</div>
+<div th:if="${sign}!='1'">
+	<div th:text="${message}"></div>
+	<form th:action="@{/news/addSchoolNews}" onsubmit="modifyContent()" method="post"  enctype="multipart/form-data">
+		<table>
+			<tr>
+				<td>标题</td>
+				<td><input type="text" name="reTitle" required="required" maxlength="25"></td>
+			</tr>
+			<tr>
+				<td>内容</td>
+				<td>
+					<div id="introduction">
+						<textarea style="display: none;" name="reContent" 
+							id="usIntroduction" ></textarea>
+						<div id="intro">
+							<div id="introdEditor" style="height: 200px;"></div>
+						</div>
+					</div>
+			</tr>
+			<tr>
+				<td>对象</td>
+				<td>
+					<select name="caId">
+						<option th:each="category,categoryStart:${categoryList}" th:text="${category.caName}" th:value="${category.caId}" />
+						<option th:each="category,categoryStart:${itemList}" th:text="${category.caName}" th:value="${category.caId}" />
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="添加"></td>
+				<td><input type="reset" value="重置"></td>
+			</tr>
+		</table>
+	</form>
+<script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/addnews.js}" ></script>
+</div>
+</body>
+</html>

@@ -17,7 +17,7 @@ public interface TbResourceService {
     List<TbResource> selectAll();
     //得到单条资源类，目前用于概括类
     TbResource selectOne(Integer gId);
-    //得到8条新闻，8条公告等
+    //得到8条新闻，8条公告等,应用于首页
     void getResource(List<TbCategory> categoryList, Model model);
     
 

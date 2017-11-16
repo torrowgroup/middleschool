@@ -128,7 +128,7 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 				noticeCaId = categoryList.get(i).getCaId();
 			}
 		}
-		List<TbResource> sNews = new ArrayList<TbResource>();//学校新闻，按倒序得到，只要8条
+		List<TbResource> sNews = new ArrayList<TbResource>();//学校新闻，按倒序得到，只要8条,没有图片不要
 		List<TbResource> sNotices = new ArrayList<TbResource>();//学校公告，按倒序得到，只要8条
 		List<TbResource> allResources = this.selectAll();
 		for(int i=allResources.size()-1;i>=0;i--){	//倒序得到资源类
@@ -155,15 +155,28 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	 * 用于从富文本中分离图片，此方法仅存在于该类中，接口层没有相应方法
 	 */
 	public String getPicture(String content){	
-		String img = "<img alt=\"\" src=";// \"\"是为了加入""
-		int startIndex = content.indexOf(img);
+		String imgInternet = "<img alt=\"\" src=\"";// \"\"是为了加入"" alt在前
+		String imglocal = "<img src=\"";//src在前
+		int startIndex = -1;
+		int stopIndex = -1;
+		int length = 0;//src内容前面的部分
 		String contentTemp="";//用于存放从富文本中得到的图片
+		if(content.indexOf(imgInternet)!=-1){
+			startIndex = content.indexOf(imgInternet);
+			length = imgInternet.length();
+			stopIndex = content.indexOf("\">",startIndex);
+		} else if(content.indexOf(imglocal)!=-1) {
+			startIndex = content.indexOf(imglocal);
+			length = imglocal.length();
+			stopIndex = content.indexOf("\" alt=",startIndex);
+		}
 		if(startIndex!=-1){
-			int stopIndex = content.indexOf("\">",startIndex);
-			for(int i=startIndex+img.length();i<stopIndex;i++){
+			for(int i=startIndex+length;i<stopIndex;i++){
 				contentTemp +=  content.charAt(i);
 			}
-			log.info(contentTemp);
+			if(contentTemp.indexOf("middleschool")!=-1){
+				contentTemp = ".."+contentTemp;//本地图片回到项目名前
+			}
 		} else  {
 			return null;
 		}

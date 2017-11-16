@@ -15,8 +15,8 @@
 	})
 	
 	function turnPageNew (obj){	//新闻界面的跳转页数
-		var text = obj.text;
-		var name = obj.id;
+		var text = obj.text;//跳转页数
+		var name = obj.id;	//类别类id
 		window.location.href = "viewNews?currentPage="+text+"&nId="+name;
 	}
 	
@@ -24,6 +24,12 @@
 		var text = obj.text;
 		var name = obj.id;
 		window.location.href = "viewGeneral?currentPage="+text+"&gId="+name;
+	}
+	
+	function turnPageNotice (obj){//通知公告界面的跳转页数
+		var text = obj.text;
+		var name = obj.id;
+		window.location.href = "viewNotices?currentPage="+text+"&nId="+name;
 	}
 	
 	

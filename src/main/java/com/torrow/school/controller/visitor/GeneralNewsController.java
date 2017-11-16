@@ -1,5 +1,9 @@
 package com.torrow.school.controller.visitor;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +52,20 @@ public class GeneralNewsController extends BaseController {
 	}
 
 	/**
+	 * @param pId	获得图片资源类的id
+	 * @param nId	接受用户查看的功能
+	 * @param model
+	 * @return  查看校园风光的详情
+	 */
+	@RequestMapping("viewsDetails")
+	public ModelAndView viewsDetails(Integer pId,Integer nId,Model model) {
+		TbResource resource = resourceService.selectByPrimaryKey(pId);
+		model.addAttribute("resource", resource);//将图片放进model
+		categoryService.getCategory(nId,model);//将概括，新闻等封装进model，供下拉菜单使用，以及用户选择的功能项
+		return new ModelAndView("visitor/viewdetails");
+	}
+	
+	/**
 	 * @param nName	得到新闻类别
 	 * @param nId	接受用户查看的功能
 	 * @param model
@@ -67,20 +85,6 @@ public class GeneralNewsController extends BaseController {
 	}
 	
 	/**
-	 * @param pId	获得图片资源类的id
-	 * @param nId	接受用户查看的功能
-	 * @param model
-	 * @return  查看校园风光的详情
-	 */
-	@RequestMapping("viewsDetails")
-	public ModelAndView viewsDetails(Integer pId,Integer nId,Model model) {
-		TbResource resource = resourceService.selectByPrimaryKey(pId);
-		model.addAttribute("resource", resource);//将图片放进model
-		categoryService.getCategory(nId,model);//将概括，新闻等封装进model，供下拉菜单使用，以及用户选择的功能项
-		return new ModelAndView("visitor/viewdetails");
-	}
-	
-	/**
 	 * @param rId	接受用户查看的具体的新闻id
 	 * @param nId	接受用户查看的功能
 	 * @param model
@@ -89,8 +93,39 @@ public class GeneralNewsController extends BaseController {
 	@RequestMapping("newDetails")
 	public ModelAndView newDetails(Integer rId,Integer nId,Model model){
 		TbResource resource = resourceService.selectByPrimaryKey(rId);
+		int pId = categoryService.selectByPrimaryKey(resource.getCaId()).getCaPid();//得到所选择的资源类的pId，如果是学生管理和教师发展提供下载
+		if (pId==9) {
+			model.addAttribute("download", true);
+		}
 		model.addAttribute("resource", resource);
 		categoryService.getCategory(nId,model);//将概括，新闻等封装进model，供下拉菜单使用，以及用户选择的功能项
 		return new ModelAndView("visitor/newdetails");
+	}
+	
+	
+	/**
+	 * @param model
+	 * @return	首页更多新闻,到达新闻界面
+	 */
+	@RequestMapping("moreNews")
+	public ModelAndView moreNews(Model model){
+		int pId = 2;//新闻类的id
+		List<TbCategory> categoryList = categoryService.queryByPid(pId);
+		int caId = 0;
+		if(categoryList!=null){
+			TbCategory category = categoryList.get(0);
+			caId = category.getCaId();
+		}
+		return this.viewNews(1,model, caId);
+	}
+	
+	/**
+	 * @param id 下载文件id
+	 * @throws Exception
+	 * 下载学生管理和教师成长的内容 
+	 */
+	@RequestMapping("downloadNews")
+	public void downloadNews(int id,HttpServletResponse response) throws Exception{
+		resourceService.down(request, response, id);
 	}
 }

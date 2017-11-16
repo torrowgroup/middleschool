@@ -108,13 +108,23 @@
 	                </a>
 	            </div>
 	            <div class="clearfix"></div>
-	            <div class="paging1" th:if="${views.totalPage>0}">
+	            <div class="paging1">
 	                <ul class="pagingUl" >
-	                    <li><a href="">&laquo;</a></li>
+	                    <li th:if="${views.currPage-1>0}">
+	                    	<a th:href="@{/visitorGN/viewGeneral?(currentPage=${views.currPage-1},gId=${views.lists[0].caId})}">&laquo;</a>
+	                    </li>
+	                     <li th:if="${views.currPage-1==0}">
+	                     <a href="#">&laquo;</a>
+	                     </li>
 	                    <li th:each="i:${#numbers.sequence(1,views.totalPage)}" th:if="${i > views.currPage-3} and ${i < views.currPage+3}" >
 	                    	<a th:href="@{/visitorGN/viewGeneral?(currentPage=${i},gId=${views.lists[0].caId})}" th:text="${i}">#</a>
 	                    </li>
-	                    <li><a href="">&raquo;</a></li>
+	                    <li th:if="${views.currPage+1<=views.totalPage}">
+	                    	<a th:href="@{/visitorGN/viewGeneral?(currentPage=${views.currPage+1},gId=${views.lists[0].caId})}">&raquo;</a>
+	                    </li>
+	                    <li th:if="${views.currPage+1>views.totalPage}">
+	                     	<a href="#">&raquo;</a>
+	                    </li>
 	                </ul>
 	                <div class="pagingRight">
 	                    <span>跳转到</span>
