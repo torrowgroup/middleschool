@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>主页</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/dist/css/wangEditor.min.css}">
+</head>
+<body>
+	<div th:if="${pagemsg.totalCount}==0">没有任何用户信息！</div>
+	<div th:if="${pagemsg.totalCount}!=0">
+		<table border="1">
+			<thead>
+				<tr>
+					<td>姓名</td>
+					<td>邮箱</td>
+					<td>性别</td>
+					<td>职位</td>
+					<td>联系电话</td>
+					<td>图片</td>
+					<td>简介</td>
+					<td>成就</td>
+					<td>Edit</td>
+					<td>Delete</td>
+				</tr>
+			</thead>
+			<tr th:each="user,userStart:${pagemsg.lists}">
+				<td th:text="${user.usName}">${user.usName }</td>
+				<td th:text="${user.usEmail}">${user.usEmail}</td>
+				<td th:text="${user.usSex}">${user.usSex}</td>
+				<td th:text="${user.caName}">${user.caName }</td>
+				<td th:text="${user.usPhone}">${user.usPhone }</td>
+				<td><img alt="无图片" width="100px;" height="80px;" th:src="@{/static/uploadimg/{picture}(picture=${user.usPicture})}" /></td>
+				<td><button th:name="${user.usIntroduction}" onclick="show(this)">预览</button></td>
+				<td><button th:name="${user.usAchievements}" onclick="show(this)">预览</button></td>
+				<td><a th:href="@{/user/toUpdateUser?(id=${user.usId},page=${pagemsg.currPage})}">Edit</a></td>
+				<td><a th:href="@{/user/deleteUser?(id=${user.usId},page=${pagemsg.currPage})}"
+					onclick="return confirm('确定要删除吗')">Delete</a></td>
+			</tr>
+		</table>
+	</div>
+	<div id="introEditor"  style="border: 1px solid #ccc;display: none;"></div>
+	<table>
+		<tr>
+			<td class="td2"><span th:if="${pagemsg.currPage != 1}"> <a
+					th:href="@{/user/manageUser?(currentPage=1)}">[首页]</a>&nbsp;&nbsp;
+					<a
+					th:href="@{/user/manageUser?(currentPage=${pagemsg.currPage-1})}">[上一页]</a>&nbsp;&nbsp;
+			</span> <span th:if="${pagemsg.currPage == 1}"> [首页][上一页] </span> <span
+				th:each="i:${#numbers.sequence(1,pagemsg.totalPage)}"> <a
+					th:if="${i > pagemsg.currPage-3} and ${i < pagemsg.currPage+3}"
+					th:href="@{/user/manageUser?(currentPage=${i})}" th:text="${i}">#</a>
+			</span> <span th:if="${pagemsg.currPage < pagemsg.totalPage}"> <a
+					th:href="@{/user/manageUser?(currentPage=${pagemsg.currPage+1})}">[下一页]</a>&nbsp;&nbsp;
+			</span> <span th:if="${pagemsg.currPage >= pagemsg.totalPage}"> [下一页]
+			</span></td>
+		</tr>
+	</table>
+<script type="text/javascript">
+	function show(obj) {
+		document.getElementById('introEditor').style.display="block";
+		document.getElementById('introEditor').innerHTML = obj.name;
+	}
+</script>
+</body>
+</html>

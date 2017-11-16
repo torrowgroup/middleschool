@@ -47,7 +47,7 @@
             <a href="#">教育教研</a>
                 <ul class="navSecondUl">
                     <li th:each="education,educations:${educations}">
-                    	<a th:href="@{/visitorGN/viewNews?(gName= ${education.caName})}" th:text="${education.caName}">学校概况</a>
+                    	<a th:href="@{/visitorNEL/viewEducation?(rId= ${education.caId})}" th:text="${education.caName}" >教育教研</a>
                		</li>
                 </ul>
         </li>

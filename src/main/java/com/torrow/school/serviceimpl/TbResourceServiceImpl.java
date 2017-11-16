@@ -209,4 +209,9 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	public void down(HttpServletRequest request, HttpServletResponse response, int id) throws Exception {
 		this.download(request,response,id);
 	}
+
+	@Override
+	public List<TbResource> selectListByCaId(Integer caId) {
+		return tbResourceDao.selectListByCaId(caId);
+	}
 }

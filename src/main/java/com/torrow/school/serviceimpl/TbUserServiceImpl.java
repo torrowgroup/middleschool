@@ -77,4 +77,10 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 		return tbUserDao.selectByEmail(email);
 	}
 
+	@Override
+	public List<TbUser> selectListByCaId(Integer caId) {
+		
+		return tbUserDao.selectListByCaId(caId);
+	}
+
 }

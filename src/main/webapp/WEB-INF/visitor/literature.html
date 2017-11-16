@@ -54,8 +54,9 @@
         <li class="navLi">
             <a href="#">校园文学</a>
             <ul class="navSecondUl">
-                <li><a href="#">学生园地</a></li>
-                <li><a href="#">教师园地</a></li>
+                <li th:each="literature,literatureS:${literature}">
+                    	<a th:href="@{/visitorNEL/viewLiterature?(cId= ${literature.caId})}" th:text="${literature.caName}">校园文学</a>
+                    </li>
             </ul>
         </li>
         <li class="navLi">
@@ -84,57 +85,57 @@
 <div class="mainbox1">
     <div class="schollabout">
         <div class="schollleft">
-            <h3>教育教研</h3>
+            <h3>校园文学</h3>
             <ul class="schoolcenter">
-               	<li th:each="news,newsStart:${schoolNews}">
-                    	<a th:name="${news.caId}" th:href="@{/visitorGN/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
+               	<li th:each="news,newsStart:${literature}">
+                    	<a th:name="${news.caId}" th:href="@{/visitorNEL/viewLiterature?(cId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
                 </li>
             </ul>
         </div>
         <div class="schollright">
             <div class="location"><a th:href="@{/index}">首页</a><span th:if="${useCategory!=null}">.<a href="#" th:text="${useCategory.caName}">校园新闻</a></span></div>
-            <div th:if="${news.totalPage==0}">
+            <div th:if="${resourceList.totalPage==0}">
             	<h3 class="titlesc">暂没有相关内容</h3>
             </div>
-            <div th:if="${news.totalPage>0}">
-	            <h3 class="titlesc" th:text="${news.lists[0].caName}">校园新闻</h3>
+            <div th:if="${resourceList.totalPage>0}">
+	            <h3 class="titlesc" th:text="${resourceList.lists[0].caName}">校园文学</h3>
 	            <div class="newscontent">
 	                <ul class="newscontentUl">
-	                 	<li th:each="resource,resoueStart:${news.lists}">
-	                 		<a id="news" th:href="@{/visitorGN/newDetails?(rId=${resource.reId},nId=${resource.caId})}" th:text="${resource.reTitle}"></a><span th:text="${resource.reIssuingdate}"></span>
+	                 	<li th:each="resource,resoueStart:${resourceList.lists}">
+	                 		<a title="点击下载" id="news" th:href="@{/visitorNEL/downEduLiter?(rId=${resource.reId})}" th:text="${resource.reTitle}"></a><span th:text="${resource.reIssuingdate}"></span>
 	                 	</li>
 	                </ul>
 	                <div class="clearfix"></div>
 	            </div>
-	            <div class="paging1" th:if="${news.totalPage>0}">
+	            <div class="paging1" th:if="${resourceList.totalPage>0}">
 	                <ul class="pagingUl">
-	                    <li th:if="${news.currPage-1>0}">
-	                    	<a th:href="@{/visitorGN/viewNews?(currentPage=${news.currPage-1},nId=${news.lists[0].caId})}">&laquo;</a>
+	                    <li th:if="${resourceList.currPage-1>0}">
+	                    	<a th:href="@{/visitorGN/viewNews?(currentPage=${resourceList.currPage-1},nId=${resourceList.lists[0].caId})}">&laquo;</a>
 	                    </li>
-	                     <li th:if="${news.currPage-1==0}">
+	                     <li th:if="${resourceList.currPage-1==0}">
 	                     <a href="#">&laquo;</a>
 	                     </li>
-	                    <li th:each="i:${#numbers.sequence(1,news.totalPage)}" th:if="${i > news.currPage-3} and ${i < news.currPage+3}" >
-	                    	<a th:href="@{/visitorGN/viewNews?(currentPage=${i},nId=${news.lists[0].caId})}" th:text="${i}">#</a>
+	                    <li th:each="i:${#numbers.sequence(1,resourceList.totalPage)}" th:if="${i > resourceList.currPage-3} and ${i < resourceList.currPage+3}" >
+	                    	<a th:href="@{/visitorGN/viewNews?(currentPage=${i},nId=${resourceList.lists[0].caId})}" th:text="${i}">#</a>
 	                    </li>
-	                   <li th:if="${news.currPage+1<=news.totalPage}">
-	                    	<a th:href="@{/visitorGN/viewNews?(currentPage=${news.currPage+1},nId=${news.lists[0].caId})}">&raquo;</a>
+	                   <li th:if="${resourceList.currPage+1<=resourceList.totalPage}">
+	                    	<a th:href="@{/visitorGN/viewNews?(currentPage=${resourceList.currPage+1},nId=${resourceList.lists[0].caId})}">&raquo;</a>
 	                    </li>
-	                    <li th:if="${news.currPage+1>news.totalPage}">
+	                    <li th:if="${resourceList.currPage+1>resourceList.totalPage}">
 	                     	<a href="#">&raquo;</a>
 	                    </li>
 	                </ul>
 	                <div class="pagingRight">
 	                    <span>跳转到</span>
 	                    <div class="selectBox">
-	                        <span th:text="${news.currPage}"> <i class="glyphicon glyphicon-chevron-down pull-right" style="line-height: 30px"></i></span>
+	                        <span th:text="${resourceList.currPage}"> <i class="glyphicon glyphicon-chevron-down pull-right" style="line-height: 30px"></i></span>
 	                        <ul class="selectBoxUl">
-	                         	<li th:each="i:${#numbers.sequence(1,news.totalPage)}">
-	                         		<a href="#" th:onclick="'turnPageNew(this);'" th:id="${news.lists[0].caId}" th:text="${i}"></a>
+	                         	<li th:each="i:${#numbers.sequence(1,resourceList.totalPage)}">
+	                         		<a href="#" th:onclick="'turnPageNew(this);'" th:id="${resourceList.lists[0].caId}" th:text="${i}"></a>
 	                         	</li>
 	                        </ul>
 	                    </div>
-	                    <span>页 共<span th:text="${news.totalPage}"></span>页</span>
+	                    <span>页 共<span th:text="${resourceList.totalPage}"></span>页</span>
 	                </div>
 	            </div>
 	           </div>

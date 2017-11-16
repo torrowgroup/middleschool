@@ -82,4 +82,9 @@
 	<select id="selectCount" resultType="int">
 		select count(*) from tb_resource
 	</select>
+	
+	<select id="selectListByCaId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+	    select * from tb_resource where ca_id = #{caId,jdbcType=INTEGER}
+  </select>
+	
 </mapper>

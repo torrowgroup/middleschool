@@ -19,7 +19,8 @@ public interface TbResourceService {
     TbResource selectOne(Integer gId);
     //得到8条新闻，8条公告等,应用于首页
     void getResource(List<TbCategory> categoryList, Model model);
-    
+    //根据caId得到对应资源类，不分页
+    List<TbResource> selectListByCaId(Integer caId);
 
     //为了查看一条信息
     TbResource selectByPrimaryKey(Integer id);
@@ -47,4 +48,5 @@ public interface TbResourceService {
     public String uploadFile(MultipartFile file, String path) throws Exception;
     //文件的下载
     public void down(HttpServletRequest request,HttpServletResponse response,int id) throws Exception;
+	
 }

@@ -28,10 +28,13 @@ public interface TbUserService {
 	TbUser selectByEmail(String email);
 	// 上传图片
 	String uploadPicture(MultipartFile picture, String path) throws Exception;
+	//根据caId得到用户集合
+	List<TbUser> selectListByCaId(Integer caId);
 	// 这个方法是为了根据caId来查找的
 	TbUser selectByCaId(Integer caId);// 安李杰
 	// 这个方法根据caId来删除
 	int deleteByCaId(Integer caId);
 	// 登陆的方法
 	TbUser login(String usEmail, String usPassword);
+	
 }

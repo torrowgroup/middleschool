@@ -47,15 +47,16 @@
             <a href="#">教育教研</a>
                 <ul class="navSecondUl">
                     <li th:each="education,educations:${educations}">
-                    	<a th:href="@{/visitorNE/viewEducation?(rId= ${education.caId})}" th:text="${education.caName}" >教育教研</a>
+                    	<a th:href="@{/visitorNEL/viewEducation?(rId= ${education.caId})}" th:text="${education.caName}" >教育教研</a>
                		</li>
                 </ul>
         </li>
         <li class="navLi">
             <a href="#">校园文学</a>
             <ul class="navSecondUl">
-                <li><a href="#">学生园地</a></li>
-                <li><a href="#">教师园地</a></li>
+                <li th:each="literature,literatureS:${literature}">
+                    	<a th:href="@{/visitorNEL/viewEducation?(rId= ${literature.caId})}" th:text="${literature.caName}">校园文学</a>
+                    </li>
             </ul>
         </li>
         <li class="navLi">
@@ -87,7 +88,7 @@
             <h3>教育教研</h3>
             <ul class="schoolcenter">
                	<li th:each="resourceList,resourceStart:${educations}">
-                    	<a th:name="${resourceList.caId}" th:href="@{/visitorNE/viewEducation?(rId= ${resourceList.caId})}" th:text="${resourceList.caName}">学校新闻</a>
+                    	<a th:name="${resourceList.caId}" th:href="@{/visitorNEL/viewEducation?(rId= ${resourceList.caId})}" th:text="${resourceList.caName}">学校新闻</a>
                 </li>
             </ul>
         </div>
@@ -101,7 +102,7 @@
 	            <div class="newscontent">
 	                <ul class="newscontentUl">
 	                 	<li th:each="resource,resoueStart:${resourceList.lists}">
-	                 		<a title="点击下载" id="news" th:href="@{/visitorGN/downEducation?(rId=${resource.reId})}" th:text="${resource.reTitle}"></a><span th:text="${resource.reIssuingdate}"></span>
+	                 		<a title="点击下载" id="news" th:href="@{/visitorGN/downEduLiter?(rId=${resource.reId})}" th:text="${resource.reTitle}"></a><span th:text="${resource.reIssuingdate}"></span>
 	                 	</li>
 	                </ul>
 	                <div class="clearfix"></div>
