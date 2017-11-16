@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>home</title>
+</head>
+<body>
+<span>政教处上传</span>
+<a th:href="@{/news/uploadJumpping}" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传（学生管理和教师成长）</a>
+<span>政教处管理上传的</span>
+<div th:each="category,categoryStart:${uploadList}">
+	<a th:href="@{/news/manageUpload?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span></a>
+</div>
+</body>
+</html>

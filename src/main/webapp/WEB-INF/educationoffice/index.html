@@ -7,8 +7,10 @@
 </head>
 <body>
 <details>
-		<summary>教育教研管理</summary>
-		<div th:each="category,categoryStart:${categoryList}">
+		<span>教研组上传</span>
+		<a th:href="@{/news/educationJumpping}"  target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;教育教研上传</a>
+		<span>教研组管理</span>
+		<div th:each="category,categoryStart:${educationList}">
 				<a th:href="@{/news/manageUpload?(id=${category.caId})}" th:text="${category.caName}"></a>
 		</div>
 		<br>

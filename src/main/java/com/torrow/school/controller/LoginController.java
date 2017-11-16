@@ -55,11 +55,26 @@ public class LoginController extends BaseController {
 			List<TbCategory> upload = categoryService.queryByPid(d);
 			int i=3;
 			List<TbCategory> education = categoryService.queryByPid(i);
+			int j=12;
+			List<TbCategory> literature = categoryService.queryByPid(j);
+			int f=11;
+			List<TbCategory> download = categoryService.queryByPid(f);
+			model.addAttribute("downloadList", download);
+			model.addAttribute("literatureList",literature);
 			model.addAttribute("educationList",education);
 			model.addAttribute("uploadList",upload);
 			model.addAttribute("newsList", news);
 			model.addAttribute("generalList", list);
 			model.addAttribute("sceneryList", item);
+			TbCategory tbCategory = categoryService.selectByPrimaryKey(tbUser.getCaId());
+			//进入机构部的管理页面
+			if(tbCategory.getCaPid()==3) {
+				return "educationoffice/index";
+			}else if(tbUser.getCaName().equals("政教处")) {
+				return "politicaleducation/index";
+			}else if(tbUser.getCaName().equals("教师")) {
+				return "teacher/index";
+			}
 		}else{
 			model.addAttribute("msg", "用户名或密码错误");
 			return "index";

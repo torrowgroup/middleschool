@@ -119,5 +119,4 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 		model.addAttribute("educations", educations);
 		model.addAttribute("literature", literature);
 	}
-	
 }
