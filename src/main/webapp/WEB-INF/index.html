@@ -26,43 +26,42 @@
 			</tr>
 		</table>
 	</form> -->
-<div class="box"> 
+	<div class="box"> 
 		<div class="logo">
 		<form th:action="@{/userLogin}" method="post" accept-charset="UTF-8" class="form-horizontal" role="form">	<br>
 			<div class="form-group">
 				<label for="firstname" class="col-sm-2 control-label">账户</label>
 				<div class="col-sm-10">
-					<input type="email" name="usEmail" required class="form-control" id="firstname" 
+					<input type="email" name="usEmail" required="required" class="form-control" id="firstname" 
 						   placeholder="请输入账户">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="lastname" class="col-sm-2 control-label">密码</label>
 				<div class="col-sm-10">
-					<input type="password" name="usPassword" required class="form-control" id="lastname" 
+					<input type="password" name="usPassword" required="required" class="form-control" id="lastname" 
 						   placeholder="请输入密码">
 				</div>
 			</div>
-			<div class="form-group" style="margin-top:40px;">
+			<div th:text="${msg}"></div>
+		<!-- 	<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<div class="checkbox">
 						<label>
 							<input type="checkbox">记住密码
 						</label>
-						<a th:href="@{/toInputEmail}" class="righ" style="text-decoration: none;">忘记密码</a>
+						<a href="#" class="righ" style="text-decoration: none;">忘记密码</a>
 					</div>
 
 				</div>
-			</div>
-			<!-- 返回错误信息的部分 -->
-			<div th:text="${msg}" style="position:relative;top:-60px;text-align:center;background-color:#fff;"></div>
+			</div> -->
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<a href="#" style="text-decoration: none;"><input type="submit" value="login" class="but" style="background: #012349;color: white;width: 66px;height: 24px;" onclick = "checkUser();" /></a>
+					<a href="#" style="text-decoration: none;"><input type="submit" value="login" class="but" style="background: #66B3FF;color: white;width: 66px;height: 24px;" onclick = "checkUser();" /></a>
 				</div>
 			</div>
 		</form>
 		</div>
-</div>
+	</div>
 </body>
 </html>

@@ -261,18 +261,16 @@ public class SchoolNewsController extends BaseController {
 
 	/**
 	 * @param model
-	 * @return 管理资源下载的跳转
+	 * @return 管理资源下载的管理
 	 */
 	@RequestMapping("manageDownLoadJumpping")
-	public String manageDownLoadJumpping(Model model) {
-		int Pid = 11;
-		List<TbCategory> list = categoryService.queryByPid(Pid);
-		if (!list.isEmpty()) {
-			model.addAttribute("categoryList", list);
-		} else {
-			model.addAttribute("sign", 1);
-		}
-		return "admin/download/index";
+	public String manageDownLoadJumpping(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
+			TbCategory record = new TbCategory();
+			record.setCaPid(11);
+			model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,4));// 回显分页数据
+			model.addAttribute("sign", 1);// 为了在查看管理轮播图时是同一个界面
+			session.setAttribute("currentPage", currentPage);
+			return "admin/schoolnews/manageupload";
 	}
 
 	/**
@@ -302,9 +300,12 @@ public class SchoolNewsController extends BaseController {
 				}
 			}
 		}
+		Date date = new Date();
+		DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd"); // HH表示24小时制；
+		String Date = dFormat.format(date);
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
 		String reContent = resourceService.uploadFile(file, path);
-		TbResource tb = new TbResource(item.getCaId(), item.getCaName(), file.getOriginalFilename(), reContent);
+		TbResource tb = new TbResource(item.getCaId(),Date,item.getCaName(), file.getOriginalFilename(), reContent);
 		resourceService.insert(tb);
 		model.addAttribute("message", "添加成功");
 		// 校园文学
@@ -353,15 +354,13 @@ public class SchoolNewsController extends BaseController {
 	 * @return 进入管理通知公告类的跳转
 	 */
 	@RequestMapping("noticeJumping")
-	public String noticeJumping(Model model) {
-		int Pid = 6;
-		List<TbCategory> list = categoryService.queryByPid(Pid);
-		if (!list.isEmpty()) {
-			model.addAttribute("categoryList", list);
-		} else {
-			model.addAttribute("message", "该类别名称不存在");
-		}
-		return "admin/notice/index";
+	public String noticeJumping(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
+			TbCategory record = new TbCategory();
+			record.setCaPid(6);
+			model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,4));// 回显分页数据
+			model.addAttribute("sign", 1);// 为了在查看管理轮播图时是同一个界面
+			session.setAttribute("currentPage", currentPage);
+			return "admin/schoolnews/manageschoolnews";
 	}
 
 	// ----------------------------------------------------------

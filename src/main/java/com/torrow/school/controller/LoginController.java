@@ -42,7 +42,7 @@ public class LoginController extends BaseController {
 	@RequestMapping("userLogin")
 	public String login(String usEmail,String usPassword,Model model){
 		TbUser tbUser=userService.login(usEmail,usPassword);
-		if(tbUser!=null) {
+		if(null!=tbUser) {
 			model.addAttribute("msg", "登录成功");
 			session.setAttribute("manager",tbUser);
 			int Pid=1;//概括类的
@@ -75,11 +75,12 @@ public class LoginController extends BaseController {
 			}else if(tbUser.getCaName().equals("教师")) {
 				return "teacher/index";
 			}
-		}else{
+			return "admin/index";
+		}else {
 			model.addAttribute("msg", "用户名或密码错误");
-			return "index";
+			log.info("--------------------------------------------------");
 		}
-		return "admin/index";
+		return "index";
 	}
 	
 	/**

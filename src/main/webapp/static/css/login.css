@@ -6,7 +6,7 @@ body{
 .box{
 	width: 100%;
 	height: 650px;
-	background-image: url(../images/admin/login.jpg);
+	background-image: url(../images/admin/login1.png);
 	background-size: 100% 100%;
 }
 .logo{
@@ -43,7 +43,7 @@ input{
 	cursor:pointer;
 	/*color: #333366;*/
 	border-radius: 6px;
-	border: 1px solid #012349;
+	border: 1px solid #66B3FF;
 	
 }
 a{

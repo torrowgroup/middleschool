@@ -1,138 +1,212 @@
-
+body{
+	margin:0;
+	padding: 0;
+}
 .topper{
 	width: 100%;
-	height:80px;
-	background-color: #012349;
+	height:90px;
+	background: url(../../images/admin/nav.png);
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	/*position: fixed;*/
+/*	background: -webkit-linear-gradient(left top, #1fa4c7, white);*/
 }
 .one{
-	width:20%;
-	height: 100%;
-	float: left;	
-	background-color: white;
-}
-.one p{
-	font-size: 1.6em;
-	font-weight: bold;
-	color:#012349; 
-	font-family:楷体;
-	padding-top:22px;
-}
-.mid{ 
-	width: 50%;
+	width:19.5%;
 	height: 100%;
 	float: left;	
 }
+.mid{  
+	width: 64%;
+	height: 100%;
+	float: left;
+}
+
+		.mid ul li{
+			list-style-type:none;
+			margin:0;
+			padding:0;
+			overflow:hidden;
+		}
+		.mid ul li{
+			width: 100px;
+			height:90px;
+			float: left;
+		}
+		.mid img{
+			width: 80%;
+			height: 60px;
+			margin-left: 10%;
+			margin-top:5px;
+		}
+		.mid span{
+			width:100px;
+			height:20px;
+			line-height:20px;
+			color: black;
+			text-align:center;
+			display:block;
+		}
+		.mid ul li a{
+			text-decoration: none;
+		}
+		
+		#next{
+			width: 100px;
+			height:60px;
+			position: absolute;
+			top: 89px;
+			margin-left: -40px;
+			display:none;
+			
+		}
+		#next > li{
+    		text-align: center;
+		}
+		#next > ul > li > a{
+			display: block;
+			width: 100px;
+			height: 40px;
+			color: black;
+			font-size: 13px;	
+			background:#1fa4c7;	
+			text-align: center;
+			padding: 10px 10px;
+		}
+		.mid li:hover #next{		
+			display:block;		
+		}
+		.word{
+			
+			width: 100px;
+			height: 40px;
+			font-size: 13px;	
+			background: #1fa4c7;	
+			text-align: center;
+			
+			padding: 10px 10px;	
+		}
+		.word a{
+			color: black;
+		}
 .two{
-	width:30%;
+	width:16%;
 	height: 100%;
 	float: right;
 	/*background-color: gray;*/
 }
-
-.a{
-	list-style: none;
-
-	box-sizing: border-box;
+.two ul {
+	 list-style: none;
+ 	 margin: 0px; 
+ 	}
+.two ul li {
+	width:60px;
+	float:left;
+	padding:25px 5px;  
+	line-height: 26px; 
 }
-.a li a{
+.two ul li a{
 	text-decoration: none;
-}
-.a li{
-	display: inline-block;
-	width: 17%; 
-	/*background: #f66;*/
-	vertical-align: middle;
+	font-size: 14px;
+	color: black;
 }
 .le_1{
 	width: 60px;
 	height: 60px;
-	margin-top: 20px;
+/*	margin-top: 0px;*/
 }
 .le_1 img{
 	width: 100%;
 	height: 100%;
 	border-radius: 100%;
+	margin-top: -12px;
 }
 
 /*头部结束*/
 .box{
 	width:100%;
-	height:500px;
+	height:570px;
 }
  .sidebar-collapse{
 	width: 20%;
-    height:500px;
+    height:570px;
     float: left;
-    background-color: #012349;
+    background-color:white;
     overflow: scroll;
-    overflow-x: hidden;
+    overflow-x: hidden; 
 }
- .sidebar-collapse span{
-  margin-left: 2%;
- }
+::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 8px;     /*高宽分别对应横竖滚动条的尺寸*/
+    /*height: 4px;*/
+}
+::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.1);
+}
 .sidebar-collapse .nav > li > a {
     font-weight: bold;
-    padding: 15px 25px;
-    text-indent:5%; 
+    padding: 15px 15px;
+    text-indent:3%; 
     font-size: 18px;
-    color:white;
-    border: 1px solid white;
-    border-left: none;
+    color:black;
+    padding: 15px 25px;
 }
-
+/*.sidebar-collapse .nav .lione a{
+	box-shadow:0px 0px 15px gray inset;
+}*/
+.sidebar-collapse .nav .lione > a{
+	box-shadow:0px 0px 5px gray inset;
+}
 .out{
-	background-color: #012349;
+	background-color:white;
 }
- .sidebar-collapse > .nav > li > a {
-    padding: 15px 10px;
-    }
-
 .sidebar-collapse .nav > li > a:hover{
-		background:#012349 ;
+		background-color:#ebebeb;
         outline: 0;
-    }
+        color:#1fa4c7;
 
+    }
 .nav-second-level{
 	display: none;
 }
 .nav-second-level > li > a{
-    background-color: #012349;
+    background-color:#ebebeb;
+    text-align: center;
+    line-height:10px;
+    border-bottom: 1px solid lightgray;
 }
 .nav-second-level li a {
 	font-weight: bold;
-    padding-left: 20px;
+    
  }
-/*   .letter{
- 	font-size:18px;
+ .fex{
+ 	background-color:#ebebeb;
  	font-weight: bold;
- } 
- .letter a{
-    width:200px;
- 	background:red;
- 	margin-left:60px;
- 	border:1px solid white;
- 	 height:40px;
- 	
- } */
-
+    text-indent:3%; 
+    text-align:center;
+    font-size: 18px;
+    padding: 15px 25px;
+    border-bottom: 1px solid lightgray;
+ }
+ .fex a{
+ 	color:black;
+ 	}
+ .fex a:hover{
+  	text-decoration:none;
+  	color:#1fa4c7;
+  }
+ 
 #ifr{
     border: none;
     width: 80%;
-    height: 500px;
+    height: 570px;
 	left:20%;
     float: left;
-    /*background-image: url(../images/welcome7.jpg);*/
-    /*background-size: 100% 100%;*/
+    background-image:url(../../images/admin/school2.png);
+    background-size: 100% 100%;
 }
 #date{
 	width: 100%;
-	height:60px;
-	/*background-color:gray;	*/
-
-}
-.out2{
-	color:white;
+	height:50px;
 }
