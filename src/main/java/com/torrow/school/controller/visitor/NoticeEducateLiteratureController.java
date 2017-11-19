@@ -1,6 +1,7 @@
 
 package com.torrow.school.controller.visitor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
+import com.torrow.school.entity.TbUser;
 import com.torrow.school.util.PageBean;
 /**
  * @author 张金高
@@ -21,8 +23,8 @@ import com.torrow.school.util.PageBean;
  * 公告和教育教研控制层
  */
 @Controller
-@RequestMapping("/visitorNE")
-public class NoticeEducateController extends BaseController{
+@RequestMapping("/visitorNEL")
+public class NoticeEducateLiteratureController extends BaseController{
 
 	/**
 	 * 
@@ -79,7 +81,6 @@ public class NoticeEducateController extends BaseController{
 		TbCategory category = new TbCategory();
 		category.setCaId(rId);
 		PageBean<TbResource> resourceList = resourceService.findingByPaging(currentPage, category, 10);
-		log.info("category:"+category+" resourceList "+resourceList);
 		categoryService.getCategory(rId,model);//将概括，新闻等封装进model，供下拉菜单使用，以及用户选择的功能项
 		model.addAttribute("resourceList", resourceList);
 		return new ModelAndView("visitor/education");
@@ -88,10 +89,46 @@ public class NoticeEducateController extends BaseController{
 	
 	/**
 	 * @param rId 下载文件的id
-	 * 	下载教育教研
+	 * 	下载教育教研,校园文学的内容
 	 */
-	@RequestMapping("downEducation")
-	public void downEducation(int rId,HttpServletResponse response) throws Exception{
+	@RequestMapping("downEduLiter")
+	public void downEduLiter(int rId,HttpServletResponse response) throws Exception{
 		resourceService.down(request, response, rId);
+	}
+	
+	/**
+	 * @param cId 用户想要查看的校园文学类别
+	 * @param model
+	 * @return 查看校园文学
+	 */
+	@RequestMapping("viewLiterature")
+	public ModelAndView viewLiterature(@RequestParam(value = "currentPage", defaultValue = "1")int currentPage,int cId,Model model){
+		TbCategory category = new TbCategory();
+		category.setCaId(cId);
+		PageBean<TbResource> resourceList = resourceService.findingByPaging(currentPage, category, 10);
+		model.addAttribute("resourceList", resourceList);
+		categoryService.getCategory(cId,model);//将概括，新闻等封装进model，供下拉菜单使用，以及用户选择的功能项
+		return new ModelAndView("visitor/literature");
+	}
+	
+	/**
+	 * @return查看教师介绍
+	 */
+	@RequestMapping("viewTeacherIntroduction")
+	public ModelAndView viewTeacherIntroduction(Model model){
+		List<Integer> pidList = new ArrayList<Integer>();
+		pidList.add(3);//教育教研组
+		pidList.add(4);//用户
+		List<TbCategory> categoryList = categoryService.selectByPid(pidList);
+		model.addAttribute("categoryList",categoryList);
+		List<TbUser> userLists = new ArrayList<TbUser>();
+		for(int i=0;i<categoryList.size();i++){
+			List<TbUser> userList = userService.selectListByCaId(categoryList.get(i).getCaId());
+			userLists.addAll(userList);	
+		}
+		log.info("---"+userLists);
+		model.addAttribute("userList", userLists);
+		categoryService.getCategory(0, model);
+		return new ModelAndView("visitor/teacherintroduction");
 	}
 }

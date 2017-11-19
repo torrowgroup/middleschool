@@ -1,5 +1,8 @@
 package com.torrow.school.dao;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+
 import com.torrow.school.entity.TbResource;
 
 /**
@@ -8,6 +11,9 @@ import com.torrow.school.entity.TbResource;
  * @2017年10月15日下午4:21:03
  */
 public interface TbResourceDao {
+	
+	//根据caId得到所有资源类，不分页，张金高加
+	List<TbResource> selectListByCaId(@Param("caId")Integer caId);
 	
 	/**
 	 * @param caId

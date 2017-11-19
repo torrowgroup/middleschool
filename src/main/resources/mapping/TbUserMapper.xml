@@ -123,4 +123,8 @@
 		select * from tb_user where us_email = #{email}
 	</select>
 
+	<select id="selectListByCaId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select * from tb_user where ca_id = #{caId}
+	</select>
+	
 </mapper>
