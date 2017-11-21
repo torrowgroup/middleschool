@@ -83,4 +83,22 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 		return tbUserDao.selectListByCaId(caId);
 	}
 
+	@Override
+	public void updateDeleteUserByCaId(TbUser tbUser,int id) {
+		List<TbUser> user = this.selectAll();
+		if(!user.isEmpty()) {
+			for(TbUser item:user) {
+				if(item.getCaId()==tbUser.getCaId()) {
+					if(id==1) {
+						item.setCaName(tbUser.getCaName());
+						this.updateByPrimaryKey(item);
+					}else if(id==2) {
+						this.deleteById(tbUser.getCaId());
+					}
+				}
+			}
+		}
+		
+	}
+
 }

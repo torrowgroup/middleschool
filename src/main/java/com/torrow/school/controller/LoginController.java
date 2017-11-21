@@ -78,7 +78,6 @@ public class LoginController extends BaseController {
 			return "admin/index";
 		}else {
 			model.addAttribute("msg", "用户名或密码错误");
-			log.info("--------------------------------------------------");
 		}
 		return "index";
 	}

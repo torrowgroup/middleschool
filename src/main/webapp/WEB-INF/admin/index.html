@@ -51,7 +51,7 @@
 				</a>
 				<div id="next">
 					<ul>
-						<li><a th:href="@{/news/addNoticeJumping}"  target="ie">添加公告</a></li>
+						<li><a th:href="@{/news/addNewsJumping?(Pid=6)}"  target="ie">添加公告</a></li>
 						<li style="margin-top:-50px"><a th:href="@{/news/noticeJumping}" target="ie">管理公告</a></li>
 					</ul>
 				</div>
@@ -63,7 +63,7 @@
 				</a>
 				<div id="next">
 					<ul>
-						<li><a th:href="@{/news/literatureJumping}" target="ie">添加校园文学</a></li>
+						<li><a th:href="@{/news/addNewsJumping?(Pid=12)}" target="ie">添加校园文学</a></li>
 						<li style="margin-top:-50px"><div class="word" th:each="category,categoryStart:${literatureList}"><a th:href="@{/news/manageUpload?(id=${category.caId})}" th:text="${category.caName}" target="ie"></a></div></li>
 					</ul>
 				</div>
@@ -75,7 +75,7 @@
 				</a>
 				<div id="next">
 					<ul>
-						<li><a th:href="@{/news/downLoadjumpping}"  target="ie">上传资源</a></li>
+						<li><a th:href="@{/news/addNewsJumping?(Pid=11)}"  target="ie">上传资源</a></li>
 						<li style="margin-top:-50px"><a th:href="@{/news/manageDownLoadJumpping}"  target="ie">资源管理</a></li>
 					</ul>
 				</div>
@@ -117,7 +117,7 @@
 					<a href="#" class="out"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;新闻管理</a>
                     <ul class="nav nav-second-level" style="display: none">
 	                    <li>
-	                      <a th:href="@{/news/addNewsJumping}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加新闻</a>
+	                      <a th:href="@{/news/addNewsJumping?(Pid=2)}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加新闻</a>
 	                    </li>
 	                     <li>
 	                     <!--  <a href="manageschoolintroduction.html" class="out1" target="ie"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;学校简介管理</a>
@@ -150,7 +150,7 @@
 					<a href="#" class="out"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;&nbsp;教育教研</a>
                     <ul class="nav nav-second-level" style="display: none">
 	                    <li>
-	                      <a th:href="@{/news/educationJumpping}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加教育教研</a>
+	                      <a th:href="@{/news/addNewsJumping?(Pid=3)}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加教育教研</a>
 	                    </li>
 	                    <li>
 	                      <div class="fex" th:each="category,categoryStart:${educationList}">

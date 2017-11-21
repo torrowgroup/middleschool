@@ -36,5 +36,7 @@ public interface TbUserService {
 	int deleteByCaId(Integer caId);
 	// 登陆的方法
 	TbUser login(String usEmail, String usPassword);
+	//这种删除/修改类别类中的信息，user表跟着删除/修改，id只是为了区分是修改还是删除，修改是1、删除是2
+	void updateDeleteUserByCaId(TbUser tbUser,int id);
 	
 }

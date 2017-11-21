@@ -7,7 +7,7 @@
 </head>
 <body>
 <div th:text="${message}"></div>
-<form th:action="@{/category/updateCategory?(id=${category.caId})}" method="post">  
+<form th:action="@{/category/updateCategory?(caId=${category.caId})}" method="post">  
 	  <table>
 	    <tr>
 	      <td>类别名称</td>
