@@ -56,15 +56,15 @@
                 <a href="#">校园文学</a>
                 <ul class="navSecondUl">
                     <li th:each="literature,literatureS:${literature}">
-                    	<a th:href="@{/visitorNEL/viewLiterature?(cId= ${literature.caId})}" th:text="${literature.caName}">校园文学</a>
+                    	<a th:href="@{/visitorNEL/viewLiterature?(cId= ${literature.caId})}" th:text="${literature.caName}" target="_blank">校园文学</a>
                     </li>
                 </ul>
             </li>
             <li class="navLi">
                 <a href="#">教师风采</a>
                 <ul class="navSecondUl">
-                    <li><a th:href="@{/visitorNEL/viewTeacherIntroduction}">教师介绍</a></li>
-                    <li><a href="#">教师成果</a></li>
+                    <li><a th:href="@{/visitorNEL/viewTeacherIntroduction?ask=intro}">教师介绍</a></li>
+                    <li><a th:href="@{/visitorNEL/viewTeacherIntroduction?ask=achieve}">教师成果</a></li>
                 </ul>
             </li>
             <li class="navLi">
@@ -164,40 +164,12 @@
                         </div>
                         <div class="col-sm-6 col-xs-12">
                             <div class="mainBheader">
-                                <a href="">资源下载 <span class="pull-right">&gt; 更多</span></a>
+                                <a href="#">资源下载 <span class="pull-right">&gt; 更多</span></a>
                             </div>
                             <ul class="mainBbody">
-                                <li>
-                                    <a href="">全笼着一层薄烟。树叶却绿得发亮，小草也青</a>
-                                    <span>2017-10-12</span>
-                                </li>
-                                <li>
-                                    <a href="">顶上全笼着一层薄烟。树叶却绿得发亮，小草也青得逼你的眼</a>
-                                    <span>2017-10-20</span>
-                                </li>
-                                <li>
-                                    <a href="">全笼着一层薄烟。树叶却绿得发亮，小草也青</a>
-                                    <span>2017-10-20</span>
-                                </li>
-                                <li>
-                                    <a href="">顶上全笼着一层薄烟。树叶却绿得发亮，小草也青得逼你的眼</a>
-                                    <span>2017-10-20</span>
-                                </li>
-                                <li>
-                                    <a href="">顶上全笼着一层薄烟。树叶却绿得发亮，小草也青得逼你的眼</a>
-                                    <span>2017-10-20</span>
-                                </li>
-                                <li>
-                                    <a href="">顶上全笼着一层薄烟。树叶却绿得发亮，小草也青得逼你的眼</a>
-                                    <span>2017-10-20</span>
-                                </li>
-                                <li>
-                                    <a href="">全笼着一层薄烟。树叶却绿得发亮，小草也青</a>
-                                    <span>2017-10-20</span>
-                                </li>
-                                <li>
-                                    <a href="">顶上全笼着一层薄烟。树叶却绿得发亮，小草也青得逼你的眼</a>
-                                    <span>2017-10-20</span>
+                                <li th:each="resource,resourceStart:${resourcesDown}">
+                                    <a href="#" th:text="${resource.reTitle}">资源下载</a>
+                                    <span th:text="${resource.reIssuingdate}">上传时间</span>
                                 </li>
                             </ul>
                         </div>

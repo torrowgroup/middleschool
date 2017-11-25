@@ -1,39 +1,43 @@
 	body{
 			margin: 0;
 			padding: 0;
+			background: #ebebeb;
 		}
 		.demo{
 			width:400px;
 			height: 350px;
-			/*border: 1px solid gray;*/
-			font-weight: bold;
 			margin: 0 auto;
 			margin-top: 100px;
+			position: relative;
 		}
 		input{
 			width: 200px;
 			height: 30px;
-			border: 1px solid black;
-			border-radius: 3px;
-			margin-top:10px;
+			padding:10px;
 		}
 		.demo_1{
 			width: 202px;
 			height: 30px;
-			border: 1px solid black;
 			border-radius: 3px;
 			margin-top:10px;
 		}
-		.button input{
-			width: 60px;
-			height: 30px;
-			background-color: 	#C0C0C0;
-			/*margin-left:160px;	*/
-			float: right;
+		tr{
+			height:10px;
 		}
-		/* td{
+		td{
 			text-align:center;
-		}  */
-        /* td{
-        	height:50px;   
-        } */
+		}
+		span{
+			
+			font-size: 16px;
+		}
+		.bb{
+			width: 50px;
+			height: 30px;
+			border-radius: 8px;
+			position: absolute;
+			margin-left: 150px;
+			display: block;
+			background: #012349;
+			color: white;
+		}

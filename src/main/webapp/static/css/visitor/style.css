@@ -137,6 +137,9 @@ body{
 .mainCenter{
     max-width: 1000px;
 }
+.mainLeft{
+    border-right:2px solid #d7d7d7;
+}
 .mainLeft>h3>a{
     text-decoration: none;
     color: rgb(48,64,91);
@@ -146,7 +149,23 @@ body{
 }
 .mainLeft>p{
     margin: 10px 0;
-    font-size: 12px;
+    font-size: 14px;
+    line-height: 20px;
+    height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.mainLeft>p>a{
+    color:rgb(48,64,91);
+    text-decoration: none;
+}
+.mainLeft>p>span{
+    padding-left:5px;
+    background-color: white;
+    position: absolute;
+    bottom:14px;
+    right: 23px;
+    letter-spacing: 1px;
 }
 .mainImg{
     width: 100%;
@@ -157,6 +176,7 @@ body{
     width: 100%;
 }
 .mainTop{
+    position: relative;
     margin-bottom: 25px;
 }
 .mainBheader{
@@ -204,7 +224,7 @@ body{
     overflow:hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    background: url("../../images/visitor/pont.jpg") no-repeat left center; 
+    background: url("../images/pont.jpg") no-repeat left center;
 }
 .mainBbody>li>span{
     float: right;

@@ -112,23 +112,29 @@ public class NoticeEducateLiteratureController extends BaseController{
 	}
 	
 	/**
-	 * @return查看教师介绍
+	 * @return查看教师介绍,教师成果
 	 */
 	@RequestMapping("viewTeacherIntroduction")
-	public ModelAndView viewTeacherIntroduction(Model model){
+	public ModelAndView viewTeacherIntroduction(@RequestParam(value = "currentPage", defaultValue = "1")int currentPage,String ask,Model model){
 		List<Integer> pidList = new ArrayList<Integer>();
 		pidList.add(3);//教育教研组
 		pidList.add(4);//用户
 		List<TbCategory> categoryList = categoryService.selectByPid(pidList);
 		model.addAttribute("categoryList",categoryList);
-		List<TbUser> userLists = new ArrayList<TbUser>();
-		for(int i=0;i<categoryList.size();i++){
-			List<TbUser> userList = userService.selectListByCaId(categoryList.get(i).getCaId());
-			userLists.addAll(userList);	
-		}
-		log.info("---"+userLists);
-		model.addAttribute("userList", userLists);
+		PageBean<TbUser> pageBean = userService.findPageSplit(categoryList,currentPage, 15);
+		log.info("---"+pageBean);
+		model.addAttribute("userList", pageBean);
 		categoryService.getCategory(0, model);
-		return new ModelAndView("visitor/teacherintroduction");
+		String view = "visitor/teacherintroduction";//返回界面，默认是教师介绍
+		if(ask.equals("achieve")){
+			view = "visitor/teacherintroduction";//返回界面，默认是教师成果
+		}
+		return new ModelAndView(view);
+	}
+	
+	@RequestMapping("resourceDown")
+	public ModelAndView resourceDown(){
+//		asa
+		return new ModelAndView();
 	}
 }

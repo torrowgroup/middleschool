@@ -31,5 +31,11 @@
 		var name = obj.id;
 		window.location.href = "viewNotices?currentPage="+text+"&nId="+name;
 	}
+	function turnPageUserIntro (obj){//教师介绍界面的跳转页数
+		var text = obj.text;
+		var name = obj.id;
+		window.location.href = "viewTeacherIntroduction?currentPage="+text;
+	}
+	
 	
 	

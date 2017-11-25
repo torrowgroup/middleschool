@@ -98,7 +98,7 @@ public class LoginController extends BaseController {
 	public ModelAndView index(Model model){
 		categoryService.getCategory(0,model);
 		List<TbCategory> categoryList = categoryService.selectAll();
-		resourceService.getResource(categoryList,model);//得到新闻，公告等
+		resourceService.getResource(categoryList,model);//得到新闻，公告等,追加资源下载
 		return new ModelAndView("visitor/index");
 	}
 	

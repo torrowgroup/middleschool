@@ -2,6 +2,8 @@ package com.torrow.school.service;
 
 import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbUser;
 import com.torrow.school.util.PageBean;
 
@@ -36,5 +38,7 @@ public interface TbUserService {
 	int deleteByCaId(Integer caId);
 	// 登陆的方法
 	TbUser login(String usEmail, String usPassword);
+	//按照身份分开所有用户
+	PageBean<TbUser> findPageSplit(List<TbCategory> categoryList,int currentPage, int pageSize);
 	
 }
