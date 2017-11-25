@@ -2,6 +2,7 @@
 package com.torrow.school.serviceimpl;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -221,5 +222,23 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	@Override
 	public List<TbResource> selectListByCaId(Integer caId) {
 		return tbResourceDao.selectListByCaId(caId);
+	}
+
+	@Override
+	public void updateDeleteTbResourceByCaId(TbResource record, int id) {
+		List<TbResource> tb = this.selectAll();
+		if(!tb.isEmpty()) {
+			for(TbResource item:tb) {
+				if(item.getCaId()==record.getCaId()) {
+					if(id==1) {
+						item.setCaName(record.getCaName());
+						this.updateByPrimaryKey(item);
+					}else if(id==2) {
+						this.deleteByPrimaryKey(record.getCaId());
+					}
+				}
+			}
+		}
+		
 	}
 }

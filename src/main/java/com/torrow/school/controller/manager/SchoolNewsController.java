@@ -33,50 +33,16 @@ public class SchoolNewsController extends BaseController {
 
 	/**
 	 * @param model
-	 * @return 添加新闻类的跳转
+	 * @return 添加校园新闻、上传（学生管理、教师成长）、
+	 * 教研组上的上传、资源下载类的上传、校园文学类的上传、学校公告类的添加
 	 */
 	@RequestMapping("addNewsJumping")
-	public String newsJumping(Model model) {
-		int Pid = 2;
-		List<TbCategory> list = categoryService.queryByPid(Pid);
-		if (!list.isEmpty()) {
-			model.addAttribute("categoryList", list);
-		} else {
-			model.addAttribute("sign", 1);
+	public String addNewsJumping(Model model,int Pid) {
+		categoryService.addBySelectPid(model,Pid);
+		if(Pid==9||Pid==3||Pid==11||Pid==12) {
+			return "admin/schoolnews/uploadfile";
 		}
 		return "admin/schoolnews/addschoolnews";
-	}
-
-	/**
-	 * @param model
-	 * @return 对于学生管理和教师成长的上传
-	 */
-	@RequestMapping("uploadJumpping")
-	public String uploadJumpping(Model model) {
-		int Pid = 9;
-		List<TbCategory> list = categoryService.queryByPid(Pid);
-		if (!list.isEmpty()) {
-			model.addAttribute("uploadList", list);
-		} else {
-			model.addAttribute("sign", 1);
-		}
-		return "admin/schoolnews/uploadfile";
-	}
-
-	/**
-	 * @param model
-	 * @return 教育教研类的跳转
-	 */
-	@RequestMapping("educationJumpping")
-	public String educationJumpping(Model model) {
-		int Pid = 3;
-		List<TbCategory> list = categoryService.queryByPid(Pid);
-		if (!list.isEmpty()) {
-			model.addAttribute("uploadList", list);
-		} else {
-			model.addAttribute("sign", 1);
-		}
-		return "educationoffice/uploadfile";
 	}
 
 	/**
@@ -110,8 +76,6 @@ public class SchoolNewsController extends BaseController {
 	 */
 	@RequestMapping("addSchoolNews")
 	public String addSchoolNews(Model model, TbResource tbResource) {
-		// TbResource retitle =
-		// resourceService.selectByReTitle(tbResource.getReTitle());
 		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		List<TbResource> resource = resourceService.selectAll();
 		for (TbResource en : resource) {
@@ -119,9 +83,9 @@ public class SchoolNewsController extends BaseController {
 				if (en.getReTitle().equals(tbResource.getReTitle())) {
 					model.addAttribute("message", "该名称已存在，添加失败");
 					if (item.getCaPid() == 2) {
-						return this.newsJumping(model);
+						return this.addNewsJumping(model,2);
 					} else {
-						return this.addNoticeJumping(model);
+						return this.addNewsJumping(model,6);
 					}
 				}
 			}
@@ -142,9 +106,9 @@ public class SchoolNewsController extends BaseController {
 			model.addAttribute("message", "添加失败,不存在该类别");
 		}
 		if (item.getCaPid() == 6) {
-			return this.addNoticeJumping(model);
+			return this.addNewsJumping(model,6);
 		}
-		return this.newsJumping(model);
+		return this.addNewsJumping(model,2);
 	}
 
 	/**
@@ -242,37 +206,18 @@ public class SchoolNewsController extends BaseController {
 		}
 		return this.manageSchoolNews(currentPage, model, tb.getCaId());
 	}
-
 	/**
 	 * @param model
-	 * @return 资源下载的跳转
-	 */
-	@RequestMapping("downLoadjumpping")
-	public String downLoadjumpping(Model model) {
-		int Pid = 11;
-		List<TbCategory> list = categoryService.queryByPid(Pid);
-		if (!list.isEmpty()) {
-			model.addAttribute("categoryList", list);
-		} else {
-			model.addAttribute("sign", 1);
-		}
-		return "admin/download/uploadfile";
-	}
-
-	/**
-	 * @param model
-	 * @return 管理资源下载的跳转
+	 * @return 管理资源下载的管理
 	 */
 	@RequestMapping("manageDownLoadJumpping")
-	public String manageDownLoadJumpping(Model model) {
-		int Pid = 11;
-		List<TbCategory> list = categoryService.queryByPid(Pid);
-		if (!list.isEmpty()) {
-			model.addAttribute("categoryList", list);
-		} else {
-			model.addAttribute("sign", 1);
-		}
-		return "admin/download/index";
+	public String manageDownLoadJumpping(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
+			TbCategory record = new TbCategory();
+			record.setCaPid(11);
+			model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,4));// 回显分页数据
+			model.addAttribute("sign", 1);// 为了在查看管理轮播图时是同一个界面
+			session.setAttribute("currentPage", currentPage);
+			return "admin/schoolnews/manageupload";
 	}
 
 	/**
@@ -291,35 +236,38 @@ public class SchoolNewsController extends BaseController {
 				if (file.getOriginalFilename().equals(en.getReContent())) {
 					model.addAttribute("message", "该文件已存在,上传失败");
 					if (item.getCaPid() == 9) {
-						return this.uploadJumpping(model);
+						return this.addNewsJumping(model,9);
 					} else if (item.getCaPid() == 11) {
-						return downLoadjumpping(model);
+						return this.addNewsJumping(model,11);
 					} else if (item.getCaPid() == 12) {
-						return this.literatureJumping(model);
+						return this.addNewsJumping(model,12);
 					} else if (item.getCaPid() == 3) {
-						return this.educationJumpping(model);
+						return this.addNewsJumping(model,3);
 					}
 				}
 			}
 		}
+		Date date = new Date();
+		DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd"); // HH表示24小时制；
+		String Date = dFormat.format(date);
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
 		String reContent = resourceService.uploadFile(file, path);
-		TbResource tb = new TbResource(item.getCaId(), item.getCaName(), file.getOriginalFilename(), reContent);
+		TbResource tb = new TbResource(item.getCaId(),Date,item.getCaName(), file.getOriginalFilename(), reContent);
 		resourceService.insert(tb);
 		model.addAttribute("message", "添加成功");
 		// 校园文学
 		if (item.getCaPid() == 12) {
-			return this.literatureJumping(model);
+			return this.addNewsJumping(model,12);
 		}
 		// 教育教研
 		if (item.getCaPid() == 3) {
-			return this.educationJumpping(model);
+			return this.addNewsJumping(model,3);
 		}
 		// 资源类的下载
 		if (item.getCaPid() == 11) {
-			return this.downLoadjumpping(model);
+			return this.addNewsJumping(model,11);
 		}
-		return this.uploadJumpping(model);
+		return this.addNewsJumping(model,9);
 	}
 
 	// 用于富文本编辑器的图片上传
@@ -331,72 +279,19 @@ public class SchoolNewsController extends BaseController {
 		response.getWriter().write("/middleschool/static/uploadimg/" + fileName);
 	}
 
-	// ---------------------------------------------------以下写的是通知公告类
-	/**
-	 * @param model
-	 * @return 添加学校公告类的跳转
-	 */
-	@RequestMapping("addNoticeJumping")
-	public String addNoticeJumping(Model model) {
-		int Pid = 6;
-		List<TbCategory> list = categoryService.queryByPid(Pid);
-		if (!list.isEmpty()) {
-			model.addAttribute("categoryList", list);
-		} else {
-			model.addAttribute("sign", 1);
-		}
-		return "admin/schoolnews/addschoolnews";
-	}
-
 	/**
 	 * @param model
 	 * @return 进入管理通知公告类的跳转
 	 */
 	@RequestMapping("noticeJumping")
-	public String noticeJumping(Model model) {
-		int Pid = 6;
-		List<TbCategory> list = categoryService.queryByPid(Pid);
-		if (!list.isEmpty()) {
-			model.addAttribute("categoryList", list);
-		} else {
-			model.addAttribute("message", "该类别名称不存在");
-		}
-		return "admin/notice/index";
+	public String noticeJumping(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
+			TbCategory record = new TbCategory();
+			record.setCaPid(6);
+			model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,4));// 回显分页数据
+			model.addAttribute("sign", 1);// 为了在查看管理轮播图时是同一个界面
+			session.setAttribute("currentPage", currentPage);
+			return "admin/schoolnews/manageschoolnews";
 	}
-
-	// ----------------------------------------------------------
-	/**
-	 * @param model
-	 * @return 校园文学类的跳转
-	 */
-	@RequestMapping("literatureJumping")
-	public String literatureJumping(Model model) {
-		int Pid = 12;
-		List<TbCategory> list = categoryService.queryByPid(Pid);
-		if (!list.isEmpty()) {
-			model.addAttribute("categoryList", list);
-		} else {
-			model.addAttribute("message", "该类别名称不存在");
-		}
-		return "admin/schoolliterature/uploadfile";
-	}
-
-	/**
-	 * @param model
-	 * @return 管理校园文学
-	 */
-	@RequestMapping("manageliteratureJumping")
-	public String manageliteratureJumping(Model model) {
-		int Pid = 12;
-		List<TbCategory> list = categoryService.queryByPid(Pid);
-		if (!list.isEmpty()) {
-			model.addAttribute("categoryList", list);
-		} else {
-			model.addAttribute("message", "该类别名称不存在");
-		}
-		return "admin/schoolliterature/index";
-	}
-
 	/**
 	 * 文件下载功能
 	 * 

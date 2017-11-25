@@ -22,7 +22,7 @@
 		<tr>
 			<td>类别名称</td>
 			<td><select name="caId">
-						<option th:each="category,categoryStart:${uploadList}" th:text="${category.caName}" th:value="${category.caId}" />
+						<option th:each="category,categoryStart:${categoryList}" th:text="${category.caName}" th:value="${category.caId}" />
 				 </select></td>
 		</tr>
 		<tr>

@@ -114,7 +114,7 @@ public class NoticeEducateLiteratureController extends BaseController{
 	/**
 	 * @return查看教师介绍,教师成果
 	 */
-	@RequestMapping("viewTeacherIntroduction")
+	@RequestMapping("viewTeacherIntroActieve")
 	public ModelAndView viewTeacherIntroduction(@RequestParam(value = "currentPage", defaultValue = "1")int currentPage,String ask,Model model){
 		List<Integer> pidList = new ArrayList<Integer>();
 		pidList.add(3);//教育教研组

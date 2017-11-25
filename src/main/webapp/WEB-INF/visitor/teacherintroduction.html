@@ -88,8 +88,8 @@
              <h3>教师介绍</h3>
             <ul class="schoolcenter">
                	<li>
-                    <li><a th:href="@{/visitorNEL/viewTeacherIntroduction?ask=intro}">教师介绍</a></li>
-                    <li><a th:href="@{/visitorNEL/viewTeacherIntroduction?ask=achieve}">教师介绍</a></li>
+                    <li><a th:href="@{/visitorNEL/viewTeacherIntroActieve?ask=intro}">教师介绍</a></li>
+                    <li><a th:href="@{/visitorNEL/viewTeacherIntroActieve?ask=achieve}">教师介绍</a></li>
                 </li>
             </ul>
         </div>
@@ -119,16 +119,16 @@
 	             <div class="paging1">
 	                <ul class="pagingUl">
 	                     <li th:if="${userList.currPage-1>0}">
-	                    	<a th:href="@{/visitorNEL/viewTeacherIntroduction?(currentPage=${userList.currPage-1},ask=intro)}">&laquo;</a>
+	                    	<a th:href="@{/visitorNEL/viewTeacherIntroActieve?(currentPage=${userList.currPage-1},ask=intro)}">&laquo;</a>
 	                    </li>
 	                     <li th:if="${userList.currPage-1==0}">
 	                     <a href="#">&laquo;</a>
 	                     </li>
 	                    <li th:each="i:${#numbers.sequence(1,userList.totalPage)}" th:if="${i > userList.currPage-3} and ${i < userList.currPage+3}" >
-	                    	<a th:href="@{/visitorNEL/viewTeacherIntroduction?(currentPage=${i},ask=intro)}" th:text="${i}">#</a>
+	                    	<a th:href="@{/visitorNEL/viewTeacherIntroActieve?(currentPage=${i},ask=intro)}" th:text="${i}">#</a>
 	                    </li>
 	                   <li th:if="${userList.currPage+1<=userList.totalPage}">
-	                    	<a th:href="@{/visitorNEL/viewTeacherIntroduction?(currentPage=${userList.currPage+1},ask=intro)}">&raquo;</a>
+	                    	<a th:href="@{/visitorNEL/viewTeacherIntroActieve?(currentPage=${userList.currPage+1},ask=intro)}">&raquo;</a>
 	                    </li>
 	                    <li th:if="${userList.currPage+1>userList.totalPage}">
 	                     	<a href="#">&raquo;</a>

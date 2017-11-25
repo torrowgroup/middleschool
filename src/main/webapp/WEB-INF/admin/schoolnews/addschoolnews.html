@@ -11,6 +11,7 @@
 <div th:if="${sign}=='1'">请先去类别管理中添加相应类别</div>
 <div th:if="${sign}!='1'">
 	<div th:text="${message}"></div>
+<a th:href="@{/news/addNewsJumping?(Pid=9)}" target="ie" class="out1" style="margin-left:900px;">上传学生管理或教师成长</a>
 	<form th:action="@{/news/addSchoolNews}" onsubmit="modifyContent()" method="post"  enctype="multipart/form-data">
 		<table>
 			<tr>

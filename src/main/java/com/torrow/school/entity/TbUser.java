@@ -42,6 +42,11 @@ public class TbUser implements Serializable {
 		this.spare = spare;
 	}
 
+	public TbUser(Integer caId, String caName) {
+		this.caId = caId;
+		this.caName = caName;
+	}
+
 	public Integer getUsId() {
 		return usId;
 	}

@@ -77,6 +77,11 @@ public class TbResource implements Serializable {
 		this.reContent = reContent;
 	}
 	
+	public TbResource(Integer caId, String caName) {
+		this.caId = caId;
+		this.caName = caName;
+	}
+
 	public Integer getReId() {
 		return reId;
 	}

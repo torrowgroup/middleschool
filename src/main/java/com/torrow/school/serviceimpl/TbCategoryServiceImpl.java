@@ -119,4 +119,14 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 		model.addAttribute("educations", educations);
 		model.addAttribute("literature", literature);
 	}
+
+	@Override
+	public void addBySelectPid(Model model,int Pid) {
+		List<TbCategory> list = this.queryByPid(Pid);
+		if (!list.isEmpty()) {
+			model.addAttribute("categoryList", list);
+		} else {
+			model.addAttribute("sign", 1);
+		}
+	}
 }
