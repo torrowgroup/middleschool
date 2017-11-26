@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>郑州一二二中学-新闻</title>
+    <title>郑州一二二中学-教师介绍</title>
     <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/static/css/visitor/style.css}" type="text/css">
 	<link rel="stylesheet" th:href="@{/static/css/visitor/aboutschool.css}" type="text/css">
-    <script th:src="@{/static/js/jquery.min.js}"></script>
-    <script th:src="@{/static/js/bootstrap.min.js}"></script>
+	<link rel="stylesheet" th:href="@{/static/css/visitor/schoolnews.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/static/css/visitor/views.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/static/css/visitor/aboutteacher.css}" type="text/css">
 </head>
 <body>
 <div class="container header">
@@ -61,8 +62,8 @@
         <li class="navLi">
             <a href="#">教师风采</a>
             <ul class="navSecondUl">
-                <li><a href="#">教师介绍</a></li>
-                <li><a href="#">教师成果</a></li>
+                <li><a th:href="@{/visitorNEL/viewTeacherIntroduction}">教师介绍</a></li>
+                <li><a th:href="@{/visitorNEL/viewTeacherAchievement}">教师成果</a></li>
             </ul>
         </li>
         <li class="navLi">
@@ -87,30 +88,69 @@
              <h3>教师介绍</h3>
             <ul class="schoolcenter">
                	<li>
-                    <a th:href="@{/visitorNEL/viewTeacherIntroduction}">教师介绍</a>
-                    <a href="#">教师成果</a>
+                    <li><a th:href="@{/visitorNEL/viewTeacherIntroActieve?ask=intro}">教师介绍</a></li>
+                    <li><a th:href="@{/visitorNEL/viewTeacherIntroActieve?ask=achieve}">教师介绍</a></li>
                 </li>
             </ul>
         </div>
-        <div class="schollright">
-            <div class="location"><a th:href="@{/index}">首页</a>.教师介绍</div>
-           <div th:if="${categoryList==null}">
-            	<h3 class="titlesc">暂没有相关内容</h3>
-            </div>
-            <div th:if="${categoryList!=null}">
-<!-- 	            <h3 class="titlesc" th:text="${news.lists[0].caName}">校园新闻</h3> -->
-	            <div class="newscontent">
-<!-- 	                <ul class="newscontentUl"> -->
-	                 	<span th:each="user,userStart:${userList}">
-	                 		<a style="font-size: 30px;margin-left: 100px;" th:href="@{/visitorGN/newDetails}"><span th:text="${user.usName}"></span></a>
-	                 	</span>
-<!-- 	                </ul> -->
-	                <div class="clearfix"></div>
+		<div class="schollright">
+            <div class="location"><a th:href="@{/index}">首页</a>.<a href="aboutschool.html">教师风采</a>.<a href="aboutTeacher.html">教师介绍</a></div>
+            <div th:if="${userList.totalCount != 0}">
+	            <h3 class="titlesc">教师介绍</h3>
+	            <div class="tourcontent">
+	                <div class="teacherbox" th:each="user,userStart:${userList.lists}">
+	                    <div class="teacherimg">
+	                        <a th:href="@{/visitorGN/newDetails}" title="点击查看教师成果">
+	                            <img th:src="@{/static/uploadimg/{picture}(picture=${user.usPicture})}" alt="加载中">
+	                        </a>
+	                    </div>
+	                    <div class="teacherabout">
+	                        <a th:href="@{/visitorGN/newDetails}" title="点击查看教师成果">
+	                            <h3 th:text="${user.usName}">姓名</h3>
+	                            <p th:text="${user.caName}">职位</p>
+	                            <h3>用户简介：</h3>
+	                            <p th:text="${user.usIntroduction}">用户简介</p>
+	                        </a>
+	                    </div>
+	                </div>
+	                </div>
 	            </div>
-	         </div>
+	            <div class="clearfix"></div>
+	             <div class="paging1">
+	                <ul class="pagingUl">
+	                     <li th:if="${userList.currPage-1>0}">
+	                    	<a th:href="@{/visitorNEL/viewTeacherIntroActieve?(currentPage=${userList.currPage-1},ask=intro)}">&laquo;</a>
+	                    </li>
+	                     <li th:if="${userList.currPage-1==0}">
+	                     <a href="#">&laquo;</a>
+	                     </li>
+	                    <li th:each="i:${#numbers.sequence(1,userList.totalPage)}" th:if="${i > userList.currPage-3} and ${i < userList.currPage+3}" >
+	                    	<a th:href="@{/visitorNEL/viewTeacherIntroActieve?(currentPage=${i},ask=intro)}" th:text="${i}">#</a>
+	                    </li>
+	                   <li th:if="${userList.currPage+1<=userList.totalPage}">
+	                    	<a th:href="@{/visitorNEL/viewTeacherIntroActieve?(currentPage=${userList.currPage+1},ask=intro)}">&raquo;</a>
+	                    </li>
+	                    <li th:if="${userList.currPage+1>userList.totalPage}">
+	                     	<a href="#">&raquo;</a>
+	                    </li>
+	                </ul>
+	                <div class="pagingRight">
+	                    <span>跳转到</span>
+	                    <div class="selectBox">
+	                       <span th:text="${userList.currPage}"> <i class="glyphicon glyphicon-chevron-down pull-right" style="line-height: 30px"></i></span>
+	                        <ul class="selectBoxUl">
+	                         	<li th:each="i:${#numbers.sequence(1,userList.totalPage)}">
+	                         		<a href="#" th:onclick="'turnPageUserIntro(this);'" th:text="${i}"></a>
+	                         	</li>
+	                        </ul>
+	                    </div>
+	                    <span>页 共<span th:text="${userList.totalPage}"></span>页</span>
+	                </div>
+	            </div>
+	            <div class="clearfix"></div>
+            </div>
         </div>
     </div>
-</div>
 <div class="clearfix"></div>
 <div class="footer">
     <div class="container footerBox">
@@ -138,11 +178,8 @@
         </div>
     </div>
 </div>
-<script th:inline="javascript">
-	var cateList = /*[[${categoryList}]]*/ null；
-	if(cateList!=null){
-		console.info(cateList.length);
-	}
-</script>
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
+<script th:src="@{/static/js/visitor/select.js}"></script>
 </body>
 </html>

@@ -1,0 +1,90 @@
+body{
+	margin: 0;
+	padding: 0;
+	position: relative; 
+	background: #ebebeb;
+}
+.t1{
+	width: 40%;
+	height:300px;
+	margin-left: 10%;
+	margin-top:5%;
+	float: left;
+}
+.t2{
+	width: 40%;
+	height:300px;
+	margin-left: 1%;
+	margin-top:5%;
+	float: left;
+}
+
+input{
+	width: 60%;
+	height: 30px;
+}
+img{
+	width: 30%;
+}   
+#sex input{
+	width: 50px;
+	height: 10px;
+}
+.aa{
+	width: 48px;
+	margin-left: 80%;
+	background-color: #012349;
+	color: white;
+}
+
+.bb{
+	text-align: center;
+}
+#cc{
+	width: 60%;
+	height: 30px;
+}
+ #hidebg{
+ 	position:relative;
+ 	left:0px;
+ 	top:0px;
+    background-color:gray;
+    /*height: 600px;*/
+    width:100%;  /*宽度设置为100%，这样才能使隐藏背景层覆盖原页面*/
+    filter:alpha(opacity=60);  /*设置透明度为60%*/
+    opacity:0.6;  /*非IE浏览器下设置透明度为60%*/
+    display:block; /* http://www.jb51.net */
+    z-index:2;
+}
+#hidebox{ 
+ 	position:absolute;
+ 	width:300px;
+ 	height:200px;
+	top:50%;
+	transform: translateY(-50%);
+/*	vertical-align: middle;*/
+ 	left:35%;
+
+ 	background-color:#fff;
+ 	display:none;
+	cursor:pointer;
+	z-index:3;
+}
+#content{ 
+	text-align:center;
+	cursor:pointer;
+	z-index:1;
+}
+button{
+	width: 50px;
+	height: 30px;
+	background: #012349;
+	border-radius: 4px;
+	color: white;
+	margin-top:1%;
+	margin-left:40%;
+}
+textarea{
+	width: 300px;
+	height: 300px;
+}

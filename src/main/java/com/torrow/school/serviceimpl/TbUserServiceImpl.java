@@ -1,10 +1,15 @@
 package com.torrow.school.serviceimpl;
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.torrow.school.base.BaseDao;
 import com.torrow.school.dao.TbUserDao;
+import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbUser;
 import com.torrow.school.service.TbUserService;
 import com.torrow.school.util.PageBean;
@@ -28,9 +33,29 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 
 	@Override
 	public PageBean<TbUser> findPage(int currentPage,int pageSize) {
-		return this.pageCut(currentPage,pageSize);		
+		return this.pageCut(currentPage,pageSize);
 	}
 
+	@Override
+	public PageBean<TbUser> findPageSplit(List<TbCategory> categoryList,int currentPage,int pageSize) {
+		List<TbUser> userList = new ArrayList<TbUser>();//全部按照身份分开的用户
+		for(int i=0;i<categoryList.size();i++){
+			if(categoryList.get(i).getCaId()!=0){ //非空判断
+				userList.addAll(this.selectListByCaId(categoryList.get(i).getCaId()));				
+			}
+		}
+		int totalCount = userList.size();// 得到总记录数
+		double tc = totalCount;
+		Double num = Math.ceil(tc / pageSize);// 向上取整
+		List<TbUser> lists = new ArrayList<TbUser>();// 这个集合是为了分页显示的条数
+		for (int j = (currentPage - 1) * pageSize; j < currentPage * pageSize && j < totalCount; j++) {
+			lists.add(userList.get(j));
+		}
+		PageBean<TbUser> pageBean = new PageBean<TbUser>(currentPage, pageSize, lists, num.intValue(),
+				totalCount);
+		return pageBean;
+	}
+	
 	@Override
 	public List<TbUser> selectAll() {
 		return this.selectAllEntity();
@@ -79,7 +104,6 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 
 	@Override
 	public List<TbUser> selectListByCaId(Integer caId) {
-		
 		return tbUserDao.selectListByCaId(caId);
 	}
 

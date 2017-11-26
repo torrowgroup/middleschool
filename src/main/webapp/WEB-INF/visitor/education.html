@@ -55,15 +55,15 @@
             <a href="#">校园文学</a>
             <ul class="navSecondUl">
                 <li th:each="literature,literatureS:${literature}">
-                    	<a th:href="@{/visitorNEL/viewEducation?(rId= ${literature.caId})}" th:text="${literature.caName}">校园文学</a>
-                    </li>
+                   	<a th:href="@{/visitorNEL/viewLiterature?(cId= ${literature.caId})}" th:text="${literature.caName}">校园文学</a>
+                 </li>
             </ul>
         </li>
         <li class="navLi">
             <a href="#">教师风采</a>
             <ul class="navSecondUl">
-                <li><a href="#">教师介绍</a></li>
-                <li><a href="#">教师成果</a></li>
+                 <li><a th:href="@{/visitorNEL/viewTeacherIntroduction}">教师介绍</a></li>
+                    <li><a href="#">教师成果</a></li>
             </ul>
         </li>
         <li class="navLi">
@@ -102,7 +102,7 @@
 	            <div class="newscontent">
 	                <ul class="newscontentUl">
 	                 	<li th:each="resource,resoueStart:${resourceList.lists}">
-	                 		<a title="点击下载" id="news" th:href="@{/visitorGN/downEduLiter?(rId=${resource.reId})}" th:text="${resource.reTitle}"></a><span th:text="${resource.reIssuingdate}"></span>
+	                 		<a title="点击下载" id="news" th:href="@{/visitorNEL/downEduLiter?(rId=${resource.reId})}" th:text="${resource.reTitle}"></a><span th:text="${resource.reIssuingdate}"></span>
 	                 	</li>
 	                </ul>
 	                <div class="clearfix"></div>

@@ -1,0 +1,40 @@
+.teacherbox{
+    width: 365px;
+    margin-right: 10px;
+    float: left;
+    margin-bottom: 20px;
+}
+.teacherimg{
+    float: left;
+    width: 40%;
+    height: 210px;
+    padding: 4px;
+    border:#dcdee0 1px solid;
+}
+.teacherabout{
+    float: left;
+    width: 60%;
+    height: 220px;
+    padding:0 20px;
+    
+}
+.teacherimg img{
+    width: 100%;
+    height: 100%;
+}
+.teacherabout>a{
+    text-decoration: none;
+}
+.teacherabout>a>h3{
+    font-size: 16px;
+    color:#62708a;
+    padding:5px 0;
+}
+.teacherabout>a>p{
+    color:#75839d;
+    font-size: 12px;
+    padding:5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

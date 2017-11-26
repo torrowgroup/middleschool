@@ -121,16 +121,20 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	@Override
 	public void getResource(List<TbCategory> categoryList, Model model) {
 		List<Integer> caIdNews = new ArrayList<Integer>();//学校新闻类别类的id
-		int noticeCaId = 0;
+		int noticeCaId = 0;//通知公告类别类id
+		int resourcesId = 0;//资源下载类别类id
 		for(int i=0;i<categoryList.size();i++){
 			if(categoryList.get(i).getCaPid()==2) {//校园新闻
 				caIdNews.add(categoryList.get(i).getCaId()); 
 			} else if(categoryList.get(i).getCaPid()==6) {//通知公告
 				noticeCaId = categoryList.get(i).getCaId();
+			} else if(categoryList.get(i).getCaPid()==11) {//资源下载
+				resourcesId = categoryList.get(i).getCaId();
 			}
 		}
 		List<TbResource> sNews = new ArrayList<TbResource>();//学校新闻，按倒序得到，只要8条,没有图片不要
 		List<TbResource> sNotices = new ArrayList<TbResource>();//学校公告，按倒序得到，只要8条
+		List<TbResource> resourcesDown = new ArrayList<TbResource>();//资源下载，按倒序得到，只要8条
 		List<TbResource> allResources = this.selectAll();
 		for(int i=allResources.size()-1;i>=0;i--){	//倒序得到资源类
 			for(int j=0;j<caIdNews.size();j++){
@@ -145,9 +149,13 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 			if(sNotices.size()<8&&allResources.get(i).getCaId()==noticeCaId){
 				sNotices.add(allResources.get(i));
 			}
+			if(resourcesDown.size()<8&&allResources.get(i).getCaId()==resourcesId){
+				resourcesDown.add(allResources.get(i));
+			}
 		}
 		model.addAttribute("notices", sNotices);
 		model.addAttribute("sNews", sNews);
+		model.addAttribute("resourcesDown", resourcesDown);
 	}
 
 	/**
