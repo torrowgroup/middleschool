@@ -20,6 +20,7 @@ import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbUser;
 import com.torrow.school.util.Email;
+
 import sun.misc.BASE64Encoder;
 /**
  * @author 张金高
@@ -45,27 +46,8 @@ public class LoginController extends BaseController {
 		if(null!=tbUser) {
 			model.addAttribute("msg", "登录成功");
 			session.setAttribute("manager",tbUser);
-			int Pid=1;//概括类的
-			List<TbCategory> list=categoryService.queryByPid(Pid);
-			int id=7;//校园风光
-			List<TbCategory> item=categoryService.queryByPid(id);
-			int Pd = 2;//新闻类
-			List<TbCategory> news = categoryService.queryByPid(Pd);
-			int d=9;//学生管理、教师上传
-			List<TbCategory> upload = categoryService.queryByPid(d);
-			int i=3;
-			List<TbCategory> education = categoryService.queryByPid(i);
-			int j=12;
-			List<TbCategory> literature = categoryService.queryByPid(j);
-			int f=11;
-			List<TbCategory> download = categoryService.queryByPid(f);
-			model.addAttribute("downloadList", download);
-			model.addAttribute("literatureList",literature);
-			model.addAttribute("educationList",education);
-			model.addAttribute("uploadList",upload);
-			model.addAttribute("newsList", news);
-			model.addAttribute("generalList", list);
-			model.addAttribute("sceneryList", item);
+			//这个方法是为了获得首页的显示数据
+			categoryService.findAllCategory(model);
 			TbCategory tbCategory = categoryService.selectByPrimaryKey(tbUser.getCaId());
 			//进入机构部的管理页面
 			if(tbCategory.getCaPid()==3) {
@@ -98,7 +80,7 @@ public class LoginController extends BaseController {
 	public ModelAndView index(Model model){
 		categoryService.getCategory(0,model);
 		List<TbCategory> categoryList = categoryService.selectAll();
-		resourceService.getResource(categoryList,model);//得到新闻，公告等
+		resourceService.getResource(categoryList,model);//得到新闻，公告等,追加资源下载
 		return new ModelAndView("visitor/index");
 	}
 	
@@ -213,4 +195,10 @@ public class LoginController extends BaseController {
 		return new ModelAndView("updatepassword");
 	}
 	
+	@RequestMapping("logout")
+	public String logout() {
+		session.invalidate();
+		log.info("注销操作");
+		return "index";
+	}
 }

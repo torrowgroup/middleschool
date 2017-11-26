@@ -144,6 +144,7 @@ public class BaseDao<T> extends SqlSessionDaoSupport implements Serializable {
 	}
 	
 	public void download(HttpServletRequest request,HttpServletResponse response,int id) throws Exception{  
+		//根据ID来查找相应的实体类对应的字段信息，这里指的是文件地址
     	TbResource tb = getSqlSession().selectOne(this.getNameSpace() + ".selectByPrimaryKey", id);
     	//模拟文件，myfile.txt为需要下载的文件  
         String fileName = request.getSession().getServletContext().getRealPath("/static/uploadimg")+"/" + tb.getReContent(); 

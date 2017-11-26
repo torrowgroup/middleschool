@@ -22,7 +22,7 @@
                 <tr th:each="news,newsStart:${pagemsg.lists}">
                 	<td th:text="${news.reTitle}">${news.reTitle}</td>
                 	<td th:text="${news.reIssuingdate}">${news.reIssuingdate}</td>
-                	<td><a th:href="@{/education/down?(id=${news.reId})}">下载</a></td>
+                	<td><a th:href="@{/political/down?(id=${news.reId})}">下载</a></td>
                 </tr>
         </table>    
     </div>

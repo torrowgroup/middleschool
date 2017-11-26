@@ -14,44 +14,43 @@ import com.torrow.school.entity.TbCategory;
 /**
  * @author 安李杰
  *
- * @2017年11月25日下午5:11:25
+ * @2017年11月25日下午8:22:24
  * 
- * 此处为教研组管理后台
+ * 政教处的上传
  */
 @Controller
-@RequestMapping("/education")
-public class EducationController extends BaseController {
+@RequestMapping("/political")
+public class PoliticalEducationController extends BaseController{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * @param model
 	 * @param Pid
-	 * @return 教研组的上传
+	 * @return 政教处的上传
 	 */
-	@RequestMapping("addNewsJumping")
+	@RequestMapping("uploadJumping")
 	public String addNewsJumping(Model model,int Pid) {
 		categoryService.addBySelectPid(model,Pid);
-		return "educationoffice/addschoolnews";
+		return "politicaleducation/uploadfile";
 	}
 
 	/**
 	 * @param currentPage
 	 * @param model
-	 * @return 教研组上传类的查看
+	 * @return 政教处上传类的查看
 	 */
 	@RequestMapping("manageEducationUpload")
 	public String manageUpload(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,
 			Integer id) {
 		TbCategory record = new TbCategory();
-		// record.setCaPid(2);
 		record.setCaId(id);
 		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
-		return "educationoffice/manageupload";
+		return "politicaleducation/manageupload";
 	}
 	
 	/**

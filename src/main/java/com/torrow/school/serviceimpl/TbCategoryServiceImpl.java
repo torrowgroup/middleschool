@@ -129,4 +129,29 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 			model.addAttribute("sign", 1);
 		}
 	}
+
+	@Override
+	public void findAllCategory(Model model) {
+		int Pid=1;//概括类的
+		List<TbCategory> list=this.queryByPid(Pid);
+		int id=7;//校园风光
+		List<TbCategory> item=this.queryByPid(id);
+		int Pd = 2;//新闻类
+		List<TbCategory> news = this.queryByPid(Pd);
+		int d=9;//学生管理、教师上传
+		List<TbCategory> upload = this.queryByPid(d);
+		int i=3;
+		List<TbCategory> education = this.queryByPid(i);
+		int j=12;
+		List<TbCategory> literature = this.queryByPid(j);
+		int f=11;
+		List<TbCategory> download = this.queryByPid(f);
+		model.addAttribute("downloadList", download);
+		model.addAttribute("literatureList",literature);
+		model.addAttribute("educationList",education);
+		model.addAttribute("uploadList",upload);
+		model.addAttribute("newsList", news);
+		model.addAttribute("generalList", list);
+		model.addAttribute("sceneryList", item);	
+	}
 }
