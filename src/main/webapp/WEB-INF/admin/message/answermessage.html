@@ -17,14 +17,9 @@
 			<td>发布人：</td>
 			<td th:text="${message.meHide}"></td>
 		</tr>
-		<tr th:if="${message.mePicture}!=null">
-			<td>图片</td>
-			<td><img alt="加载中"
-				src="@{/middleschool/static/uploadimg/${message.mePicture}}"></td>
-		</tr>
 		<tr>
 			<td>内容</td>
-			<td><textarea th:text="${message.meContent}"></textarea></td>
+			<td><div id="meContent">没有填写内容</div></td>
 		</tr>
 		<tr>
 			<td>留言日期：</td>
@@ -56,6 +51,11 @@
 			editor.config.uploadImgUrl = 'uploadImg'
 			editor.config.uploadImgFileName = 'file'
 			editor.create()
+			
+			var messageContent = /*[[${message}]]*/;
+			if(messageContent.meContent!=null){
+				$(meContent).html(messageContent.meContent)
+			}
 			
 			var coutent = /*[[${message.meReply}]]*/;
 			editor.$txt.html(coutent);

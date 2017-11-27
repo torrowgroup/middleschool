@@ -88,7 +88,7 @@
             <h3>校园文学</h3>
             <ul class="schoolcenter">
                 <li th:each="literature,literatureS:${literature}">
-                    	<a th:href="@{/visitorNEL/viewLiterature?(cId= ${literature.caId})}" th:text="${literature.caName}">校园文学</a>
+                    	<a th:name="${literature.caId}" th:href="@{/visitorNEL/viewLiterature?(cId= ${literature.caId})}" th:text="${literature.caName}">校园文学</a>
                 </li>
             </ul>
         </div>

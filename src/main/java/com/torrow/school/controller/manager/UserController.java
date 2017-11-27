@@ -106,23 +106,28 @@ public class UserController extends BaseController {
 	//修改用户信息
 	@RequestMapping("updateUser")
 	public String updateUser(TbUser user,int page,MultipartFile picture,Model model) throws Exception{
-		TbCategory category = categoryService.selectByPrimaryKey(user.getCaId());
-		user.setCaName(category.getCaName());//得到用户身份名称
-		if(!picture.getOriginalFilename().equals("")){//如果用户上传了图片，则换掉原来的图片
-			TbUser userData = userService.selectById(user.getUsId());
-			String path = session.getServletContext().getRealPath("/static/uploadimg");
-			File file = new File(path+"/"+userData.getUsPicture());
-			if(file.exists()){	//删掉不用的图片
-				file.delete();
-			}
-			String fileName = userService.uploadPicture(picture, path);
-			user.setUsPicture(fileName);
-		}
-		int boo = userService.updateByPrimaryKey(user);
-		if(boo==1){
-			model.addAttribute("message", "修改完成");
+		TbUser userBoo = userService.selectById(user.getUsId());
+		if(userBoo==null){											//如果用户不存在，返回
+			model.addAttribute("message", "用户不存在，修改失败");
 		} else {
-			model.addAttribute("message", "修改失败");
+			TbCategory category = categoryService.selectByPrimaryKey(user.getCaId());
+			user.setCaName(category.getCaName());//得到用户身份名称
+			if(!picture.getOriginalFilename().equals("")){//如果用户上传了图片，则换掉原来的图片
+				TbUser userData = userService.selectById(user.getUsId());
+				String path = session.getServletContext().getRealPath("/static/uploadimg");
+				File file = new File(path+"/"+userData.getUsPicture());
+				if(file.exists()){	//删掉不用的图片
+					file.delete();
+				}
+				String fileName = userService.uploadPicture(picture, path);
+				user.setUsPicture(fileName);
+			}
+			int boo = userService.updateByPrimaryKey(user);
+			if(boo==1){
+				model.addAttribute("message", "修改完成");
+			} else {
+				model.addAttribute("message", "修改失败");
+			}
 		}
 		return this.manageUser(page, model);//返回管理用户当前页面
 	}

@@ -9,8 +9,6 @@
     <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/static/css/visitor/style.css}" type="text/css">
 	<link rel="stylesheet" th:href="@{/static/css/visitor/aboutschool.css}" type="text/css">
-    <script th:src="@{/static/js/jquery.min.js}"></script>
-    <script th:src="@{/static/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" th:href="@{/static/css/visitor/schoolnews.css}" type="text/css">
 </head>
 <body>
@@ -85,7 +83,7 @@
 <div class="mainbox1">
     <div class="schollabout">
         <div class="schollleft">
-            <h3>教育教研</h3>
+            <h3>校园新闻</h3>
             <ul class="schoolcenter">
                	<li th:each="news,newsStart:${schoolNews}">
                     	<a th:name="${news.caId}" th:href="@{/visitorGN/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
@@ -170,6 +168,8 @@
         </div>
     </div>
 </div>
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
 <script th:src="@{/static/js/visitor/select.js}"></script>
 <script th:inline="javascript">
 	var useCategory = /*[[${useCategory}]]*/;

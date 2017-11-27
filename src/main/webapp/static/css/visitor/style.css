@@ -138,7 +138,7 @@ body{
     max-width: 1000px;
 }
 .mainLeft{
-    border-right:2px solid #d7d7d7;
+    border-right:1.5px solid #d7d7d7;
 }
 .mainLeft>h3>a{
     text-decoration: none;
@@ -151,9 +151,7 @@ body{
     margin: 10px 0;
     font-size: 14px;
     line-height: 20px;
-    height: 100px;
     overflow: hidden;
-    text-overflow: ellipsis;
 }
 .mainLeft>p>a{
     color:rgb(48,64,91);
@@ -224,7 +222,7 @@ body{
     overflow:hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    background: url("../images/pont.jpg") no-repeat left center;
+    background: url("../../images/visitor/pont.jpg") no-repeat left center;
 }
 .mainBbody>li>span{
     float: right;

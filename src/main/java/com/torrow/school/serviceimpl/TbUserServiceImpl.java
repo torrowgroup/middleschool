@@ -75,10 +75,10 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 	public int addUser(TbUser tbUser) {
 		return this.insertEntity(tbUser);
 	}
-	@Override
-	public TbUser selectByCaId(Integer caId) {
-		return tbUserDao.selectByCaId(caId);
-	}
+//	@Override
+//	public TbUser selectByCaId(Integer caId) {
+//		return tbUserDao.selectByCaId(caId);
+//	}
 
 	@Override
 	public int deleteByCaId(Integer caId) {
