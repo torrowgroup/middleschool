@@ -33,5 +33,6 @@ public interface TbCategoryService {
 	public List<TbCategory> queryByPid(int Pid);//张金高用
 	//添加的跳转
 	public void addBySelectPid(Model model,int Pid);
-
+	//首页的显示的类别类
+	public void findAllCategory(Model model);
 }

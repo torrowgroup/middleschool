@@ -93,7 +93,7 @@
 		<div class="two">  
 			<ul>
 			
-				<li><a href="#"><span class="glyphicon glyphicon-hand-right"></span>退出</a></li>
+				<li><a th:href="@{/logout}"><span class="glyphicon glyphicon-hand-right"></span>注销</a></li>
 				<li><div class="le_1"><a th:href="@{/user/viewMe}" target="ie">
 						<img th:src="@{/static/uploadimg/{picture}(picture=${session.manager.usPicture})}" alt="没有图片">
 					</a></div></li>
