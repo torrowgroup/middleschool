@@ -8,7 +8,7 @@
 <body>
 <div th:text="${message}"></div>
 <span th:if ="${pagemsg.totalCount}==0">
-        没有任何资源信息！
+        没有任何资源下载信息！
     </span>
  <div th:if ="${pagemsg.totalCount}!=0">
         <table border="1"  class="table1">
@@ -16,31 +16,33 @@
             <tr>
                 <td>上传的名称</td>
                 <td>上传的时间</td>
+                <td>删除</td>
                 <td>下载</td>
             </tr>
             </thead>
                 <tr th:each="news,newsStart:${pagemsg.lists}">
                 	<td th:text="${news.reTitle}">${news.reTitle}</td>
                 	<td th:text="${news.reIssuingdate}">${news.reIssuingdate}</td>
-                	<td><a th:href="@{/education/down?(id=${news.reId})}">下载</a></td>
+                	<td><a th:href="@{/news/deleteFile?(id=${news.reId})}">delete</a></td>
+                	<td><a th:href="@{/news/down?(id=${news.reId})}">下载</a></td>
                 </tr>
         </table>    
-    
+  
 <table>
 <tr>
 <td class="td2">
    <span th:if ="${pagemsg.currPage != 1}">
-           <a th:href="@{/education/manageEducationUpload?(currentPage=1,id=${zid})}">[首页]</a>&nbsp;&nbsp;
-           <a th:href="@{/education/manageEducationUpload?(currentPage=${pagemsg.currPage-1},id=${zid})}">[上一页]</a>&nbsp;&nbsp;
+           <a th:href="@{/news/manageObject?(currentPage=1,id=${zid})}">[首页]</a>&nbsp;&nbsp;
+           <a th:href="@{/news/manageObject?(currentPage=${pagemsg.currPage-1},id=${zid})}">[上一页]</a>&nbsp;&nbsp;
 	</span>	
 	<span th:if="${pagemsg.currPage == 1}">
 		[首页][上一页]
 	</span>
 	<span th:each="i:${#numbers.sequence(1,pagemsg.totalPage)}">
-			<a th:if="${i > pagemsg.currPage-3} and ${i < pagemsg.currPage+3}"  th:href="@{/education/manageEducationUpload?(currentPage=${i},id=${zid})}"th:text="${i}">#</a>
+			<a th:if="${i > pagemsg.currPage-3} and ${i < pagemsg.currPage+3}"  th:href="@{/news/manageObject?(currentPage=${i},id=${zid})}"th:text="${i}">#</a>
 	</span>
     <span th:if ="${pagemsg.currPage < pagemsg.totalPage}">
-           <a th:href="@{/education/manageEducationUpload?(currentPage=${pagemsg.currPage+1},id=${zid})}">[下一页]</a>&nbsp;&nbsp;
+           <a th:href="@{/news/manageObject?(currentPage=${pagemsg.currPage+1},id=${zid})}">[下一页]</a>&nbsp;&nbsp;
 	</span>
 	<span th:if="${pagemsg.currPage >= pagemsg.totalPage}">
 		[下一页]
@@ -48,6 +50,6 @@
 </td>
 </tr>
 </table>
-</div>
+  </div>
 </body>
 </html>

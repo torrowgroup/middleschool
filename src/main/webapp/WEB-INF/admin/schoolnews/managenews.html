@@ -8,7 +8,7 @@
 	th:href="@{/static/dist/css/wangEditor.min.css}">
 </head>
 <body>
-	<div th:if="${sign}!='1'"><button onclick="bian()">点我一下</button></div>
+	<div th:if="${sign}!='1'"><button onclick="bian()">编辑</button></div>
 	<div th:text="${message}"></div>
 	<form th:action="@{/news/updateSchoolNews}" onSubmit="return modifyContent();"
 		method="post" enctype="multipart/form-data">

@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div th:text="${message}"></div>
-	<span th:if="${pagemsg.totalCount}==0"> 没有任何用户信息！ </span>
+	<span th:if="${pagemsg.totalCount}==0"> 没有任何类别信息! </span>
 	<div th:if="${pagemsg.totalCount}!=0">
 		<table border="1" class="table1">
 			<thead>
@@ -26,8 +26,7 @@
 				<td th:if="${category.caPid}=='1'">学校概括</td>
 				<td th:if="${category.caPid}=='2'">学校新闻</td>
 				<td th:if="${category.caPid}=='3'">机构部</td>
-				<td th:if="${category.caPid}=='4'">管理员</td>
-				<td th:if="${category.caPid}=='5'">教师</td>
+				<td th:if="${category.caPid}=='4'">用户</td>
 				<td th:if="${category.caPid}=='6'">通知公告</td>
 				<td th:if="${category.caPid}=='7'">校园风光</td>
 				<td th:if="${category.caPid}=='8'">底部链接</td>
@@ -44,7 +43,7 @@
 					onclick="return confirm('确定要删除吗')">Delete</a></td>
 			</tr>
 		</table>
-	</div>
+	
 	<table>
 		<tr>
 			<td class="td2"><span th:if="${pagemsg.currPage != 1}"> <a
@@ -62,5 +61,6 @@
 			</span></td>
 		</tr>
 	</table>
+</div>
 </body>
 </html>

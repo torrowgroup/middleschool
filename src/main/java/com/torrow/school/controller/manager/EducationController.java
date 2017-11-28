@@ -51,6 +51,7 @@ public class EducationController extends BaseController {
 		record.setCaId(id);
 		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
+		model.addAttribute("zid", id);
 		return "educationoffice/manageupload";
 	}
 	

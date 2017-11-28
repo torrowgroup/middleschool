@@ -62,4 +62,5 @@
 	<select id="selectCount" resultType="int">
 		select count(*) from tb_category
 	</select>
+	
 </mapper>

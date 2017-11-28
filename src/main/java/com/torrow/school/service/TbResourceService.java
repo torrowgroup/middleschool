@@ -48,6 +48,6 @@ public interface TbResourceService {
     public String uploadFile(MultipartFile file, String path) throws Exception;
     //文件的下载
     public void down(HttpServletRequest request,HttpServletResponse response,int id) throws Exception;
-    //这种删除/修改类别类中的信息，resource表跟着删除/修改，id只是为了区分是修改还是删除，修改是1、删除是2
+    //这种删除/修改类别类中的信息，resource表跟着删除/修改，id只是为了区分是修改还是删除，修改是1、删除是2,3是验证图片或文件是否重复,
     void updateDeleteTbResourceByCaId(TbResource record,int id);
 }

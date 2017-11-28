@@ -12,7 +12,7 @@
 <div th:text="${message}"></div>
 <div th:if="${sign}!='1'">
 <a th:href="@{/general/addSceneryJumping}" target="ie" class="out1" style="margin-left:900px;">添加校园风光</a>
-<form th:action="@{/general/addGeneral}"  onsubmit="modifyContent()" method="post" enctype="multipart/form-data">
+<form th:action="@{/general/addGeneral}"  onSubmit="return modifyContent();" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>标题</td>
@@ -47,5 +47,15 @@
 <script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/addnews.js}" ></script>
 </div>
+<script>
+	function modifyContent(){
+		var oIn = document.getElementById('introdEditor');
+// 		alert(oIn.innerHTML);
+// 		if(oIn.innerHTML==null){
+// 			alert("sdf");
+// 		}
+		
+	}
+</script>
 </body>
 </html>

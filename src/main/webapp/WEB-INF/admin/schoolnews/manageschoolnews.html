@@ -8,7 +8,7 @@
 <body>
 <div th:text="${message}"></div>
 <span th:if ="${pagemsg.totalCount}==0">
-        没有任何资源信息！
+        没有任何校园新闻信息!
     </span>
  <div th:if ="${pagemsg.totalCount}!=0">
         <table border="1"  class="table1">
@@ -27,7 +27,7 @@
                 	<td><a th:href="@{/news/deleteNews?(id=${news.reId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
                 </tr>
         </table>    
-    </div>
+    
 <table>
 <tr>
 <td class="td2">
@@ -50,5 +50,6 @@
 </td>
 </tr>
 </table>
+</div>
 </body>
 </html>

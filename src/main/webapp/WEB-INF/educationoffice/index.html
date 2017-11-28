@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>home</title>
+<title>home</title>
 </head>
 <body>
-<details>
-		<a th:href="@{/education/addNewsJumping?(Pid=3)}"  target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;教育教研上传</a>
-		<div th:each="category,categoryStart:${educationList}">
-				<a th:href="@{/education/manageEducationUpload?(id=${category.caId})}" th:text="${category.caName}"></a>
-		</div>
-</details>
-<iframe name="mainIframe" height="500px;" width="1500px;"></iframe>
+
+	<a th:href="@{/education/addNewsJumping?(Pid=3)}" target="ie"
+		class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;教育教研上传</a>
+	<div th:each="category,categoryStart:${educationList}">
+		<a th:href="@{/education/manageEducationUpload?(id=${category.caId})}"
+			th:text="${category.caName}"></a>
+	</div>
+	<hr>
+	<a th:href="@{/teacher/uploadJumping?(Pid=12)}" class="out2"><span
+		class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校园文学的上传</a>
+	<div th:each="category,categoryStart:${literatureList}">
+		<a th:href="@{/teacher/manageUpload?(id=${category.caId})}"
+			th:text="${category.caName}" target="ie" class="out2"><span
+			class="glyphicon glyphicon-list-alt"></span></a>
+	</div>
+	<div th:each="category,categoryStart:${downloadList}">
+		<a th:href="@{/teacher/manageUpload?(id=${category.caId})}"
+			th:text="${category.caName}" target="ie" class="out2"><span
+			class="glyphicon glyphicon-list-alt"></span></a>
+	</div>
 </body>
 </html>

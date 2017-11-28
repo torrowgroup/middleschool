@@ -15,16 +15,20 @@
         <table border="1"  class="table1">   
         <thead>
             <tr>
+            	<td>简介</td>
                 <td>校园风光</td>
+                <td>详情</td>
                 <td>删除</td>
             </tr>
             </thead>
                 <tr th:each="general,generalStart:${pagemsg.lists}">
-                    <td><a th:href="@{/general/selectOneScenery?(id=${general.reId})}"><img alt="无图片" width="100px;" height="80px;" th:src="@{/static/uploadimg/{picture}(picture=${general.reContent})}" /></a></td>
+                    <td th:text="${general.reTitle}">${news.reTitle}</td>
+                    <td><img alt="无图片" width="100px;" height="80px;" th:src="@{/static/uploadimg/{picture}(picture=${general.reContent})}" /></td>
+                	<td><a th:href="@{/general/selectOneScenery?(id=${general.reId})}">详情</a>
                 	<td><a th:href="@{/general/deleteScenery?(id=${general.reId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
                 </tr>
         </table>   
-    </div> 
+    
 <table>
 <tr>
 <td class="td2">
@@ -47,5 +51,6 @@
 </td>
 </tr>
 </table>
+</div> 
 </body>
 </html>

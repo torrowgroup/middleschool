@@ -233,8 +233,9 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 					if(id==1) {
 						item.setCaName(record.getCaName());
 						this.updateByPrimaryKey(item);
-					}else if(id==2) {
-						this.deleteByPrimaryKey(record.getCaId());
+					}
+					if(id==2) {
+						this.deleteByPrimaryKey(item.getReId());
 					}
 				}
 			}

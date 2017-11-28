@@ -103,7 +103,10 @@ public class GeneralController extends BaseController {
 		TbCategory tbCategory = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
 		String reContent = resourceService.uploadPicture(picture, path);
+//		TbResource t=new TbResource(tbCategory.getCaId(),reContent);
 		if(tbCategory.getCaPid()==7) {
+//			//这是验证图片是否重名
+//			resourceService.updateDeleteTbResourceByCaId(t,3);
 			TbResource tb = new TbResource(tbResource.getCaId(),tbResource.getCaName(),tbResource.getReTitle(),reContent);
 			int i=resourceService.insert(tb);
 			if(i!=0) {
@@ -152,7 +155,7 @@ public class GeneralController extends BaseController {
 			model.addAttribute("tbResource", tb);
 		} else {
 			model.addAttribute("message", "您还没有添加这方面的内容,请先在概括类中添加该项内容");
-			return "admin/animation";
+			return "admin/empty";
 		}
 		return "admin/general/managegeneral";
 	}
@@ -168,22 +171,7 @@ public class GeneralController extends BaseController {
 		} else {
 			model.addAttribute("message", "删除失败");
 		}
-		int Pid=1;//概括类的
-		List<TbCategory> list=categoryService.queryByPid(Pid);
-		int idd=7;//校园风光
-		List<TbCategory> item=categoryService.queryByPid(idd);
-		int Pd = 2;//新闻类
-		List<TbCategory> news = categoryService.queryByPid(Pd);
-		int d=9;//学生管理、教师上传
-		List<TbCategory> upload = categoryService.queryByPid(d);
-		int i=3;
-		List<TbCategory> education = categoryService.queryByPid(i);
-		model.addAttribute("educationList",education);
-		model.addAttribute("uploadList",upload);
-		model.addAttribute("newsList", news);
-		model.addAttribute("generalList", list);
-		model.addAttribute("sceneryList", item);
-		return  "admin/index";
+		return "admin/empty";
 	}
 
 	

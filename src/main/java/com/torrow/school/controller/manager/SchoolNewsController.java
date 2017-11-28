@@ -33,13 +33,12 @@ public class SchoolNewsController extends BaseController {
 
 	/**
 	 * @param model
-	 * @return 添加校园新闻、上传（学生管理、教师成长）、
-	 * 教研组上的上传、资源下载类的上传、校园文学类的上传、学校公告类的添加
+	 * @return 添加校园新闻、上传（学生管理、教师成长）、 教研组上的上传、资源下载类的上传、校园文学类的上传、学校公告类的添加
 	 */
 	@RequestMapping("addNewsJumping")
-	public String addNewsJumping(Model model,int Pid) {
-		categoryService.addBySelectPid(model,Pid);
-		if(Pid==9||Pid==3||Pid==11||Pid==12) {
+	public String addNewsJumping(Model model, int Pid) {
+		categoryService.addBySelectPid(model, Pid);
+		if (Pid == 9 || Pid == 3 || Pid == 11 || Pid == 12) {
 			return "admin/schoolnews/uploadfile";
 		}
 		return "admin/schoolnews/addschoolnews";
@@ -54,16 +53,21 @@ public class SchoolNewsController extends BaseController {
 	public String deleteScenery(Model model, Integer id) {
 		int currentPage = (int) session.getAttribute("currentPage");
 		TbResource tb = resourceService.selectByPrimaryKey(id);
-		String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tb.getReContent();
-		File files = new File(path);
-		if (files.exists()) {
-			files.delete();
+		if(null!=tb) {
+			String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tb.getReContent();
+			File files = new File(path);
+			if (files.exists()) {
+				files.delete();
+			}
+			String msg = "删除失败";
+			if (resourceService.deleteByPrimaryKey(id) == 1) {
+				msg = "删除成功";
+			}
+			model.addAttribute("message", msg);
+		} else {
+			model.addAttribute("message","这个文件不存在");
+			return "admin/empty";
 		}
-		String msg = "删除失败";
-		if (resourceService.deleteByPrimaryKey(id) == 1) {
-			msg = "删除成功";
-		}
-		model.addAttribute("message", msg);
 		return this.manageUpload(currentPage, model, tb.getCaId());
 	}
 
@@ -81,11 +85,11 @@ public class SchoolNewsController extends BaseController {
 		for (TbResource en : resource) {
 			if (en.getCaId() == tbResource.getCaId()) {
 				if (en.getReTitle().equals(tbResource.getReTitle())) {
-					model.addAttribute("message", "该名称已存在，添加失败");
+					model.addAttribute("message", "该标题已存在，添加失败");
 					if (item.getCaPid() == 2) {
-						return this.addNewsJumping(model,2);
+						return this.addNewsJumping(model, 2);
 					} else {
-						return this.addNewsJumping(model,6);
+						return this.addNewsJumping(model, 6);
 					}
 				}
 			}
@@ -106,9 +110,9 @@ public class SchoolNewsController extends BaseController {
 			model.addAttribute("message", "添加失败,不存在该类别");
 		}
 		if (item.getCaPid() == 6) {
-			return this.addNewsJumping(model,6);
+			return this.addNewsJumping(model, 6);
 		}
-		return this.addNewsJumping(model,2);
+		return this.addNewsJumping(model, 2);
 	}
 
 	/**
@@ -120,7 +124,6 @@ public class SchoolNewsController extends BaseController {
 	public String manageSchoolNews(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
 			Model model, Integer id) {
 		TbCategory record = new TbCategory();
-		// record.setCaPid(2);
 		record.setCaId(id);
 		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
@@ -137,7 +140,6 @@ public class SchoolNewsController extends BaseController {
 	public String manageUpload(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,
 			Integer id) {
 		TbCategory record = new TbCategory();
-		// record.setCaPid(2);
 		record.setCaId(id);
 		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
@@ -157,6 +159,7 @@ public class SchoolNewsController extends BaseController {
 			model.addAttribute("tbResource", tb);
 		} else {
 			model.addAttribute("message", "该名称不存在");
+			return "admin/empty";
 		}
 		TbCategory tbCategory = categoryService.selectByPrimaryKey(tb.getCaId());
 		if (tbCategory.getCaPid() == 6) {
@@ -185,6 +188,9 @@ public class SchoolNewsController extends BaseController {
 			} else {
 				model.addAttribute("message", "保存失败");
 			}
+		} else {
+			model.addAttribute("message","这条新闻不存在");
+			return "admin/empty";
 		}
 		return this.selectOneNews(tbResource.getReId(), model);
 	}
@@ -198,28 +204,43 @@ public class SchoolNewsController extends BaseController {
 	public String deleteNews(Model model, int id) {
 		int currentPage = (int) session.getAttribute("currentPage");
 		TbResource tb = resourceService.selectByPrimaryKey(id);
-		int i = resourceService.deleteByPrimaryKey(id);
-		if (i != 0) {
-			model.addAttribute("message", "删除成功");
+		if(null!=tb) {
+			int i = resourceService.deleteByPrimaryKey(id);
+			if (i != 0) {
+				model.addAttribute("message", "删除成功");
+			} else {
+				model.addAttribute("message", "删除失败");
+			}
 		} else {
-			model.addAttribute("message", "删除失败");
+			model.addAttribute("message", "这条新闻不存在");
+			return "admin/empty";
 		}
 		return this.manageSchoolNews(currentPage, model, tb.getCaId());
 	}
+
 	/**
 	 * @param model
 	 * @return 管理资源下载的管理
 	 */
-	@RequestMapping("manageDownLoadJumpping")
-	public String manageDownLoadJumpping(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
-			TbCategory record = new TbCategory();
-			record.setCaPid(11);
-			model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,4));// 回显分页数据
-			model.addAttribute("sign", 1);// 为了在查看管理轮播图时是同一个界面
-			session.setAttribute("currentPage", currentPage);
-			return "admin/schoolnews/manageupload";
+	@RequestMapping("manageObject")
+	public String manageObject(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
+			Model model,Integer id) {
+		TbCategory record = new TbCategory();
+		record.setCaPid(id);
+		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 4));// 回显分页数据
+		model.addAttribute("sign", 1);// 为了在查看管理轮播图时是同一个界面
+		session.setAttribute("currentPage", currentPage);
+		model.addAttribute("zid", id);
+		if(id==6) {
+			return "admin/notice/managenotice";
+		}else if(id==10) {
+			return "admin/managepicture/managepicture";
+		}
+		return "admin/download/manageupload";
 	}
-
+	
+	
+	
 	/**
 	 * @param tbResource
 	 * @param picture
@@ -236,13 +257,13 @@ public class SchoolNewsController extends BaseController {
 				if (file.getOriginalFilename().equals(en.getReContent())) {
 					model.addAttribute("message", "该文件已存在,上传失败");
 					if (item.getCaPid() == 9) {
-						return this.addNewsJumping(model,9);
+						return this.addNewsJumping(model, 9);
 					} else if (item.getCaPid() == 11) {
-						return this.addNewsJumping(model,11);
+						return this.addNewsJumping(model, 11);
 					} else if (item.getCaPid() == 12) {
-						return this.addNewsJumping(model,12);
+						return this.addNewsJumping(model, 12);
 					} else if (item.getCaPid() == 3) {
-						return this.addNewsJumping(model,3);
+						return this.addNewsJumping(model, 3);
 					}
 				}
 			}
@@ -252,22 +273,22 @@ public class SchoolNewsController extends BaseController {
 		String Date = dFormat.format(date);
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
 		String reContent = resourceService.uploadFile(file, path);
-		TbResource tb = new TbResource(item.getCaId(),Date,item.getCaName(), file.getOriginalFilename(), reContent);
+		TbResource tb = new TbResource(item.getCaId(), Date, item.getCaName(), file.getOriginalFilename(), reContent);
 		resourceService.insert(tb);
 		model.addAttribute("message", "添加成功");
 		// 校园文学
 		if (item.getCaPid() == 12) {
-			return this.addNewsJumping(model,12);
+			return this.addNewsJumping(model, 12);
 		}
 		// 教育教研
 		if (item.getCaPid() == 3) {
-			return this.addNewsJumping(model,3);
+			return this.addNewsJumping(model, 3);
 		}
 		// 资源类的下载
 		if (item.getCaPid() == 11) {
-			return this.addNewsJumping(model,11);
+			return this.addNewsJumping(model, 11);
 		}
-		return this.addNewsJumping(model,9);
+		return this.addNewsJumping(model, 9);
 	}
 
 	// 用于富文本编辑器的图片上传
@@ -279,19 +300,6 @@ public class SchoolNewsController extends BaseController {
 		response.getWriter().write("/middleschool/static/uploadimg/" + fileName);
 	}
 
-	/**
-	 * @param model
-	 * @return 进入管理通知公告类的跳转
-	 */
-	@RequestMapping("noticeJumping")
-	public String noticeJumping(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
-			TbCategory record = new TbCategory();
-			record.setCaPid(6);
-			model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,4));// 回显分页数据
-			model.addAttribute("sign", 1);// 为了在查看管理轮播图时是同一个界面
-			session.setAttribute("currentPage", currentPage);
-			return "admin/schoolnews/manageschoolnews";
-	}
 	/**
 	 * 文件下载功能
 	 * 

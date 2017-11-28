@@ -10,10 +10,9 @@
 	th:href="@{/static/css/admin/managegeneral.css}">	
 </head>
 <body>
-<div th:text="${message}"></div>
 <div class="total">
 <button onclick="bian()">点我一下</button>
-<a th:href="@{/general/deleteScenery?(id=${tbResource.reId})}" onclick="return confirm('确定要删除吗')">Delete</a>
+<a th:href="@{/general/deleteGeneral?(id=${tbResource.reId})}" onclick="return confirm('确定要删除吗')">Delete</a>
 <form th:action="@{/general/updateGeneral}" onSubmit="return modifyContent();"
 		method="post" enctype="multipart/form-data">
 		<input type="hidden" name="reId" th:value="${tbResource.reId}">
