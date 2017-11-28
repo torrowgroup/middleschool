@@ -15,14 +15,16 @@
 		<table border="1" class="table1">
 			<thead>
 				<tr>
-					<td>所属的类别</td>
 					<td>类别编号</td>
 					<td>类别名称</td>
+					<td>父类别</td>
 					<td>Edit</td>
 					<td>Delete</td>
 				</tr>
 			</thead>
 			<tr th:each="category,categoryStart:${pagemsg.lists}">
+				<td th:text="${category.caId}">${category.caId}</td>
+				<td th:text="${category.caName}">${category.caName}</td>
 				<td th:if="${category.caPid}=='1'">学校概括</td>
 				<td th:if="${category.caPid}=='2'">学校新闻</td>
 				<td th:if="${category.caPid}=='3'">机构部</td>
@@ -34,8 +36,7 @@
 				<td th:if="${category.caPid}=='10'">图片</td>
 				<td th:if="${category.caPid}=='11'">资源下载</td>
 				<td th:if="${category.caPid}=='12'">校园文学</td>
-				<td th:text="${category.caId}">${category.caId}</td>
-				<td th:text="${category.caName}">${category.caName}</td>
+				<td th:if="${category.caPid}=='13'">其他信息</td>
 				<td><a
 					th:href="@{/category/selectOneCategory?(id=${category.caId})}">Edit</a></td>
 				<td><a

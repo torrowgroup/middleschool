@@ -7,8 +7,6 @@
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/addlink.css}">
 </head>
 <body>
-<div th:if="${sign}=='1'">请先去类别管理中添加相应类别</div>
-<div th:if="${sign}!='1'">
 <div th:text="${message}"></div>
 	<form th:action="@{/link/addLink}" method="post">
 		<table>
@@ -22,18 +20,9 @@
 				<td><input type="url" name="reContent"></td>
 			</tr>
 			<tr>
-				<td>名称</td>
-				<td>
-					<select name="caId">
-						<option th:each="category,categoryStart:${categoryList}" th:text="${category.caName}" th:value="${category.caId}" />
-					</select>
-				</td>
-			</tr>
-			<tr>
 				<td><input type="submit" value="提交"></td>
 			</tr>
 		</table>
 	</form>
-</div>
 </body>
 </html>

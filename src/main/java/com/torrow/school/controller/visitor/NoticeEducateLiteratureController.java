@@ -127,14 +127,13 @@ public class NoticeEducateLiteratureController extends BaseController{
 		categoryService.getCategory(0, model);
 		String view = "visitor/teacherintroduction";//返回界面，默认是教师介绍
 		if(ask.equals("achieve")){
-			view = "visitor/teacherintroduction";//返回界面，默认是教师成果
+			view = "visitor/teacherachieve";//返回界面，默认是教师成果
 		}
 		return new ModelAndView(view);
 	}
 	
 	@RequestMapping("resourceDown")
 	public ModelAndView resourceDown(){
-//		asa
 		return new ModelAndView();
 	}
 }

@@ -1,6 +1,7 @@
 package com.torrow.school.controller;
 import java.io.IOException;
 
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -15,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbUser;
@@ -81,6 +81,13 @@ public class LoginController extends BaseController {
 		categoryService.getCategory(0,model);
 		List<TbCategory> categoryList = categoryService.selectAll();
 		resourceService.getResource(categoryList,model);//得到新闻，公告等,追加资源下载
+		List<TbUser> userAll = userService.selectAll();//首页名师推荐
+		if(userAll.size()>0){
+			model.addAttribute("famousTeacherOne", userService.selectAll().get(0));
+		}
+		if(userAll.size()>1){
+			model.addAttribute("famousTeacherTwo", userService.selectAll().get(1));
+		}
 		return new ModelAndView("visitor/index");
 	}
 	

@@ -121,17 +121,46 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	@Override
 	public void getResource(List<TbCategory> categoryList, Model model) {
 		List<Integer> caIdNews = new ArrayList<Integer>();//学校新闻类别类的id
+		List<Integer> caIdGenerals = new ArrayList<Integer>();//学校概括类别类的id
 		int noticeCaId = 0;//通知公告类别类id
 		int resourcesId = 0;//资源下载类别类id
-		for(int i=0;i<categoryList.size();i++){
-			if(categoryList.get(i).getCaPid()==2) {//校园新闻
+		int pId = 0;
+		for(int i=0;i<categoryList.size();i++){//由父id得到类别类id
+			pId = categoryList.get(i).getCaPid();
+			if(pId==2) {//校园新闻
 				caIdNews.add(categoryList.get(i).getCaId()); 
-			} else if(categoryList.get(i).getCaPid()==6) {//通知公告
+			} else if(pId==6) {//通知公告
 				noticeCaId = categoryList.get(i).getCaId();
-			} else if(categoryList.get(i).getCaPid()==11) {//资源下载
+			} else if(pId==11) {//资源下载
 				resourcesId = categoryList.get(i).getCaId();
+			} else if(pId==1) {//学校概括
+				caIdGenerals.add(categoryList.get(i).getCaId());
+			} 
+		}
+		TbResource general = null;
+		for(int i=0;i<caIdGenerals.size();i++){//将首页的展示学校简介等封装进model，此处定死概括类四个名称
+			general = this.selectByCaId(caIdGenerals.get(i));
+			if(general!=null){
+				String cutPicture = this.getPicture(general.getReContent(), 1);//剪取图片前部分
+				if(cutPicture!=null){
+					general.setReContent(cutPicture);//剪取图片前部分				
+				}		
+				if(general.getCaName().equals("学校简介")){
+					model.addAttribute("schoolGeneralIndex", general);
+				} else if(general.getCaName().equals("建校历史")){
+					model.addAttribute("schoolHistory", general);
+				} else if(general.getCaName().equals("学校荣誉")){
+					model.addAttribute("schoolHonorIndex", general);
+				} else if(general.getCaName().equals("教学成果")){
+					model.addAttribute("educationAchieveIndex", general);
+				}
 			}
 		}
+		getResources(caIdNews,caIdGenerals,noticeCaId,resourcesId,model);//将全部资源类按照条数要求，倒序要求得到
+	}
+	
+	//将全部资源类按照条数要求，倒序要求得到
+	public void getResources(List<Integer> caIdNews, List<Integer> caIdGenerals, int noticeCaId, int resourcesId,Model model){
 		List<TbResource> sNews = new ArrayList<TbResource>();//学校新闻，按倒序得到，只要8条,没有图片不要
 		List<TbResource> sNotices = new ArrayList<TbResource>();//学校公告，按倒序得到，只要8条
 		List<TbResource> resourcesDown = new ArrayList<TbResource>();//资源下载，按倒序得到，只要8条
@@ -139,7 +168,7 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 		for(int i=allResources.size()-1;i>=0;i--){	//倒序得到资源类
 			for(int j=0;j<caIdNews.size();j++){
 				if(sNews.size()<8&allResources.get(i).getCaId()==caIdNews.get(j)){//当资源类属于新闻时取出
-					String content = this.getPicture(allResources.get(i).getReContent());//将图片从富文本中得到并暂存于资源类内容中,没有图片的新闻不要
+					String content = this.getPicture(allResources.get(i).getReContent(),0);//将图片从富文本中得到并暂存于资源类内容中,没有图片的新闻不要
 					if(content!=null){
 						allResources.get(i).setReContent(content);
 						sNews.add(allResources.get(i));
@@ -157,13 +186,14 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 		model.addAttribute("sNews", sNews);
 		model.addAttribute("resourcesDown", resourcesDown);
 	}
-
+	
 	/**
 	 * @param content
+	 * @param where 使用处，在学校简介，建校历史首页处只要图片前
 	 * @return 	
 	 * 用于从富文本中分离图片，此方法仅存在于该类中，接口层没有相应方法
 	 */
-	public String getPicture(String content){	
+	public String getPicture(String content,int where){	
 		String imgInternet = "<img alt=\"\" src=\"";// \"\"是为了加入"" alt在前
 		String imglocal = "<img src=\"";//src在前
 		int startIndex = -1;
@@ -179,15 +209,17 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 			length = imglocal.length();
 			stopIndex = content.indexOf("\" alt=",startIndex);
 		}
-		if(startIndex!=-1){
+		if(startIndex!=-1&&where==0){
 			for(int i=startIndex+length;i<stopIndex;i++){
 				contentTemp +=  content.charAt(i);
 			}
 			if(contentTemp.indexOf("middleschool")!=-1){
 				contentTemp = ".."+contentTemp;//本地图片回到项目名前
 			}
-		} else  {
-			return null;
+		} else if(startIndex!=-1&&where==1){//当有图片是首页学校概括时
+			contentTemp = content.split("<img")[0];//截取图片前的部分
+		} else {//当无图片是学校概括时
+			contentTemp = null;
 		}
 		return contentTemp;
 	}

@@ -1,12 +1,12 @@
 package com.torrow.school.controller.manager;
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.torrow.school.base.BaseController;
-import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
 
 @Controller
@@ -23,35 +23,30 @@ public class BottomLinkController extends BaseController {
 	 */
 	@RequestMapping("linkJumping")
 	public String linkJumping(Model model) {
-		int Pid = 8;
-		categoryService.addBySelectPid(model, Pid);
+		
 		return "admin/bottomlink/addlink";
 	}
 
 	/**
 	 * @param reTitle
 	 * @param reContent
-	 * @return 底部链接的添加 控制次数3次 不需要做非空判断
+	 * @return 底部链接的添加 控制次数4次 不需要做非空判断
 	 */
 	@RequestMapping("addLink")
 	public String addLink(TbResource tbResource, Model model) {
 		List<TbResource> list=new ArrayList<TbResource>();
-		List<TbCategory> category=categoryService.queryByPid(8);
 		List<TbResource> t = resourceService.selectAll();
-		for(TbCategory item:category) {
 			for(TbResource en:t) {
-				if(item.getCaId()==en.getCaId()) {
+				if("底部链接".equals(en.getCaName())) {
 					list.add(en);
 				}
 			}
-		}
 		//判断底部链接是否是4个
 		if (list.size() > 3) {
 			model.addAttribute("message", "底部链接最多有4个");
 			return this.linkJumping(model);
 		}
-		TbCategory tb = categoryService.selectByPrimaryKey(tbResource.getCaId());
-		TbResource record = new TbResource(tbResource.getCaId(), tb.getCaName(), tbResource.getReTitle(),
+		TbResource record = new TbResource("底部链接",tbResource.getReTitle(),
 				tbResource.getReContent());
 		int i = resourceService.insert(record);
 		if (i != 0) {
@@ -68,9 +63,17 @@ public class BottomLinkController extends BaseController {
 	 */
 	@RequestMapping("manageLink")
 	public String manageLink(Model model) {
-		TbCategory record = new TbCategory();
-		record.setCaPid(8);
-		model.addAttribute("pagemsg", resourceService.findingByPaging(1, record, 4));// 回显分页数据
+		List<TbResource> list=new ArrayList<TbResource>();
+		List<TbResource> t = resourceService.selectAll();
+			for(TbResource en:t) {
+				if("底部链接".equals(en.getCaName())) {
+					list.add(en);
+				}
+			}
+		model.addAttribute("list", list);
+		if(list.isEmpty()) {
+			model.addAttribute("sign",1);
+		}
 		return "admin/bottomlink/managelink";
 	}
 

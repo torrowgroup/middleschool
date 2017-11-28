@@ -9,23 +9,19 @@
 <script th:src="@{/static/js/jquery.min.js}"></script>
 <script th:src="@{/static/js/admin/index.js}"></script>
 <script th:src="@{/static/js/bootstrap.min.js}"></script>
-<style>
-			@media (max-width: 900px){
-				.sidebar-collapse .nav > li > a {
-					font-size: 12px;	
-				}  
-				.two{
-					display: none; 
-				}
-			}
-			@media (max-width: 760px){
-				#date {
-					font-size:16px;
-				}
-			}
-	</style>
+<script type="text/javascript">
+		function reinitIframe(){
+		var iframe = document.getElementById("ifr");
+			try{
+		iframe.height =  iframe.contentWindow.document.documentElement.scrollHeight;
+		}catch (ex){}
+		}
+		window.setInterval("reinitIframe()", 200);
+</script>
+
 </head>
 <body onload="getdates()">
+<div class="total">
 	<div class="topper">
 		<div class="one">
 			<img th:src="@{/static/images/admin/navone.png}" alt="" style="width: 100%;height: 100%;">
@@ -34,19 +30,19 @@
 		<ul>
 			<li id="aa">
 				<a href="#"> 
-					<img th:src="@{/static/images/admin/sec2.png}" alt="">
+					<img th:src="@{/static/images/admin/sec4.png}" alt="">
 					<span>留言板</span>
 				</a>
 				<div id="next">
 					<ul>
-<!-- 						<li><a href="managemessage.html"  target="ie">添加留言</a></li> -->
+						<!-- <li><a href="managemessage.html"  target="ie">添加留言</a></li> -->
 						<li><a th:href="@{/message/manageMessage}" target="ie">留言管理</a></li>
 					</ul>
 				</div>
 			</li>
-			<li>
+			<li>	
 				<a href="#">
-					<img th:src="@{/static/images/admin/sec5.jpg}" alt="">
+					<img th:src="@{/static/images/admin/sec3.png}" alt="">
 					<span>公告</span>
 				</a>
 				<div id="next">
@@ -58,7 +54,7 @@
 			</li>
 			<li>
 				<a href="#">
-					<img th:src="@{/static/images/admin/sec3.png}" alt="">
+					<img th:src="@{/static/images/admin/sec2.png}" alt="">
 					<span>校园文学</span>
 				</a>
 				<div id="next">
@@ -70,7 +66,7 @@
 			</li>
 			<li>
 				<a href="#">
-					<img th:src="@{/static/images/admin/sec4.jpg}" alt="">
+					<img th:src="@{/static/images/admin/sec5.png}" alt="">
 					<span>资源下载</span>
 				</a>
 				<div id="next">
@@ -82,12 +78,12 @@
 			</li>
 			<li>
 				<a href="#">
-					<img th:src="@{/static/images/admin/sec1.jpg}" alt="">
+					<img th:src="@{/static/images/admin/sec1.png}" alt="">
 					<span>用户</span>
 				</a>
 				<div id="next">
 					<ul>
-						<li><a href="/user/toAddUser" th:href="@{/user/toAddUser}"  target="ie">添加用户</a></li>
+						<li><a th:href="@{/user/toAddUser}"  target="ie">添加用户</a></li>
 						<li style="margin-top:-50px"><a th:href="@{/user/manageUser}"  target="ie">用户管理</a></li>
 					</ul>
 				</div>
@@ -196,10 +192,21 @@
 	                    </li>
                     </ul>
 				</li>
+				<li class="lione">
+					<a href="#" class="out"><span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp;其他功能</a>
+                    <ul class="nav nav-second-level" style="display: none">
+	                    <li>
+	                       <div class="fex" th:each="category,categoryStart:${generalList}">
+								<span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/general/manageGeneral?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out1" ><span class="glyphicon glyphicon-list-alt"></span></a>
+						  </div>
+	                    </li>
+                    </ul>
+				</li>
  			</ul>
 		</div><!-- 左侧菜单 -->
 		<iframe src=""   id="ifr" name="ie">
 		</iframe><!-- iframe标签 -->
+	</div>
 	</div>
 </body>
 <script>

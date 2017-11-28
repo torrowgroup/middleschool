@@ -44,10 +44,6 @@ public class CategoryController extends BaseController {
 		if (null != tbCategory) {
 			model.addAttribute("message", "该类别已存在");
 		} else {
-			if (caPid == 8 && categoryService.queryByPid(8).size() > 4) {
-				model.addAttribute("message", "底部链接最多有4个");
-				return "admin/category/addcategory";
-			}
 			TbCategory record = new TbCategory(caPid, caName);
 			categoryService.insert(record);
 			model.addAttribute("message", "添加成功");

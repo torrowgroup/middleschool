@@ -8,8 +8,8 @@
 </head>
 <body>
 	<div th:text="${message}"></div>
-	<span th:if="${pagemsg.totalCount}==0"> 没有任何底部链接信息! </span>
-	<div th:if="${pagemsg.totalCount}!=0">
+<div th:if="${sign}=='1'">无任何底部链接的信息</div>
+<div th:if="${sign}!='1'">
 		<table border="1" class="table1">
 			<thead>
 				<tr>
@@ -19,7 +19,7 @@
 					<td>Delete</td>
 				</tr>
 			</thead>
-			<tr th:each="link,linkStart:${pagemsg.lists}">
+			<tr th:each="link,linkStart:${list}">
 				<td th:text="${link.reTitle}">${link.reTitle}</td>
 				<td th:text="${link.reContent}">${link.reContent}</td>
 				<td><a th:href="@{/link/selectOneLink?(id=${link.reId})}">Edit</a></td>

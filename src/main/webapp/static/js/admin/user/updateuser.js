@@ -32,7 +32,7 @@
 
 	function modifyContent() {// 将两个富文本的值赋值给textarea
 		var usIntroduction = document.getElementById("usIntroduction");
-		var usAchievements = document.getElementById("usAachievements");
+		var usAchievements = document.getElementById("usAchievements");
 		usIntroduction.value = introdEditor.$txt.html();
 		usAchievements.value = achieveEditor.$txt.html();
 	}
