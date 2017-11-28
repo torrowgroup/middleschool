@@ -11,7 +11,7 @@
 	<a th:href="@{/political/manageEducationUpload?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span></a>
 </div>
 <div th:each="category,categoryStart:${downloadList}">
-	<a th:href="@{/teacher/manageUpload?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span></a>
+	<a th:href="@{/political/manageUpload?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span></a>
 </div>
 </body>
 </html>

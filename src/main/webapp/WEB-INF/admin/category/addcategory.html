@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/addlink.css}">
 </head>
 <body>
+<a th:href="@{/news/addNewsJumping?(Pid=11)}"  target="ie">上传资源</a>
 <div th:text="${message}"></div>
 	<form th:action="@{/category/addCategory}" method="post">
 		<table>

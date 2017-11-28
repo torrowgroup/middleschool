@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="total">
-<button onclick="bian()">点我一下</button>
+<button onclick="bian()">编辑</button>
 <a th:href="@{/general/deleteGeneral?(id=${tbResource.reId})}" onclick="return confirm('确定要删除吗')">Delete</a>
 <form th:action="@{/general/updateGeneral}" onSubmit="return modifyContent();"
 		method="post" enctype="multipart/form-data">

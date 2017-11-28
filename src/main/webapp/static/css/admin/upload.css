@@ -1,0 +1,25 @@
+body{
+	margin:0;
+	padding: 0;
+	background: #ebebeb;
+}
+.aa{
+	width: 400px;
+	height: 300px;
+	margin:0 auto;
+	margin-top:10%;
+}
+.cc{
+	width: 200px;
+	height: 30px;
+	float: left;
+}
+.bb{
+	width: 60px;
+	height: 30px;
+	background: #012349;
+	border-radius: 8px;
+	color: white;
+	cursor: pointer;
+	margin-left: 20%;
+}
