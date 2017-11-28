@@ -75,16 +75,16 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 		List<TbCategory> tbCategory = tbCategoryDao.selectAllCaId();
 		List<TbResource> tbResource = this.selectAll();
 		for (TbCategory item : tbCategory) {
-			if (!item.getCaPid().equals(null)) {
-				if (item.getCaPid().equals(record.getCaPid())) {
+			if (item.getCaPid()!=null) {
+				if (item.getCaPid()==record.getCaPid()) {
 					for (TbResource it : tbResource) {
-						if (it.getCaId().equals(item.getCaId())) {
+						if (it.getCaId()==item.getCaId()) {
 							list.add(it);
 						}
 					}
 				} else {
 					for (TbResource it : tbResource) {
-						if (it.getCaId().equals(item.getCaId()) && it.getCaId().equals(record.getCaId())) {
+						if (it.getCaId()==item.getCaId() && it.getCaId()==record.getCaId()) {
 							list.add(it);
 						}
 					}

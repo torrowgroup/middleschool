@@ -4,6 +4,7 @@
 
 <head>
   <title>home</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/updatelink.css}">
 </head>
 <body>
 <form th:action="@{/link/updateLink?(id=${link.reId})}" method="post">  
@@ -18,8 +19,7 @@
 				<td><input type="url" name="reContent" th:value="${link.reContent}"/></td>
 			</tr>
 		<tr>
-			<td th:text="${message}"></td>
-		   <td><input type="submit" value="修改"/></td>
+		   <td><input type="submit" value="修改" class="mm"/></td>
 		</tr>
 	  </table>
 </form>  

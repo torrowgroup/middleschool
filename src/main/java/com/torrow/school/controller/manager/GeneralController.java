@@ -47,22 +47,22 @@ public class GeneralController extends BaseController {
 		return "admin/general/managescenery";
 	}
 	
-	/**
-	 * @param currentPage
-	 * @param model
-	 * @return 管理图片轮播图
-	 */
-	@RequestMapping("managePicture")
-	public String managePicture(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
-		TbCategory record = new TbCategory();
-		record.setCaPid(10);
-		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,4));// 回显分页数据
-		model.addAttribute("sign", 1);// 为了在查看管理轮播图时是同一个界面
-		session.setAttribute("currentPage", currentPage);
-		return "admin/managepicture/managepicture";
-	}
-	
-	
+//	/**
+//	 * @param currentPage
+//	 * @param model
+//	 * @return 管理图片轮播图
+//	 */
+//	@RequestMapping("managePicture")
+//	public String managePicture(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
+//		TbCategory record = new TbCategory();
+//		record.setCaPid(10);
+//		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,4));// 回显分页数据
+//		model.addAttribute("sign", 1);// 为了在查看管理轮播图时是同一个界面
+//		session.setAttribute("currentPage", currentPage);
+//		return "admin/managepicture/managepicture";
+//	}
+//	
+//	
 	/**
 	 * @param model
 	 * @param id
@@ -87,7 +87,7 @@ public class GeneralController extends BaseController {
 		if(!list.isEmpty()) {
 			model.addAttribute("uploadList", list);
 		} else {
-			model.addAttribute("message","该类别名称不存在");
+			model.addAttribute("sign",1);
 		}
 		return "admin/managepicture/upload";
 	}
@@ -135,10 +135,16 @@ public class GeneralController extends BaseController {
 	@RequestMapping("addSceneryJumping")
 	public String addSceneryJumping(Model model) {
 		List<TbCategory> item=categoryService.selectAll();
+		boolean enough=false;
 		for(TbCategory en:item) {
-			if(en.getCaPid()==7) {
-				model.addAttribute("tb",en);
-			}
+				if(en.getCaPid()==7) {
+					model.addAttribute("tb",en);
+					enough=true;
+				}
+		}
+		if(enough==false) {
+			model.addAttribute("message","该类别名称不存在请先去类别类中添加");
+			return "admin/empty";
 		}
 		return "admin/general/addscenery";
 	}
