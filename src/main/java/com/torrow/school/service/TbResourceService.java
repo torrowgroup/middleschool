@@ -3,6 +3,8 @@ import com.torrow.school.entity.TbCategory;
 
 import com.torrow.school.entity.TbResource;
 import com.torrow.school.util.PageBean;
+
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,12 +17,14 @@ public interface TbResourceService {
     //张金高
     //得到所有资源类
     List<TbResource> selectAll();
-    //得到单条资源类，目前用于概括类
+    //得到单条资源类，目前用于概括类,根据caId得到
     TbResource selectOne(Integer gId);
     //得到8条新闻，8条公告等,应用于首页
     void getResource(List<TbCategory> categoryList, Model model);
     //根据caId得到对应资源类，不分页
     List<TbResource> selectListByCaId(Integer caId);
+    //得到考试时间和联系方式
+    void getTimeInfor(Model model) throws ParseException;
 
     //为了查看一条信息
     TbResource selectByPrimaryKey(Integer id);
@@ -39,7 +43,7 @@ public interface TbResourceService {
     //根据caId来删除
     int deleteByCaId(Integer caId);
 	//根据reTitle来查询
-    public TbResource selectByReTitle(String reTitle);
+    public TbResource selectByReTitle(String reTitle);//张金高用
     //根据reContent来查询
     public TbResource selectByReContent(String reContent);
     //上传图片

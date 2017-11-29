@@ -25,7 +25,16 @@
 		var name = obj.id;
 		window.location.href = "viewGeneral?currentPage="+text+"&gId="+name;
 	}
-	
+	function turnPageEducation (obj){//教育教研界面的跳转页数
+		var text = obj.text;
+		var name = obj.id;
+		window.location.href = "viewEducation?currentPage="+text+"&rId="+name;
+	}
+	function turnPageLiterture (obj){//校园文学公告界面的跳转页数
+		var text = obj.text;
+		var name = obj.id;
+		window.location.href = "viewLiterature?currentPage="+text+"&cId="+name;
+	}
 	function turnPageNotice (obj){//通知公告界面的跳转页数
 		var text = obj.text;
 		var name = obj.id;
@@ -34,7 +43,7 @@
 	function turnPageUserIntro (obj){//教师介绍界面的跳转页数
 		var text = obj.text;
 		var name = obj.id;
-		window.location.href = "viewTeacherIntroduction?currentPage="+text;
+		window.location.href = "viewTeacherIntroActieve?currentPage="+text+"&ask="+name;
 	}
 	
 	

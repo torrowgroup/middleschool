@@ -228,8 +228,9 @@
 					<a href="#" class="out"><span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp;其他功能</a>
                     <ul class="nav nav-second-level" style="display: none">
 	                    <li>
-	                       <div class="fex" th:each="category,categoryStart:${generalList}">
-								<span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/general/manageGeneral?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out1" ><span class="glyphicon glyphicon-list-alt"></span></a>
+	                       <div class="fex">
+								<span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/others/managerTestTime}" target="ie" class="out1" >考试时间</a>
+								<span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/others/managerInformation}" target="ie" class="out1" >联系我们</a>
 						  </div>
 	                    </li>
                     </ul>

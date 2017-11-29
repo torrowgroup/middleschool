@@ -16,6 +16,7 @@
     width: 60%;
     height: 220px;
     padding:0 20px;
+    overflow: hidden;
     
 }
 .teacherimg img{
@@ -32,6 +33,24 @@
 }
 .teacherabout>a>p{
     color:#75839d;
+    font-size: 12px;
+    padding:5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.intros{
+	height:30px;
+	color:#75839d;
+    font-size: 12px;
+    padding:5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.intros>p{
+	height:20px;
+	color:#75839d;
     font-size: 12px;
     padding:5px 0;
     overflow: hidden;

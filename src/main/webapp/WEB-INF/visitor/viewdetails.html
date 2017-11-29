@@ -14,68 +14,7 @@
     <link rel="stylesheet" th:href="@{/static/css/visitor/schoolnews.css}" type="text/css">
 </head>
 <body>
-<div class="container header">
-       <div class="logo">
-           <img th:src="@{/static/images/visitor/logo.jpg}" alt="加载中">
-       </div>
-       <div class="headerRight">
-           <p>距离中招200天</p>
-           <p>距离期中/期末100天</p>
-           <p class="hidden-xs">今天2017年10月20号</p>
-       </div>
- </div>
-<div class="navBox">
-    <ul class="navUl">
-        <li class="navLi hidden-xs"><a th:href="@{/index}">首页</a></li>
-        <li class="navLi">
-            <a href="#">学校概况</a>
-              <ul class="navSecondUl">
-                    <li th:each="general,generals:${generals}">
-                    	<a th:href="@{/visitorGN/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
-                    </li>
-              </ul>
-        </li>
-        <li class="navLi">
-            <a href="#">校园新闻</a>
-             <ul class="navSecondUl">
-                    <li th:each="news,newsStart:${schoolNews}">
-                    	<a th:href="@{/visitorGN/viewNews?(nId= ${news.caId})}" th:text="${news.caName}">学校新闻</a>
-                    </li>
-             </ul>
-        </li>
-        <li class="navLi">
-            <a href="#">教育教研</a>
-                <ul class="navSecondUl">
-                    <li th:each="education,educations:${educations}">
-                    	<a th:href="@{/visitorNEL/viewEducation?(rId= ${education.caId})}" th:text="${education.caName}" >教育教研</a>
-               		</li>
-                </ul>
-        </li>
-        <li class="navLi">
-            <a href="#">校园文学</a>
-            <ul class="navSecondUl">
-                <li><a href="#">学生园地</a></li>
-                <li><a href="#">教师园地</a></li>
-            </ul>
-        </li>
-        <li class="navLi">
-            <a href="#">教师风采</a>
-            <ul class="navSecondUl">
-                <li><a href="#">教师介绍</a></li>
-                <li><a href="#">教师成果</a></li>
-            </ul>
-        </li>
-        <li class="navLi">
-            <a href="#">校园博客</a>
-        </li>
-        <li class="navLi">
-            <a href="#">校园论坛</a>
-        </li>
-        <li class="navLi">
-            <a href="#">资源下载</a>
-        </li>
-    </ul>
-</div>
+<div th:replace="headerfooter :: header"></div> 
 
 
 <div class="centerImg">
@@ -88,7 +27,7 @@
             <h3>学校概括</h3>
             <ul class="schoolcenter">
                 <li th:each="general,generals:${generals}">
-                  	<a th:href="@{/visitorGN/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
+                  	<a th:name="${general.caId}" th:href="@{/visitorGN/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
                 </li>
             </ul>
         </div>
@@ -109,32 +48,13 @@
     </div>
 </div>
 <div class="clearfix"></div>
-<div class="footer">
-    <div class="container footerBox">
-        <div class="row">
-            <div class="col-sm-3 col-xs-6 footerBox1 hidden-xs"><img th:src="@{/static/images/visitor/bottomlogo.png}" alt=""></div>
-            <div class="col-sm-3 col-xs-6 footerBox1">
-                <h3>联系我们:</h3>
-                <p>电话：56565656</p>
-                <p>邮箱：56789@789685</p>
-                <p>地址：郑州市中原区二二一中学</p>
-            </div>
-            <div class="col-sm-3 col-xs-6 footerBox1">
-                <h3>友情链接:</h3>
-                <p><a href="">郑州市外国语中学</a></p>
-                <p><a href="">郑州一中</a></p>
-                <p><a href="">郑州大学附属中学</a></p>
-                <p><a href="">港区教育单位</a></p>
-            </div>
-            <div class="col-sm-3 col-xs-12 footerBox1">
-                <h3><a href="">留言板进入留言</a></h3>
-                <p>&nbsp;</p>
-                <p>版权所有@郑州二二一中学</p>
-                <p>备案信息：<a href="">豫ICP备1111111号</a></p>
-            </div>
-        </div>
-    </div>
-</div>
+<div th:replace="headerfooter::footer"></div>
 <script th:src="@{/static/js/visitor/select.js}"></script>
+<script th:inline="javascript">
+	var useCategory = /*[[${useCategory}]]*/;
+	if(useCategory!=null){
+		$("a[name="+useCategory.caId+"]").addClass("active1");		
+	}
+</script>
 </body>
 </html>

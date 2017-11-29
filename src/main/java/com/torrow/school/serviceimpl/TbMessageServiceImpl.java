@@ -26,8 +26,7 @@ public class TbMessageServiceImpl extends BaseDao<TbMessage> implements TbMessag
 
 	@Override
 	public int insert(TbMessage record) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.insertEntity(record);
 	}
 
 	@Override

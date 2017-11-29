@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/manageuser.css}">
 </head>
 <body>
+	<div th:text="${message}"></div>
 	<div th:if="${pagemsg.totalCount}==0">没有任何用户信息！</div>
 	<div th:if="${pagemsg.totalCount}!=0">
 	<table class="table table-bordered table-hover table-condensed" style="width: 74%;" >

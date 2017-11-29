@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>郑州一二二中学-教育教研</title>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/static/css/visitor/style.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/static/css/visitor/aboutschool.css}" type="text/css">
+    <script th:src="@{/static/js/jquery.min.js}"></script>
+    <script th:src="@{/static/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/visitor/schoolnews.css}" type="text/css">
+</head>
+<body>
+<div class="container header">
+       <div class="logo">
+           <img th:src="@{/static/images/visitor/logo.jpg}" alt="加载中">
+       </div>
+       <div class="headerRight">
+           <p>距离中招200天</p>
+           <p>距离期中/期末100天</p>
+           <p class="hidden-xs">今天2017年10月20号</p>
+       </div>
+ </div>
+<!--导航条-->
+<div class="navBox">
+    <ul class="navUl">
+        <li class="navLi hidden-xs"><a th:href="@{/index}">首页</a></li>
+        <li class="navLi">
+            <a href="#">学校概况</a>
+              <ul class="navSecondUl">
+                    <li th:each="general,generals:${generals}">
+                    	<a th:href="@{/visitorGN/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}">学校概况</a>
+                    </li>
+              </ul>
+        </li>
+        <li class="navLi">
+            <a href="#">校园新闻</a>
+             <ul class="navSecondUl">
+                    <li th:each="resourceList,resourceListStart:${schoolNews}">
+                    	<a th:href="@{/visitorGN/viewNews?(nId= ${resourceList.caId})}" th:text="${resourceList.caName}">学校新闻</a>
+                    </li>
+             </ul>
+        </li>
+        <li class="navLi">
+            <a href="#">教育教研</a>
+                <ul class="navSecondUl">
+                    <li th:each="education,educations:${educations}">
+                    	<a th:href="@{/visitorNEL/viewEducation?(rId= ${education.caId})}" th:text="${education.caName}" >教育教研</a>
+               		</li>
+                </ul>
+        </li>
+        <li class="navLi">
+            <a href="#">校园文学</a>
+            <ul class="navSecondUl">
+                <li th:each="literature,literatureS:${literature}">
+                   	<a th:href="@{/visitorNEL/viewLiterature?(cId= ${literature.caId})}" th:text="${literature.caName}">校园文学</a>
+                 </li>
+            </ul>
+        </li>
+        <li class="navLi">
+            <a href="#">教师风采</a>
+            <ul class="navSecondUl">
+                 <li><a th:href="@{/visitorNEL/viewTeacherIntroduction}">教师介绍</a></li>
+                    <li><a href="#">教师成果</a></li>
+            </ul>
+        </li>
+        <li class="navLi">
+            <a href="#">校园博客</a>
+        </li>
+        <li class="navLi">
+            <a href="#">校园论坛</a>
+        </li>
+        <li class="navLi">
+            <a href="#">资源下载</a>
+        </li>
+    </ul>
+</div>
+
+<div class="centerImg">
+    <img th:src="@{/static/images/visitor/news1.jpg}" alt="">
+</div>
+
+<div class="mainbox1">
+    <div class="schollabout">
+        <div class="schollleft">
+            <h3>教育教研</h3>
+            <ul class="schoolcenter">
+               	<li th:each="resourceList,resourceStart:${educations}">
+                    	<a th:name="${resourceList.caId}" th:href="@{/visitorNEL/viewEducation?(rId= ${resourceList.caId})}" th:text="${resourceList.caName}">学校新闻</a>
+                </li>
+            </ul>
+        </div>
+        <div class="schollright">
+            <div class="location"><a th:href="@{/index}">首页</a><span th:if="${useCategory!=null}">.<a href="#" th:text="${useCategory.caName}">教育教研</a></span></div>
+            <div th:if="${resourceList.totalPage==0}">
+            	<h3 class="titlesc">暂没有相关内容</h3>
+            </div>
+            <div th:if="${resourceList.totalPage>0}">
+	            <h3 class="titlesc" th:text="${resourceList.lists[0].caName}">教育教研</h3>
+	            <div class="newscontent">
+	                <ul class="newscontentUl">
+	                 	<li th:each="resource,resoueStart:${resourceList.lists}">
+	                 		<a title="点击下载" id="news" th:href="@{/visitorNEL/downEduLiter?(rId=${resource.reId})}" th:text="${resource.reTitle}"></a><span th:text="${resource.reIssuingdate}"></span>
+	                 	</li>
+	                </ul>
+	                <div class="clearfix"></div>
+	            </div>
+	            <div class="paging1" th:if="${resourceList.totalPage>0}">
+	                <ul class="pagingUl">
+	                    <li th:if="${resourceList.currPage-1>0}">
+	                    	<a th:href="@{/visitorGN/viewresourceList?(currentPage=${resourceList.currPage-1},nId=${resourceList.lists[0].caId})}">&laquo;</a>
+	                    </li>
+	                     <li th:if="${resourceList.currPage-1==0}">
+	                     <a href="#">&laquo;</a>
+	                     </li>
+	                    <li th:each="i:${#numbers.sequence(1,resourceList.totalPage)}" th:if="${i > resourceList.currPage-3} and ${i < resourceList.currPage+3}" >
+	                    	<a th:href="@{/visitorGN/viewresourceList?(currentPage=${i},nId=${resourceList.lists[0].caId})}" th:text="${i}">#</a>
+	                    </li>
+	                   <li th:if="${resourceList.currPage+1<=resourceList.totalPage}">
+	                    	<a th:href="@{/visitorGN/viewresourceList?(currentPage=${resourceList.currPage+1},nId=${resourceList.lists[0].caId})}">&raquo;</a>
+	                    </li>
+	                    <li th:if="${resourceList.currPage+1>resourceList.totalPage}">
+	                     	<a href="#">&raquo;</a>
+	                    </li>
+	                </ul>
+	                <div class="pagingRight">
+	                    <span>跳转到</span>
+	                    <div class="selectBox">
+	                        <span th:text="${resourceList.currPage}"> <i class="glyphicon glyphicon-chevron-down pull-right" style="line-height: 30px"></i></span>
+	                        <ul class="selectBoxUl">
+	                         	<li th:each="i:${#numbers.sequence(1,resourceList.totalPage)}">
+	                         		<a href="#" th:onclick="'turnPageNew(this);'" th:id="${resourceList.lists[0].caId}" th:text="${i}"></a>
+	                         	</li>
+	                        </ul>
+	                    </div>
+	                    <span>页 共<span th:text="${resourceList.totalPage}"></span>页</span>
+	                </div>
+	            </div>
+	           </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="footer">
+    <div class="container footerBox">
+        <div class="row">
+            <div class="col-sm-3 col-xs-6 footerBox1 hidden-xs"><img th:src="@{/static/images/visitor/bottomlogo.png}" alt=""></div>
+            <div class="col-sm-3 col-xs-6 footerBox1">
+                <h3>联系我们:</h3>
+                <p>电话：56565656</p>
+                <p>邮箱：56789@789685</p>
+                <p>地址：郑州市中原区二二一中学</p>
+            </div>
+            <div class="col-sm-3 col-xs-6 footerBox1">
+                <h3>友情链接:</h3>
+                <p><a href="">郑州市外国语中学</a></p>
+                <p><a href="">郑州一中</a></p>
+                <p><a href="">郑州大学附属中学</a></p>
+                <p><a href="">港区教育单位</a></p>
+            </div>
+            <div class="col-sm-3 col-xs-12 footerBox1">
+                <h3><a href="">留言板进入留言</a></h3>
+                <p>&nbsp;</p>
+                <p>版权所有@郑州二二一中学</p>
+                <p>备案信息：<a href="">豫ICP备1111111号</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/static/js/visitor/select.js}"></script>
+<script th:inline="javascript">
+	var useCategory = /*[[${useCategory}]]*/;
+	if(useCategory!=null){
+		$("a[name="+useCategory.caId+"]").addClass("active1");		
+	}
+</script>
+</body>
+</html>
