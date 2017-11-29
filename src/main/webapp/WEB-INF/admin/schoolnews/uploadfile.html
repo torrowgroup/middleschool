@@ -4,31 +4,36 @@
 
 <head>
   <title>home</title>
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/upload.css}">
 </head>
 <body>
 <div th:if="${sign}=='1'">请先去类别管理中添加相应类别</div>
 <div th:if="${sign}!='1'">
 <div th:text="${message}"></div>
 <form th:action="@{/news/upload}" method="post" enctype="multipart/form-data">
+<div class="aa">
 	<table>
 		<!-- <tr>
 			<td>上传名称</td>
 			<td><input type="text" name="reTitle" required="required"></td>
 		</tr> -->
 		<tr>
-			<td>选择文件:</td>
-			<td><input type="file" name="file" width="120px" required="required"></td>  
+			<td width="20%">选择文件:</td>
+			<td width="20%"><input type="file" name="file" width="120px" required="required"></td>  
 		</tr>
+		<tr height="30px"></tr>
 		<tr>
 			<td>类别名称</td>
-			<td><select name="caId">
+			<td><select name="caId" class="cc">
 						<option th:each="category,categoryStart:${categoryList}" th:text="${category.caName}" th:value="${category.caId}" />
 				 </select></td>
 		</tr>
+		<tr height="30px"></tr>	
 		<tr>
-			 <td><input type="submit" value="上传"></td>  
+			 <td><input type="submit" value="上传" class="bb"/></td>  
 		</tr>
 	</table>
+</div>
 </form>
 </div>
 </body>

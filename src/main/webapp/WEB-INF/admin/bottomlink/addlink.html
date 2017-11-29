@@ -11,12 +11,7 @@
 	<form th:action="@{/link/addLink}" method="post">
 		<table>
 			<tr>
-				<td><input type="hidden" name="caName" th:value="${link.caName}">
-					<input type="hidden" name="caId" th:value="${link.caId}">
-				</td>
-			</tr>
-			<tr>
-				<td>链接名称</td>
+				<td width="24%">链接内容</td>
 				<td><input type="text" name="reTitle"></td>
 			</tr>
 
@@ -25,8 +20,8 @@
 				<td><input type="url" name="reContent"></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="提交"></td>
-				<td><input type="reset" name="重置"></td>
+				<td colspan=
+				"2"><input type="submit" value="提交" class="aa"></td>
 			</tr>
 		</table>
 	</form>

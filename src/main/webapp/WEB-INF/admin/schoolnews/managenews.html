@@ -8,7 +8,6 @@
 	th:href="@{/static/dist/css/wangEditor.min.css}">
 </head>
 <body>
-	<div th:if="${sign}!='1'"><button onclick="bian()">点我一下</button></div>
 	<div th:text="${message}"></div>
 	<form th:action="@{/news/updateSchoolNews}" onSubmit="return modifyContent();"
 		method="post" enctype="multipart/form-data">
@@ -18,7 +17,6 @@
 		<textarea style="display: none;" name="reContent" id="a"></textarea>
 		<div id="introEditor" style="border: 1px solid #ccc;"
 			contenteditable="false"></div>
-		<div th:if="${sign}!='1'"><input type="submit" value="保存"></div>
 	</form>
 	<script type="text/javascript"
 		th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>

@@ -8,3 +8,16 @@ table{
 	margin :0 auto;
 	margin-top: 10%;
 }
+.aa{
+	background:#012349;
+	color:white;
+	width:60px;
+	height:30px;
+	margin-left:100px;
+	border-radius:6px;
+}
+input{
+	width:200px;
+	height:30px;
+	margin-top:10px;
+}

@@ -87,4 +87,12 @@
 	    select * from tb_resource where ca_id = #{caId,jdbcType=INTEGER}
   </select>
 	
+	<!--这个是为了模糊查询  -->
+	<select id="queryAll" 	parameterType="java.lang.String"  resultMap="BaseResultMap">
+	    select re_id, ca_id, ca_name, re_title, re_issuer, re_issuingdate, spare, re_content
+	    from tb_resource where true 
+	    <if test="name!=null">
+	     	and re_title like CONCAT(CONCAT('%', #{name}), '%')
+		</if>
+    </select> 
 </mapper>

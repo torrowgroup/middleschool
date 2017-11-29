@@ -1,13 +1,12 @@
 package com.torrow.school.controller.manager;
+import java.util.ArrayList;
 
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.torrow.school.base.BaseController;
-import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
 
 @Controller
@@ -24,31 +23,36 @@ public class BottomLinkController extends BaseController {
 	 */
 	@RequestMapping("linkJumping")
 	public String linkJumping(Model model) {
-		int Pid = 8;
-		List<TbCategory> tbCategory = categoryService.queryByPid(Pid);
-		if (!tbCategory.isEmpty()) {
-			for (TbCategory item : tbCategory) {
-				model.addAttribute("link", item);
-			}
-		}
+		
 		return "admin/bottomlink/addlink";
 	}
 
 	/**
 	 * @param reTitle
 	 * @param reContent
-	 * @return 底部链接的添加
+	 * @return 底部链接的添加 控制次数4次 不需要做非空判断
 	 */
 	@RequestMapping("addLink")
 	public String addLink(TbResource tbResource, Model model) {
-		TbResource tbresource = resourceService.selectByCaId(tbResource.getCaId());
-		if (null != tbresource) {
-			model.addAttribute("message", "该类别已存在");
-		} else {
-			TbResource record = new TbResource(tbResource.getCaId(),tbResource.getCaName(), tbResource.getReTitle(),
-					tbResource.getReContent());
-			resourceService.insert(record);
+		List<TbResource> list=new ArrayList<TbResource>();
+		List<TbResource> t = resourceService.selectAll();
+			for(TbResource en:t) {
+				if("底部链接".equals(en.getCaName())) {
+					list.add(en);
+				}
+			}
+		//判断底部链接是否是4个
+		if (list.size() > 3) {
+			model.addAttribute("message", "底部链接最多有4个");
+			return this.linkJumping(model);
+		}
+		TbResource record = new TbResource("底部链接",tbResource.getReTitle(),
+				tbResource.getReContent());
+		int i = resourceService.insert(record);
+		if (i != 0) {
 			model.addAttribute("message", "添加成功");
+		} else {
+			model.addAttribute("message", "添加失败");
 		}
 		return this.linkJumping(model);
 	}
@@ -59,17 +63,16 @@ public class BottomLinkController extends BaseController {
 	 */
 	@RequestMapping("manageLink")
 	public String manageLink(Model model) {
-		int Pid = 8;
-		List<TbCategory> tbCategory = categoryService.queryByPid(Pid);
-		List<TbResource> tbResource = resourceService.selectAll();
-		if (!tbCategory.isEmpty()) {
-			for (TbResource item : tbResource) {
-				for (TbCategory it : tbCategory) {
-					if (item.getCaId().equals(it.getCaId())) {
-						model.addAttribute("itemList", item);
-					}
+		List<TbResource> list=new ArrayList<TbResource>();
+		List<TbResource> t = resourceService.selectAll();
+			for(TbResource en:t) {
+				if("底部链接".equals(en.getCaName())) {
+					list.add(en);
 				}
 			}
+		model.addAttribute("list", list);
+		if(list.isEmpty()) {
+			model.addAttribute("sign",1);
 		}
 		return "admin/bottomlink/managelink";
 	}
@@ -82,7 +85,12 @@ public class BottomLinkController extends BaseController {
 	@RequestMapping("selectOneLink")
 	public String selectOnelink(Model model, Integer id) {
 		TbResource tb = resourceService.selectByPrimaryKey(id);
-		model.addAttribute("link", tb);
+		if(null!=tb) {
+			model.addAttribute("link", tb);
+		} else {
+			model.addAttribute("message","没有该底部链接");
+			return "admin/empty";
+		}
 		return "admin/bottomlink/updatelink";
 	}
 

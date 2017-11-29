@@ -26,5 +26,7 @@ public interface TbResourceDao {
 	public TbResource selectByTitle(@Param("reTitle")String reTitle);
 
 	public TbResource selectByContent(@Param("reContent")String reContent);
+
+	public List<TbResource> queryAll(@Param("name")String name);
 	
 }

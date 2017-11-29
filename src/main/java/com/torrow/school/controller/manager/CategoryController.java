@@ -1,4 +1,5 @@
 package com.torrow.school.controller.manager;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +8,7 @@ import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
 import com.torrow.school.entity.TbUser;
+
 /**
  * 这个控制器是对类别进行管理的
  * 
@@ -39,7 +41,7 @@ public class CategoryController extends BaseController {
 	@RequestMapping("/addCategory")
 	public String addCategory(String caName, Integer caPid, Model model) {
 		TbCategory tbCategory = categoryService.selectCaName(caName);
-		if (null!=tbCategory) {
+		if (null != tbCategory) {
 			model.addAttribute("message", "该类别已存在");
 		} else {
 			TbCategory record = new TbCategory(caPid, caName);
@@ -57,9 +59,9 @@ public class CategoryController extends BaseController {
 	@RequestMapping("/manageCategory")
 	public String manageCategory(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
 			Model model) {
-		model.addAttribute("pagemsg", categoryService.findPage(currentPage,2));// 回显分页数据
+		model.addAttribute("pagemsg", categoryService.findPage(currentPage, 2));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
-		return "admin/category/managecategory"; 
+		return "admin/category/managecategory";
 	}
 
 	/**
@@ -80,22 +82,22 @@ public class CategoryController extends BaseController {
 	 * @return 修改类别信息
 	 */
 	@RequestMapping("/updateCategory")
-	public String updateCategory(Model model,TbCategory tbCategory) {
+	public String updateCategory(Model model, TbCategory tbCategory) {
 		int currentPage = (int) session.getAttribute("currentPage");
 		TbCategory t = categoryService.selectCaName(tbCategory.getCaName());
-		if (null!=t) {
+		if (null != t) {
 			model.addAttribute("message", "该类别已存在,修改失败");
 		} else {
 			TbCategory record = categoryService.selectByPrimaryKey(tbCategory.getCaId());
-			if(!record.getCaName().equals("管理员")) {
+			if (!record.getCaName().equals("管理员")) {
 				record.setCaName(tbCategory.getCaName());
-				categoryService.updateByPrimaryKey(record);//这是类别类的修改
-				TbResource tbResource=new TbResource(tbCategory.getCaId(),tbCategory.getCaName());
-				resourceService.updateDeleteTbResourceByCaId(tbResource,1);//这是资源类的修改
-				TbUser tbUser=new TbUser(tbCategory.getCaId(),tbCategory.getCaName());
-				userService.updateDeleteUserByCaId(tbUser, 1);//这是用户类的修改
+				categoryService.updateByPrimaryKey(record);// 这是类别类的修改
+				TbResource tbResource = new TbResource(tbCategory.getCaId(), tbCategory.getCaName());
+				resourceService.updateDeleteTbResourceByCaId(tbResource, 1);// 这是资源类的修改
+				TbUser tbUser = new TbUser(tbCategory.getCaId(), tbCategory.getCaName());
+				userService.updateDeleteUserByCaId(tbUser, 1);// 这是用户类的修改
 				model.addAttribute("message", "修改成功");
-			}else {
+			} else {
 				model.addAttribute("message", "不可以对管理员进行操作");
 			}
 		}
@@ -111,14 +113,14 @@ public class CategoryController extends BaseController {
 	public String deleteCategory(Model model, Integer id) {
 		int currentPage = (int) session.getAttribute("currentPage");
 		TbCategory tbCategory = categoryService.selectByPrimaryKey(id);
-		if(!tbCategory.getCaName().equals("管理员")) {
-			categoryService.deleteByPrimaryKey(id);//这是删除类别类
-			TbResource tbResource=new TbResource();
+		if (!tbCategory.getCaName().equals("管理员")) {
+			categoryService.deleteByPrimaryKey(id);// 这是删除类别类
+			TbResource tbResource = new TbResource();
 			tbResource.setCaId(id);
-			resourceService.updateDeleteTbResourceByCaId(tbResource, 2);//删除资源类对应的
-			TbUser tbUser=new TbUser();
+			resourceService.updateDeleteTbResourceByCaId(tbResource, 2);// 删除资源类对应的
+			TbUser tbUser = new TbUser();
 			tbUser.setCaId(id);
-			userService.updateDeleteUserByCaId(tbUser,2);//删除用户对应的
+			userService.updateDeleteUserByCaId(tbUser, 2);// 删除用户对应的
 			model.addAttribute("message", "删除成功");
 		} else {
 			model.addAttribute("message", "你不可以对管理员进行操作");

@@ -1,6 +1,7 @@
 package com.torrow.school.controller;
 import java.io.IOException;
 
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -44,7 +45,7 @@ public class LoginController extends BaseController {
 		TbUser tbUser=userService.login(usEmail,usPassword);
 		if(null!=tbUser) {
 			model.addAttribute("msg", "登录成功");
-			session.setAttribute("manager",tbUser);
+			session.setAttribute("manager","sdsada");
 			//这个方法是为了获得首页的显示数据
 			categoryService.findAllCategory(model);
 			TbCategory tbCategory = categoryService.selectByPrimaryKey(tbUser.getCaId());

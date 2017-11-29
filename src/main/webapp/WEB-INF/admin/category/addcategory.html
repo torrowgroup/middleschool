@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/addlink.css}">
 </head>
 <body>
+<a th:href="@{/news/addNewsJumping?(Pid=11)}"  target="ie">上传资源</a>
 <div th:text="${message}"></div>
 	<form th:action="@{/category/addCategory}" method="post">
 		<table>
@@ -23,7 +24,6 @@
 						<option value="4">用户</option>
 						<option value="6">通知公告</option>
 						<option value="7">校园风光</option>
-						<option value="8">底部链接</option>
 						<option value="9">上传类</option>
 						<option value="10">图片</option>
 						<option value="11">资源下载</option>
@@ -32,8 +32,7 @@
 				</select></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="添加"> <input
-					type="reset" value="重置"></td>
+				<td><input type="submit" value="添加">
 			</tr>
 		</table>
 	</form>

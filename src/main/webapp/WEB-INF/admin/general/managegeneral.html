@@ -10,10 +10,8 @@
 	th:href="@{/static/css/admin/managegeneral.css}">	
 </head>
 <body>
-<div th:text="${message}"></div>
 <div class="total">
-<button onclick="bian()">点我一下</button>
-<a th:href="@{/general/deleteScenery?(id=${tbResource.reId})}" onclick="return confirm('确定要删除吗')">Delete</a>
+<a th:href="@{/general/deleteGeneral?(id=${tbResource.reId})}" onclick="return confirm('确定要删除吗')">Delete</a>
 <form th:action="@{/general/updateGeneral}" onSubmit="return modifyContent();"
 		method="post" enctype="multipart/form-data">
 		<input type="hidden" name="reId" th:value="${tbResource.reId}">
@@ -21,12 +19,6 @@
 			<div class="top"><p><input type="text" name="reTitle" th:value="${tbResource.reTitle}" required="required"></p></div>
 			<div class="ziti">
 				<input type="text" name="reIssuingdate" th:value="${tbResource.reIssuingdate}" readonly="readonly">
-				【字体：<a href="javascript:doZoom(16)">大</a> 
-				<a href="javascript:doZoom(14)">中</a> 
-				<a href="javascript:doZoom(12)">小</a>】
-				&nbsp;&nbsp;<a href="javascript:;"onclick="CloseWebPage()">【关闭窗口】</a>
-				&nbsp;&nbsp;<a onclick=window.print() style="cursor:hand">【打印该页】</a>
-				<input type="submit" value="保存">
 		   </div>
 		 </div>
 		<textarea style="display: none;" name="reContent" id="a"></textarea>

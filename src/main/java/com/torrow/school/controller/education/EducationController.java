@@ -1,4 +1,9 @@
-package com.torrow.school.controller.manager;
+package com.torrow.school.controller.education;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,9 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
+import com.torrow.school.entity.TbResource;
 
 /**
  * @author 安李杰
@@ -35,7 +42,7 @@ public class EducationController extends BaseController {
 	@RequestMapping("addNewsJumping")
 	public String addNewsJumping(Model model,int Pid) {
 		categoryService.addBySelectPid(model,Pid);
-		return "educationoffice/addschoolnews";
+		return "educationoffice/uploadfile";
 	}
 
 	/**
@@ -51,8 +58,40 @@ public class EducationController extends BaseController {
 		record.setCaId(id);
 		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
+		model.addAttribute("zid", id);
 		return "educationoffice/manageupload";
 	}
+	
+	/**
+	 * @param tbResource
+	 * @param picture
+	 * @param model
+	 * @return 教研组上传的操作
+	 * @throws Exception
+	 */
+	@RequestMapping("upload")
+	public String upload(TbResource tbResource, MultipartFile file, Model model) throws Exception {
+		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
+		List<TbResource> resource = resourceService.selectAll();
+		for (TbResource en : resource) {
+			if (en.getCaId() == tbResource.getCaId()) {
+				if (file.getOriginalFilename().equals(en.getReContent())) {
+					model.addAttribute("message", "该文件已存在,上传失败");
+						return this.addNewsJumping(model, 3);
+				}
+			}
+		}
+		Date date = new Date();
+		DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd"); // HH表示24小时制；
+		String Date = dFormat.format(date);
+		String path = session.getServletContext().getRealPath("/static/uploadimg");
+		String reContent = resourceService.uploadFile(file, path);
+		TbResource tb = new TbResource(item.getCaId(), Date, item.getCaName(), file.getOriginalFilename(), reContent);
+		resourceService.insert(tb);
+		model.addAttribute("message", "添加成功");
+		return this.addNewsJumping(model, 3);
+	}
+
 	
 	/**
 	 * 文件下载功能
