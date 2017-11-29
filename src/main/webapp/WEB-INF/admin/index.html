@@ -95,7 +95,7 @@
 			
 				<li><a th:href="@{/logout}"><span class="glyphicon glyphicon-hand-right"></span>注销</a></li>
 				<li><div class="le_1"><a th:href="@{/user/viewMe}" target="ie">
-						<img th:src="@{/static/uploadimg/{picture}(picture=${session.manager.usPicture})}" alt="没有图片">
+<!-- 						<img th:src="@{/static/uploadimg/{picture}(picture=${session.manager.usPicture})}" alt="没有图片"> -->
 					</a></div></li>
 				
 			</ul>
@@ -117,7 +117,7 @@
 	                    </li>
 	                     <li>
 	                     <div class="fex" th:each="category,categoryStart:${newsList}">
-							   <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/news/manageSchoolNews?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out1"></a>
+							   <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}" th:text="${category.caName}" target="ie" class="out1"></a>
 						  </div>
 						  <div class="fex" th:each="category,categoryStart:${uploadList}">
 							   <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/news/manageUpload?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out1"></a>

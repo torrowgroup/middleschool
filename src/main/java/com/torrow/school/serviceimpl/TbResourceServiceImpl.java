@@ -58,7 +58,7 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	public List<TbResource> selectAll() {
 		return this.selectAllEntity();
 	}
-
+	
 	@Override
 	public int updateByPrimaryKey(TbResource record) {
 		return this.updateEntity(record);
@@ -73,11 +73,12 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	public PageBean<TbResource> findingByPaging(int currentPage, TbCategory record,int pageSize) {
 		List<TbResource> list = new ArrayList<TbResource>();// 这个集合是为了把得到资源类与类别类caId相同的的数据
 		List<TbCategory> tbCategory = tbCategoryDao.selectAllCaId();
-		List<TbResource> tbResource = this.selectAll();
+		String name=record.getCaName();
+		List<TbResource> tbResource = tbResourceDao.queryAll(name);
 		for (TbCategory item : tbCategory) {
 			if (item.getCaPid()!=null) {
 				if (item.getCaPid()==record.getCaPid()) {
-					for (TbResource it : tbResource) {
+					for (TbResource it : tbResource) { 
 						if (it.getCaId()==item.getCaId()) {
 							list.add(it);
 						}

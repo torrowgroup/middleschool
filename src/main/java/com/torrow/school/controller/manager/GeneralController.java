@@ -285,37 +285,37 @@ public class GeneralController extends BaseController {
 		return this.addGeneralJumping(model);
 	}
 	
-	/**
-	 * @param model
-	 * @param id
-	 * @param reTitle
-	 * @param reContent
-	 * @param caName
-	 * @return 对于概括类进行修改的操作
-	 */
-	@RequestMapping("updateGeneral")
-	public String updateGeneral(Model model, @RequestParam(value = "picture", required = false) MultipartFile[] picture,
-			TbResource tbResource) throws IllegalStateException, IOException {
-		if(tbResource.getReContent().equals(null)) {
-			int i=resourceService.deleteByPrimaryKey(tbResource.getReId());
-			if(i!=0) {
-				model.addAttribute("message", "保存成功");
-			}else {
-				model.addAttribute("message", "保存失败");
-			}
-		}
-		TbResource tb = resourceService.selectByPrimaryKey(tbResource.getReId());
-		if (null != tb) {
-			tb.setReContent(tbResource.getReContent());
-			int i=resourceService.updateByPrimaryKey(tb);
-			if(i!=0) {
-				model.addAttribute("message", "保存成功");
-			}else {
-				model.addAttribute("message", "保存失败");
-			}
-		} 
-		return this.manage(model,tb.getCaId());
-	}
+//	/**
+//	 * @param model
+//	 * @param id
+//	 * @param reTitle
+//	 * @param reContent
+//	 * @param caName
+//	 * @return 对于概括类进行修改的操作
+//	 */
+//	@RequestMapping("updateGeneral")
+//	public String updateGeneral(Model model, @RequestParam(value = "picture", required = false) MultipartFile[] picture,
+//			TbResource tbResource) throws IllegalStateException, IOException {
+//		if(tbResource.getReContent().equals(null)) {
+//			int i=resourceService.deleteByPrimaryKey(tbResource.getReId());
+//			if(i!=0) {
+//				model.addAttribute("message", "保存成功");
+//			}else {
+//				model.addAttribute("message", "保存失败");
+//			}
+//		}
+//		TbResource tb = resourceService.selectByPrimaryKey(tbResource.getReId());
+//		if (null != tb) {
+//			tb.setReContent(tbResource.getReContent());
+//			int i=resourceService.updateByPrimaryKey(tb);
+//			if(i!=0) {
+//				model.addAttribute("message", "保存成功");
+//			}else {
+//				model.addAttribute("message", "保存失败");
+//			}
+//		} 
+//		return this.manage(model,tb.getCaId());
+//	}
 	
 	
 	// 用于富文本编辑器的图片上传
