@@ -3,17 +3,27 @@
 			padding: 0;
 			background: #ebebeb;
 		}
-		.demo{
-			width:400px;
-			height: 350px;
-			margin: 0 auto;
-			margin-top: 100px;
-			position: relative;
+		.t1{
+			width: 30%;
+			height:200px;
+			margin-left: 10%;
+			margin-top:5%;
+			float: left;
 		}
+		.t2{
+			width: 30%;
+			height:300px;
+			margin-top:5%;
+			float: left;
+		}
+		
 		input{
 			width: 200px;
 			height: 30px;
-			padding:10px;
+			border-radius:5px; 
+			-moz-border-radius:5px; 
+			-webkit-border-radius:5px; 
+			border:1px solid #ccc;
 		}
 		.demo_1{
 			width: 202px;
@@ -28,7 +38,7 @@
 			text-align:center;
 		}
 		span{
-			
+			float:right;
 			font-size: 16px;
 		}
 		.bb{

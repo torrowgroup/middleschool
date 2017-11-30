@@ -20,12 +20,10 @@ public interface TbMessageService {
 	int insert(TbMessage record);
 	// 根据id得到单个留言信息
 	TbMessage selectByPrimaryKey(Integer meId);
-	// 查看所有留言
-	List<TbMessage> selectAll();
 	// 修改留言
 	int updateByPrimaryKey(TbMessage record);
 	// 得到所有留言，分页
-	PageBean<TbMessage> findPage(int currentPage,int pageSize);
+	PageBean<TbMessage> findPage(int currentPage,String inquiry,int pageSize);
 	// 留言回复
 	int reply(int id, String meReply);
 	// 富文本上传图片

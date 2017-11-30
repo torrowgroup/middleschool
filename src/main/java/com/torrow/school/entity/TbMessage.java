@@ -32,11 +32,15 @@ public class TbMessage implements Serializable {
 	//写入留言
 	public TbMessage( String meTitle, String meHide, String meIssuingdate, String meStatus,
 			String meContent) {
+		super();
 		this.meTitle = meTitle;
+		this.mePicture = "";
 		this.meHide = meHide;
 		this.meIssuingdate = meIssuingdate;
 		this.meStatus = meStatus;
 		this.meContent = meContent;
+		this.meReply = "";
+		this.spare = null;
 	}
 	
 	

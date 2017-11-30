@@ -176,7 +176,6 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 					}
 					if (content.indexOf(">", i) != -1) {
 						stopIndex = content.indexOf(">", i);
-						log.info("stopIndex" + stopIndex);
 						if (startIndex != -1) {
 							i = stopIndex + 1;// 跳过标签内容
 						}

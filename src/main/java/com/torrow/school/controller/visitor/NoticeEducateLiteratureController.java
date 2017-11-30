@@ -25,7 +25,7 @@ import com.torrow.school.util.PageBean;
 /**
  * @author 张金高
  * 2017年11月7日下午1:44:56
- * 公告和教育教研控制层,追加留言
+ * 公告和教育教研控制层,追加留言,用户简介，成果
  */
 @Controller
 @RequestMapping("/visitorNEL")
@@ -137,13 +137,28 @@ public class NoticeEducateLiteratureController extends BaseController{
 		pidList.add(4);//用户
 		List<TbCategory> categoryList = categoryService.selectByPid(pidList);
 		model.addAttribute("categoryList",categoryList);
-		PageBean<TbUser> pageBean = userService.findPageSplit(categoryList,currentPage, 15);
+		PageBean<TbUser> pageBean = userService.findPageSplit(categoryList,currentPage,null, 12);
 		model.addAttribute("userList", pageBean);
 		String view = "visitor/teacherintroduction";//返回界面，默认是教师介绍
 		if(ask.equals("achieve")){
 			view = "visitor/teacherachieve";//返回界面，默认是教师成果
 		}
 		return new ModelAndView(view);
+	}
+	
+	/**
+	 * @param usId 查看详情的教师id
+	 * @param model
+	 * @return 查看教师的详情
+	 * @throws ParseException 
+	 */
+	@RequestMapping("teacherDetail")
+	public ModelAndView teacherDetail(int usId,Model model) throws ParseException{
+		TbUser teacher = userService.selectById(usId); 
+		model.addAttribute("teacher", teacher);
+		categoryService.getCategory(0, model);
+		resourceService.getTimeInfor(model);//得到考试和联系信息
+		return new ModelAndView("visitor/teacherdetail");
 	}
 	
 	/**
@@ -160,14 +175,17 @@ public class NoticeEducateLiteratureController extends BaseController{
 	/**
 	 * @param model
 	 * @return	留言
-	 * @throws ParseException 
+	 * @throws ParseException
+	 * String meTitle, String meHide, String meIssuingdate, String meStatus,
+			String meContent
+	 *  
 	 */
 	@RequestMapping("leaveWord")
 	public ModelAndView leaveWord(String meHide,String meTitle,String meContent,Model model) throws ParseException{
-		if(meHide==null){
+		if(meHide==null||meHide.equals("")){
 			meHide="匿名";
 		}
-		if(meTitle==null){
+		if(meTitle==null||meTitle.equals("")){
 			meContent = "无标题";
 		}
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

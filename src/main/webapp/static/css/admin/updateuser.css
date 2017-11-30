@@ -14,7 +14,6 @@ body{
 .t2{
 	width: 40%;
 	height:300px;
-	margin-left: 1%;
 	margin-top:5%;
 	float: left;
 }
@@ -22,6 +21,10 @@ body{
 input{
 	width: 60%;
 	height: 30px;
+	border-radius:5px; 
+	-moz-border-radius:5px; 
+	-webkit-border-radius:5px; 
+	border:1px solid #ccc;
 }
 img{
 	width: 30%;

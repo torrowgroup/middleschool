@@ -15,10 +15,10 @@ $(function () {
             sBox1.scrollLeft++
         }
     }
-    var timer = setInterval(gotol,20)
+    var timer = setInterval(gotol,50)
     sBox.hover(function () {
         clearInterval(timer)
     },function () {
-        timer = setInterval(gotol,20)
+        timer = setInterval(gotol,50)
     })
 })

@@ -1,6 +1,8 @@
 
 package com.torrow.school.controller.manager;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,8 +32,12 @@ public class MessageController extends BaseController {
 
 	// 查看所有留言，分页
 	@RequestMapping("manageMessage")
-	public String manageMessage(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
-		model.addAttribute("messagePage", messageService.findPage(currentPage,5));// 回显分页数据
+	public String manageMessage(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, String inquiry,Model model) throws UnsupportedEncodingException {
+		if(inquiry!=null){
+			inquiry = new String(inquiry.getBytes("iso8859-1"),"utf-8");
+		}
+		model.addAttribute("messagePage", messageService.findPage(currentPage,inquiry,5));// 回显分页数据
+		model.addAttribute("inquiry", inquiry);
 		return "admin/message/managemessage";
 	}
 
@@ -46,26 +52,26 @@ public class MessageController extends BaseController {
 
 	// 留言回复
 	@RequestMapping("reply")
-	public String reply(int id, String meReply, int page,Model model) {
+	public String reply(int id, String meReply, int page,Model model) throws UnsupportedEncodingException {
 		int boo = messageService.reply(id, meReply);
 		String reply = "回复成功";
 		if (boo != 1) {
 			reply = "回复失败";
 		}
 		model.addAttribute("msg", reply);
-		return this.manageMessage(page, model);
+		return this.manageMessage(page,null, model);
 	}
 
 	// 删除留言
 	@RequestMapping("deleteMessage")
-	public String deleteMessage(int id, int page,Model model) {
+	public String deleteMessage(int id, int page,Model model) throws UnsupportedEncodingException {
 		int boo = messageService.deleteByPrimaryKey(id);
 		String reply = "删除成功";
 		if (boo != 1) {
 			reply = "删除失败";
 		}
 		model.addAttribute("msg", reply);
-		return this.manageMessage(page, model);
+		return this.manageMessage(page,null, model);
 	}
 
 	// 用于富文本编辑器的图片上传

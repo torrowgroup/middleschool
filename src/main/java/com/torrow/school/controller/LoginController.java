@@ -45,12 +45,12 @@ public class LoginController extends BaseController {
 		TbUser tbUser=userService.login(usEmail,usPassword);
 		if(null!=tbUser) {
 			model.addAttribute("msg", "登录成功");
+			session.setAttribute("manager",tbUser);
 			//这个方法是为了获得首页的显示数据
 			categoryService.findAllCategory(model);
 			TbCategory tbCategory = categoryService.selectByPrimaryKey(tbUser.getCaId());
 			//进入机构部的管理页面
 			if(tbCategory.getCaPid()==3) {
-				session.setAttribute("education",tbUser);
 				return "educationoffice/index";
 			}else if(tbUser.getCaName().equals("政教处")) {
 				session.setAttribute("political",tbUser);

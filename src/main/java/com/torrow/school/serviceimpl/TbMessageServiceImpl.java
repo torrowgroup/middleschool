@@ -1,13 +1,18 @@
 
 package com.torrow.school.serviceimpl;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.torrow.school.base.BaseDao;
+import com.torrow.school.dao.TbMessageDao;
 import com.torrow.school.entity.TbMessage;
+import com.torrow.school.entity.TbUser;
 import com.torrow.school.service.TbMessageService;
 import com.torrow.school.util.PageBean;
 
@@ -19,6 +24,9 @@ public class TbMessageServiceImpl extends BaseDao<TbMessage> implements TbMessag
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Resource
+	TbMessageDao messageDao;
+	
 	@Override
 	public int deleteByPrimaryKey(Integer meId) {
 		return this.deleteEntity(meId);
@@ -35,19 +43,17 @@ public class TbMessageServiceImpl extends BaseDao<TbMessage> implements TbMessag
 	}
 
 	@Override
-	public List<TbMessage> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int updateByPrimaryKey(TbMessage record) {
-		return 0;
-	}
-
-	@Override
-	public PageBean<TbMessage> findPage(int currentPage,int pageSize) {
-		return this.pageCut(currentPage,pageSize);
+	public PageBean<TbMessage> findPage(int currentPage,String inquiry,int pageSize) {
+		List<TbMessage> message = messageDao.selectBlur(inquiry);
+		int totalCount = message.size();
+		double tc = totalCount;
+		Double num = Math.ceil(tc / pageSize);// 向上取整
+		List<TbMessage> messageList = new ArrayList<TbMessage>();// 这个集合是为了分页显示的条数
+		for (int j = (currentPage - 1) * pageSize; j < currentPage * pageSize && j < totalCount; j++) {
+			messageList.add(message.get(j));
+		}
+		PageBean<TbMessage> pageBean = new PageBean<TbMessage>(currentPage, pageSize, messageList, num.intValue(), totalCount);
+		return pageBean;
 	}
 
 	@Override
@@ -61,6 +67,12 @@ public class TbMessageServiceImpl extends BaseDao<TbMessage> implements TbMessag
 	@Override
 	public String uploadImg(MultipartFile file,String path) throws Exception {
 		return this.uploadP(file,path);
+	}
+
+	@Override
+	public int updateByPrimaryKey(TbMessage record) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 

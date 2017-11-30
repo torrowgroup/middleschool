@@ -8,12 +8,11 @@
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
 </head>
 <body>
-	<div class="demo">
 	<div th:text="${message}"></div>
 		<form th:action="@{/user/addUser}" method="post" enctype="multipart/form-data" th:onsubmit="'javascript:checkPicture(this);'">
-			<table>
+			<table border="0" class="t1">
 				<tr>
-					<td width="35%"><span>邮箱</span></td>
+					<td width="35%"><span>邮&nbsp;&nbsp;&nbsp;&nbsp;箱</span></td>
 					<td width="65%"><input type="email" name="usEmail" id="usEmail" required="required" th:oninput="'javascript:testEmail();'" maxlength="25" >
 					
 						<span id="ok" class="glyphicon glyphicon-ok" style="display: none;"></span>
@@ -22,7 +21,7 @@
 				</tr>
 				<tr><td colspan="2"></td></tr>
 				<tr>
-					<td><span>密码</span></td>
+					<td><span>密&nbsp;&nbsp;&nbsp;&nbsp;码</span></td>
 					<td><input type="password" name="usPassword" id="password"
 					required="required" maxlength="20"></td>
 				</tr>
@@ -36,6 +35,8 @@
 					</td>
 				</tr>
 				<tr><td colspan="2"></td></tr>
+				</table>
+				<table border="0" class="t2">
 				<tr>
 					<td><span>姓名</span></td>
 					<td><input type="text" name="usName" required="required" maxlength="10"></td>
@@ -71,7 +72,6 @@
 				</tr>
 			</table>
 		</form>
-	</div>
 <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/admin/user/testemail.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/admin/user/adduser.js}"></script>

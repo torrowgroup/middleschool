@@ -123,8 +123,11 @@
 		select * from tb_user where us_email = #{email}
 	</select>
 
-	<select id="selectListByCaId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+	<select id="selectListByCaId" resultMap="BaseResultMap">
 		select * from tb_user where ca_id = #{caId}
+		<if test="content!=null and content !=''">
+			and concat (us_name,',',us_email,',',ca_name,',',us_phone) like '%' #{content} '%';
+		</if>
 	</select>
 	
 </mapper>

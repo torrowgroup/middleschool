@@ -21,29 +21,29 @@
 <div class="mainbox1">
         <div class="schollright">
             <h3 class="titlesc">留言板</h3>
-            <form th:action="@{/visitorNEL/leaveWord}" method="post" class="basic-grey">
+            <form th:action="@{/visitorNEL/leaveWord}" method="post" class="basic-grey" onsubmit="checkForm()">
                 <h1>欢迎您
                     <span>请留下您宝贵的见解：</span>
-                    <span class="isSuccess" th:text="${message}">提交成功</span>
+                    <span class="isSuccess" th:text="${message}"></span>
                 </h1>
                 <label>
                     <span>您的姓名 :</span>
-                    <input id="name" type="text" name="name" placeholder="您的姓名" />
+                    <input id="name" type="text" name="meHide" placeholder="您的姓名（选填）" maxlength="10"/>
                 </label>
                 <label>
                     <span>留言标题 :</span>
-                    <input id="email" type="text" name="email" placeholder="请填写标题" />
+                    <input id="email" type="text" name="meTitle" placeholder="请填写标题（选填）" maxlength="20"/>
                 </label>
                 <label>
                     <span>留言内容 :</span>
                     <div id="message">
-						<textarea name="meReply" style="display: none;"></textarea>
+						<textarea name="meContent" id="content" style="display: none;"></textarea>
 						<div id="editor"></div>
 					</div>
 				</label>	
                 <label>
                     <span>&nbsp;</span>
-                    <input type="submit" class="button" value="提交" />
+                    <input type="submit" class="button" value="提交"/>
                 </label>
             </form>
         </div>
@@ -54,12 +54,6 @@
 <script th:src="@{/static/js/bootstrap.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script>
-	<script th:inline="javascript">
-			var E = window.wangEditor
-			var editor = new E('editor')
-			editor.config.uploadImgUrl = 'uploadImg'
-			editor.config.uploadImgFileName = 'file'
-			editor.create()
-	</script>
+<script type="text/javascript" th:src="@{/static/js/visitor/leaveword.js}"></script>
 </body>
 </html>
