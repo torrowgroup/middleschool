@@ -38,8 +38,7 @@
 			<tr>
 				<td class="td2"><span th:if="${messagePage.currPage != 1}">
 						<a th:href="@{/message/manageMessage?(currentPage=1,inquiry=${inquiry})}">[首页]</a>&nbsp;&nbsp;
-						<a
-						th:href="@{/message/manageMessage?(currentPage=${messagePage.currPage-1},inquiry=${inquiry})}">[上一页]</a>&nbsp;&nbsp;
+						<a th:href="@{/message/manageMessage?(currentPage=${messagePage.currPage-1},inquiry=${inquiry})}">[上一页]</a>&nbsp;&nbsp;
 				</span> <span th:if="${messagePage.currPage == 1}"> [首页][上一页] </span> <span
 					th:each="i:${#numbers.sequence(1,messagePage.totalPage)}">
 					 <a	th:if="${i > messagePage.currPage-3} and ${i < messagePage.currPage+3}"

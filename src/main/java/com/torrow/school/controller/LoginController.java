@@ -45,32 +45,18 @@ public class LoginController extends BaseController {
 		TbUser tbUser=userService.login(usEmail,usPassword);
 		if(null!=tbUser) {
 			model.addAttribute("msg", "登录成功");
-<<<<<<< HEAD
 			session.setAttribute("manager",tbUser);
-=======
->>>>>>> 1b23a1733fa64729e5ce4863fedcd03b505250da
 			//这个方法是为了获得首页的显示数据
 			categoryService.findAllCategory(model);
 			TbCategory tbCategory = categoryService.selectByPrimaryKey(tbUser.getCaId());
 			//进入机构部的管理页面
 			if(tbCategory.getCaPid()==3) {
-<<<<<<< HEAD
-				
-				return "educationoffice/index";
-			}else if(tbUser.getCaName().equals("政教处")) {
-				
-				return "politicaleducation/index";
-			}else if(tbUser.getCaName().equals("教师")) {
-				
-=======
-				session.setAttribute("education",tbUser);
 				return "educationoffice/index";
 			}else if(tbUser.getCaName().equals("政教处")) {
 				session.setAttribute("political",tbUser);
 				return "politicaleducation/index";
 			}else if(tbUser.getCaName().equals("教师")) {
 				session.setAttribute("teacher",tbUser);
->>>>>>> 1b23a1733fa64729e5ce4863fedcd03b505250da
 				return "teacher/index";
 			}
 			session.setAttribute("admin",tbUser);
