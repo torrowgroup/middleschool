@@ -6,20 +6,22 @@
 <title>home</title>
 <link rel="stylesheet" type="text/css"
 	th:href="@{/static/dist/css/wangEditor.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/addgeneral.css}">
 </head>
 <body>
+<div class="aa"> 
 <div th:if="${sign}=='1'">请先去类别管理中添加相应类别</div>
 <div th:text="${message}"></div>
 <div th:if="${sign}!='1'">
-<a th:href="@{/general/addSceneryJumping}" target="ie" class="out1" style="margin-left:900px;">添加校园风光</a>
+<a th:href="@{/general/addSceneryJumping}" target="ie" class="out1">添加校园风光</a>
 <form th:action="@{/general/addGeneral}"  onSubmit="return modifyContent();" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
-				<td>标题</td>
+				<th width="20%"><span>标题</span></th>
 				<td><input type="text" name="reTitle" required="required" maxlength="10"></td>
 			</tr>
 			<tr>
-				<td>内容</td>
+				<th><span>内容</span></th>
 				<td>
 					<div id="introduction">
 						<textarea style="display: none;" name="reContent" 
@@ -30,22 +32,22 @@
 					</div>
 			</tr>
 			<tr>
-				<td>名称</td>
+				<th><span>名称</span></th>
 				<td>
-					<select name="caId">
+					<select name="caId" class="cc">
 						<option th:each="category,categoryStart:${categoryList}" th:text="${category.caName}" th:value="${category.caId}" />
 					</select>
 				</td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="添加"></td>
-				<td><input type="reset" value="重置"></td>
+				<th colspan="2"><input type="submit" value="添加" class="bb"></th>
 			</tr>
 		</table>
 </form>
 <script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/addnews.js}" ></script>
+</div>
 </div>
 </body>
 </html>

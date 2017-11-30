@@ -4,9 +4,12 @@
 
 <head>
   <title>home</title>
-<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/managescenery.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/managepicture.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
+<script type="text/javascript" th:src="@{/static/js/bootstrap.min.js}"></script>
 </head>
 <body>
+<div class="aa">
 <div th:text="${message}"></div>
 <span th:if ="${pagemsg.totalCount}==0">
         没有任何校园风光信息！
@@ -15,10 +18,10 @@
         <table border="1"  class="table1">   
         <thead>
             <tr>
-            	<td>简介</td>
-                <td>校园风光</td>
-                <td>详情</td>
-                <td>删除</td>
+            	<td width="30%"><span>简介</span></td>
+                <td width="30%"><span>校园风光</span></td>
+                <td width="30%"><span>详情</span></td>
+                <td width="60%"><span>删除</span></td>
             </tr>
             </thead>
                 <tr th:each="general,generalStart:${pagemsg.lists}">
@@ -52,5 +55,6 @@
 </tr>
 </table>
 </div> 
+</div>
 </body>
 </html>

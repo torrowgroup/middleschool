@@ -4,20 +4,20 @@
 
 <head>
 <title>增加类别</title>
-<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/addlink.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/addcategory.css}">
 </head>
 <body>
-<a th:href="@{/news/addNewsJumping?(Pid=11)}"  target="ie">上传资源</a>
+<div class="demo">
 <div th:text="${message}"></div>
 	<form th:action="@{/category/addCategory}" method="post">
 		<table>
 			<tr>
-				<td>类别名称</td>
+				<td><span>类别名称</span></td>
 				<td><input type="text" name="caName" required="required" maxlength="6"></td>
 			</tr>
 			<tr>
-				<td>父类别名称:</td>
-				<td><select id="caPid" name="caPid" style="width: 160px">
+				<td><span>父类别名称</span></td>
+				<td><select id="caPid" name="caPid" style="width: 160px" class="bb">
 						<option value="1">学校概括</option>
 						<option value="2">学校新闻</option>
 						<option value="3">机构部</option>
@@ -32,10 +32,11 @@
 				</select></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="添加">
+				<td colspan="2"><input type="submit" value="添加" class="butone">
 			</tr>
 		</table>
 	</form>
 	<br>
+</div>
 </body>
 </html>

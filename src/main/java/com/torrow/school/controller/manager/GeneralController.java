@@ -82,7 +82,7 @@ public class GeneralController extends BaseController {
 	 */
 	@RequestMapping("uploadPictureJumping")
 	public String uploadPictureJumping(Model model) {
-		int Pid=10;//查询概括类
+		int Pid=10;//查询轮播图
 		List<TbCategory> list=categoryService.queryByPid(Pid);
 		if(!list.isEmpty()) {
 			model.addAttribute("uploadList", list);

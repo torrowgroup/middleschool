@@ -1,0 +1,27 @@
+body{
+	margin:0;
+	padding: 0;
+	background: #ebebeb;
+}
+.aa{
+	width: 300px;
+	height: 500px;
+	margin: 0 auto;
+	margin-top: 10%;
+}
+img{
+	width:120px;
+	height: 120px;
+}
+td{
+	text-align: center;
+}
+a{
+	line-height: 120px;
+}
+span{
+	line-height: 50px;
+}
+a:hover{
+	text-decoration: none;
+}

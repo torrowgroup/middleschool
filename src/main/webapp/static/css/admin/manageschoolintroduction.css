@@ -1,0 +1,48 @@
+body{
+	margin: 0;
+	padding: 0;
+	background: #ebebeb;
+}
+.total{
+	width: 100%;
+	height: auto;
+	
+}
+.inner{
+	max-width: 80%;
+	height: 100%;
+	/*background-color: green;*/
+	margin-left: 10%;
+}
+.top{
+	width: 100%;
+	height: 60px;
+	/*background-color: red;*/
+}
+.top p{
+	text-align: center;
+	font-size: 1.9em;
+}
+#zoom{
+	padding: 10px;
+	width: 98%;
+	height: 300px;
+	overflow:scroll;
+	overflow-x: hidden;
+}
+.ziti{
+	left: 32%;
+	height: 40px;
+	text-align: center;
+	margin-top: 10px;
+}
+.ziti a{
+	color: lightblue;
+	text-decoration: none;
+}
+.ziti button{
+	background: #66B3FF;
+	color: white;
+	border-radius: 8px;
+	cursor: pointer;
+}

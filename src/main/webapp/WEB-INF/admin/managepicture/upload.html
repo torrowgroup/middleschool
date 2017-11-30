@@ -4,38 +4,29 @@
 
 <head>
 <title>Home</title>
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/uploadpicture.css}">
 <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 <script type="text/javascript" th:src="@{/static/js/upload.js}"></script>
 </head>
 <body>
+<div class="aa">
 <div th:if="${sign}=='1'">请先去类别管理中添加相应类别</div>
 <div th:if="${sign}!='1'">
 	<form th:action="@{/general/addSchoolScenery}" method="post"
 		enctype="multipart/form-data">
 		<table>
-			<!-- <tr>
-				<td><input type="hidden" name="caId" th:value="${tb.caId}"></td>
-				<td><input type="hidden" name="caName" th:value="${tb.caName}"></td>
-			</tr> -->
-			<!-- <tr>
-				<td>风景名</td>
-				<td><input type="text" name="reTitle"></td>
-			</tr> -->
 			<tr>
-				<td>类别名称</td>
-				<td><select name="caId">
-							<option th:each="category,categoryStart:${categoryList}" th:text="${category.caName}" th:value="${category.caId}" />
+				<td width="15%"><span>类别名称</span></td>
+				<td><select name="caId" class="cc">
+							<option th:each="category,categoryStart:${uploadList}" th:text="${category.caName}" th:value="${category.caId}" />
 					 </select></td>
 			</tr>
-			<tr>
-				<td><input type="submit" value="添加"></td>
-			</tr>
+			<tr height="20px"></tr>
 		</table>
 		<div id="addCommodityIndex">
 			<!--input-group start-->
 			<div class="input-group row">
 				<div class="col-sm-3">
-					<label>图片</label>
 				</div>
 				<div class="col-sm-9 big-photo">
 					<div id="preview">
@@ -44,84 +35,13 @@
 					</div>
 					<input type="file" name="picture" onchange="previewImage(this)"
 						style="display: none;" id="previewImg" required="required">
-					<!--<input id="uploaderInput" class="uploader__input" style="display: none;" type="file" accept="" multiple="">-->
 				</div>
 			</div>
 			<!--input-group end-->
 		</div>
-		<!-- <div id="addCommodityIndex">
-			input-group start
-			<div class="input-group row">
-				<div class="col-sm-3">
-					<label>图片1</label>
-				</div>
-				<div class="col-sm-9 big-photo">
-					<div id="preview1">
-						<img id="imghead1" border="0" src="../static/images/photo_icon.png"
-							width="90" height="90" onclick="$('#previewImg1').click();">
-					</div>
-					<input type="file" name="picture" onchange="previewImage1(this)"
-						style="display: none;" id="previewImg1">
-					<input id="uploaderInput" class="uploader__input" style="display: none;" type="file" accept="" multiple="">
-				</div>
-			</div>
-			input-group end
-		</div>
-		<div id="addCommodityIndex">
-			input-group start
-			<div class="input-group row">
-				<div class="col-sm-3">
-					<label>图片2</label>
-				</div>
-				<div class="col-sm-9 big-photo">
-					<div id="preview2">
-						<img id="imghead2" border="0" src="../static/images/photo_icon.png"
-							width="90" height="90" onclick="$('#previewImg2').click();">
-					</div>
-					<input type="file" name="picture" onchange="previewImage2(this)"
-						style="display: none;" id="previewImg2">
-					<input id="uploaderInput" class="uploader__input" style="display: none;" type="file" accept="" multiple="">
-				</div>
-			</div>
-			input-group end
-		</div>
-		<div id="addCommodityIndex">
-			input-group start
-			<div class="input-group row">
-				<div class="col-sm-3">
-					<label>图片3</label>
-				</div>
-				<div class="col-sm-9 big-photo">
-					<div id="preview3">
-						<img id="imghead3" border="0" src="../static/images/photo_icon.png"
-							width="90" height="90" onclick="$('#previewImg3').click();">
-					</div>
-					<input type="file" name="picture" onchange="previewImage3(this)"
-						style="display: none;" id="previewImg3">
-					<input id="uploaderInput" class="uploader__input" style="display: none;" type="file" accept="" multiple="">
-				</div>
-			</div>
-			input-group end
-		</div>
-		<div id="addCommodityIndex">
-			input-group start
-			<div class="input-group row">
-				<div class="col-sm-3">
-					<label>图片4</label>
-				</div>
-				<div class="col-sm-9 big-photo">
-					<div id="preview4">
-						<img id="imghead4" border="0" src="../static/images/photo_icon.png"
-							width="90" height="90" onclick="$('#previewImg4').click();">
-					</div>
-					<input type="file" name="picture" onchange="previewImage4(this)"
-						style="display: none;" id="previewImg4">
-					<input id="uploaderInput" class="uploader__input" style="display: none;" type="file" accept="" multiple="">
-				</div>
-			</div>
-			input-group end
-		</div> -->
+			<input type="submit" value="添加" class="bb">
 	</form>
+</div>
 </div>
 </body>
 </html>
