@@ -3,88 +3,70 @@
 	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>管理系统</title>
+<title>郑州122中学管理系统</title>
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/index.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
-<script th:src="@{/static/js/jquery.min.js}"></script>
-<script th:src="@{/static/js/admin/index.js}"></script>
-<script th:src="@{/static/js/bootstrap.min.js}"></script>
-<script type="text/javascript">
-		function reinitIframe(){
+<script>
+			function reinitIframe(){
 		var iframe = document.getElementById("ifr");
 			try{
 		iframe.height =  iframe.contentWindow.document.documentElement.scrollHeight;
 		}catch (ex){}
 		}
 		window.setInterval("reinitIframe()", 200);
-</script>
-
+	</script>
 </head>
 <body onload="getdates()">
 <div class="total">
-	<div class="topper">
+	<div class="topper"> 
 		<div class="one">
-			<img th:src="@{/static/images/admin/navone.png}" alt="" style="width: 100%;height: 100%;">
+			<img th:src="@{/static/images/admin/navone.png}" alt="">
 		</div>  
 		<div class="mid">
-		<ul>
+		<ul class="midul">
 			<li id="aa">
-				<a href="#"> 
-					<img th:src="@{/static/images/admin/sec4.png}" alt="">
-					<span>留言板</span>
-				</a>
-				<div id="next">
-					<ul>
-						<!-- <li><a href="managemessage.html"  target="ie">添加留言</a></li> -->
-						<li><a th:href="@{/message/manageMessage}" target="ie">留言管理</a></li>
-					</ul>
-				</div>
+				<img th:src="@{/static/images/admin/sec11.png}" alt="" class="photo1">
+				<a th:href="@{/message/manageMessage}"  target="ie"><span class="changecolor">留言板</span></a>
 			</li>
-			<li>	
-				<a href="#">
-					<img th:src="@{/static/images/admin/sec3.png}" alt="">
-					<span>公告</span>
-				</a>
-				<div id="next">
+			<li>
+				<img th:src="@{/static/images/admin/sec22.png}" alt="" class="photo2">
+				<span class="changecolor">公告</span>
+				<div class="next">
 					<ul>
-						<li><a th:href="@{/news/addNewsJumping?(Pid=6)}"  target="ie">添加公告</a></li>
-						<li style="margin-top:-50px"><a th:href="@{/news/manageObject?(id=6)}" target="ie">管理公告</a></li>
+						<li><a th:href="@{/news/addNewsJumping?(Pid=6)}" target="ie">添加公告</a></li>
+						<li><a th:href="@{/news/manageObject?(id=6)}" target="ie">管理公告</a></li>
 					</ul>
 				</div>
 			</li>
 			<li>
-				<a href="#">
-					<img th:src="@{/static/images/admin/sec2.png}" alt="">
-					<span>校园文学</span>
-				</a>
-				<div id="next">
+				<img th:src="@{/static/images/admin/sec33.png}" alt="" class="photo3">
+				<span class="changecolor">校园文学</span>
+				<div class="next">
 					<ul>
-						<li><a th:href="@{/news/addNewsJumping?(Pid=12)}" target="ie">添加校园文学</a></li>
-						<li style="margin-top:-50px"><div class="word" th:each="category,categoryStart:${literatureList}"><a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}" th:text="${category.caName}" target="ie"></a></div></li>
+						<li><a th:href="@{/news/addNewsJumping?(Pid=12)}"  target="ie">添加校园文学</a></li>
+						<li style="margin-top:0px" th:each="category,categoryStart:${literatureList}">
+							<a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}" th:text="${category.caName}" target="ie"></a>
+						</li>
 					</ul>
 				</div>
 			</li>
 			<li>
-				<a href="#">
-					<img th:src="@{/static/images/admin/sec5.png}" alt="">
-					<span>资源下载</span>
-				</a>
-				<div id="next">
+				<img th:src="@{/static/images/admin/sec44.png}" alt="" class="photo4">
+				<span class="changecolor">资源下载</span>
+				<div class="next">
 					<ul>
 						<li><a th:href="@{/news/addNewsJumping?(Pid=11)}"  target="ie">上传资源</a></li>
-						<li style="margin-top:-50px"><a th:href="@{/news/manageObject?(id=11)}"  target="ie">资源管理</a></li>
+						<li><a th:href="@{/news/manageObject?(id=11)}"  target="ie">资源管理</a></li>
 					</ul>
 				</div>
 			</li>
 			<li>
-				<a href="#">
-					<img th:src="@{/static/images/admin/sec1.png}" alt="">
-					<span>用户</span>
-				</a>
-				<div id="next">
+				<img th:src="@{/static/images/admin/sec55.png}" alt="" class="photo5">
+				<span class="changecolor">用户</span>
+				<div class="next">
 					<ul>
 						<li><a th:href="@{/user/toAddUser}"  target="ie">添加用户</a></li>
-						<li style="margin-top:-50px"><a th:href="@{/user/manageUser}"  target="ie">用户管理</a></li>
+						<li><a th:href="@{/user/manageUser}"  target="ie">用户管理</a></li>
 					</ul>
 				</div>
 			</li>
@@ -92,11 +74,14 @@
 	</div>
 		<div class="two">  
 			<ul>
-			
-				<li><a th:href="@{/logout}"><span class="glyphicon glyphicon-hand-right"></span>注销</a></li>
-				<li><div class="le_1"><a th:href="@{/user/viewMe}" target="ie">
-<!-- 						<img th:src="@{/static/uploadimg/{picture}(picture=${session.manager.usPicture})}" alt="没有图片"> -->
-					</a></div></li>
+				<li>
+					<div class="le_1">
+						<a th:href="@{/user/viewMe}" target="ie">
+							<img th:src="@{/static/uploadimg/{picture}(picture=${session.manager.usPicture})}" alt="没有图片">
+						</a>
+					</div>
+				</li>
+				<li><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-out" title="退出"></span></a></li>
 			</ul>
 		</div> 
 	</div><!-- 头部结束 -->
@@ -104,87 +89,81 @@
 		<div class="sidebar-collapse">
 			<ul class="nav" id="main-menu">
 				<li>
-					<div id="date" style="color: white;line-height: 50px; background:#1fa4c7;font-size: 22px;text-align: center;">
+					<div id="date">
 					</div>
 				</li>
 				<!-- 新闻管理 -->
 				<li class="lione">
-					<a href="#" class="out"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;新闻管理</a>
-                    <ul class="nav nav-second-level" style="display: none">
-	                    <li>
+					<a href="#" class="out"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;新闻管理<span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <ul class="nav nav-second-level">
+	                    <li class="hr">
 	                      <a th:href="@{/news/addNewsJumping?(Pid=2)}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加新闻</a>
 	                    </li>
-	                     <li>
-	                     <div class="fex" th:each="category,categoryStart:${newsList}">
-							   <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}" th:text="${category.caName}" target="ie" class="out1"></a>
-						  </div>
-						  <div class="fex" th:each="category,categoryStart:${uploadList}">
-							   <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}" th:text="${category.caName}" target="ie" class="out1"></a>
-						  </div>
+	                     <li th:each="category,categoryStart:${newsList}" class="hr">
+							  <a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}" target="ie" class="out1"> <span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}"></span></a>
+						</li>
+						  <li th:each="category,categoryStart:${uploadList}" class="hr">
+							   <a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}" target="ie" class="out1"><span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}" ></span></a>
 	                    </li>
                     </ul>
 				</li>
 				<!-- 教育教研管理 -->
 				<li class="lione">
-					<a href="#" class="out"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;&nbsp;教育教研</a>
-                    <ul class="nav nav-second-level" style="display: none">
+					<a href="#" class="out"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;&nbsp;教育教研<span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <ul class="nav nav-second-level">
 	                    <li>
 	                      <a th:href="@{/news/addNewsJumping?(Pid=3)}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加教育教研</a>
 	                    </li>
-	                    <li>
-	                      <div class="fex" th:each="category,categoryStart:${educationList}">
-							   <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}" th:text="${category.caName}" target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span></a>
-						  </div>
+	                   	<li th:each="category,categoryStart:${educationList}">
+							   <a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}"  target="ie" class="out1"><span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}"></span></a>
 	                    </li>
                     </ul>
 				</li>
 				<!-- 概括类管理 --> 
 				<li class="lione">
-					<a href="#" class="out"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;&nbsp;概括管理</a>
+					<a href="#" class="out"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;&nbsp;概括管理<span class="glyphicon glyphicon-chevron-right"></span></a>
                     <ul class="nav nav-second-level" >
                     	<li>
 	                      <a th:href="@{/general/addGeneralJumping}" class="out1" target="ie"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加概括</a>
 	                    </li>
-	                    <li>
-	                      <div class="fex" th:each="category,categoryStart:${generalList}">
-								<span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/general/manageGeneral?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out1" ><span class="glyphicon glyphicon-list-alt"></span></a>
-						  </div>
-						  <div class="fex" th:each="category,categoryStart:${sceneryList}">
-								<span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/general/manageScenery}" th:text="${category.caName}" target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span></a>
-						  </div>
+	                    <li th:each="category,categoryStart:${generalList}">
+							<a th:href="@{/general/manageGeneral?(id=${category.caId})}" target="ie" class="out1" ><span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}"></span></a>
+						</li>
+						<li th:each="category,categoryStart:${sceneryList}">
+							<a th:href="@{/general/manageScenery}" target="ie" class="out1"><span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}"></span></a>
 	                    </li>
                     </ul>
 				</li>
 				<!-- 类别管理 -->
 				<li class="lione">
-					<a href="#" class="out"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;类别管理</a>
+					<a href="#" class="out"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;类别管理<span class="glyphicon glyphicon-chevron-right"></span></a>
                     <ul class="nav nav-second-level" >
 	                    <li>
-	                      <a th:href="@{/category/categoryjumping}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加类别</a>
+	                      <a th:href="@{/category/categoryjumping}" target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加类别</a>
 	                    </li>
 	                    <li>
-	                      <a th:href="@{/category/manageCategory}"  target="ie" class="out1"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;管理类别</a>
+	                      <a th:href="@{/category/manageCategory}" target="ie" class="out1"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;管理类别</a>
 	                    </li>
                     </ul>
 				</li>
 				<!-- 轮播图管理 -->
 				<li class="lione">
-					<a href="#" class="out"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;轮播图</a>
+					<a href="#" class="out"><span class="glyphicon glyphicon-tree-deciduous"></span>&nbsp;&nbsp;轮&nbsp;播&nbsp;&nbsp;图<span class="glyphicon glyphicon-chevron-right"></span></a>
                     <ul class="nav nav-second-level" >
 	                    <li>
-	                      <a th:href="@{/general/uploadPictureJumping}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加轮播图</a>
+	                      <a th:href="@{/general/uploadPictureJumping}" target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加轮播图</a>
 	                    </li>
 	                    <li>
-	                      <a th:href="@{/news/manageObject?(id=10)}"  target="ie" class="out1"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;轮播图管理</a>
+	                      <a th:href="@{/news/manageObject?(id=10)}" target="ie" class="out1"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;轮播图管理</a>
 	                    </li>
                     </ul>
 				</li>
 				<!-- 底部链接管理 -->
 				<li class="lione">
-					<a href="#" class="out"><span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp;底部链接</a>
-                    <ul class="nav nav-second-level" style="display: none">
+					<a href="#" class="out"><span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp;底部链接<span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <ul class="nav nav-second-level">
 	                    <li>
-	                      <a th:href="@{/link/linkJumping}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加链接</a>
+	                      <a th:href="@{/link/linkJumping}" target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加链接</a>
 	                    </li>
 	                    <li>
 	                      <a th:href="@{/link/manageLink}"  target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;管理链接</a>
@@ -192,22 +171,27 @@
                     </ul>
 				</li>
 				<li class="lione">
-					<a href="#" class="out"><span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp;其他功能</a>
-                    <ul class="nav nav-second-level" style="display: none">
+					<a href="#" class="out"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;其他功能<span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <ul class="nav nav-second-level">
 	                    <li>
-	                       <div class="fex">
-								<span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/others/managerTestTime}" target="ie" class="out1" >考试时间</a>
-								<span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/others/managerInformation}" target="ie" class="out1" >联系我们</a>
-						  </div>
+	                      <a th:href="@{/others/managerTestTime}" target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;考试时间</a>
+	                    </li>
+	                    <li>
+	                      <a th:href="@{/others/managerInformation}" target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;联系我们</a>
 	                    </li>
                     </ul>
 				</li>
  			</ul>
 		</div><!-- 左侧菜单 -->
-		<iframe src=""   id="ifr" name="ie"></iframe><!-- iframe标签 -->
+		<iframe src=""   id="ifr" name="ie">
+		
+		</iframe><!-- iframe标签 -->
 	</div>
 	</div>
 </body>
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/admin/index.js}"></script>
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
 <script>
 	$(document).ready(function(){
         $('.out').click(function(e) {
@@ -215,10 +199,10 @@
             e.preventDefault();
         })
         $('.out').hover(function(){
-   	 		$(this).css("backgroundColor", "white");
+   	 		$(this).css("backgroundColor", "#f9f9f9");
  		})
  		  $('.out1').hover(function(){
-   	 		$(this).css("backgroundColor", "#ebebeb");
+   	 		$(this).css("backgroundColor", "white");
  		})
     });
 </script>
