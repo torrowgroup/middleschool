@@ -256,7 +256,7 @@ body{
 .teacher1 img{
     width: 100%;
 }
-.teacher1>span{
+.teacher1 span{
     display: inline-block;
     position: absolute;
     width: 100%;

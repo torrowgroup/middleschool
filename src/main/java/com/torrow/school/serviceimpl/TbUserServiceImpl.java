@@ -37,11 +37,11 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 	}
 
 	@Override
-	public PageBean<TbUser> findPageSplit(List<TbCategory> categoryList,int currentPage,int pageSize) {
+	public PageBean<TbUser> findPageSplit(List<TbCategory> categoryList,int currentPage,String content, int pageSize) {
 		List<TbUser> userList = new ArrayList<TbUser>();//全部按照身份分开的用户
 		for(int i=0;i<categoryList.size();i++){
 			if(categoryList.get(i).getCaId()!=0){ //非空判断
-				userList.addAll(this.selectListByCaId(categoryList.get(i).getCaId()));				
+				userList.addAll(tbUserDao.selectListByCaId(categoryList.get(i).getCaId(),content));				
 			}
 		}
 		int totalCount = userList.size();// 得到总记录数
@@ -51,9 +51,9 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 		for (int j = (currentPage - 1) * pageSize; j < currentPage * pageSize && j < totalCount; j++) {
 			lists.add(userList.get(j));
 		}
-		PageBean<TbUser> pageBean = new PageBean<TbUser>(currentPage, pageSize, lists, num.intValue(),
-				totalCount);
-		return pageBean;
+		PageBean<TbUser> pageBean = new PageBean<TbUser>(currentPage, pageSize, lists, num.intValue(),totalCount);
+		log.info("----"+content+" "+totalCount+" "+pageBean);
+		return pageBean;	
 	}
 	
 	@Override
@@ -75,10 +75,6 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 	public int addUser(TbUser tbUser) {
 		return this.insertEntity(tbUser);
 	}
-//	@Override
-//	public TbUser selectByCaId(Integer caId) {
-//		return tbUserDao.selectByCaId(caId);
-//	}
 
 	@Override
 	public int deleteByCaId(Integer caId) {
@@ -102,10 +98,10 @@ public class TbUserServiceImpl extends BaseDao<TbUser> implements TbUserService 
 		return tbUserDao.selectByEmail(email);
 	}
 
-	@Override
-	public List<TbUser> selectListByCaId(Integer caId) {
-		return tbUserDao.selectListByCaId(caId);
-	}
+//	@Override
+//	public List<TbUser> selectListByCaId(Integer caId) {
+//		return tbUserDao.selectListByCaId(caId);
+//	}
 
 	@Override
 	public void updateDeleteUserByCaId(TbUser tbUser,int id) {

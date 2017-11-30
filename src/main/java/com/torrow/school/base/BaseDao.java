@@ -108,9 +108,7 @@ public class BaseDao<T> extends SqlSessionDaoSupport implements Serializable {
 
 	/**
 	 * 分页查询
-	 * 
-	 * @param currentPage
-	 *            当前页码
+	 * @param currentPage 当前页码
 	 * @return
 	 */
 	public final PageBean<T> pageCut(int currentPage, int pageSize) {

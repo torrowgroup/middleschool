@@ -1,6 +1,7 @@
 package com.torrow.school.controller.manager;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbUser;
+import com.torrow.school.util.PageBean;
 
 /**
  * @author 张金高
@@ -36,8 +38,18 @@ public class UserController extends BaseController {
 
 	// 查找所有用户，分页
 	@RequestMapping("manageUser")
-	public String manageUser(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
-		model.addAttribute("pagemsg", userService.findPage(currentPage,5));// 回显分页数据
+	public String manageUser(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, String inquiry, Model model) throws UnsupportedEncodingException {
+		if(inquiry!=null){
+			inquiry = new String(inquiry.getBytes("ISO-8859-1"), "UTF-8");
+		}
+		List<Integer> pidList = new ArrayList<Integer>();
+		pidList.add(3);//教育教研组
+		pidList.add(4);//用户
+		List<TbCategory> categoryList = categoryService.selectByPid(pidList);
+		model.addAttribute("categoryList",categoryList);
+		PageBean<TbUser> pageBean = userService.findPageSplit(categoryList,currentPage,inquiry, 6);
+		model.addAttribute("pagemsg", pageBean);
+		model.addAttribute("inquiry", inquiry);
 		return "admin/user/manageuser";
 	}
 
@@ -45,9 +57,8 @@ public class UserController extends BaseController {
 	@RequestMapping("toAddUser")
 	public String toAddUser(Model model) {
 		List<Integer> pidList = new ArrayList<Integer>();
-		pidList.add(3);// 将机构部3，管理员4，教师5放进集合中
+		pidList.add(3);// 将机构部3，用户4, 放进集合中
 		pidList.add(4);
-		pidList.add(5);
 		List<TbCategory> list = categoryService.selectByPid(pidList);
 		model.addAttribute("categoryList", list);
 		return "admin/user/adduser";
@@ -93,9 +104,8 @@ public class UserController extends BaseController {
 	public String toUpdateUser(int id,int page, Model model) {
 		TbUser tbUser = userService.selectById(id);
 		List<Integer> pidList = new ArrayList<Integer>();
-		pidList.add(3);// 将机构部3，管理员4，教师5放进集合中
+		pidList.add(3);// 将机构部3，用户4放进集合中
 		pidList.add(4);
-		pidList.add(5);
 		List<TbCategory> list = categoryService.selectByPid(pidList);// 得到所有身份记录
 		model.addAttribute("categoryList", list);
 		model.addAttribute("user", tbUser);
@@ -129,23 +139,31 @@ public class UserController extends BaseController {
 				model.addAttribute("message", "修改失败");
 			}
 		}
-		return this.manageUser(page, model);//返回管理用户当前页面
+		return this.manageUser(page,null, model);//返回管理用户当前页面
 	}
 	// 删除用户
 	@RequestMapping("deleteUser")
-	public String deleteUser(int id, int page,Model model) {
+	public String deleteUser(int id, int page,Model model) throws UnsupportedEncodingException {
 		TbUser tbUser = userService.selectById(id);
-		String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tbUser.getUsPicture();
-		File files = new File(path);
-		if (files.exists()) {
-			files.delete();
-		}
-		String msg = "删除失败";
-		if (userService.deleteById(id) == 1) {
-			msg = "删除成功";
+		String msg = "该用户已被删除";
+		if(tbUser!=null) {
+			TbUser admin = (TbUser)session.getAttribute("admin");
+			if(admin!=null&&admin.getUsId()==tbUser.getUsId()){
+				msg = "不能删除自己";
+			} else {
+				msg = "删除失败";
+				String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tbUser.getUsPicture();
+				File files = new File(path);
+				if (files.exists()) {
+					files.delete();
+				}
+				if (userService.deleteById(id) == 1) {
+					msg = "删除成功";
+				}
+			}
 		}
 		model.addAttribute("msg", msg);
-		return this.manageUser(page, model);
+		return this.manageUser(page,null, model);
 	}
 	
 	/**

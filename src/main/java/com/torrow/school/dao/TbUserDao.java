@@ -31,6 +31,7 @@ public interface TbUserDao {
 	//张金高
 	//根绝邮箱查询用户
 	TbUser selectByEmail(String email);
-	//根据caId得到list集合用户
-	List<TbUser> selectListByCaId(Integer caId);
+	//根据caId模糊得到list集合用户
+	List<TbUser> selectListByCaId(@Param("caId")Integer caId,@Param("content")String content);
+	
 }

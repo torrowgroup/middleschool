@@ -1,0 +1,94 @@
+.centerImg{
+    width: 100%;
+    background-color: #8050a0;
+}
+.centerImg img{
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+}
+.mainbox1{
+    margin-top: 20px;
+}
+.schollabout{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.schollabout .schollright{
+    max-width: 750px;
+    padding: 10px;
+    margin: 0 auto;
+    border: 1px solid rgb(220,222,224);
+    overflow: hidden;
+}
+.location{
+    font: 12px '微软雅黑';
+    color: #707070;
+    letter-spacing: 1px;
+}
+.location>a{
+    color: #707070;
+}
+.location>a:hover{
+    text-decoration: none;
+}
+.titlesc{
+    width: 100%;
+    font: 22px '微软雅黑';
+    text-align: center;
+    padding: 20px 0px;
+    letter-spacing: 5px;
+    color: rgb(48,64,91);
+}
+.schollcontent{
+    text-indent: 28px;
+}
+.schollcontent>p{
+    padding-bottom: 20px;
+}
+.schoolcenter{
+    list-style: none;
+}
+.schollleft>h3{
+    padding: 0 0 15px 20px;
+}
+.schoolcenter>li{
+    list-style: none;
+}
+.schoolcenter>li>a{
+    display: block;
+    padding: 15px 35px;
+    font-family: '微软雅黑';
+    color: #000;
+}
+
+.schoolcenter>li>a:hover{
+    text-decoration: none;
+    background-color: #d9fab4;
+}
+.active1{
+    background-color: #d9fab4;
+}
+.teacherphoto{
+    width: 400px;
+    margin:0 auto;
+}
+.teacherphoto img{
+    width:100%;
+    min-height: 300px;
+}
+.teacherin{
+    margin-top:30px;
+}
+.teacherin>h3{
+    margin-left: 5px;
+    font-size: 20px;
+    line-height: 25px;
+    font-weight: 600;
+}
+.teacherin>p{
+    text-indent:28px;
+    line-height: 25px;
+    font-size: 14px;
+}

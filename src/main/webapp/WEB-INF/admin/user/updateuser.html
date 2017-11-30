@@ -12,6 +12,8 @@
 	th:href="@{/static/css/admin/updateuser.css}">
 </head>
 <body>
+<div th:if="${user==null}">该用户已被删除</div>
+<div th:if="${user!=null}">
 	<form th:action="@{/user/updateUser}" onsubmit="modifyContent()"
 		method="post" enctype="multipart/form-data">
 		<input type="hidden" name="usId" th:value="${user.usId}" /> <input
@@ -105,7 +107,7 @@
 		<div id="achieveEditor"></div>
 		<button onClick='hide()'>完成</button>
 	</div>
-
+</div>
 	<script th:src="@{/static/js/jquery.min.js}"></script>
 	<script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
 	<script type="text/javascript"

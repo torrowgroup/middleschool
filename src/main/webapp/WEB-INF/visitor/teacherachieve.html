@@ -35,12 +35,12 @@
 	            <div class="tourcontent">
 	                <div class="teacherbox" th:each="user,userStart:${userList.lists}">
 	                 	<div class="teacherimg">
-	                        <a th:href="@{/visitorGN/newDetails}">
+	                        <a th:href="@{/visitorNEL/teacherDetail?(usId=${user.usId})}" title="点击查看教师详情">
 	                            <img th:src="@{/static/uploadimg/{picture}(picture=${user.usPicture})}" alt="加载中">
 	                        </a>
 	                    </div>
 	                    <div class="teacherabout">
-	                        <a href="#">
+	                        <a th:href="@{/visitorNEL/teacherDetail?(usId=${user.usId})}" title="点击查看教师详情">
 	                        	<h3 th:text="${user.usName}">姓名</h3>
 	                        	<p th:name="${user.usAchievements}" class="achieve">教师成果</p>
 	                        </a>
@@ -52,16 +52,16 @@
 	             <div class="paging1">
 	                <ul class="pagingUl">
 	                     <li th:if="${userList.currPage-1>0}">
-	                    	<a th:href="@{/visitorNEL/viewTeacherIntroActieve?(currentPage=${userList.currPage-1},ask=intro)}">&laquo;</a>
+	                    	<a th:href="@{/visitorNEL/viewTeacherIntroActieve?(currentPage=${userList.currPage-1},ask=achieve)}">&laquo;</a>
 	                    </li>
 	                     <li th:if="${userList.currPage-1==0}">
 	                     <a href="#">&laquo;</a>
 	                     </li>
 	                    <li th:each="i:${#numbers.sequence(1,userList.totalPage)}" th:if="${i > userList.currPage-3} and ${i < userList.currPage+3}" >
-	                    	<a th:href="@{/visitorNEL/viewTeacherIntroActieve?(currentPage=${i},ask=intro)}" th:text="${i}">#</a>
+	                    	<a th:href="@{/visitorNEL/viewTeacherIntroActieve?(currentPage=${i},ask=achieve)}" th:text="${i}">#</a>
 	                    </li>
 	                   <li th:if="${userList.currPage+1<=userList.totalPage}">
-	                    	<a th:href="@{/visitorNEL/viewTeacherIntroActieve?(currentPage=${userList.currPage+1},ask=intro)}">&raquo;</a>
+	                    	<a th:href="@{/visitorNEL/viewTeacherIntroActieve?(currentPage=${userList.currPage+1},ask=achieve)}">&raquo;</a>
 	                    </li>
 	                    <li th:if="${userList.currPage+1>userList.totalPage}">
 	                     	<a href="#">&raquo;</a>

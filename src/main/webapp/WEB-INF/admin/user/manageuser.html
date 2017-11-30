@@ -12,42 +12,46 @@
 </head>
 <body>
 	<div th:text="${message}"></div>
+	<form th:action="@{/user/manageUser}">
+		<input type="text" name="inquiry" th:value="${inquiry}" placeholder="姓名/邮箱/职位/电话" required="required" maxlength="20"/>
+		<input type="submit" value="提交" />
+	</form>
 	<div th:if="${pagemsg.totalCount}==0">没有任何用户信息！</div>
 	<div th:if="${pagemsg.totalCount}!=0">
-	<table class="table table-bordered table-hover table-condensed" style="width: 74%;" >
-		<tr>
-			<th class="aa"><span>姓名</span></th>
-			<th class="aa"><span>邮箱</span></th>
-			<th class="aa"><span>性别</span></th>
-			<th class="aa"><span>职位</span></th>
-			<th class="aa"><span>联系电话</span></th>
-			<th class="aa"><span>图片</span></th>
-			<th class="aa"><span>简介</span></th>
-			<th class="aa"><span>成就</span></th>
-			<th class="aa"><span>修改</span></th>
-			<th class="aa"><span>删除</span></th>
-		</tr>
-		<tr  th:each="user,userStart:${pagemsg.lists}">
-				<td class="aa" th:text="${user.usName}">${user.usName }</td>
-				<td class="aa" th:text="${user.usEmail}">${user.usEmail}</td>
-				<td class="aa" th:text="${user.usSex}">${user.usSex}</td>
-				<td class="aa" th:text="${user.caName}">${user.caName }</td>
-				<td class="aa" th:text="${user.usPhone}">${user.usPhone }</td>
-				<td class="bb" align="center"><img alt="无图片" th:src="@{/static/uploadimg/{picture}(picture=${user.usPicture})}" /></td>
-				<td class="aa"><div id="content2" onClick="show();"><button th:name="${user.usIntroduction}" onclick="show(this)">预览</button></div></td>
-				<td class="aa"><div id="content3" onClick="show();"><button th:name="${user.usAchievements}" onclick="show(this)">预览</button></div></td>
-				<td class="aa"><a th:href="@{/user/toUpdateUser?(id=${user.usId},page=${pagemsg.currPage})}"><span class="glyphicon glyphicon-edit"></span></a></td>
-				<td class="aa"><a th:href="@{/user/deleteUser?(id=${user.usId},page=${pagemsg.currPage})}"
-					onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash"></span></a></td>
-		</tr>
-	</table>
+		<table class="table table-bordered table-hover table-condensed" style="width: 74%;" >
+			<tr>
+				<th class="aa"><span>姓名</span></th>
+				<th class="aa"><span>邮箱</span></th>
+				<th class="aa"><span>性别</span></th>
+				<th class="aa"><span>职位</span></th>
+				<th class="aa"><span>联系电话</span></th>
+				<th class="aa"><span>图片</span></th>
+				<th class="aa"><span>简介</span></th>
+				<th class="aa"><span>成就</span></th>
+				<th class="aa"><span>修改</span></th>
+				<th class="aa"><span>删除</span></th>
+			</tr>
+			<tr  th:each="user,userStart:${pagemsg.lists}">
+					<td class="aa" th:text="${user.usName}">${user.usName }</td>
+					<td class="aa" th:text="${user.usEmail}">${user.usEmail}</td>
+					<td class="aa" th:text="${user.usSex}">${user.usSex}</td>
+					<td class="aa" th:text="${user.caName}">${user.caName }</td>
+					<td class="aa" th:text="${user.usPhone}">${user.usPhone }</td>
+					<td class="bb" align="center"><img alt="无图片" th:src="@{/static/uploadimg/{picture}(picture=${user.usPicture})}" /></td>
+					<td class="aa"><div id="content2" onClick="show();"><button th:name="${user.usIntroduction}" onclick="show(this)">预览</button></div></td>
+					<td class="aa"><div id="content3" onClick="show();"><button th:name="${user.usAchievements}" onclick="show(this)">预览</button></div></td>
+					<td class="aa"><a th:href="@{/user/toUpdateUser?(id=${user.usId},page=${pagemsg.currPage})}"><span class="glyphicon glyphicon-edit"></span></a></td>
+					<td class="aa"><a th:href="@{/user/deleteUser?(id=${user.usId},page=${pagemsg.currPage})}"
+						onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash"></span></a></td>
+			</tr>
+		</table>
 	</div>
 		<ul class="pagination">  
 			<span th:if="${pagemsg.currPage != 1}"> 
-					<a th:href="@{/user/manageUser?(currentPage=1)}">首页</a>
+					<a th:href="@{/user/manageUser?(currentPage=1,inquiry=${inquiry})}">首页</a>
 			</span>
 			<span th:if="${pagemsg.currPage != 1}">
-					<a th:href="@{/user/manageUser?(currentPage=${pagemsg.currPage-1})}">上一页</a>
+					<a th:href="@{/user/manageUser?(currentPage=${pagemsg.currPage-1},inquiry=${inquiry})}">上一页</a>
 			</span>
 			<span th:if="${pagemsg.currPage == 1}">
 				<a href="#">首页</a>
@@ -57,10 +61,10 @@
 			</span>
 			 <span th:each="i:${#numbers.sequence(1,pagemsg.totalPage)}"> 
 			 	<a th:if="${i > pagemsg.currPage-3} and ${i < pagemsg.currPage+3}"
-					th:href="@{/user/manageUser?(currentPage=${i})}" th:text="${i}">#</a>
+					th:href="@{/user/manageUser?(currentPage=${i},inquiry=${inquiry})}" th:text="${i}">#</a>
 			</span>
 			<span th:if="${pagemsg.currPage < pagemsg.totalPage}">
-				 <a th:href="@{/user/manageUser?(currentPage=${pagemsg.currPage+1})}">下一页</a>
+				 <a th:href="@{/user/manageUser?(currentPage=${pagemsg.currPage+1},inquiry=${inquiry})}">下一页</a>
 			</span> 
 			<span th:if="${pagemsg.currPage >= pagemsg.totalPage}">
 				<a href="#">下一页</a>
