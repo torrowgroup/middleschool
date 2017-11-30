@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Home</title>
+</head>
+<body>
+<table>
+	<tr th:if="${phone!=null}"> 
+		<form th:action="@{/others/updateInformation}" method="post">
+			<input type="hidden" name="reId" th:value="${phone.reId}"/>
+			<td th:text="${phone.reTitle}">电话</td>
+			<td><input type="text" name="reContent" th:value="${phone.reContent}" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" maxlength="11"/></td>
+			<td>
+				<input type="submit" value="修改"/>
+			</td>
+		</form>
+	</tr>
+	<tr th:if="${email!=null}">
+		<form th:action="@{/others/updateInformation}" method="post">
+				<input type="hidden" name="reId" th:value="${email.reId}"/>
+			<td th:text="${email.reTitle}">邮箱</td>
+			<td><input type="email" name="reContent" th:value="${email.reContent}" maxlength="20"/></td>
+			<td>
+				<input type="submit" value="修改"/>
+			</td>
+		</form>
+	</tr>
+	<tr th:if="${address!=null}">
+		<form th:action="@{/others/updateInformation}" method="post">
+			<input type="hidden" name="reId" th:value="${address.reId}"/>
+			<td th:text="${address.reTitle}">地址</td>
+			<td><input type="text" name="reContent" th:value="${address.reContent}" maxlength="25"/></td>
+			<td>
+				<input type="submit" value="修改"/>
+			</td>
+		</form>
+	</tr>
+</table>
+</body>
+</html>

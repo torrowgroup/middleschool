@@ -19,9 +19,10 @@
             <img th:src="@{/static/images/visitor/logo.jpg}" alt="加载中">
         </div>
         <div class="headerRight">
-            <p>距离中招200天</p>
-            <p>距离期中/期末100天</p>
-            <p class="hidden-xs">今天2017年10月20号</p>
+            <p th:if="${midExam != '--'}">距离期中<span th:text="${midExam}"></span>天</p>
+            <p th:if="${finalExam != '--'}">距离期末<span th:text="${finalExam}"></span>天</p>
+            <p th:if="${catchingExam != '--'}">距离中招<span th:text="${catchingExam}"></span>天</p>
+            <p class="hidden-xs">今天<span id="todayTime">--年--月--日</span></p>
         </div>
     </div>
     <!--导航条-->
@@ -74,7 +75,7 @@
                 <a th:href="@{http://jingao.site:8080/bbs}" target="_blank">校园论坛</a>
             </li>
             <li class="navLi">
-                <a href="#">资源下载</a>
+                <a th:href="@{/login}" target="_blank">资源下载</a>
             </li>
         </ul>
     </div>
@@ -114,19 +115,19 @@
                     <h3>
                     	<a th:href="@{/visitorGN/viewGeneral?(gId= ${schoolGeneralIndex.caId})}">学校概况</a>
                     </h3>
-					<p> <span>......</span><a href="" id="schoolGeneralIndex">学校简介</span></a></p>                    
+					<p><a href="" id="schoolGeneralIndex">学校简介</a></p>                    
                 </div>
                 <div class="col-sm-3 col-xs-6 mainLeft">
                     <h3><a th:href="@{/visitorGN/viewGeneral?(gId= ${schoolHistory.caId})}">建校历史</a></h3>
-                    <p> <span>......</span><a href="" id="schoolHistory">建校历史</a></p>
+                    <p><a href="" id="schoolHistory">建校历史</a></p>
                 </div>
                 <div class="col-sm-3 col-xs-6 mainLeft">
                     <h3><a th:href="@{/visitorGN/viewGeneral?(gId= ${schoolHonorIndex.caId})}">学校荣誉</a></h3>
-                    <p> <span>......</span><a href="" id="schoolHonorIndex">学校荣誉</a></p>
+                    <p><a href="" id="schoolHonorIndex">学校荣誉</a></p>
                 </div>
                 <div class="col-sm-3 col-xs-6 mainLeft" style="border: none">
                     <h3><a th:href="@{/visitorGN/viewGeneral?(gId= ${educationAchieveIndex.caId})}">教学成果</a></h3>
-                    <p> <span>......</span><a href="" id="educationAchieveIndex">教学成果</a></p>
+                    <p><a href="" id="educationAchieveIndex">教学成果</a></p>
                 </div>
             </div>
             <div class="row">
@@ -145,11 +146,11 @@
                         </div>
                         <div class="col-sm-6 col-xs-12">
                             <div class="mainBheader">
-                                <a href="#">资源下载 <span class="pull-right">&gt; 更多</span></a>
+                                <a th:href="@{/login}">资源下载 <span class="pull-right">&gt; 更多</span></a>
                             </div>
                             <ul class="mainBbody">
                                 <li th:each="resource,resourceStart:${resourcesDown}">
-                                    <a href="#" th:text="${resource.reTitle}">资源下载</a>
+                                    <a th:href="@{/login}" th:text="${resource.reTitle}">资源下载</a>
                                     <span th:text="${resource.reIssuingdate}">上传时间</span>
                                 </li>
                             </ul>
@@ -165,11 +166,9 @@
                         <span th:text="${famousTeacherOne.usName}">名师</span>
                     </div>
                     <div class="teacher2">
-                    	<a href="#">
 	                        <img th:src="@{/static/uploadimg/{picture}(picture=${famousTeacherTwo.usPicture})}" alt="没有上传图片">
 	                        <span th:text="${famousTeacherTwo.usName}">名师</span>
-	                    </a>
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -194,40 +193,18 @@
             </div>
         </div>
     </div>
-    <div class="footer">
-        <div class="container footerBox">
-            <div class="row">
-                <div class="col-sm-3 col-xs-6 footerBox1 hidden-xs"><img th:src="@{/static/images/visitor/bottomlogo.png}" alt=""></div>
-                <div class="col-sm-3 col-xs-6 footerBox1">
-                    <h3>联系我们:</h3>
-                    <p>电话：56565656</p>
-                    <p>邮箱：56789@789685</p>
-                    <p>地址：郑州市中原区二二一中学</p>
-                </div>
-                <div class="col-sm-3 col-xs-6 footerBox1">
-                    <h3>友情链接:</h3>
-                    <p><a href="">郑州市外国语中学</a></p>
-                    <p><a href="">郑州一中</a></p>
-                    <p><a href="">郑州大学附属中学</a></p>
-                    <p><a href="">港区教育单位</a></p>
-                </div>
-                <div class="col-sm-3 col-xs-12 footerBox1">
-                    <h3><a href="">留言板进入留言</a></h3>
-                    <p>&nbsp;</p>
-                    <p>版权所有@郑州二二一中学</p>
-                    <p>备案信息：<a href="">豫ICP备1111111号</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
+<div th:replace="headerfooter::footer"></div>
 <script th:src="@{/static/js/jquery.min.js}"></script>
 <script th:inline="javascript">
+	var today = new Date();	//获得今天时间
+	var todayTime = today.getFullYear()+"年"+today.getMonth()+"月"+today.getDate()+"日"; 
+	$('#todayTime').text(todayTime);
 	var schoolGeneralIndex = /*[[${schoolGeneralIndex}]]*/ null;//学校简介
 	var schoolHistory = /*[[${schoolHistory}]]*/ null;//建校历史
 	var schoolHonorIndex = /*[[${schoolHonorIndex}]]*/ null;//学校荣誉
 	var educationAchieveIndex = /*[[${educationAchieveIndex}]]*/ null;//教学成果
 	if(schoolGeneralIndex!=null){
-// 		$('#schoolGeneralIndex').html(schoolGeneralIndex.reContent)	
+		$('#schoolGeneralIndex').html(schoolGeneralIndex.reContent)	
 	}
 	if(schoolHistory!=null){
 		$('#schoolHistory').html(schoolHistory.reContent);

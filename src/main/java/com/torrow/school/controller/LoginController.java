@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +21,6 @@ import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbUser;
 import com.torrow.school.util.Email;
-
 import sun.misc.BASE64Encoder;
 /**
  * @author 张金高
@@ -78,19 +78,21 @@ public class LoginController extends BaseController {
 	
 	/**
 	 * @return web-app下html用于跳转到游客首页界面
+	 * @throws ParseException 
 	 */
 	@RequestMapping("index")
-	public ModelAndView index(Model model){
+	public ModelAndView index(Model model) throws ParseException{
 		categoryService.getCategory(0,model);
 		List<TbCategory> categoryList = categoryService.selectAll();
 		resourceService.getResource(categoryList,model);//得到新闻，公告等,追加资源下载
+		resourceService.getTimeInfor(model);//得到考试和联系信息
 		List<TbUser> userAll = userService.selectAll();//首页名师推荐
 		if(userAll.size()>0){
 			model.addAttribute("famousTeacherOne", userService.selectAll().get(0));
 		}
 		if(userAll.size()>1){
 			model.addAttribute("famousTeacherTwo", userService.selectAll().get(1));
-		}
+		}	
 		return new ModelAndView("visitor/index");
 	}
 	

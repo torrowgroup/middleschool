@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>查看考试时间</title>
+</head>
+<body>
+<div th:text="${message}"></div>
+<div th:if="${midExam==null && finallExam==null && catchingExam==null}">
+	没有相关内容
+</div>
+<div th:if="${midExam!=null || finallExam!=null || catchingExam!=null}">
+	<table>
+		<tr>
+			<td>考试名称</td>
+			<td>考试时间</td>
+			<td>修改</td>
+		</tr>
+		<tr th:if="${midExam!=null}"> 
+			<td th:text="${midExam.reTitle}">考试名称</td>
+			<td th:text="${midExam.reContent}">考试时间</td>
+			<td><a th:href="@{/others/toUpdateTestTime?(reId=${midExam.reId})}">修改</a></td>
+		</tr>
+		<tr th:if="${finalExam!=null}">
+			<td th:text="${finalExam.reTitle}">考试名称</td>
+			<td th:text="${finalExam.reContent}">考试时间</td>
+			<td><a th:href="@{/others/toUpdateTestTime?(reId=${finalExam.reId})}">修改</a></td>
+		</tr>
+		<tr th:if="${catchingExam!=null}">
+			<td th:text="${catchingExam.reTitle}">考试名称</td>
+			<td th:text="${catchingExam.reContent}">考试时间</td>
+			<td><a th:href="@{/others/toUpdateTestTime?(reId=${catchingExam.reId})}">修改</a></td>
+		</tr>
+	</table>
+</div>
+</body>
+</html>

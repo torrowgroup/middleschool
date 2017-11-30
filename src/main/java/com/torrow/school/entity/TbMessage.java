@@ -12,8 +12,6 @@ public class TbMessage implements Serializable {
 
     private String meTitle;	//留言标题
 
-    private String mePicture;	//上传图片地址
-
     private String meHide;	//是否匿名，匿名则“匿名”，否则内容为留言人填写的个人信息
 
     private String meIssuingdate;	//留言日期
@@ -24,12 +22,24 @@ public class TbMessage implements Serializable {
 
     private String meReply;		//回复内容
     
+    private String mePicture;	//上传图片地址,不用了，无用字段
+    
     private String spare;	//备用
 
 	public TbMessage() {
 		super();
 	}
-
+	//写入留言
+	public TbMessage( String meTitle, String meHide, String meIssuingdate, String meStatus,
+			String meContent) {
+		this.meTitle = meTitle;
+		this.meHide = meHide;
+		this.meIssuingdate = meIssuingdate;
+		this.meStatus = meStatus;
+		this.meContent = meContent;
+	}
+	
+	
 	public TbMessage( String meTitle, String mePicture, String meHide, String meIssuingdate, String meStatus,
 			String meContent, String meReply, String spare) {
 		super();

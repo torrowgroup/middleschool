@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Home</title>
+</head>
+<body>
+<div th:text="${message}"></div>
+<div  th:if="${updateTime==null}">此数据已被删除</div>
+<div  th:if="${updateTime!=null}">
+	<form th:action="@{/others/updateTestTime}" method="post">
+		<input type="hidden" name="reId" th:value="${updateTime.reId}"/>
+		<table>
+			<tr>
+				<td>考试名称</td>
+				<td th:text="${updateTime.reTitle}">考试名称</td>
+			</tr>
+			<tr>
+				<td>考试时间</td>
+				<td>
+ 					<input type="date" name="reContent" th:value="${updateTime.reContent}"  />
+				</td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="修改"/></td>
+			</tr>
+		</table>
+	</form>
+</div>
+</body>
+</html>

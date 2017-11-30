@@ -19,7 +19,7 @@
   </delete>
   
   <insert id="insert" parameterType="com.torrow.school.entity.TbMessage">
-    insert into tb_message (d, me_title, me_picture, 
+    insert into tb_message ( me_title, me_picture, 
       me_hide, me_issuingdate, me_status, 
       spare, me_content, me_reply
       )

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>郑州一二二中学-留言</title>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/static/css/visitor/style.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/static/css/visitor/aboutschool.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/static/css/visitor/leaveword.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/static/css/visitor/schoolnews.css}" type="text/css">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/dist/css/wangEditor.min.css}">
+</head>
+<body>
+<div th:replace="headerfooter :: header"></div> 
+<div class="centerImg">
+    <img th:src="@{/static/images/visitor/news1.jpg}" alt="">
+</div>
+
+<div class="mainbox1">
+        <div class="schollright">
+            <h3 class="titlesc">留言板</h3>
+            <form th:action="@{/visitorNEL/leaveWord}" method="post" class="basic-grey">
+                <h1>欢迎您
+                    <span>请留下您宝贵的见解：</span>
+                    <span class="isSuccess" th:text="${message}">提交成功</span>
+                </h1>
+                <label>
+                    <span>您的姓名 :</span>
+                    <input id="name" type="text" name="name" placeholder="您的姓名" />
+                </label>
+                <label>
+                    <span>留言标题 :</span>
+                    <input id="email" type="text" name="email" placeholder="请填写标题" />
+                </label>
+                <label>
+                    <span>留言内容 :</span>
+                    <div id="message">
+						<textarea name="meReply" style="display: none;"></textarea>
+						<div id="editor"></div>
+					</div>
+				</label>	
+                <label>
+                    <span>&nbsp;</span>
+                    <input type="submit" class="button" value="提交" />
+                </label>
+            </form>
+        </div>
+    </div>
+<div class="clearfix"></div>
+<div th:replace="headerfooter::footer"></div>
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script>
+	<script th:inline="javascript">
+			var E = window.wangEditor
+			var editor = new E('editor')
+			editor.config.uploadImgUrl = 'uploadImg'
+			editor.config.uploadImgFileName = 'file'
+			editor.create()
+	</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Home</title>
+</head>
+<body>
+
+<div th:text="${message}"></div>
+<div th:if="${phone==null && email==null && address==null}">
+	没有联系方式
+</div>
+<div th:if="${phone!=null || email!=null || address!=null}">
+	<table>
+		<tr>
+			<td>联系方式</td>
+			<td>内容</td>
+		</tr>
+		<tr th:if="${phone!=null}"> 
+			<td th:text="${phone.reTitle}">电话</td>
+			<td th:text="${phone.reContent}">内容</td>
+		</tr>
+		<tr th:if="${email!=null}">
+			<td th:text="${email.reTitle}">邮箱</td>
+			<td th:text="${email.reContent}">内容</td>
+		</tr>
+		<tr th:if="${address!=null}">
+			<td th:text="${address.reTitle}">地址</td>
+			<td th:text="${address.reContent}">内容</td>
+		</tr>
+	</table>
+	<a th:href="@{/others/toUpdateInformation}">修改</a>
+</div>
+</body>
+</html>
