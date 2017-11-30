@@ -41,9 +41,9 @@ public class EducationController extends BaseController {
 	 * @return 教研组的上传
 	 */
 	@RequestMapping("addNewsJumping")
-	public String addNewsJumping(Model model,int Pid) {
-		TbUser tbUser=(TbUser)session.getAttribute("manager");
-		List<TbCategory> list=categoryService.queryByPid(Pid);
+	public String addNewsJumping(Model model) {
+		TbUser tbUser=(TbUser)session.getAttribute("education");
+		List<TbCategory> list=categoryService.selectAll();
 		boolean enough=false;
 		if(!list.isEmpty()) {
 			for(TbCategory item:list) {
@@ -100,7 +100,7 @@ public class EducationController extends BaseController {
 			if (en.getCaId() == tbResource.getCaId()) {
 				if (file.getOriginalFilename().equals(en.getReContent())) {
 					model.addAttribute("message", "该文件已存在,上传失败");
-						return this.addNewsJumping(model, 3);
+						return this.addNewsJumping(model);
 				}
 			}
 		}
@@ -112,7 +112,7 @@ public class EducationController extends BaseController {
 		TbResource tb = new TbResource(item.getCaId(), Date, item.getCaName(), file.getOriginalFilename(), reContent);
 		resourceService.insert(tb);
 		model.addAttribute("message", "添加成功");
-		return this.addNewsJumping(model, 3);
+		return this.addNewsJumping(model);
 	}
 
 	

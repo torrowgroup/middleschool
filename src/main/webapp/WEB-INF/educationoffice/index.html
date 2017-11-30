@@ -7,14 +7,14 @@
 </head>
 <body>
 
-	<a th:href="@{/education/addNewsJumping?(Pid=3)}" target="ie"
+	<a th:href="@{/education/addNewsJumping}" target="ie"
 		class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;教育教研上传</a>
 	<div th:each="category,categoryStart:${educationList}">
 		<a th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"
 			th:text="${category.caName}"></a>
 	</div>
 	<hr>
-	<a th:href="@{/education/addNewsJumping?(Pid=12)}" class="out2"><span
+	<a th:href="@{/education/addNewsJumping}" class="out2"><span
 		class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校园文学的上传</a>
 	<div th:each="category,categoryStart:${literatureList}">
 		<a th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"

@@ -6,7 +6,7 @@
   <title>home</title>
 </head>
 <body>
-<a th:href="@{/political/uploadJumping?(Pid=9)}" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传（学生管理和教师成长）</a>
+<a th:href="@{/political/uploadJumping}" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上传（学生管理和教师成长）</a>
 <div th:each="category,categoryStart:${uploadList}">
 	<a th:href="@{/political/manageEducationUpload?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out2"><span class="glyphicon glyphicon-list-alt"></span></a>
 </div>
