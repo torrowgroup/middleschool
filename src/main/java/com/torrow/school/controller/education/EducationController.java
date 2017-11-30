@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
+import com.torrow.school.entity.TbUser;
 
 /**
  * @author 安李杰
@@ -41,7 +42,21 @@ public class EducationController extends BaseController {
 	 */
 	@RequestMapping("addNewsJumping")
 	public String addNewsJumping(Model model,int Pid) {
-		categoryService.addBySelectPid(model,Pid);
+		TbUser tbUser=(TbUser)session.getAttribute("manager");
+		List<TbCategory> list=categoryService.queryByPid(Pid);
+		boolean enough=false;
+		if(!list.isEmpty()) {
+			for(TbCategory item:list) {
+				if(tbUser.getCaName().equals(item.getCaName())) {
+					model.addAttribute("TbCategory",item);
+					enough=true;
+				}
+			}
+		}
+		if(enough==false) {
+			model.addAttribute("message","请先去类别类中添加相应类别");
+			return "educationoffice/empty";
+		}
 		return "educationoffice/uploadfile";
 	}
 
@@ -52,13 +67,21 @@ public class EducationController extends BaseController {
 	 */
 	@RequestMapping("manageEducationUpload")
 	public String manageUpload(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,
-			Integer id) {
+			TbCategory tbCategory) {
 		TbCategory record = new TbCategory();
-		// record.setCaPid(2);
-		record.setCaId(id);
-		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页数据
+		//这步是一般查询
+		record.setCaId(tbCategory.getCaId());
+		//这步是为了模糊查询
+		if(null!=tbCategory.getCaName()) {
+			record.setCaName(tbCategory.getCaName());
+		}
+		//携带的参数包括分页依据和查询条件还有显示条数
+		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页10条数据
 		session.setAttribute("currentPage", currentPage);
-		model.addAttribute("zid", id);
+		session.setAttribute("caName", tbCategory.getCaName());
+		//session和model是不同的,接下来两个model是为了把数据返回到前台,以便分页进行使用
+		model.addAttribute("caName", tbCategory.getCaName());
+		model.addAttribute("zid", tbCategory.getCaId());
 		return "educationoffice/manageupload";
 	}
 	

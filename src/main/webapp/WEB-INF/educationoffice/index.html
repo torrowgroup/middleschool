@@ -10,19 +10,19 @@
 	<a th:href="@{/education/addNewsJumping?(Pid=3)}" target="ie"
 		class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;教育教研上传</a>
 	<div th:each="category,categoryStart:${educationList}">
-		<a th:href="@{/education/manageEducationUpload?(id=${category.caId})}"
+		<a th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"
 			th:text="${category.caName}"></a>
 	</div>
 	<hr>
 	<a th:href="@{/education/addNewsJumping?(Pid=12)}" class="out2"><span
 		class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校园文学的上传</a>
 	<div th:each="category,categoryStart:${literatureList}">
-		<a th:href="@{/education/manageEducationUpload?(id=${category.caId})}"
+		<a th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"
 			th:text="${category.caName}" target="ie" class="out2"><span
 			class="glyphicon glyphicon-list-alt"></span></a>
 	</div>
 	<div th:each="category,categoryStart:${downloadList}">
-		<a th:href="@{/education/manageEducationUpload?(id=${category.caId})}"
+		<a th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"
 			th:text="${category.caName}" target="ie" class="out2"><span
 			class="glyphicon glyphicon-list-alt"></span></a>
 	</div>

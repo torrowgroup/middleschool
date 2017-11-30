@@ -60,7 +60,7 @@
 				<div id="next">
 					<ul>
 						<li><a th:href="@{/news/addNewsJumping?(Pid=12)}" target="ie">添加校园文学</a></li>
-						<li style="margin-top:-50px"><div class="word" th:each="category,categoryStart:${literatureList}"><a th:href="@{/news/manageUpload?(id=${category.caId})}" th:text="${category.caName}" target="ie"></a></div></li>
+						<li style="margin-top:-50px"><div class="word" th:each="category,categoryStart:${literatureList}"><a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}" th:text="${category.caName}" target="ie"></a></div></li>
 					</ul>
 				</div>
 			</li>
@@ -120,7 +120,7 @@
 							   <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}" th:text="${category.caName}" target="ie" class="out1"></a>
 						  </div>
 						  <div class="fex" th:each="category,categoryStart:${uploadList}">
-							   <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/news/manageUpload?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out1"></a>
+							   <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}" th:text="${category.caName}" target="ie" class="out1"></a>
 						  </div>
 	                    </li>
                     </ul>
@@ -134,7 +134,7 @@
 	                    </li>
 	                    <li>
 	                      <div class="fex" th:each="category,categoryStart:${educationList}">
-							   <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/news/manageUpload?(id=${category.caId})}" th:text="${category.caName}" target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span></a>
+							   <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;<a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}" th:text="${category.caName}" target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span></a>
 						  </div>
 	                    </li>
                     </ul>

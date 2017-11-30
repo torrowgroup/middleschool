@@ -68,7 +68,13 @@ public class SchoolNewsController extends BaseController {
 			model.addAttribute("message","这个文件不存在");
 			return "admin/empty";
 		}
-		return this.manageUpload(currentPage, model, tb.getCaId());
+		TbCategory record = new TbCategory();
+		record.setCaId(tb.getCaId());
+		if(session.getAttribute("caName")!=null) {
+			String caName =(String)session.getAttribute("caName");
+			record.setCaName(caName);
+		}
+		return this.manageSchoolNews(currentPage, model, record);
 	}
 
 	/**
@@ -118,38 +124,59 @@ public class SchoolNewsController extends BaseController {
 	/**
 	 * @param currentPage
 	 * @param model
-	 * @return 校园新闻类/学校公告的管理
+	 * @return 校园新闻类/上传/教育教研的管理
+	 * 这个会发生中文乱码问题写过滤器时会处理
+	 * String userName = new String(name.getByte("ISO-8859-1"),"utf-8");
 	 */
 	@RequestMapping("manageSchoolNews")
 	public String manageSchoolNews(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
 			Model model, TbCategory tbCategory) {
+		log.info("----------"+tbCategory);
 		TbCategory record = new TbCategory();
+		//这步是一般查询
 		record.setCaId(tbCategory.getCaId());
+		//这步是为了模糊查询
 		if(null!=tbCategory.getCaName()) {
 			record.setCaName(tbCategory.getCaName());
 		}
+		//携带的参数包括分页依据和查询条件还有显示条数
 		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页10条数据
 		session.setAttribute("currentPage", currentPage);
 		session.setAttribute("caName", tbCategory.getCaName());
+		//session和model是不同的,接下来两个model是为了把数据返回到前台,以便分页进行使用
+		model.addAttribute("caName", tbCategory.getCaName());
 		model.addAttribute("zid", tbCategory.getCaId());
+		TbCategory t = categoryService.selectByPrimaryKey(tbCategory.getCaId());
+		if(t.getCaPid()==3||t.getCaPid()==9) {
+			return "admin/schoolnews/manageupload";
+		}
 		return "admin/schoolnews/manageschoolnews";
 	}
 
-	/**
-	 * @param currentPage
-	 * @param model
-	 * @return 上传类的管理
-	 */
-	@RequestMapping("manageUpload")
-	public String manageUpload(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,
-			Integer id) {
-		TbCategory record = new TbCategory();
-		record.setCaId(id);
-		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页数据
-		session.setAttribute("currentPage", currentPage);
-		model.addAttribute("zid", id);
-		return "admin/schoolnews/manageupload";
-	}
+//	/**
+//	 * @param currentPage
+//	 * @param model
+//	 * @return 上传类的管理
+//	 */
+//	@RequestMapping("manageUpload")
+//	public String manageUpload(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,
+//			TbCategory tbCategory) {
+//		TbCategory record = new TbCategory();
+//		//这步是一般查询
+//		record.setCaId(tbCategory.getCaId());
+//		//这步是为了模糊查询
+//		if(null!=tbCategory.getCaName()) {
+//			record.setCaName(tbCategory.getCaName());
+//		}
+//		//携带的参数包括分页依据和查询条件还有显示条数
+//		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页10条数据
+//		session.setAttribute("currentPage", currentPage);
+//		session.setAttribute("caName", tbCategory.getCaName());
+//		//session和model是不同的,接下来两个model是为了把数据返回到前台,以便分页进行使用
+//		model.addAttribute("caName", tbCategory.getCaName());
+//		model.addAttribute("zid", tbCategory.getCaId());
+//		return "admin/schoolnews/manageupload";
+//	}
 
 	/**
 	 * @param id
@@ -167,6 +194,7 @@ public class SchoolNewsController extends BaseController {
 		}
 		TbCategory tbCategory = categoryService.selectByPrimaryKey(tb.getCaId());
 		if (tbCategory.getCaPid() == 6) {
+			//这步是为了在数据没时提示语句
 			model.addAttribute("sign", 1);
 		}
 		return "admin/schoolnews/managenews";
@@ -219,6 +247,7 @@ public class SchoolNewsController extends BaseController {
 			model.addAttribute("message", "这条新闻不存在");
 			return "admin/empty";
 		}
+		//这是为了返回那条信息的分页位置
 		TbCategory record = new TbCategory();
 		record.setCaId(tb.getCaId());
 		if(session.getAttribute("caName")!=null) {
@@ -230,7 +259,7 @@ public class SchoolNewsController extends BaseController {
 
 	/**
 	 * @param model
-	 * @return 管理资源下载的管理
+	 * @return 管理资源下载和通知公告和图片的的管理
 	 */
 	@RequestMapping("manageObject")
 	public String manageObject(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
@@ -319,6 +348,7 @@ public class SchoolNewsController extends BaseController {
 	 */
 	@RequestMapping("/down")
 	public void down(HttpServletRequest request, HttpServletResponse response, int id) throws Exception {
+		//根据资源类的对应ID在数据库中获取相应数据，从而找到服务器的文件
 		resourceService.down(request, response, id);
 	}
 }

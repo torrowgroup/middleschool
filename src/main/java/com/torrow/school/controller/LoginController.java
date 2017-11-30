@@ -45,18 +45,21 @@ public class LoginController extends BaseController {
 		TbUser tbUser=userService.login(usEmail,usPassword);
 		if(null!=tbUser) {
 			model.addAttribute("msg", "登录成功");
-			session.setAttribute("manager","sdsada");
 			//这个方法是为了获得首页的显示数据
 			categoryService.findAllCategory(model);
 			TbCategory tbCategory = categoryService.selectByPrimaryKey(tbUser.getCaId());
 			//进入机构部的管理页面
 			if(tbCategory.getCaPid()==3) {
+				session.setAttribute("education",tbUser);
 				return "educationoffice/index";
 			}else if(tbUser.getCaName().equals("政教处")) {
+				session.setAttribute("political",tbUser);
 				return "politicaleducation/index";
 			}else if(tbUser.getCaName().equals("教师")) {
+				session.setAttribute("teacher",tbUser);
 				return "teacher/index";
 			}
+			session.setAttribute("admin",tbUser);
 			return "admin/index";
 		}else {
 			model.addAttribute("msg", "用户名或密码错误");
@@ -205,7 +208,6 @@ public class LoginController extends BaseController {
 	@RequestMapping("logout")
 	public String logout() {
 		session.invalidate();
-		log.info("注销操作");
 		return "index";
 	}
 }

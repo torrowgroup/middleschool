@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
+import com.torrow.school.entity.TbUser;
 
 /**
  * @author 安李杰
@@ -41,7 +42,21 @@ public class PoliticalEducationController extends BaseController{
 	 */
 	@RequestMapping("uploadJumping")
 	public String uploadJumping(Model model,int Pid) {
-		categoryService.addBySelectPid(model,Pid);
+		TbUser tbUser=(TbUser)session.getAttribute("manager");
+		List<TbCategory> list=categoryService.queryByPid(Pid);
+		boolean enough=false;
+		if(!list.isEmpty()) {
+			for(TbCategory item:list) {
+				if(tbUser.getCaName().equals(item.getCaName())) {
+					model.addAttribute("TbCategory",item);
+					enough=true;
+				}
+			}
+		}
+		if(enough==false) {
+			model.addAttribute("message","请先去类别类中添加相应类别");
+			return "politicaleducation/empty";
+		}
 		return "politicaleducation/uploadfile";
 	}
 	
