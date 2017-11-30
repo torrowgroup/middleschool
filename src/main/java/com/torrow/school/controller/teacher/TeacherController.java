@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
+import com.torrow.school.entity.TbUser;
 
 @Controller
 @RequestMapping("/teacher")
@@ -30,8 +31,22 @@ public class TeacherController extends BaseController{
 	 * @return 教师上传的上传
 	 */
 	@RequestMapping("uploadJumping")
-	public String uploadJumping(Model model,int Pid) {
-		categoryService.addBySelectPid(model,Pid);
+	public String uploadJumping(Model model) {
+		TbUser tbUser=(TbUser)session.getAttribute("teacher");
+		List<TbCategory> list=categoryService.selectAll();
+		boolean enough=false;
+		if(!list.isEmpty()) {
+			for(TbCategory item:list) {
+				if(tbUser.getCaName().equals(item.getCaName())) {
+					model.addAttribute("TbCategory",item);
+					enough=true;
+				}
+			}
+		}
+		if(enough==false) {
+			model.addAttribute("message","请先去类别类中添加相应类别");
+			return "teacher/empty";
+		}
 		return "teacher/uploadfile";
 	}
 
@@ -50,7 +65,7 @@ public class TeacherController extends BaseController{
 			if (en.getCaId() == tbResource.getCaId()) {
 				if (file.getOriginalFilename().equals(en.getReContent())) {
 					model.addAttribute("message", "该文件已存在,上传失败");
-					return this.uploadJumping(model, 12);
+					return this.uploadJumping(model);
 				}
 			}
 		}
@@ -62,7 +77,7 @@ public class TeacherController extends BaseController{
 		TbResource tb = new TbResource(item.getCaId(), Date, item.getCaName(), file.getOriginalFilename(), reContent);
 		resourceService.insert(tb);
 		model.addAttribute("message", "添加成功");
-		return this.uploadJumping(model, 12);
+		return this.uploadJumping(model);
 	}
 
 	

@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
+import com.torrow.school.entity.TbUser;
 
 /**
  * @author 安李杰
@@ -40,8 +41,22 @@ public class EducationController extends BaseController {
 	 * @return 教研组的上传
 	 */
 	@RequestMapping("addNewsJumping")
-	public String addNewsJumping(Model model,int Pid) {
-		categoryService.addBySelectPid(model,Pid);
+	public String addNewsJumping(Model model) {
+		TbUser tbUser=(TbUser)session.getAttribute("education");
+		List<TbCategory> list=categoryService.selectAll();
+		boolean enough=false;
+		if(!list.isEmpty()) {
+			for(TbCategory item:list) {
+				if(tbUser.getCaName().equals(item.getCaName())) {
+					model.addAttribute("TbCategory",item);
+					enough=true;
+				}
+			}
+		}
+		if(enough==false) {
+			model.addAttribute("message","请先去类别类中添加相应类别");
+			return "educationoffice/empty";
+		}
 		return "educationoffice/uploadfile";
 	}
 
@@ -52,13 +67,21 @@ public class EducationController extends BaseController {
 	 */
 	@RequestMapping("manageEducationUpload")
 	public String manageUpload(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,
-			Integer id) {
+			TbCategory tbCategory) {
 		TbCategory record = new TbCategory();
-		// record.setCaPid(2);
-		record.setCaId(id);
-		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页数据
+		//这步是一般查询
+		record.setCaId(tbCategory.getCaId());
+		//这步是为了模糊查询
+		if(null!=tbCategory.getCaName()) {
+			record.setCaName(tbCategory.getCaName());
+		}
+		//携带的参数包括分页依据和查询条件还有显示条数
+		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页10条数据
 		session.setAttribute("currentPage", currentPage);
-		model.addAttribute("zid", id);
+		session.setAttribute("caName", tbCategory.getCaName());
+		//session和model是不同的,接下来两个model是为了把数据返回到前台,以便分页进行使用
+		model.addAttribute("caName", tbCategory.getCaName());
+		model.addAttribute("zid", tbCategory.getCaId());
 		return "educationoffice/manageupload";
 	}
 	
@@ -77,7 +100,7 @@ public class EducationController extends BaseController {
 			if (en.getCaId() == tbResource.getCaId()) {
 				if (file.getOriginalFilename().equals(en.getReContent())) {
 					model.addAttribute("message", "该文件已存在,上传失败");
-						return this.addNewsJumping(model, 3);
+						return this.addNewsJumping(model);
 				}
 			}
 		}
@@ -89,7 +112,7 @@ public class EducationController extends BaseController {
 		TbResource tb = new TbResource(item.getCaId(), Date, item.getCaName(), file.getOriginalFilename(), reContent);
 		resourceService.insert(tb);
 		model.addAttribute("message", "添加成功");
-		return this.addNewsJumping(model, 3);
+		return this.addNewsJumping(model);
 	}
 
 	

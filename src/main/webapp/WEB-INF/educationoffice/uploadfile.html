@@ -13,21 +13,20 @@
 <form th:action="@{/education/upload}" method="post" enctype="multipart/form-data">
 <div class="aa">
 	<table>
-		<!-- <tr>
-			<td>上传名称</td>
-			<td><input type="text" name="reTitle" required="required"></td>
-		</tr> -->
+		<tr>
+			<td><input type="hidden" name="caId" th:value="${TbCategory.caId}"></td>
+		</tr>
 		<tr>
 			<td width="20%">选择文件:</td>
 			<td width="20%"><input type="file" name="file" width="120px" required="required"></td>  
 		</tr>
-		<tr height="30px"></tr>
+	<!-- 	<tr height="30px"></tr>
 		<tr>
 			<td>类别名称</td>
 			<td><select name="caId" class="cc">
 						<option th:each="category,categoryStart:${categoryList}" th:text="${category.caName}" th:value="${category.caId}" />
 				 </select></td>
-		</tr>
+		</tr> -->
 		<tr height="30px"></tr>	
 		<tr>
 			 <td><input type="submit" value="上传" class="bb"/></td>  

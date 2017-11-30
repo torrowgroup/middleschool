@@ -11,6 +11,15 @@
         没有任何资源信息！
     </span>
  <div th:if ="${pagemsg.totalCount}!=0">
+ 
+<!--模糊查询  -->
+<form th:action="@{/education/manageEducationUpload}" method="post">
+ 	<input type="hidden" name="caId" th:value="${zid}">
+    <input type="text" name="caName" required>
+    <input type="submit" value="查询">
+</form>
+<!--模糊查询  -->
+
         <table border="1"  class="table1">
         <thead>
             <tr>
@@ -30,17 +39,17 @@
 <tr>
 <td class="td2">
    <span th:if ="${pagemsg.currPage != 1}">
-           <a th:href="@{/education/manageEducationUpload?(currentPage=1,id=${zid})}">[首页]</a>&nbsp;&nbsp;
-           <a th:href="@{/education/manageEducationUpload?(currentPage=${pagemsg.currPage-1},id=${zid})}">[上一页]</a>&nbsp;&nbsp;
+           <a th:href="@{/education/manageEducationUpload?(currentPage=1,caId=${zid},caName=${caName})}">[首页]</a>&nbsp;&nbsp;
+           <a th:href="@{/education/manageEducationUpload?(currentPage=${pagemsg.currPage-1},caId=${zid},caName=${caName})}">[上一页]</a>&nbsp;&nbsp;
 	</span>	
 	<span th:if="${pagemsg.currPage == 1}">
 		[首页][上一页]
 	</span>
 	<span th:each="i:${#numbers.sequence(1,pagemsg.totalPage)}">
-			<a th:if="${i > pagemsg.currPage-3} and ${i < pagemsg.currPage+3}"  th:href="@{/education/manageEducationUpload?(currentPage=${i},id=${zid})}"th:text="${i}">#</a>
+			<a th:if="${i > pagemsg.currPage-3} and ${i < pagemsg.currPage+3}"  th:href="@{/education/manageEducationUpload?(currentPage=${i},caId=${zid},caName=${caName})}"th:text="${i}">#</a>
 	</span>
     <span th:if ="${pagemsg.currPage < pagemsg.totalPage}">
-           <a th:href="@{/education/manageEducationUpload?(currentPage=${pagemsg.currPage+1},id=${zid})}">[下一页]</a>&nbsp;&nbsp;
+           <a th:href="@{/education/manageEducationUpload?(currentPage=${pagemsg.currPage+1},caId=${zid},caName=${caName})}">[下一页]</a>&nbsp;&nbsp;
 	</span>
 	<span th:if="${pagemsg.currPage >= pagemsg.totalPage}">
 		[下一页]

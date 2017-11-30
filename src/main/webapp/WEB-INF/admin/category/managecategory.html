@@ -12,6 +12,16 @@
 	<div th:text="${message}"></div>
 	<span th:if="${pagemsg.totalCount}==0"> 没有任何类别信息! </span>
 	<div th:if="${pagemsg.totalCount}!=0">
+	
+<!--模糊查询  -->
+ <form th:action="@{/category/manageCategory}" method="post">
+    <input type="text" name="caName" required>
+    <input type="submit" value="查询">
+</form>
+<!--模糊查询  -->
+	
+	
+	
 		<table border="1" class="table1">
 			<thead>
 				<tr>
