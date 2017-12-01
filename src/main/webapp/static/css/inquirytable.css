@@ -1,4 +1,6 @@
 @charset "UTF-8";
+
+
 .inquiry{
 	margin:20px 0;
 	float:right;
@@ -36,6 +38,7 @@ td{
 }
 .issucessor{
 	margin-top:20px;
+	font-size:16px;
 	color:red;
 }
 .mainbox{

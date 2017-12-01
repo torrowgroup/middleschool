@@ -12,12 +12,12 @@
 	<form th:action="@{/category/addCategory}" method="post">
 		<table>
 			<tr>
-				<td><span>类别名称</span></td>
-				<td><input type="text" name="caName" required="required" maxlength="6"></td>
+				<td width="40%"><span>类别名称</span></td>
+				<td width="60%"><input type="text" name="caName" required="required" maxlength="6"></td>
 			</tr>
 			<tr>
 				<td><span>父类别名称</span></td>
-				<td><select id="caPid" name="caPid" style="width: 160px" class="bb">
+				<td><select id="caPid" name="caPid" style="width: 200px" class="bb">
 						<option value="1">学校概括</option>
 						<option value="2">学校新闻</option>
 						<option value="3">机构部</option>

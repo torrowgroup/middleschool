@@ -14,8 +14,7 @@
 </head>
 <body>
 	<div th:text="${message}" class="issucessor"></div>
-	<div th:if="${pagemsg.totalCount}==0" class="issucessor">
-		没有任何校园新闻信息!</div>
+	<div th:if="${pagemsg.totalCount}==0" class="issucessor">没有查询到任何信息</div>
 	<div class="mainbox">	
 	<form th:action="@{/news/manageSchoolNews}" class="inquiry"
 		method="post">

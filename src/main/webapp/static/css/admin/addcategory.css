@@ -5,22 +5,25 @@
 			background: #ebebeb;
 		}
 		table{
-			height: 150px;
-			padding: 5px;
+			width:350px;
+			height:180px;
+			padding: 0px;
 		}
 		.demo{
-			width:280px;
+			width:400px;
 			height: 180px;
-			font-weight: bold;
 			margin: 0 auto;
 			margin-top: 100px;
 		}
-		span{
-			float: right;
+		td span{
+			float:right;
+			font-size:18px;
+			padding:2px 4px;
 		}
 		input{
-			width: 160px;
+			width:200px;
 			height: 30px;
+			margin-left:30px;
 			border-radius:5px; 
 			-moz-border-radius:5px; 
 			-webkit-border-radius:5px; 
@@ -30,19 +33,25 @@
 			width: 55px;
 			height: 25px;
 			border-radius: 8px;
-			margin-left: 140px;
-			background:  #66B3FF;
+			margin-left: 210px;
+			background:  #2896ef;
+			
 			color: white;
 		}
 		.but{
 			width: 55px;
-			height: 25px;
-			margin-left: 30px;
+			height: 30px;
+			margin-left:50px;
 			border-radius: 8px;
 			background: #66B3FF;
 			color: white;
 		} 
 		.bb{
-			width: 160px;
-			height: 30px;
+			width:200px;
+			height: 35px;
+			border-radius:5px;
+			margin-left:30px; 
+			-moz-border-radius:5px; 
+			-webkit-border-radius:5px; 
+			border:1px solid #ccc;
 		}

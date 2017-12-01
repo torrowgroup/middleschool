@@ -124,7 +124,7 @@ public class SchoolNewsController extends BaseController {
 	/**
 	 * @param currentPage
 	 * @param model
-	 * @return 校园新闻类/上传/教育教研的管理
+	 * @return 校园新闻类/上传/教育教研/校园文学的管理
 	 * 这个会发生中文乱码问题写过滤器时会处理
 	 * String userName = new String(name.getByte("ISO-8859-1"),"utf-8");
 	 */
@@ -147,8 +147,10 @@ public class SchoolNewsController extends BaseController {
 		model.addAttribute("caName", tbCategory.getCaName());
 		model.addAttribute("zid", tbCategory.getCaId());
 		TbCategory t = categoryService.selectByPrimaryKey(tbCategory.getCaId());
-		if(t.getCaPid()==3||t.getCaPid()==9) {
+		if(t.getCaPid()==3||t.getCaPid()==9||t.getCaPid()==12) {
 			return "admin/schoolnews/manageupload";
+		} else if(t.getCaPid()==6){
+			return "admin/notice/managenotice";
 		}
 		return "admin/schoolnews/manageschoolnews";
 	}
