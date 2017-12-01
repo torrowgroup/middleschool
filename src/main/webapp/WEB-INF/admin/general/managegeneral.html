@@ -14,19 +14,19 @@
 </head>
 <body>
 <div class="total">
-<a th:href="@{/general/deleteGeneral?(id=${tbResource.reId})}" onclick="return confirm('确定要删除吗')">Delete</a>
+
 <form th:action="@{/general/updateGeneral}" onSubmit="return modifyContent();"
 		method="post" enctype="multipart/form-data">
 		<input type="hidden" name="reId" th:value="${tbResource.reId}">
 		<div  class="inner">
-			<div class="top"><p><input type="text" name="reTitle" th:value="${tbResource.reTitle}" required="required"></p></div>
+			<div class="top"><span th:text="${tbResource.reTitle}">标题</span></div>
 			<div class="ziti">
-				<input type="text" name="reIssuingdate" th:value="${tbResource.reIssuingdate}" readonly="readonly">
+				<p>发布时间&nbsp;&nbsp;<span th:text="${tbResource.reIssuingdate}">--</span><a th:href="@{/general/deleteGeneral?(id=${tbResource.reId})}" onclick="return confirm('确定要删除吗')">delete</a></p>
 		   </div>
 		 </div>
 		<textarea style="display: none;" name="reContent" id="a"></textarea>
-		<div id="zoom" ><div id="introEditor" style="border: 1px solid #ccc;"
-			contenteditable="false"></div></div>
+		<div id="introEditor" style="border: 1px solid #ccc;"
+			contenteditable="false"></div>
 	</form>
 </div>
 </body>

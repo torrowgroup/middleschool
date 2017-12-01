@@ -4,7 +4,7 @@ body{
 	background: #ebebeb;}
 .aa{
 	width: 500px;
-	height:200px;
+	height:400px;
 	margin: 0 auto;
 	margin-top: 10%;
 }
@@ -20,13 +20,15 @@ table{
 	border-radius: 8px;
 	color: white;
 	cursor: pointer;
-	margin-left: 20%;
+	margin-left: 28%;
+	margin-top:30px;
 }
 .cc{
 	width: 200px;
-	height: 30px;
+	height: 35px;
 	float: left;
 }
 img{
 	width: 30%;
+	margin-left:20%;
 } 

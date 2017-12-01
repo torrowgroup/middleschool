@@ -6,18 +6,52 @@
 <title>home</title>
 <link rel="stylesheet" type="text/css"
 	th:href="@{/static/dist/css/wangEditor.min.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/css/admin/managegeneral.css}">	
+	
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/manageschoolintroduction.css}">
+
 </head>
 <body>
-	<div th:text="${message}"></div>
-	<form th:action="@{/news/updateSchoolNews}" onSubmit="return modifyContent();"
+<div class="total">
+
+<form th:action="@{/news/updateSchoolNews}" onSubmit="return modifyContent();"
 		method="post" enctype="multipart/form-data">
 		<input type="hidden" name="reId" th:value="${tbResource.reId}">
-		<input type="text" name="reTitle" th:value="${tbResource.reTitle}" required="required">
-		<input type="text" name="reIssuingdate" th:value="${tbResource.reIssuingdate}" readonly="readonly">
+		<div  class="inner">
+			<div class="top"><span th:text="${tbResource.reTitle}">标题</span></div>
+			<div class="ziti">
+				<p>发布时间&nbsp;&nbsp;<span th:text="${tbResource.reIssuingdate}">--</span></p>
+		   </div>
+		 </div>
 		<textarea style="display: none;" name="reContent" id="a"></textarea>
 		<div id="introEditor" style="border: 1px solid #ccc;"
 			contenteditable="false"></div>
 	</form>
+</div>
+</body>
+<script type="text/javascript">
+function CloseWebPage(){
+ if (navigator.userAgent.indexOf("MSIE") > 0) {
+  if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {
+   window.opener = null;
+   window.close();
+  } else {
+   window.open('', '_top');
+   window.top.close();
+  }
+ }
+ else if (navigator.userAgent.indexOf("Firefox") > 0) {
+  window.location.href = 'about:blank ';
+ } else {
+  window.opener = null;
+  window.open('', '_self', '');
+  window.close();
+ }
+}
+function doZoom(size)
+{document.getElementById('zoom').style.fontSize=size+'px';}
+</script>
 	<script type="text/javascript"
 		th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
 	<script th:inline="javascript">
@@ -33,7 +67,6 @@
 		var oIn = document.getElementById('introEditor');
 		oA.value = oIn.innerHTML;
 	}
-	
 </script>
 </body>
 </html>
