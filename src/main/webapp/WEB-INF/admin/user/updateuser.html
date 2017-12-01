@@ -68,7 +68,7 @@
 						<div id="preview">
 							<img id="imghead" border="0"
 								th:src="@{/static/uploadimg/{picture}(picture=${user.usPicture})}"
-								width="90" height="90" onclick="$('#previewImg').click();">
+								width="90" height="90" onclick="$('#previewImg').click();" alt="没有图片" title="点击选择图片">
 						</div>
 						<input type="file" name="picture" onchange="previewImage(this)"
 							style="display: none;" id="previewImg" accept="image/*">

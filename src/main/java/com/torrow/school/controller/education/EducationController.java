@@ -40,8 +40,8 @@ public class EducationController extends BaseController {
 	 * @param Pid
 	 * @return 教研组的上传
 	 */
-	@RequestMapping("addNewsJumping")
-	public String addNewsJumping(Model model) {
+	@RequestMapping("uploadEducation")
+	public String uploadEducation(Model model) {
 		TbUser tbUser=(TbUser)session.getAttribute("education");
 		List<TbCategory> list=categoryService.selectAll();
 		boolean enough=false;
@@ -60,6 +60,25 @@ public class EducationController extends BaseController {
 		return "educationoffice/uploadfile";
 	}
 
+	@RequestMapping("schoolLiterature")
+	public String schoolLiterature(Model model) {
+		TbUser tbUser=(TbUser)session.getAttribute("education");
+		List<TbCategory> list=categoryService.selectAll();
+		boolean enough=false;
+		if(!list.isEmpty()) {
+			for(TbCategory item:list) {
+				if(tbUser.getCaName().equals(item.getCaName())) {
+					model.addAttribute("TbCategory",item);
+					enough=true;
+				}
+			}
+		}
+		if(enough==false) {
+			model.addAttribute("message","请先去类别类中添加相应类别");
+			return "educationoffice/empty";
+		}
+		return "educationoffice/uploadfile";
+	}
 	/**
 	 * @param currentPage
 	 * @param model
@@ -100,7 +119,7 @@ public class EducationController extends BaseController {
 			if (en.getCaId() == tbResource.getCaId()) {
 				if (file.getOriginalFilename().equals(en.getReContent())) {
 					model.addAttribute("message", "该文件已存在,上传失败");
-						return this.addNewsJumping(model);
+						return this.uploadEducation(model);
 				}
 			}
 		}
@@ -112,7 +131,7 @@ public class EducationController extends BaseController {
 		TbResource tb = new TbResource(item.getCaId(), Date, item.getCaName(), file.getOriginalFilename(), reContent);
 		resourceService.insert(tb);
 		model.addAttribute("message", "添加成功");
-		return this.addNewsJumping(model);
+		return this.uploadEducation(model);
 	}
 
 	

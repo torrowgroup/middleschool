@@ -28,15 +28,16 @@ input{
 }
 img{
 	width: 30%;
+	 cursor:pointer;
 }   
 #sex input{
-	width: 50px;
-	height: 10px;
+	width:30px;
+	height: 15px;
 }
 .aa{
 	width: 48px;
-	margin-left: 80%;
-	background-color: #012349;
+	margin-left: 55%;
+	background-color: #2470e2;
 	color: white;
 }
 
