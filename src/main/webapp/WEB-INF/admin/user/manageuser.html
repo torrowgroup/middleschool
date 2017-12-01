@@ -28,8 +28,7 @@
 				<th class="aa"><span>图片</span></th>
 				<th class="aa"><span>简介</span></th>
 				<th class="aa"><span>成就</span></th>
-				<th class="aa"><span>修改</span></th>
-				<th class="aa"><span>删除</span></th>
+				<th class="aa"><span>操作</span></th>
 			</tr>
 			<tr  th:each="user,userStart:${pagemsg.lists}">
 					<td class="aa" th:text="${user.usName}">${user.usName }</td>
@@ -38,47 +37,63 @@
 					<td class="aa" th:text="${user.caName}">${user.caName }</td>
 					<td class="aa" th:text="${user.usPhone}">${user.usPhone }</td>
 					<td class="bb" align="center"><img alt="无图片" th:src="@{/static/uploadimg/{picture}(picture=${user.usPicture})}" /></td>
-					<td class="aa"><div id="content2" onClick="show();"><button th:name="${user.usIntroduction}" onclick="show(this)">预览</button></div></td>
-					<td class="aa"><div id="content3" onClick="show();"><button th:name="${user.usAchievements}" onclick="show(this)">预览</button></div></td>
-					<td class="aa"><a th:href="@{/user/toUpdateUser?(id=${user.usId},page=${pagemsg.currPage})}"><span class="glyphicon glyphicon-edit"></span></a></td>
-					<td class="aa"><a th:href="@{/user/deleteUser?(id=${user.usId},page=${pagemsg.currPage})}"
-						onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash"></span></a></td>
+					<td class="aa"><div id="content2" ><button onclick="show(this)" th:name="${user.usIntroduction}" data-toggle="modal" data-target="#myModal">预览</button></div></td>
+					<td class="aa"><div id="content3" ><button onclick="show(this)" th:name="${user.usAchievements}" data-toggle="modal" data-target="#myModal">预览</button></div></td>
+					<td class="aa">
+						<a th:href="@{/user/toUpdateUser?(id=${user.usId},page=${pagemsg.currPage})}" title="修改"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
+						<a th:href="@{/user/deleteUser?(id=${user.usId},page=${pagemsg.currPage})}" title="删除"
+ 						onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash"></span></a></td>
 			</tr>
 		</table>
 	</div>
 		<ul class="pagination">  
-			<span th:if="${pagemsg.currPage != 1}"> 
-					<a th:href="@{/user/manageUser?(currentPage=1,inquiry=${inquiry})}">首页</a>
-			</span>
-			<span th:if="${pagemsg.currPage != 1}">
-					<a th:href="@{/user/manageUser?(currentPage=${pagemsg.currPage-1},inquiry=${inquiry})}">上一页</a>
-			</span>
-			<span th:if="${pagemsg.currPage == 1}">
+			<li th:if="${pagemsg.currPage != 1}"> 
+				<a th:href="@{/user/manageUser?(currentPage=1,inquiry=${inquiry})}">首页</a>
+			</li>
+			<li th:if="${pagemsg.currPage != 1}">
+				<a th:href="@{/user/manageUser?(currentPage=${pagemsg.currPage-1},inquiry=${inquiry})}">上一页</a>
+			</li>
+			<li th:if="${pagemsg.currPage == 1}">
 				<a href="#">首页</a>
-			</span>
-			<span th:if="${pagemsg.currPage == 1}">
+			</li>
+			<li th:if="${pagemsg.currPage == 1}">
 				<a href="#">上一页</a>
-			</span>
-			 <span th:each="i:${#numbers.sequence(1,pagemsg.totalPage)}"> 
-			 	<a th:if="${i > pagemsg.currPage-3} and ${i < pagemsg.currPage+3}"
-					th:href="@{/user/manageUser?(currentPage=${i},inquiry=${inquiry})}" th:text="${i}">#</a>
-			</span>
-			<span th:if="${pagemsg.currPage < pagemsg.totalPage}">
+			</li>
+			 <li th:each="i:${#numbers.sequence(1,pagemsg.totalPage)}" th:if="${i > pagemsg.currPage-3} and ${i < pagemsg.currPage+3}"> 
+			 	<a th:href="@{/user/manageUser?(currentPage=${i},inquiry=${inquiry})}" th:text="${i}">#</a>
+			</li>
+			<li th:if="${pagemsg.currPage < pagemsg.totalPage}" >
 				 <a th:href="@{/user/manageUser?(currentPage=${pagemsg.currPage+1},inquiry=${inquiry})}">下一页</a>
-			</span> 
-			<span th:if="${pagemsg.currPage >= pagemsg.totalPage}">
+			</li> 
+			<li th:if="${pagemsg.currPage >= pagemsg.totalPage}">
 				<a href="#">下一页</a>
- 			</span>
+ 			</li>
 		</ul>
-	<div id="hidebg" onClick="show();"></div>
-<div id="hidebox" onClick="hide();"></div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+			</div>
+			<div class="modal-body" id="content">
+				没有内容
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
 <script th:src="@{/static/js/jquery.min.js}"></script>
 <script th:src="@{/static/js/admin/user/manageruser.js}"></script>
 <script th:src="@{/static/js/bootstrap.min.js}"></script>
 <script th:inline="javascript">
 	function show(obj) {
-		document.getElementById('hidebox').style.display="block";
-		document.getElementById('hidebox').innerHTML = obj.name;
+		document.getElementById('content').style.display="block";
+		document.getElementById('content').innerHTML = obj.name;
 	}
 </script>
 </body>

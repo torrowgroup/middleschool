@@ -1,0 +1,48 @@
+body{
+	margin:0;
+	padding: 0;
+	background-color: #ebebeb !important;
+}
+.content{
+	margin:5% auto;
+	width:50%;
+	text-align: right;
+}
+a{
+	text-decoration: none; 
+}
+table{
+	text-align: center !important;	
+	background-color: white !important;
+}
+th{
+	vertical-align: middle !important;
+	text-align: center !important;	
+	letter-spacing: 10px;
+}
+td{
+	vertical-align: middle !important;
+	text-align: center !important;
+	text-align: center;
+}
+img{
+	width: 30%;
+} 
+.udpateP{
+	margin-left: 50px;
+	font-size:16px;
+}
+.bb span{
+	line-height: 100px;
+}
+span{
+	font-size: 18px;
+/* 	font-weight: bold; */
+}
+.aa{
+	font-size:16px;
+}
+.aa:hover{
+	text-decoration: none;
+}
+

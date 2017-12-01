@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/upload.css}">
 </head>
 <body>
-<div th:if="${sign}=='1'">请先去类别管理中添加相应类别</div>
+<div th:if="${sign}=='1'">管理员未添加相应类别</div>
 <div th:if="${sign}!='1'">
 <div th:text="${message}"></div>
 <form th:action="@{/education/upload}" method="post" enctype="multipart/form-data">

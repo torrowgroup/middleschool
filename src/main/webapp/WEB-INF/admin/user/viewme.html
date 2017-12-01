@@ -1,74 +1,95 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Home</title>
+<title>Home</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/css/admin/viewme.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/css/bootstrap.min.css}">
 </head>
 <body>
-<span th:text="${message}"></span>
-	<table>
+	<span th:text="${message}"></span>
+	<div class="content">
+		<table class="table table-bordered">
 			<tr>
-				<td>邮箱</td>
-				<td th:text="${session.manager.usEmail}"></td>
+				<th><span>姓名</span></th>
+				<td><span th:text="${session.admin.usName}"></span></td>
 			</tr>
 			<tr>
-				<td>姓名</td>
-				<td th:text="${session.manager.usName}"></td>
+				<th width="100px"><span>邮箱</span></th>
+				<td><span th:text="${session.admin.usEmail}"></span></td>
 			</tr>
 			<tr>
-				<td>性别</td>
-				<td th:text="${session.manager.usSex}"></td>
+				<th><span>性别</span></th>
+				<td><span th:text="${session.admin.usSex}"></span></td>
 			</tr>
 			<tr>
-				<td>身份</td>
-				<td th:text="${session.manager.caName}"></td>
+				<th><span>身份</span></th>
+				<td><span th:text="${session.admin.caName}"></span></td>
 			</tr>
 			<tr>
-				<td>联系方式</td>
-				<td th:text="${session.manager.usPhone}"></td>
+				<th><span>联系方式</span></th>
+				
+				<td><span th:text="${session.admin.usPhone}"></span></td>
 			</tr>
 			<tr>
-				<td>照片</td>
-				<td>
+				<th><span>照片</span></th>
+				<td class="bb">
 					<img alt="没有照片" width="200px;" height="50px;"
-					th:src="@{/static/uploadimg/{picture}(picture=${session.manager.usPicture})}" />
+					th:src="@{/static/uploadimg/{picture}(picture=${session.admin.usPicture})}" />
 				</td>
 			</tr>
 			<tr>
-				<td>简介</td>
-				<td><a href="#" id="introShow" th:onclick="'showIntro(this)'">查看简介</a></td>
+				<th><span>简介</span></th>
+				
+				<td><a href="#"  class="aa"
+					th:onclick="'showIntro(this)'" th:name="${session.admin.usIntroduction}" data-toggle="modal" data-target="#myModal" onfocus="this.blur();">查看简介</a></td>
 			</tr>
 			<tr>
-				<td>成就</td>
-				<td><a href="#" id="achieveShow" th:onclick="'showIntro(this)'">查看成就</a></td>
+				<th><span>成就</span></th>
+				
+				<td><a href="#" class="aa"
+					th:onclick="'showIntro(this)'" th:name="${session.admin.usAchievements}" data-toggle="modal" data-target="#myModal" onfocus="this.blur();">查看成就</a></td>
 			</tr>
 			<tr>
-				<td><a th:href="@{/user/toUpdateMe}">修改基本信息</a></td>
-				<td><a th:href="@{/user/toUpdatePsw}">修改密码</a></td>
+				<th><span>操作</span></th>
+				<td>
+					<a th:href="@{/user/toUpdateMe}" class="aa">修改基本信息</a>
+					<a th:href="@{/user/toUpdatePsw}" class="udpateP">修改密码</a>
+				</td>
 			</tr>
 		</table>
-		<div id="viewDetails" style="display: none;">
-			<div id="introAchieve"></div>
-			<button id="hideDetails">隐藏</button>
-		</div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+			</div>
+			<div class="modal-body" id="content">
+				没有内容
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
 <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
 <script th:inline="javascript">
 	function showIntro(obj){
-		if(obj.id=='introShow'){
-			obj = /*[[${session.manager.usIntroduction}]]*/;
-		} else {
-			obj = /*[[${session.manager.usAchievements}]]*/;
+		if(obj.name==null||obj.name==""){
+			obj.name="无";
 		}
-		$('#viewDetails').show();
-		if(obj==null||obj==""){
-			obj="无";
-		}
-		$('#introAchieve').html(obj);
+		$('#content').html(obj.name);
 	}
-	$('#hideDetails').click(function(){
-		$('#viewDetails').hide();
-	});
 </script>
 </body>
 </html>

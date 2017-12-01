@@ -47,7 +47,7 @@ public class UserController extends BaseController {
 		pidList.add(4);//用户
 		List<TbCategory> categoryList = categoryService.selectByPid(pidList);
 		model.addAttribute("categoryList",categoryList);
-		PageBean<TbUser> pageBean = userService.findPageSplit(categoryList,currentPage,inquiry, 6);
+		PageBean<TbUser> pageBean = userService.findPageSplit(categoryList,currentPage,inquiry, 5);
 		model.addAttribute("pagemsg", pageBean);
 		model.addAttribute("inquiry", inquiry);
 		return "admin/user/manageuser";
@@ -90,12 +90,17 @@ public class UserController extends BaseController {
 			String usPicture = userService.uploadPicture(picture, path);
 			tbUser.setUsPicture(usPicture);
 		}
-		int boo = userService.addUser(tbUser);
-		if (boo == 1) {
-			model.addAttribute("message", "添加成功");
-		} else {
-			model.addAttribute("message", "添加失败");
+		TbUser userDb = userService.selectByEmail(tbUser.getUsEmail());
+		String msg = "添加失败，用户已存在";
+		if(userDb!=null){
+			int boo = userService.addUser(tbUser);
+			if (boo == 1) {
+				msg = "添加成功";
+			} else {
+				msg = "添加失败";
+			}			
 		}
+		model.addAttribute("message", msg);
 		return this.toAddUser(model);
 	}
 
