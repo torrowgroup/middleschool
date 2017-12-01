@@ -1,7 +1,8 @@
 	
-		body{
+		body{ 
 			margin: 0;
 			padding: 0;
+			background: #ebebeb;
 		}
 		table{
 			height: 150px;
@@ -17,18 +18,31 @@
 		span{
 			float: right;
 		}
+		input{
+			width: 160px;
+			height: 30px;
+			border-radius:5px; 
+			-moz-border-radius:5px; 
+			-webkit-border-radius:5px; 
+			border:1px solid #ccc;
+		}
 		.butone{
 			width: 55px;
 			height: 25px;
-			margin-left: 20px;
-			background: #012349;
+			border-radius: 8px;
+			margin-left: 140px;
+			background:  #66B3FF;
 			color: white;
 		}
 		.but{
 			width: 55px;
 			height: 25px;
 			margin-left: 30px;
-			background: #012349;
+			border-radius: 8px;
+			background: #66B3FF;
 			color: white;
 		} 
-	
+		.bb{
+			width: 160px;
+			height: 30px;
+		}

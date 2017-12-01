@@ -1,64 +1,75 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <title>home</title>
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/manageschoolnews.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/inquirytable.css}">
 </head>
 <body>
 <div th:text="${message}"></div>
 <span th:if ="${pagemsg.totalCount}==0">
-        没有任何资源信息！
+        没有任何校园新闻信息!
     </span>
  <div th:if ="${pagemsg.totalCount}!=0">
  
- <!--模糊查询  -->
- <form th:action="@{/news/manageSchoolNews}" method="post">
- 	<input type="hidden" name="caId" th:value="${zid}">
-    <input type="text" name="caName" required>
-    <input type="submit" value="查询">
-</form>
-<!--模糊查询  -->
 
-        <table border="1"  class="table1">
-        <thead>
-            <tr>
-                <td>上传的名称</td>
-                <td>上传的时间</td>
-                <td>删除</td>
-                <td>下载</td>
-            </tr>
+
+<!--模糊查询  -->
+ <div class="aa">
+ 	    <form th:action="@{/news/manageSchoolNews}" class="inquiry" method="post">
+		 	<input type="hidden" name="caId" th:value="${zid}">
+		    <input type="text" name="caName" class="inquiryinput" required>
+		    <input type="submit" value="查询" class="btn btn-default inquirysub">   
+	    </form>
+		<table class="table table-bordered table-hover table-condensed">
+       		 <thead>
+	            <tr>
+	                <th><span>上传的名称</span></th>
+	                <th><span>上传的时间</span></th>
+	                <th><span>下载</span></th>
+	                <th><span>删除</span></th>
+	            </tr>
             </thead>
-                <tr th:each="news,newsStart:${pagemsg.lists}">
-                	<td th:text="${news.reTitle}">${news.reTitle}</td>
-                	<td th:text="${news.reIssuingdate}">${news.reIssuingdate}</td>
-                	<td><a th:href="@{/news/deleteFile?(id=${news.reId})}">delete</a></td>
+            <tbody>
+            	<tr th:each="news,newsStart:${pagemsg.lists}">
+                    <td th:text="${news.reTitle}">${news.reTitle}</td>
+                    <td th:text="${news.reIssuingdate}">${news.reIssuingdate}</td>
                 	<td><a th:href="@{/news/down?(id=${news.reId})}">下载</a></td>
+                	<td class="pp"><a th:href="@{/news/deleteFile?(id=${news.reId})}"><span class="glyphicon glyphicon-trash"></span></a></td>
                 </tr>
+            </tbody>
+                
         </table>    
-  
-<table>
-<tr>
-<td class="td2">
+    
+<ul class="pagination"> 
    <span th:if ="${pagemsg.currPage != 1}">
-           <a th:href="@{/news/manageSchoolNews?(currentPage=1,caId=${zid},caName=${caName})}">[首页]</a>&nbsp;&nbsp;
-           <a th:href="@{/news/manageSchoolNews?(currentPage=${pagemsg.currPage-1},caId=${zid},caName=${caName})}">[上一页]</a>&nbsp;&nbsp;
+           <a th:href="@{/news/manageSchoolNews?(currentPage=1,caId=${zid},caName=${caName})}">首页</a>&nbsp;&nbsp;
+   </span>
+   <span th:if ="${pagemsg.currPage != 1}">
+           <a th:href="@{/news/manageSchoolNews?(currentPage=${pagemsg.currPage-1},caId=${zid},caName=${caName})}">上一页</a>&nbsp;&nbsp;
 	</span>	
 	<span th:if="${pagemsg.currPage == 1}">
-		[首页][上一页]
+		<a href="#">首页</a>
 	</span>
+	<span th:if="${pagemsg.currPage == 1}">
+		<a href="#">上一页</a>
+	</span>
+	
 	<span th:each="i:${#numbers.sequence(1,pagemsg.totalPage)}">
 			<a th:if="${i > pagemsg.currPage-3} and ${i < pagemsg.currPage+3}"  th:href="@{/news/manageSchoolNews?(currentPage=${i},caId=${zid},caName=${caName})}"th:text="${i}">#</a>
 	</span>
+	
     <span th:if ="${pagemsg.currPage < pagemsg.totalPage}">
-           <a th:href="@{/news/manageSchoolNews?(currentPage=${pagemsg.currPage+1},caId=${zid},caName=${caName})}">[下一页]</a>&nbsp;&nbsp;
+           <a th:href="@{/news/manageSchoolNews?(currentPage=${pagemsg.currPage+1},caId=${zid},caName=${caName})}">下一页</a>&nbsp;&nbsp;
 	</span>
 	<span th:if="${pagemsg.currPage >= pagemsg.totalPage}">
-		[下一页]
+		下一页
 	</span>
-</td>
-</tr>
-</table>
+</ul>
+</div>
 </div>
 </body>
 </html>

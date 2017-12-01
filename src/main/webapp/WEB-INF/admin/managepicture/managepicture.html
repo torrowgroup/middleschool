@@ -4,9 +4,12 @@
 
 <head>
   <title>home</title>
-<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/manageObject.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
+	<script type="text/javascript" th:src="@{/static/js/bootstrap.min.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/managepicture.css}">
 </head>
 <body>
+<div class="aa">
 <div th:text="${message}"></div>
 <span th:if ="${pagemsg.totalCount}==0">
         没有任何轮播图信息!
@@ -15,9 +18,9 @@
         <table border="1"  class="table1">   
         <thead>
             <tr>
-            	<td>名称</td>
-                <td>轮播图</td>
-                <td>删除</td>
+            	<td><span>名称</span></td>
+                <td><span>轮播图</span></td>
+                <td><span>删除</span></td>
             </tr>
             </thead>
                 <tr th:each="general,generalStart:${pagemsg.lists}">
@@ -27,9 +30,7 @@
                 </tr>
         </table>   
    
-<table>
-<tr>
-<td class="td2">
+<ul class="pagination">
    <span th:if ="${pagemsg.currPage != 1}">
            <a th:href="@{/news/manageObject?(currentPage=1,id=${zid})}">[首页]</a>&nbsp;&nbsp;
            <a th:href="@{/news/manageObject?(currentPage=${pagemsg.currPage-1},id=${zid})}">[上一页]</a>&nbsp;&nbsp;
@@ -46,9 +47,8 @@
 	<span th:if="${pagemsg.currPage >= pagemsg.totalPage}">
 		[下一页]
 	</span>
-</td>
-</tr>
-</table>
+</ul>
  </div> 
+</div>
 </body>
 </html>

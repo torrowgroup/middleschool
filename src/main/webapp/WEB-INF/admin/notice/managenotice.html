@@ -4,6 +4,8 @@
 
 <head>
   <title>home</title>
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/manageschoolnews.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
 </head>
 <body>
 <div th:text="${message}"></div>
@@ -11,22 +13,32 @@
         没有任何通知公告信息!
     </span>
  <div th:if ="${pagemsg.totalCount}!=0">
-        <table border="1"  class="table1">
+ 
+<!--模糊查询 
+ <form th:action="@{/news/manageSchoolNews}" method="post">
+ 	<input type="hidden" name="caId" th:value="${zid}">
+    <input type="text" name="caName" required>
+    <input type="submit" value="查询">
+</form>
+模糊查询  -->
+ 
+ <div class="aa">
+		<table class="table table-bordered table-hover table-condensed">
         <thead>
             <tr>
-                <td>标题</td>
-                <td>日期</td>
-                <td>详情</td>
-                <td>删除</td>
+                <td><span>标题</span></td>
+                <td><span>日期</span></td>
+                <td><span>详情</span></td>
+                <td><span>删除</span></td>
             </tr>
             </thead>
                 <tr th:each="news,newsStart:${pagemsg.lists}">
                     <td th:text="${news.reTitle}">${news.reTitle}</td>
                     <td th:text="${news.reIssuingdate}">${news.reIssuingdate}</td>
-                	<td><a th:href="@{/news/selectOneNews?(id=${news.reId})}">详情</a></td>
-                	<td><a th:href="@{/news/deleteNews?(id=${news.reId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
+                	<td class="pp"><a th:href="@{/news/selectOneNews?(id=${news.reId})}">详情</a></td>
+                	<td><a th:href="@{/news/deleteNews?(id=${news.reId})}" onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash"></span></a></td>
                 </tr>
-        </table>    
+        </table>       
     
 <table>
 <tr>
@@ -50,6 +62,7 @@
 </td>
 </tr>
 </table>
+</div>
 </div>
 </body>
 </html>

@@ -1,0 +1,40 @@
+@charset "UTF-8";
+.inquiry{
+	margin:20px 0px;
+	float:right;
+}
+
+.inquiryinput{
+	width:200px;
+	height:30px;
+	border: none;
+	outline:none;
+	padding-left:5px;
+	box-shadow:0 1px #bebdbd inset, 0px 1px 3px #bebdbd;
+	border-radius: 3px 0px 0px 3px;
+
+}
+.inquirysub{
+	box-shadow:none;
+	line-height:20px;
+}
+th{
+	text-align: center;
+	height:50px;
+	background-color:#ccc;
+}
+tbody{
+	background-color:white !important;
+}
+td{
+	text-align: center;
+	height:30px !important;
+	line-height:30px !important;
+	padding:5px!important;
+	vertical-align:middle !important;
+	font-size:16px;
+}
+.issucessor{
+	margin-top:20px;
+	color:red;
+}

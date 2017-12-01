@@ -19,17 +19,14 @@
     <input type="submit" value="查询">
 </form>
 <!--模糊查询  -->
-	
-	
-	
 		<table border="1" class="table1">
 			<thead>
 				<tr>
-					<td>类别编号</td>
-					<td>类别名称</td>
-					<td>父类别</td>
-					<td>Edit</td>
-					<td>Delete</td>
+					<th><span>类别编号</span></th>
+					<th><span>类别名称</span></th>
+					<th><span>父类别</span></th>
+					<th><span>修改</span></th>
+					<th><span>删除</span></th>
 				</tr>
 			</thead>
 			<tr th:each="category,categoryStart:${pagemsg.lists}">
@@ -48,16 +45,15 @@
 				<td th:if="${category.caPid}=='12'">校园文学</td>
 				<td th:if="${category.caPid}=='13'">其他信息</td>
 				<td><a
-					th:href="@{/category/selectOneCategory?(id=${category.caId})}">Edit</a></td>
+					th:href="@{/category/selectOneCategory?(id=${category.caId})}"><span class="glyphicon glyphicon-edit"></span></a></td>
 				<td><a
 					th:href="@{/category/deleteCategory?(id=${category.caId})}"
-					onclick="return confirm('确定要删除吗')">Delete</a></td>
+					onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash"></span></a></td>
 			</tr>
 		</table>
 	
-	<table>
-		<tr>
-			<td class="td2"><span th:if="${pagemsg.currPage != 1}"> <a
+		<ul class="pagination">
+			<span th:if="${pagemsg.currPage != 1}"> <a
 					th:href="@{/category/manageCategory?(currentPage=1)}">[首页]</a>&nbsp;&nbsp;
 					<a
 					th:href="@{/category/manageCategory?(currentPage=${pagemsg.currPage-1})}">[上一页]</a>&nbsp;&nbsp;
@@ -69,9 +65,8 @@
 			</span> <span th:if="${pagemsg.currPage < pagemsg.totalPage}"> <a
 					th:href="@{/category/manageCategory?(currentPage=${pagemsg.currPage+1})}">[下一页]</a>&nbsp;&nbsp;
 			</span> <span th:if="${pagemsg.currPage >= pagemsg.totalPage}"> [下一页]
-			</span></td>
-		</tr>
-	</table>
+			</span>
+</ul>
 </div>
 </body>
 </html>
