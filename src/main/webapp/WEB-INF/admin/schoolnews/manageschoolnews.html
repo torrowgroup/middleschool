@@ -4,40 +4,41 @@
 
 <head>
   <title>home</title>
-<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/manageschoolnews.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/manageschoolnews.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/inquirytable.css}">
 </head>
 <body>
-<div th:text="${message}"></div>
-<span th:if ="${pagemsg.totalCount}==0">
+<div th:text="${message}" class="issucessor"></div>
+<div th:if ="${pagemsg.totalCount}==0" class="issucessor">
         没有任何校园新闻信息!
-    </span>
+</div>
  <div th:if ="${pagemsg.totalCount}!=0">
- 
 <!--模糊查询  -->
- <form th:action="@{/news/manageSchoolNews}" method="post">
- 	<input type="hidden" name="caId" th:value="${zid}">
-    <input type="text" name="caName" required>
-    <input type="submit" value="查询">
-</form>
-<!--模糊查询  -->
- 
  <div class="aa">
+ 	    <form th:action="@{/news/manageSchoolNews}" class="inquiry" method="post">
+		 	<input type="hidden" name="caId" th:value="${zid}">
+		    <input type="text" name="caName" class="inquiryinput" required>
+		    <input type="submit" value="查询" class="btn btn-default inquirysub">   
+	    </form>
 		<table class="table table-bordered table-hover table-condensed">
-        <thead>
-            <tr>
-                <td><span>标题</span></td>
-                <td><span>日期</span></td>
-                <td><span>详情</span></td>
-                <td><span>删除</span></td>
-            </tr>
+       		 <thead>
+	            <tr>
+	                <th><span>标题</span></th>
+	                <th><span>日期</span></th>
+	                <th><span>详情</span></th>
+	                <th><span>删除</span></th>
+	            </tr>
             </thead>
-                <tr th:each="news,newsStart:${pagemsg.lists}">
+            <tbody>
+            	<tr th:each="news,newsStart:${pagemsg.lists}">
                     <td th:text="${news.reTitle}">${news.reTitle}</td>
                     <td th:text="${news.reIssuingdate}">${news.reIssuingdate}</td>
                 	<td class="pp"><a th:href="@{/news/selectOneNews?(id=${news.reId})}">详情</a></td>
                 	<td><a th:href="@{/news/deleteNews?(id=${news.reId})}" onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash"></span></a></td>
                 </tr>
+            </tbody>
+                
         </table>    
     
 <ul class="pagination"> 
