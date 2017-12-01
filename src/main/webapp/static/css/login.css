@@ -2,7 +2,10 @@ body{
 	margin: 0;
 	padding: 0;
 }
-
+.message{
+	text-align: center;
+	color:red;
+}
 .box{
 	width: 100%;
 	background-image: url(../images/admin/login1.png);

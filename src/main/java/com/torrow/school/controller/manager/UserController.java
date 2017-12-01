@@ -92,7 +92,7 @@ public class UserController extends BaseController {
 		}
 		TbUser userDb = userService.selectByEmail(tbUser.getUsEmail());
 		String msg = "添加失败，用户已存在";
-		if(userDb!=null){
+		if(userDb==null){
 			int boo = userService.addUser(tbUser);
 			if (boo == 1) {
 				msg = "添加成功";
@@ -205,27 +205,29 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("updateMe")
 	public ModelAndView updateMe(TbUser user,MultipartFile picture,Model model) throws Exception{
-		TbUser me = (TbUser)session.getAttribute("manager");
-		user.setUsId(me.getUsId());//封装前台此界面不能修改的项
-		user.setCaId(me.getCaId());
-		user.setCaName(me.getCaName());
-		user.setUsPassword(me.getUsPassword());
-		user.setUsPicture(me.getUsPicture());
-		if(!picture.getOriginalFilename().equals("")){//如果用户上传了图片，则换掉原来的图片
-			String path = session.getServletContext().getRealPath("/static/uploadimg");
-			File file = new File(path+"/"+me.getUsPicture());
-			if(file.exists()){	//删掉不用的图片
-				file.delete();
+		TbUser me = (TbUser)session.getAttribute("admin");
+		if(me!=null){
+			user.setUsId(me.getUsId());//封装前台此界面不能修改的项
+			user.setCaId(me.getCaId());
+			user.setCaName(me.getCaName());
+			user.setUsPassword(me.getUsPassword());
+			user.setUsPicture(me.getUsPicture());
+			if(!picture.getOriginalFilename().equals("")){//如果用户上传了图片，则换掉原来的图片
+				String path = session.getServletContext().getRealPath("/static/uploadimg");
+				File file = new File(path+"/"+me.getUsPicture());
+				if(file.exists()){	//删掉不用的图片
+					file.delete();
+				}
+				String fileName = userService.uploadPicture(picture, path);
+				user.setUsPicture(fileName);
 			}
-			String fileName = userService.uploadPicture(picture, path);
-			user.setUsPicture(fileName);
-		}
-		int boo = userService.updateByPrimaryKey(user);
-		if(boo==1){
-			model.addAttribute("message", "修改完成");
-			session.setAttribute("manager", user);
-		} else {
-			model.addAttribute("message", "修改失败");
+			int boo = userService.updateByPrimaryKey(user);
+			if(boo==1){
+				model.addAttribute("message", "修改完成");
+				session.setAttribute("amdin", user);
+			} else {
+				model.addAttribute("message", "修改失败");
+			}
 		}
 		return new ModelAndView("admin/user/viewme");
 	}
@@ -247,11 +249,12 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("updatePsw")
 	public ModelAndView updatePsw(String oldPsw,String password,Model model){
-		TbUser me = (TbUser)session.getAttribute("manager");
+		TbUser me = (TbUser)session.getAttribute("admin");
 		if(me.getUsPassword().equals(oldPsw)){
 			me.setUsPassword(password);
 			if(userService.updateByPrimaryKey(me)==1){
 				model.addAttribute("message", "修改成功");
+				session.setAttribute("admin", me);
 			}
 			return new ModelAndView("admin/user/viewme");
 		}

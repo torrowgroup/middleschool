@@ -12,7 +12,7 @@
 	th:href="@{/static/css/admin/updateuser.css}">
 </head>
 <body>
-<div th:if="${user==null}">该用户已被删除</div>
+<div th:if="${user==null}" class="message">该用户已被删除</div>
 <div th:if="${user!=null}">
 	<form th:action="@{/user/updateUser}" onsubmit="modifyContent()"
 		method="post" enctype="multipart/form-data">
@@ -107,6 +107,19 @@
 		<div id="achieveEditor"></div>
 		<button onClick='hide()'>完成</button>
 	</div>
+<script th:inline="javascript">
+/*<![CDATA[*/
+	window.onload=function(){
+		var user = /*[[${user}]]*/;
+		if(user!=null){
+			var usIntroduction = /*[[${user.usIntroduction}]]*/ null;//给两个富文本赋值
+			var usAchievements = /*[[${user.usAchievements}]]*/ null;
+			introdEditor.$txt.html(usIntroduction);
+			achieveEditor.$txt.html(usAchievements);
+		}
+	}
+/*]]>*/
+</script>
 </div>
 	<script th:src="@{/static/js/jquery.min.js}"></script>
 	<script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
@@ -120,110 +133,5 @@
 	<script type="text/javascript"
 		th:src="@{/static/js/admin/user/testemail.js}"></script>
 	<script th:src="@{/static/js/admin/user/zhezhaoone.js}"></script>
-	<script th:inline="javascript">
-/*<![CDATA[*/
-	window.onload=function(){
-		var usIntroduction = [[${user.usIntroduction}]];//给两个富文本赋值
-		var usAchievements = [[${user.usAchievements}]];
-		introdEditor.$txt.html(usIntroduction);
-		achieveEditor.$txt.html(usAchievements);
-	}
-/*]]>*/
-</script>
 </body>
 </html>
-<!-- <body> -->
-<!-- 	<form th:action="@{/user/updateUser}" onsubmit="modifyContent()" method="post" enctype="multipart/form-data"> -->
-<!-- 		<input type="hidden" name="usId" th:value="${user.usId}"/> -->
-<!-- 		<input type="hidden" name="page" th:value="${page}"/> -->
-<!-- 		<table> -->
-<!-- 			<tr> -->
-<!-- 				<td>邮箱</td> -->
-<!-- 				<td> -->
-<!-- 					<input type="email" name="usEmail" id="usEmail"   th:oninput="'testEmail()'" -->
-<!-- 					required="required"	th:value="${user.usEmail}" maxlength="25"> -->
-<!-- 					<span id="ok" class="glyphicon glyphicon-ok" style="display: none;"></span> -->
-<!-- 					<span id="wrong" class="glyphicon glyphicon-remove" style="display: none;"></span> -->
-<!-- 				</td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>密码</td> -->
-<!-- 				<td><input type="password" name="usPassword" -->
-<!-- 					required="required" th:value="${user.usPassword}" maxlength="15"></td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>姓名</td> -->
-<!-- 				<td><input type="text" name="usName" required="required" -->
-<!-- 					th:value="${user.usName}" maxlength="10"></td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>性别</td> -->
-<!-- 				<td><input name="usSex" type="radio"  value="男" th:checked="${user.usSex=='男'}" />男 <input -->
-<!-- 					name="usSex" type="radio" value="女" th:checked="${user.usSex=='女'}" />女</td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>身份</td> -->
-<!-- 				<td> -->
-<!-- 					<select name="caId"> -->
-<!-- 						<option th:each="category,categoryStart:${categoryList}" -->
-<!-- 							th:text="${category.caName}" th:value="${category.caId}" th:selected="${user.caId==category.caId}" /> -->
-<!-- 					</select> -->
-<!-- 				</td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>联系方式</td> -->
-<!-- 				<td><input type="text" name="usPhone" maxlength="11" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"  -->
-<!-- 					th:value="${user.usPhone}" /></td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>照片</td> -->
-<!-- 				<td> -->
-<!-- 					<input type="hidden" name="usPicture" th:value="${user.usPicture}"/> -->
-<!-- 					<div class="col-sm-9 big-photo"> -->
-<!-- 							<div id="preview"> -->
-<!-- 								<img id="imghead" border="0" th:src="@{/static/uploadimg/{picture}(picture=${user.usPicture})}" -->
-<!-- 									width="90" height="90" onclick="$('#previewImg').click();"> -->
-<!-- 							</div> -->
-<!-- 							<input type="file" name="picture" onchange="previewImage(this)" -->
-<!-- 								style="display: none;" id="previewImg" accept="image/*"> -->
-<!-- 						</div> -->
-<!-- 				</td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>简介</td> -->
-<!-- 				<td> -->
-<!-- 					<div id="introduction"> -->
-<!-- 						<textarea style="display: none;" name="usIntroduction"  -->
-<!-- 							id="usIntroduction" ></textarea> -->
-<!-- 						<div id="intro" style="display:none;"> -->
-<!-- 							<div id="introdEditor" style="height: 200px;"></div> -->
-<!-- 							<a href="#" id="introHide">完成</a> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<a href="#" id="introShow">查看/修改简介</a></td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>成就</td> -->
-<!-- 				<td> -->
-<!-- 					<div  id="achievements"> -->
-<!-- 						<textarea style="display: none;" name="usAchievements" id="usAachievements"></textarea> -->
-<!-- 						<div id="achieve" style="display:none;"> -->
-<!-- 							<div id="achieveEditor" style="height: 200px;"></div> -->
-<!-- 							<a href="#" id="achieveHide">完成</a> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				<a href="#" id="achieveShow">查看/修改成就</a></td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td><input type="submit" id="sure" value="提交"/></td> -->
-<!-- 			</tr> -->
-<!-- 		</table> -->
-<!-- 	</form> -->
-<!-- <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script> -->
-<!-- <script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script> -->
-<!-- <script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script> -->
-<!-- <script type="text/javascript" th:src="@{/static/js/admin/user/updateuser.js}" ></script> -->
-<!-- <script type="text/javascript" th:src="@{/static/js/upload.js}" ></script> -->
-<!-- <script type="text/javascript" th:src="@{/static/js/admin/user/testemail.js}" ></script> -->
-<!-- </body> -->
-<!-- </html> -->

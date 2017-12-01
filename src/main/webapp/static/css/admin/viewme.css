@@ -8,6 +8,10 @@ body{
 	width:50%;
 	text-align: right;
 }
+.message{
+	text-align: center;
+	color:red;
+}
 a{
 	text-decoration: none; 
 }
