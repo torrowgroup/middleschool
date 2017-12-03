@@ -1,0 +1,23 @@
+body{
+	margin:0;
+	padding: 0;
+	background: #ebebeb;
+}
+.aa{
+	width: 300px;
+	margin:0 auto;
+	margin-top: 10%;
+}
+.bb{
+	width: 50px;
+	height: 30px;
+	border-radius: 8px;
+	background:#2896ef;
+	color: white;
+	margin-left: 40%;
+}
+.message{
+	text-align: center;
+	color:red;
+	font-size: 16px;
+}

@@ -1,0 +1,21 @@
+.mid p {
+	font-size: 40px;
+	font-family: 楷体;
+	line-height: 90px;
+	text-align: right;
+}
+
+@media ( max-width : 900px) {
+	.sidebar-collapse .nav>li>a {
+		font-size: 12px;
+	}
+	.two {
+		display: none;
+	}
+}
+
+@media ( max-width : 760px) {
+	#date {
+		font-size: 10px;
+	}
+}

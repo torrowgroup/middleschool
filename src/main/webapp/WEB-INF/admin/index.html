@@ -11,7 +11,7 @@
 <div class="total">
 	<div class="topper"> 
 		<div class="one">
-			<img th:src="@{/static/images/admin/navone.png}" alt="">
+			<img th:src="@{/static/images/navone.png}" alt="">
 		</div>  
 		<div class="mid">
 		<ul class="midul">
@@ -67,7 +67,7 @@
 			<ul>
 				<li>
 					<div class="le_1">
-						<a th:href="@{/user/viewMe}" target="ie">
+						<a th:href="@{/user/viewMe}" target="ie" title="个人中心">
 							<img th:src="@{/static/uploadimg/{picture}(picture=${session.admin.usPicture})}" alt="没有图片">
 						</a>
 					</div>
@@ -174,9 +174,7 @@
 				</li>
  			</ul>
 		</div><!-- 左侧菜单 -->
-		<iframe src=""   id="ifr" name="ie">
-		
-		</iframe><!-- iframe标签 -->
+		<iframe src=""   id="ifr" name="ie"></iframe><!-- iframe标签 -->
 	</div>
 	</div>
 </body>
@@ -196,6 +194,5 @@
    	 		$(this).css("backgroundColor", "white");
  		})
     });
-	
 </script>
 </html>

@@ -4,54 +4,71 @@
 
 <head>
 <title>Home</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/managemessage.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
-	<script th:src="@{js/jquery.min.js}"></script>
-	<script th:src="@{js/bootstrap.min.js}"></script>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/css/admin/managemessage.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/css/inquirytable.css}">
+<script th:src="@{js/jquery.min.js}"></script>
+<script th:src="@{js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div>
-	<form th:action="@{/message/manageMessage}">
-		<input type="text" name="inquiry" th:value="${inquiry}" maxlength="20" required="required"/>
-		<input type="submit" value="查询" />
-	</form>
-</div>
-	<div th:text="${msg}"></div>
-	<div th:if="${messagePage.totalCount==0}">查询不到留言信息</div>
-	<div class="aa" th:if="${messagePage.totalCount>0}">
-		<table align="center" class="table-bordered table-hover table-condensed">
-			<tr>
-				<th>标题</th>
-				<th>发布人</th>
-				<th>发布时间</th>
-				<th>状态</th>
-				<th>回复</th>
-				<th>删除</th>
-			</tr>
-			<tr th:each="message,messageStart:${messagePage.lists}">
-				<td th:text="${message.meTitle}">标题</td>
-				<td th:text="${message.meHide}">发布人</td>
-				<td th:text="${message.meIssuingdate}">发布时间</td>
-				<td th:text="${message.meStatus}">状态</td>
-				<td><a th:href="@{/message/toAnswerMessage?(id=${message.meId},page=${messagePage.currPage})}"><span class="glyphicon glyphicon-edit"></span></a></td>
-				<td><a th:href="@{/message/deleteMessage?(id=${message.meId},page=${messagePage.currPage})}"><span class="glyphicon glyphicon-trash"></span></a></td>
-			</tr>
-		</table>
-		<table>
-			<tr>
-				<td class="td2"><span th:if="${messagePage.currPage != 1}">
-						<a th:href="@{/message/manageMessage?(currentPage=1,inquiry=${inquiry})}">[首页]</a>&nbsp;&nbsp;
-						<a th:href="@{/message/manageMessage?(currentPage=${messagePage.currPage-1},inquiry=${inquiry})}">[上一页]</a>&nbsp;&nbsp;
-				</span> <span th:if="${messagePage.currPage == 1}"> [首页][上一页] </span> <span
-					th:each="i:${#numbers.sequence(1,messagePage.totalPage)}">
-					 <a	th:if="${i > messagePage.currPage-3} and ${i < messagePage.currPage+3}"
-						th:href="@{/message/manageMessage?(currentPage=${i},inquiry=${inquiry})}" th:text="${i}">#</a>
-				</span> <span th:if="${messagePage.currPage < messagePage.totalPage}">
-						<a th:href="@{/message/manageMessage?(currentPage=${messagePage.currPage+1},inquiry=${inquiry})}">[下一页]</a>&nbsp;&nbsp;
-				</span> <span th:if="${messagePage.currPage >= messagePage.totalPage}">
-						[下一页] </span></td>
-			</tr>
-		</table>
+	<div th:text="${msg}" class="issucessor"></div>
+	<div class="mainbox">
+		<div>
+			<form th:action="@{/message/manageMessage}" class="inquiry">
+				<input type="text" name="inquiry" th:value="${inquiry}"
+					maxlength="20" required="required" class="inquiryinput" /> 
+				<input type="submit" value="查询" class="btn btn-default inquirysub" />
+			</form>
+		</div>
+		<div th:if="${messagePage.totalCount==0}">查询不到留言信息</div>
+		<div class="aa" th:if="${messagePage.totalCount>0}">
+			<table align="center"
+				class="table-bordered table-hover table-condensed">
+				<tr>
+					<th>标题</th>
+					<th>发布人</th>
+					<th>发布时间</th>
+					<th>状态</th>
+					<th>回复</th>
+					<th>删除</th>
+				</tr>
+				<tr th:each="message,messageStart:${messagePage.lists}">
+					<td th:text="${message.meTitle}">标题</td>
+					<td th:text="${message.meHide}">发布人</td>
+					<td th:text="${message.meIssuingdate}">发布时间</td>
+					<td th:text="${message.meStatus}">状态</td>
+					<td><a
+						th:href="@{/message/toAnswerMessage?(id=${message.meId},page=${messagePage.currPage})}"><span
+							class="glyphicon glyphicon-edit"></span></a></td>
+					<td><a
+						th:href="@{/message/deleteMessage?(id=${message.meId},page=${messagePage.currPage})}"><span
+							class="glyphicon glyphicon-trash"></span></a></td>
+				</tr>
+			</table>
+			<table class="page">
+				<tr>
+					<td class="td2"><span th:if="${messagePage.currPage != 1}">
+							<a
+							th:href="@{/message/manageMessage?(currentPage=1,inquiry=${inquiry})}">[首页]</a>&nbsp;&nbsp;
+							<a
+							th:href="@{/message/manageMessage?(currentPage=${messagePage.currPage-1},inquiry=${inquiry})}">[上一页]</a>&nbsp;&nbsp;
+					</span> <span th:if="${messagePage.currPage == 1}"> [首页][上一页] </span> <span
+						th:each="i:${#numbers.sequence(1,messagePage.totalPage)}">
+							<a
+							th:if="${i > messagePage.currPage-3} and ${i < messagePage.currPage+3}"
+							th:href="@{/message/manageMessage?(currentPage=${i},inquiry=${inquiry})}"
+							th:text="${i}">#</a>
+					</span> <span th:if="${messagePage.currPage < messagePage.totalPage}">
+							<a
+							th:href="@{/message/manageMessage?(currentPage=${messagePage.currPage+1},inquiry=${inquiry})}">[下一页]</a>&nbsp;&nbsp;
+					</span> <span th:if="${messagePage.currPage >= messagePage.totalPage}">
+							[下一页] </span></td>
+				</tr>
+			</table>
+		</div>
 	</div>
 </body>
 </html>

@@ -8,9 +8,11 @@
 	th:href="@{/static/css/admin/viewme.css}">
 <link rel="stylesheet" type="text/css"
 	th:href="@{/static/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css"
+	th:href="@{/static/dist/css/wangEditor.min.css}">
 </head>
 <body>
-	<span th:text="${message}"></span>
+	<div th:text="${message}" class="message"></div>
 	<div class="content">
 		<table class="table table-bordered">
 			<tr>
@@ -45,26 +47,26 @@
 				<th><span>简介</span></th>
 				
 				<td><a href="#"  class="aa"
-					th:onclick="'showIntro(this)'" th:name="${session.admin.usIntroduction}" data-toggle="modal" data-target="#myModal" onfocus="this.blur();">查看简介</a></td>
+					th:onclick="'showIntro(1)'" data-toggle="modal" data-target="#introAch" onfocus="this.blur();">查看简介</a></td>
 			</tr>
 			<tr>
 				<th><span>成就</span></th>
 				
 				<td><a href="#" class="aa"
-					th:onclick="'showIntro(this)'" th:name="${session.admin.usAchievements}" data-toggle="modal" data-target="#myModal" onfocus="this.blur();">查看成就</a></td>
+					th:onclick="'showIntro(2)'" data-toggle="modal" data-target="#introAch" onfocus="this.blur();">查看成就</a></td>
 			</tr>
 			<tr>
 				<th><span>操作</span></th>
 				<td>
-					<a th:href="@{/user/toUpdateMe}" class="aa">修改基本信息</a>
+					<a th:href="@{/user/toUpdateMe}" class="aa">修改个人资料</a>
 					<a th:href="@{/user/toUpdatePsw}" class="udpateP">修改密码</a>
 				</td>
 			</tr>
 		</table>
 </div>
 
-<!-- 模态框（Modal） -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- 模态框（简介） -->
+<div class="modal fade" id="introAch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -72,8 +74,7 @@
 					&times;
 				</button>
 			</div>
-			<div class="modal-body" id="content">
-				没有内容
+			<div class="modal-body" id="introdEditor">
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -82,14 +83,18 @@
 	</div><!-- /.modal -->
 </div>
 <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/admin/user/updateuser.js}" ></script>
 <script th:src="@{/static/js/bootstrap.min.js}"></script>
 <script th:inline="javascript">
-	function showIntro(obj){
-		if(obj.name==null||obj.name==""){
-			obj.name="无";
-		}
-		$('#content').html(obj.name);
+function showIntro(obj){
+	var content = "";	
+	if(obj==1){
+		content = /*[[${session.admin.usIntroduction}]]*/;
+	} else if(obj==2) {
+		content = /*[[${session.admin.usAchievements}]]*/;
 	}
+	$('#introdEditor').html(content);
+}
 </script>
 </body>
 </html>

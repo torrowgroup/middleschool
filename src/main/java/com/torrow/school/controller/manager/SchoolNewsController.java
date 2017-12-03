@@ -125,72 +125,38 @@ public class SchoolNewsController extends BaseController {
 		return this.addNewsJumping(model, 2);
 	}
 
-//	/**
-//	 * @param currentPage
-//	 * @param model
-//	 * @return 校园新闻类/上传/教育教研的管理
-//	 */
-//	@RequestMapping("manageSchoolNews")
-//	public String manageSchoolNews(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
-//			Model model, TbCategory tbCategory) {
-//		TbCategory record = new TbCategory();
-//		// 这步是一般查询
-//		record.setCaId(tbCategory.getCaId());
-//		// 这步是为了模糊查询
-//		if (null != tbCategory.getCaName()) {
-//			String str=tbCategory.getCaName();
-//			//这是为了用来解决中文乱码的问题
-//			Garbled g=new Garbled();
-//			String s=g.getEncoding(tbCategory.getCaName());
-//			if(s=="ISO-8859-1") {
-//				try {
-//					str=g.info(tbCategory.getCaName());
-//				} catch (UnsupportedEncodingException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//			record.setCaName(str);
-//			session.setAttribute("caName", str);
-//			// session和model是不同的,接下来两个model是为了把数据返回到前台,以便分页进行使用
-//			model.addAttribute("caName", str);
-//		}
-//		// 携带的参数包括分页依据和查询条件还有显示条数
-//		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页10条数据
-//		session.setAttribute("currentPage", currentPage);
-//		model.addAttribute("zid", tbCategory.getCaId());
-//		TbCategory t = categoryService.selectByPrimaryKey(tbCategory.getCaId());
-//		if (t.getCaPid() == 3 || t.getCaPid() == 9 || t.getCaPid() == 12) {
-//			return "admin/schoolnews/manageupload";
-//		}
-//		return "admin/schoolnews/manageschoolnews";
-//	}
-
-	// /**
-	// * @param currentPage
-	// * @param model
-	// * @return 上传类的管理
-	// */
-	// @RequestMapping("manageUpload")
-	// public String manageUpload(@RequestParam(value = "currentPage", defaultValue
-	// = "1") int currentPage, Model model,
-	// TbCategory tbCategory) {
-	// TbCategory record = new TbCategory();
-	// //这步是一般查询
-	// record.setCaId(tbCategory.getCaId());
-	// //这步是为了模糊查询
-	// if(null!=tbCategory.getCaName()) {
-	// record.setCaName(tbCategory.getCaName());
-	// }
-	// //携带的参数包括分页依据和查询条件还有显示条数
-	// model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage,
-	// record, 10));// 回显分页10条数据
-	// session.setAttribute("currentPage", currentPage);
-	// session.setAttribute("caName", tbCategory.getCaName());
-	// //session和model是不同的,接下来两个model是为了把数据返回到前台,以便分页进行使用
-	// model.addAttribute("caName", tbCategory.getCaName());
-	// model.addAttribute("zid", tbCategory.getCaId());
-	// return "admin/schoolnews/manageupload";
-	// }
+	/**
+	 * @param currentPage
+	 * @param model
+	 * @return 校园新闻类/上传/教育教研/校园文学的管理
+	 * 这个会发生中文乱码问题写过滤器时会处理
+	 * String userName = new String(name.getByte("ISO-8859-1"),"utf-8");
+	 */
+	@RequestMapping("manageSchoolNews")
+	public String manageSchoolNews(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
+			Model model, TbCategory tbCategory) {
+		TbCategory record = new TbCategory();
+		//这步是一般查询
+		record.setCaId(tbCategory.getCaId());
+		//这步是为了模糊查询
+		if(null!=tbCategory.getCaName()) {
+			record.setCaName(tbCategory.getCaName());
+		}
+		//携带的参数包括分页依据和查询条件还有显示条数
+		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页10条数据
+		session.setAttribute("currentPage", currentPage);
+		session.setAttribute("caName", tbCategory.getCaName());
+		//session和model是不同的,接下来两个model是为了把数据返回到前台,以便分页进行使用
+		model.addAttribute("caName", tbCategory.getCaName());
+		model.addAttribute("zid", tbCategory.getCaId());
+		TbCategory t = categoryService.selectByPrimaryKey(tbCategory.getCaId());
+		if(t.getCaPid()==3||t.getCaPid()==9||t.getCaPid()==12) {
+			return "admin/schoolnews/manageupload";
+		} else if(t.getCaPid()==6){
+			return "admin/notice/managenotice";
+		}
+		return "admin/schoolnews/manageschoolnews";
+	}
 
 	/**
 	 * @param id
@@ -214,33 +180,6 @@ public class SchoolNewsController extends BaseController {
 		return "admin/schoolnews/managenews";
 	}
 
-	// /**
-	// * @param model
-	// * @param id
-	// * @param reTitle
-	// * @param reContent
-	// * @return 修改学校新闻
-	// */
-	// @RequestMapping("updateSchoolNews")
-	// public String updateGeneral(Model model, @RequestParam(value = "picture",
-	// required = false) MultipartFile[] picture,
-	// TbResource tbResource) throws IllegalStateException, IOException {
-	// TbResource tb = resourceService.selectByPrimaryKey(tbResource.getReId());
-	// if (null != tb) {
-	// tb.setReContent(tbResource.getReContent());
-	// tb.setReTitle(tbResource.getReTitle());
-	// int i = resourceService.updateByPrimaryKey(tb);
-	// if (i != 0) {
-	// model.addAttribute("message", "保存成功");
-	// } else {
-	// model.addAttribute("message", "保存失败");
-	// }
-	// } else {
-	// model.addAttribute("message","这条新闻不存在");
-	// return "admin/empty";
-	// }
-	// return this.selectOneNews(tbResource.getReId(), model);
-	// }
 
 	/**
 	 * @param model

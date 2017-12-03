@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+body{
+	background-color: #eeeeec;
+}
+.notice{
+	width: 60%;
+	text-align: center;
+	margin: 3% auto;
+}
+th{
+	text-align: center;
+	background-color: #c1bac3;
+}
+table {
+	background-color: white;
+}
+.page{
+	background-color: #eeeeec;
+}

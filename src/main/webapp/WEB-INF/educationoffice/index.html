@@ -2,11 +2,83 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 
-<head>
-<title>home</title>
+<title>教研组登录</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/educationoffice/indexone.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/index.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
 </head>
-<body>
-
+<body onload="getdates()">
+<div class="total">
+	<div class="topper">
+		<div class="one">
+			<img th:src="@{/static/images/navone.png}" alt="">
+		</div>  
+		<div class="mid"><p>欢迎教研组登录</p></div>	
+		<div class="two">  
+			<ul>
+				<li><div class="le_1"><a href="viewme.html" target="ie"><img th:src="@{/static/uploadimg/{picture}(picture=${session.education.usPicture})}" alt=""></a></div></li>
+				<li><a th:href="@{/loginOut}" title="退出"><span class="glyphicon glyphicon-log-out" ></span></a></li>
+			</ul>
+		</div> 
+	</div><!-- 头部结束 -->
+	<div class="box"><!-- 左侧菜单和iframe -->
+		<div class="sidebar-collapse">
+			<ul class="nav" id="main-menu">
+				<li>
+					<div id="date">
+					</div>
+				</li>
+				<!-- 教育教研管理 -->
+				<li class="lione">
+					<a th:href="@{/education/uploadEducation}" target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;上传教育教研</a>
+				</li>
+				<li class="lione">
+					<a href="#" class="out"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;查看教育教研<span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <ul class="nav nav-second-level">
+<!-- 	                     <li th:each="category,categoryStart:${newsList}" class="hr"> -->
+<!-- 							  <a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}" target="ie" class="out1"> <span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}"></span></a> -->
+<!-- 						</li> -->
+						<li th:each="category,categoryStart:${educationList}">
+							<a th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"
+							th:text="${category.caName}"></a>
+						</li>
+                    </ul>
+				</li>
+				<li class="lione">
+					<a th:href="@{/education/schoolLiterature}" class="out2" target="ie"><span
+						class="glyphicon glyphicon-tree-conifer"></span>&nbsp;&nbsp;上传校园文学</a>
+						<ul class="nav nav-second-level">
+						<li th:each="category,categoryStart:${literatureList}">
+							<a th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"
+								th:text="${category.caName}" target="ie" class="out2"><span
+								class="glyphicon glyphicon-list-alt"></span></a>
+						</li>
+                    </ul>
+				</li>
+				<!-- 新闻管理 -->
+				<li class="lione">
+					<a href="addlink.html" target="ie"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;新闻管理</a>
+				</li>
+ 			</ul>
+		</div><!-- 左侧菜单 -->
+		<iframe src=""   id="ifr" name="ie"></iframe><!-- iframe标签 -->
+	</div>
+	</div>
+	<script th:src="@{/static/js/jquery.min.js}"></script>
+	<script th:src="@{/static/js/admin/index.js}"></script>
+	<script th:src="@{/static/js/bootstrap.min.js}"></script>
+	<script>
+		function reinitIframe(){
+			var iframe = document.getElementById("ifr");
+			try{
+				iframe.height =  iframe.contentWindow.document.documentElement.scrollHeight;
+			}catch (ex){}
+		}
+		window.setInterval("reinitIframe()", 200);
+	</script>
+</body>
+</html>
+<!-- 
 	<a th:href="@{/education/uploadEducation}" target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;教育教研上传</a>
 	<div th:each="category,categoryStart:${educationList}">
 		<a th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"
@@ -25,5 +97,4 @@
 			th:text="${category.caName}" target="ie" class="out2"><span
 			class="glyphicon glyphicon-list-alt"></span></a>
 	</div>
-</body>
-</html>
+ -->

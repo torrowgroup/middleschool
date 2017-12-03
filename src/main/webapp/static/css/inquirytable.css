@@ -1,6 +1,8 @@
 @charset "UTF-8";
+
+
 .inquiry{
-	margin:20px 0px;
+	margin:20px 0;
 	float:right;
 }
 
@@ -30,7 +32,7 @@ td{
 	text-align: center;
 	height:30px !important;
 	line-height:30px !important;
-	padding:5px!important;
+	padding:0px!important;
 	vertical-align:middle !important;
 	font-size:16px;
 }
@@ -39,3 +41,11 @@ td{
 	font-size:16px;
 	color:red;
 }
+.mainbox{
+	width:80%;
+	margin:0 auto;
+	/* clear:both; */
+	/* width:500px;
+	overflow: hidden; */
+}
+

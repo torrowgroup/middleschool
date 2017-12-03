@@ -75,12 +75,10 @@ public class CategoryController extends BaseController {
 				}
 			}
 		}
-		log.info("---------------------"+inquiry);
 		model.addAttribute("pagemsg", categoryService.findingByPaging(currentPage, inquiry, 8));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
 		session.setAttribute("inquiry", inquiry);
 		model.addAttribute("inquiry", inquiry);
-		log.info("---------------------"+inquiry+"=================================");
 		return "admin/category/managecategory";
 	}
 
