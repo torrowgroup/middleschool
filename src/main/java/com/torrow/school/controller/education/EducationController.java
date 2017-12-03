@@ -1,5 +1,6 @@
 package com.torrow.school.controller.education;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
@@ -38,11 +40,11 @@ public class EducationController extends BaseController {
 	/**
 	 * @param model
 	 * @param Pid
-	 * @return 教研组的上传
+	 * @return 教研组的上传  张金高改
 	 */
 	@RequestMapping("uploadEducation")
 	public String uploadEducation(Model model) {
-		TbUser tbUser=(TbUser)session.getAttribute("education");
+		TbUser tbUser=(TbUser)session.getAttribute("teacher");
 		List<TbCategory> list=categoryService.selectAll();
 		boolean enough=false;
 		if(!list.isEmpty()) {
@@ -53,31 +55,22 @@ public class EducationController extends BaseController {
 				}
 			}
 		}
-		if(enough==false) {
-			model.addAttribute("message","请先去类别类中添加相应类别");
-			return "educationoffice/empty";
+		if(!enough) {
+			model.addAttribute("message","你没有权利上传教研文件");
 		}
 		return "educationoffice/uploadfile";
 	}
 
-	@RequestMapping("schoolLiterature")
-	public String schoolLiterature(Model model) {
-		TbUser tbUser=(TbUser)session.getAttribute("education");
-		List<TbCategory> list=categoryService.selectAll();
-		boolean enough=false;
-		if(!list.isEmpty()) {
-			for(TbCategory item:list) {
-				if(tbUser.getCaName().equals(item.getCaName())) {
-					model.addAttribute("TbCategory",item);
-					enough=true;
-				}
-			}
-		}
-		if(enough==false) {
-			model.addAttribute("message","请先去类别类中添加相应类别");
-			return "educationoffice/empty";
-		}
-		return "educationoffice/uploadfile";
+	/**
+	 * @param model 到达上传校园文学界面 张金高
+	 * @return
+	 */
+	@RequestMapping("toUploadLiterature")
+	public ModelAndView toUploadLiterature(Model model) {
+		int pid = 12; //校园文学
+		List<TbCategory> list = categoryService.queryByPid(pid);
+		model.addAttribute("literatureList", list);
+		return new ModelAndView("educationoffice/uploadliterature");
 	}
 	/**
 	 * @param currentPage
@@ -136,6 +129,41 @@ public class EducationController extends BaseController {
 
 	
 	/**
+	 * @param caId	上传的文学类别
+	 * @param file 上传文件
+	 * @throws Exception
+	 *  上传校园文学文件 张金高
+	 */
+	@RequestMapping("uploadLiterature")
+	public ModelAndView uploadLiterature(int caId,MultipartFile file,Model model) throws Exception{
+		TbCategory category = categoryService.selectByPrimaryKey(caId);
+		if(category!=null){
+			List<TbResource> resource = resourceService.selectAll();
+			for (TbResource en : resource) {
+				if (en.getCaId() == category.getCaId()) {
+					if (file.getOriginalFilename().equals(en.getReContent())) {
+						model.addAttribute("message", "该文件已存在,上传失败");
+							return this.toUploadLiterature(model);
+					}
+				}
+			}
+			DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd"); // HH表示24小时制；
+			String Date = dFormat.format(new Date());
+			String path = session.getServletContext().getRealPath("/static/uploadimg");
+			String reContent = resourceService.uploadFile(file, path);
+			TbUser user = (TbUser) session.getAttribute("teacher");
+			TbResource tb = new TbResource(caId,user.getUsName(), Date, category.getCaName(), file.getOriginalFilename(), reContent);
+			int boo = resourceService.insert(tb);
+			if(boo==1){
+				model.addAttribute("message", "添加成功");				
+			} else {
+				model.addAttribute("message", "添加失败");
+			}
+		}
+		return this.toUploadLiterature(model);
+	}
+	
+	/**
 	 * 文件下载功能
 	 * 
 	 * @param request
@@ -146,4 +174,77 @@ public class EducationController extends BaseController {
 	public void down(HttpServletRequest request, HttpServletResponse response, int id) throws Exception {
 		resourceService.down(request, response, id);
 	}
+	
+	/**
+	 * @return个人中心
+	 */
+	@RequestMapping("viewMe")
+	public ModelAndView viewMe(){
+		return new ModelAndView("educationoffice/updateme");
+	}
+	
+	@RequestMapping("updateMe")
+	public ModelAndView updateMe(TbUser user,MultipartFile picture,Model model) throws Exception{
+		TbUser me = (TbUser)session.getAttribute("teacher");
+		if(me!=null){
+			user.setUsId(me.getUsId());//封装前台此界面不能修改的项
+			user.setCaId(me.getCaId());
+			user.setCaName(me.getCaName());
+			user.setUsPassword(me.getUsPassword());
+			user.setUsPicture(me.getUsPicture());
+			if(!picture.getOriginalFilename().equals("")){//如果用户上传了图片，则换掉原来的图片
+				String path = session.getServletContext().getRealPath("/static/uploadimg");
+				File file = new File(path+"/"+me.getUsPicture());
+				if(file.exists()){	//删掉不用的图片
+					file.delete();
+				}
+				String fileName = userService.uploadPicture(picture, path);
+				user.setUsPicture(fileName);
+			}
+			int boo = userService.updateByPrimaryKey(user);
+			if(boo==1){
+				model.addAttribute("message", "修改完成");
+				session.setAttribute("teacher", user);
+			} else {
+				model.addAttribute("message", "修改失败");
+			}
+		}
+		return new ModelAndView("educationoffice/updateme");
+	}
+	
+	/**
+	 * @return到达修改密码界面
+	 */
+	@RequestMapping("toUpdatePsw")
+	public ModelAndView tpUpdatePsw(){
+		return new ModelAndView("educationoffice/updatepsw");
+	}
+	
+	/**
+	 * @param oldPsw 旧密码
+	 * @param psw 新密码
+	 * @return 修改密码
+	 */
+	@RequestMapping("updatePsw")
+	public ModelAndView updatePsw(String oldPsw,String password,Model model){
+		TbUser user = (TbUser) session.getAttribute("teacher");
+		String message = "修改失败,密码输入错误";
+		if(user!=null&&user.getUsPassword().equals(oldPsw)){
+			if(oldPsw.equals(password)){
+				message="修改失败，旧密码和新密码相同";
+			} else { 
+				user.setUsPassword(password);
+				int boo = userService.updateByPrimaryKey(user);
+				if(boo==1){
+					message = "修改成功";
+					session.setAttribute("teacher", user);
+				} else {
+					message = "修改失败";
+				}
+			}
+		}
+		model.addAttribute("message", message);
+		return new ModelAndView("educationoffice/updatepsw");
+	}
+	
 }

@@ -107,6 +107,10 @@ public class UserController extends BaseController {
 	// 到达修改用户界面
 	@RequestMapping("toUpdateUser")
 	public String toUpdateUser(int id,int page, Model model) {
+		TbUser sessionUser = (TbUser)session.getAttribute("admin");
+		if (sessionUser!=null&&sessionUser.getUsId()==id) {//如果修改的是自己，到达个人中心
+			return "admin/user/viewme";
+		}
 		TbUser tbUser = userService.selectById(id);
 		List<Integer> pidList = new ArrayList<Integer>();
 		pidList.add(3);// 将机构部3，用户4放进集合中
@@ -167,7 +171,7 @@ public class UserController extends BaseController {
 				}
 			}
 		}
-		model.addAttribute("msg", msg);
+		model.addAttribute("message", msg);
 		return this.manageUser(page,null, model);
 	}
 	
@@ -181,7 +185,6 @@ public class UserController extends BaseController {
 		List<Integer> pidList = new ArrayList<Integer>();
 		pidList.add(3);// 将机构部3，管理员4，教师5放进集合中
 		pidList.add(4);
-		pidList.add(5);
 		List<TbCategory> list = categoryService.selectByPid(pidList);// 得到所有身份记录
 		model.addAttribute("categoryList", list);//将身份封装进model
 		return "admin/user/viewme";

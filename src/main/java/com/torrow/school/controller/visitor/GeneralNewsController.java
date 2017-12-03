@@ -44,8 +44,11 @@ public class GeneralNewsController extends BaseController {
 		categoryService.getCategory(gId,model);//将学校概括等菜单项封装进model，以及用户选择的功能项
 		resourceService.getTimeInfor(model);//得到考试和联系信息
 		TbCategory category = categoryService.selectByPrimaryKey(gId);
+		log.info("--"+category);
 		if(category.getCaPid()==7){	 //查看校园风光时调用
-			PageBean<TbResource> resourceList = resourceService.findingByPaging(currentPage, category,6);
+			TbCategory categoryInquiry = new TbCategory();
+			categoryInquiry.setCaId(category.getCaId());
+			PageBean<TbResource> resourceList = resourceService.findingByPaging(currentPage, categoryInquiry,6);
 			model.addAttribute("views", resourceList);
 			return new ModelAndView("visitor/schoolviews");
 		}
