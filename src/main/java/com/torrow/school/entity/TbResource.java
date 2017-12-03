@@ -41,7 +41,6 @@ public class TbResource implements Serializable {
 		this.reIssuingdate = reIssuingdate;
 		this.reContent = reContent;
 	}
-
 	public TbResource(Integer caId,String reIssuer, String reIssuingdate,String caName, String reTitle,
 			String reContent) {
 		super();
@@ -52,17 +51,7 @@ public class TbResource implements Serializable {
 		this.reTitle = reTitle;
 		this.reContent = reContent;
 	}
-	public TbResource(Integer caId, String reIssuingdate,String caName, String reTitle,
-			String reContent,String reIssuer) {
-		super();
-		this.caId = caId;
-		this.reIssuingdate = reIssuingdate;
-		this.caName = caName;
-		this.reTitle = reTitle;
-		this.reContent = reContent;
-		this.reIssuer = reIssuer;
-	}
-	
+
 	public TbResource(Integer caId, String reIssuingdate,String caName, String reTitle,
 			String reContent) {
 		super();

@@ -12,7 +12,7 @@
 <div class="aa">
 <div th:text="${message}"></div>
 <span th:if ="${pagemsg.totalCount}==0">
-        没有任何轮播图信息!
+        没有任何图片信息!
     </span>
  <div th:if ="${pagemsg.totalCount}!=0">
  		<form th:action="@{/news/manageObject}"  class="inquiry" method="post">

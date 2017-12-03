@@ -15,7 +15,7 @@
 </div>
  <div th:if ="${pagemsg.totalCount}!=0">
 <!--模糊查询  -->
- <div class="aa">
+  <div class="mainbox">
  	    <form th:action="@{/political/managePolitical}" class="inquiry" method="post">
 		 	<input type="hidden" name="caId" th:value="${zid}">
 		    <input type="text" name="caName" class="inquiryinput" placeholder="文件名称" required/>
@@ -25,6 +25,7 @@
        		 <thead>
 	            <tr>
 	                <th><span>文件名称</span></th>
+	                <th><span>上传人</span></th>
                 	<th><span>上传的时间</span></th>
                 	<th><span>操作</span></th>
 	            </tr>
@@ -32,6 +33,7 @@
             <tbody>
             	<tr th:each="news,newsStart:${pagemsg.lists}">
                 	<td th:text="${news.reTitle}">${news.reTitle}</td>
+                	<td th:text="${news.reIssuer}">${news.reIssuer}</td>
                 	<td th:text="${news.reIssuingdate}">${news.reIssuingdate}</td>
                 	<td><a th:href="@{/political/down?(id=${news.reId})}">下载</a></td>
                 </tr>

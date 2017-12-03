@@ -61,7 +61,7 @@ public class CategoryController extends BaseController {
 				}
 			}
 		}
-		if(one.size()==1||one.size()>5) {
+		if(one.size()==1||one.size()>7) {
 			return "admin/category/addcategory";
 		}
 		if (null != tbCategory) {

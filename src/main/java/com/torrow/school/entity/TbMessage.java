@@ -43,7 +43,6 @@ public class TbMessage implements Serializable {
 		this.spare = null;
 	}
 	
-	
 	public TbMessage( String meTitle, String mePicture, String meHide, String meIssuingdate, String meStatus,
 			String meContent, String meReply, String spare) {
 		super();

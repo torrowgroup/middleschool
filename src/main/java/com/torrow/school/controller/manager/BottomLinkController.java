@@ -48,6 +48,7 @@ public class BottomLinkController extends BaseController {
 		}
 		TbResource record = new TbResource("底部链接",tbResource.getReTitle(),
 				tbResource.getReContent());
+		record.setCaId(0);
 		int i = resourceService.insert(record);
 		if (i != 0) {
 			model.addAttribute("message", "添加成功");
