@@ -111,23 +111,19 @@
     <div class="mainBox">
         <div class="container mainCenter">
             <div class="row mainTop">
-                <div class="col-sm-3 col-xs-6 mainLeft">
-                    <h3>
-                    	<a th:href="@{/visitorGN/viewGeneral?(gId= ${schoolGeneralIndex.caId})}">学校概况</a>
-                    </h3>
-					<p><a th:href="@{/visitorGN/viewGeneral?(gId= ${schoolGeneralIndex.caId})}" id="schoolGeneralIndex">学校简介</a></p>                    
-                </div>
-                <div class="col-sm-3 col-xs-6 mainLeft">
-                    <h3><a th:href="@{/visitorGN/viewGeneral?(gId= ${schoolHistory.caId})}">建校历史</a></h3>
-                    <p><a th:href="@{/visitorGN/viewGeneral?(gId= ${schoolHistory.caId})}" id="schoolHistory">建校历史</a></p>
-                </div>
-                <div class="col-sm-3 col-xs-6 mainLeft">
-                    <h3><a th:href="@{/visitorGN/viewGeneral?(gId= ${schoolHonorIndex.caId})}">学校荣誉</a></h3>
-                    <p><a th:href="@{/visitorGN/viewGeneral?(gId= ${schoolHonorIndex.caId})}" id="schoolHonorIndex">学校荣誉</a></p>
-                </div>
-                <div class="col-sm-3 col-xs-6 mainLeft" style="border: none">
-                    <h3><a th:href="@{/visitorGN/viewGeneral?(gId= ${educationAchieveIndex.caId})}">教学成果</a></h3>
-                    <p><a th:href="@{/visitorGN/viewGeneral?(gId= ${educationAchieveIndex.caId})}" id="educationAchieveIndex">教学成果</a></p>
+            	<div th:each="resource,resourceS:${generalIndex}">
+	                <div class="col-sm-3 col-xs-6 mainLeft" th:if="${resourceS.index!=3}">
+	                    <h3>
+	                    	<a th:href="@{/visitorGN/viewGeneral?(gId= ${resource.caId})}" th:text="${resource.reTitle}">标题</a>
+	                    </h3>
+						<p><a th:href="@{/visitorGN/viewGeneral?(gId= ${resource.caId})}" class="generalIndex" th:name="${resource.reContent}">内容</a></p>                    
+	                </div>
+	                <div class="col-sm-3 col-xs-6 mainLeft" th:if="${resourceS.index==3}" style="border: none">
+	                    <h3>
+	                    	<a th:href="@{/visitorGN/viewGeneral?(gId= ${resource.caId})}" th:text="${resource.reTitle}">标题概况</a>
+	                    </h3>
+						<p><a th:href="@{/visitorGN/viewGeneral?(gId= ${resource.caId})}" class="generalIndex" th:name="${resource.reContent}">内容</a></p>                    
+	                </div>
                 </div>
             </div>
             <div class="row">
@@ -159,17 +155,19 @@
                 </div>
                 <div class="col-sm-3 col-xs-12 hidden-xs">
                     <div class="mainBheader changeColor1">
-                        <a th:href="@{/visitorNEL/viewTeacherIntroActieve?ask=intro}" target="_blank">名师推荐 <span class="pull-right">&gt; 更多</span></a>
+                        <a th:href="@{/visitorNEL/viewTeacherIntroActieve?ask=intro}" target="_blank">教师剪影 <span class="pull-right">&gt; 更多</span></a>
                     </div>
-                    <div class="teacher1">
+                    <div class="teacher1" th:if="${famousTeacherOne!=null}">
                     	<a th:href="@{/visitorNEL/teacherDetail?(usId=${famousTeacherOne.usId})}">
 	                        <img th:src="@{/static/uploadimg/{picture}(picture=${famousTeacherOne.usPicture})}" alt="没有上传图片">
 	                        <span th:text="${famousTeacherOne.usName}">名师</span>
                     	</a>
                     </div>
-                    <div class="teacher2">
+                    <div class="teacher2"  th:if="${famousTeacherTwo!=null}">
+                    	<a th:href="@{/visitorNEL/teacherDetail?(usId=${famousTeacherTwo.usId})}">
 	                        <img th:src="@{/static/uploadimg/{picture}(picture=${famousTeacherTwo.usPicture})}" alt="没有上传图片">
 	                        <span th:text="${famousTeacherTwo.usName}">名师</span>
+	                    </a>
                     </div>
                 </div>
             </div>
@@ -201,21 +199,10 @@
 	var today = new Date();	//获得今天时间
 	var todayTime = today.getFullYear()+"年"+today.getMonth()+"月"+today.getDate()+"日"; 
 	$('#todayTime').text(todayTime);
-	var schoolGeneralIndex = /*[[${schoolGeneralIndex}]]*/ null;//学校简介
-	var schoolHistory = /*[[${schoolHistory}]]*/ null;//建校历史
-	var schoolHonorIndex = /*[[${schoolHonorIndex}]]*/ null;//学校荣誉
-	var educationAchieveIndex = /*[[${educationAchieveIndex}]]*/ null;//教学成果
-	if(schoolGeneralIndex!=null){
-		$('#schoolGeneralIndex').html(schoolGeneralIndex.reContent)	
-	}
-	if(schoolHistory!=null){
-		$('#schoolHistory').html(schoolHistory.reContent);
-	}
-	if(schoolHonorIndex!=null){
-		$('#schoolHonorIndex').html(schoolHonorIndex.reContent);
-	}
-	if(educationAchieveIndex!=null){
-		$('#educationAchieveIndex').html(educationAchieveIndex.reContent);
+	
+	var generalIndex = $(".generalIndex");
+	for(var i=0;i<generalIndex.length;i++){
+		$(generalIndex[i]).html($(generalIndex[i]).attr("name"));
 	}
 </script>
 </body>

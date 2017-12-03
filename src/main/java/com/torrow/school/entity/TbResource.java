@@ -29,7 +29,7 @@ public class TbResource implements Serializable {
 	public TbResource() {
 		super();
 	}
-
+	
 	public TbResource(Integer reId,Integer caId, String caName, String reTitle, String reIssuer, String reIssuingdate,
 			String reContent) {
 		super();
@@ -41,7 +41,7 @@ public class TbResource implements Serializable {
 		this.reIssuingdate = reIssuingdate;
 		this.reContent = reContent;
 	}
-
+	//张金高用
 	public TbResource(Integer caId,String reIssuer, String reIssuingdate,String caName, String reTitle,
 			String reContent) {
 		super();

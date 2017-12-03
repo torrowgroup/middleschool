@@ -15,14 +15,9 @@
 </div>
  <div th:if ="${pagemsg.totalCount}!=0">
 <!--模糊查询  -->
-<<<<<<< HEAD
  <div class="aa">
- 	    <form th:action="@{/news/manageObject}" class="inquiry" method="post">
-=======
-<!--  <div class="aa"> -->
 <div class="mainbox">
- 	    <form th:action="@{/news/manageSchoolNews}" class="inquiry" method="post">
->>>>>>> 96f7274b47811cce8eef5780b6ffb6bf3fc0a31d
+ 	    <form th:action="@{/news/manageObject}" class="inquiry" method="post">
 		 	<input type="hidden" name="caId" th:value="${zid}">
 		    <input type="text" name="caName" class="inquiryinput" placeholder="文件名称" required/>
 		    <input type="submit" value="查询" class="btn btn-default inquirysub" title="查询">   
