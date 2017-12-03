@@ -43,31 +43,62 @@ public class LoginController extends BaseController {
 	 * @param model
 	 * @return 登陆的方法
 	 */
+//	@RequestMapping("userLogin")
+//	public String login(String usEmail,String usPassword,Model model){
+//		TbUser tbUser=userService.login(usEmail,usPassword);
+//		if(null!=tbUser) {
+//			model.addAttribute("msg", "登录成功");
+//			//这个方法是为了获得首页的显示数据
+//			categoryService.findAllCategory(model);
+//			TbCategory tbCategory = categoryService.selectByPrimaryKey(tbUser.getCaId());
+//			//进入机构部的管理页面
+//			if(tbCategory.getCaPid()==3) {
+//				session.setAttribute("education", tbUser);
+//				return "educationoffice/index";
+//			} else if(tbUser.getCaName().equals("政教处")) {
+//				session.setAttribute("political",tbUser);
+//				return "politicaleducation/index";
+//			} else if(tbUser.getCaName().equals("教师")) {
+//				session.setAttribute("teacher",tbUser);
+//				return "teacher/index";
+//			}
+//			session.setAttribute("admin",tbUser);
+//			return "admin/index";
+//		}else {
+//			model.addAttribute("msg", "用户名或密码错误");
+//		}
+//		return "index";
+//	}
+	
+	/**
+	 * @param usEmail
+	 * @param usPassword
+	 * @param model
+	 * @return 登陆的方法   张金高改，合并身份页面
+	 */
 	@RequestMapping("userLogin")
-	public String login(String usEmail,String usPassword,Model model){
+	public ModelAndView login(String usEmail,String usPassword,Model model){
 		TbUser tbUser=userService.login(usEmail,usPassword);
+		String view = "index";
 		if(null!=tbUser) {
-			model.addAttribute("msg", "登录成功");
-			//这个方法是为了获得首页的显示数据
-			categoryService.findAllCategory(model);
+			categoryService.findAllCategory(model);			//这个方法是为了获得首页的显示数据
 			TbCategory tbCategory = categoryService.selectByPrimaryKey(tbUser.getCaId());
-			//进入机构部的管理页面
-			if(tbCategory.getCaPid()==3) {
-				session.setAttribute("education", tbUser);
-				return "educationoffice/index";
-			} else if(tbUser.getCaName().equals("政教处")) {
-				session.setAttribute("political",tbUser);
-				return "politicaleducation/index";
-			} else if(tbUser.getCaName().equals("教师")) {
-				session.setAttribute("teacher",tbUser);
-				return "teacher/index";
+			if(tbUser.getCaName().equals("管理员")){
+				session.setAttribute("admin",tbUser);
+				view = "admin/index";
+			} else {
+				session.setAttribute("teacher", tbUser);
+				if(tbCategory.getCaPid()==3) {//属于教育教研
+					model.addAttribute("identity", "教研组");
+				} else if(tbUser.getCaName().equals("政教处")) {
+//					session.setAttribute("political",tbUser);
+				}	
+				view = "educationoffice/index";
 			}
-			session.setAttribute("admin",tbUser);
-			return "admin/index";
 		}else {
 			model.addAttribute("msg", "用户名或密码错误");
 		}
-		return "index";
+		return new ModelAndView(view);
 	}
 	
 	/**

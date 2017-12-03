@@ -18,7 +18,7 @@ public class TbResource implements Serializable {
 
     private String reTitle;		//资源标题，图片简介，链接名称
 
-    private String reIssuer;	//发布人或者通知对象
+    private String reIssuer;	//发布人或者通知对象(姓名)
 
     private String reIssuingdate;	//发布日期
 
@@ -42,6 +42,16 @@ public class TbResource implements Serializable {
 		this.reContent = reContent;
 	}
 
+	public TbResource(Integer caId,String reIssuer, String reIssuingdate,String caName, String reTitle,
+			String reContent) {
+		super();
+		this.caId = caId;
+		this.reIssuer = reIssuer;
+		this.reIssuingdate = reIssuingdate;
+		this.caName = caName;
+		this.reTitle = reTitle;
+		this.reContent = reContent;
+	}
 	public TbResource(Integer caId, String reIssuingdate,String caName, String reTitle,
 			String reContent,String reIssuer) {
 		super();
@@ -62,7 +72,6 @@ public class TbResource implements Serializable {
 		this.reTitle = reTitle;
 		this.reContent = reContent;
 	}
-	
 	public TbResource(Integer caId,String caName,
 			String reContent) {
 		super();

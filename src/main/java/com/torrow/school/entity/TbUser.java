@@ -15,7 +15,7 @@ public class TbUser implements Serializable {
     private String usSex;	//用户性别
     private Integer caId;	//身份编号，类别类编号
     private String caName;	//身份名称
-    private String usPhone;	//联系方式
+    private String usPhone;	//联系方式	
     private String usPicture;	//用户照片
     private String usIntroduction;	//用户简介
     private String usAchievements;	//用户成就

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Home</title>
+</head>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/dist/css/wangEditor.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/teacher/updateme.css}">
+<body>
+<div class="content">
+	<div th:text="${message}" class="message"></div>
+	<form th:action="@{/education/updateMe}" method="post" enctype="multipart/form-data" onsubmit="modifyContent()">
+		<table class="table table-bordered">
+			<tr>
+				<td>邮箱</td>
+				<td>
+					<input type="email" name="usEmail" id="usEmail" required th:value="${session.teacher.usEmail}" th:oninput="'testEmail()'" maxlength="25"/>
+					<span id="ok" class="glyphicon glyphicon-ok" style="display: none;"></span>
+					<span id="wrong" class="glyphicon glyphicon-remove" style="display: none;"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>姓名</td>
+				<td><input type="text" name="usName" th:value="${session.teacher.usName}" /></td>
+			</tr>
+			<tr>
+				<td>性别</td>
+				<td><input name="usSex" type="radio" value="男"
+					th:checked="${session.teacher.usSex=='男'}" />男 <input name="usSex"
+					type="radio" value="女" th:checked="${session.teacher.usSex=='女'}" />女
+				</td>
+			</tr>
+			<tr>
+				<td>身份</td>
+				<td th:text="${session.teacher.caName}"></td>
+			</tr>
+			<tr>
+				<td>联系方式</td>
+				<td><input type="text" name="usPhone"
+					th:value="${session.teacher.usPhone}" maxlength="11"/></td>
+			</tr>
+			<tr>
+				<td>照片</td>
+				<td>
+					<div class="col-sm-9 big-photo">
+						<div id="preview">
+							<img id="imghead" border="0" alt="未上传图片"
+								th:src="@{/static/uploadimg/{picture}(picture=${session.teacher.usPicture})}"
+								width="90" height="90" onclick="$('#previewImg').click();">
+						</div>
+						<input type="file" name="picture" onchange="previewImage(this)"
+							style="display: none;" id="previewImg" accept="image/*">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>简介</td>
+				<td>
+					<div id="introduction">
+						<textarea style="display: none;" name="usIntroduction"
+							id="usIntroduction"></textarea>
+					</div> <a href="#" id="introShow" data-toggle="modal" data-target="#intro">修改简介</a>
+				</td>
+			</tr>
+			<tr>
+				<td>成就</td>
+				<td>
+					<div id="achievements">
+						<textarea style="display: none;" name="usAchievements"
+							id="usAchievements"></textarea>
+					</div> <a href="#" id="achieveShow" data-toggle="modal" data-target="#achieve">修改成就</a>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" id="sure" value="确认修改"/>
+					<a th:href="@{/education/toUpdatePsw}" class="udpateP">修改密码</a>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="intro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+			</div>
+			<!-- 简介 -->
+			<div class="modal-body" id="introdEditor" style="height: 300px;"></div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="achieve" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+			</div>
+			<!-- 成就 -->
+			<div class="modal-body" id="achieveEditor" style="height: 300px;"></div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+<script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/admin/user/updateuser.js}" ></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap.min.js}" ></script>
+<script type="text/javascript" th:src="@{/static/js/teacher/user/testemail.js}" ></script>
+<script type="text/javascript" th:src="@{/static/js/upload.js}"></script>
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	window.onload=function(){
+		var usIntroduction = /*[[${session.teacher.usIntroduction}]]*/;//给两个富文本赋值
+		var usAchievements = /*[[${session.teacher.usAchievements}]]*/;
+// 		alert(usAchievements)
+		introdEditor.$txt.html(usIntroduction);
+		achieveEditor.$txt.html(usAchievements);
+	}
+	/*]]>*/
+</script>
+</body>
+</html>
