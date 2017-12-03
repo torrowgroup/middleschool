@@ -9,19 +9,15 @@
 <body>
 <div th:if="${sign}=='1'">请先去类别管理中添加相应类别</div>
 <div th:if="${sign}!='1'">
-<div th:text="${message}"></div>
+<div th:text="${message}" class="center"></div>
 <form th:action="@{/news/upload}" method="post" enctype="multipart/form-data">
 <div class="aa">
 	<table>
-		<!-- <tr>
-			<td>上传名称</td>
-			<td><input type="text" name="reTitle" required="required"></td>
-		</tr> -->
 		<tr>
 			<td width="20%">选择文件:</td>
 			<td width="20%"><input type="file" name="file" width="120px" required="required"></td>  
 		</tr>
-		<tr height="30px"></tr>
+		<tr height="30px"></tr>	
 		<tr>
 			<td>类别名称</td>
 			<td><select name="caId" class="cc">

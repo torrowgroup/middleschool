@@ -1,10 +1,7 @@
 package com.torrow.school.service;
-
-import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 import com.torrow.school.entity.TbMessage;
 import com.torrow.school.util.PageBean;
-
 /**
  * 留言业务类
  * 

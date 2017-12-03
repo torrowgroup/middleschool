@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>home</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/static/dist/css/wangEditor.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/addgeneral.css}">
+</head>
+<body>
+<div class="aa">
+<div th:if="${sign}=='1'">请先去类别管理中添加相应类别</div>
+<div th:if="${sign}!='1'">
+	<form th:action="@{/news/addSchoolNews}" onsubmit="modifyContent()" method="post"  enctype="multipart/form-data">
+		<table>
+			<tr>
+				<th><span>标题</span></th>
+				<td><input type="text" name="reTitle" required="required" maxlength="25"></td>
+				<td><input type="hidden" name="caId"  th:each="category,categoryStart:${categoryList}" th:value="${category.caId}">
+		    </td>
+			</tr>
+			<tr>
+				<td colspan="4">
+					<div id="introduction">
+						<textarea style="display: none;" name="reContent" 
+							id="usIntroduction"></textarea>
+						<div id="intro">
+							<div id="introdEditor" style="height: 360px;"></div>
+						</div>
+					</div>
+				</td>
+			</tr>
+			
+		</table>
+		<input type="submit" value="添加" class="bb" title="添加"/>	
+		<a th:href="@{/news/addNewsJumping?(Pid=9)}" class="out1" title="上传学生管理或教师成长">上传学生管理或教师成长</a>
+	</form>
+<script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/admin/addnews.js}" ></script>
+</div>
+</div>
+<script th:inline="javascript">
+	var message = /*[[${message}]]*/;
+	if(message!=null){
+		alert(message)
+	}
+	
+</script>
+</body>
+</html>

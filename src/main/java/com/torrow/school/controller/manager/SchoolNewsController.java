@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
+import com.torrow.school.entity.TbUser;
 import com.torrow.school.util.Garbled;
 
 
@@ -42,8 +43,12 @@ public class SchoolNewsController extends BaseController {
 	@RequestMapping("addNewsJumping")
 	public String addNewsJumping(Model model, int Pid) {
 		categoryService.addBySelectPid(model, Pid);
-		if (Pid == 9 || Pid == 3 || Pid == 11 || Pid == 12) {
+		if (Pid == 9 || Pid == 3 || Pid == 12) {
 			return "admin/schoolnews/uploadfile";
+		}else if(Pid == 11){
+			return "admin/download/upload";
+		}else if(Pid == 6) {
+			return "admin/notice/addnotice";
 		}
 		return "admin/schoolnews/addschoolnews";
 	}
@@ -110,6 +115,10 @@ public class SchoolNewsController extends BaseController {
 		if (null != item) {
 			TbResource record = new TbResource(item.getCaId(), Date, item.getCaName(), tbResource.getReTitle(),
 					tbResource.getReContent());
+			 if(item.getCaPid()==6) {
+				 TbUser tbUser=(TbUser)session.getAttribute("admin");
+				 record.setReIssuer(tbUser.getUsName());
+			 }
 			int i = resourceService.insert(record);
 			if (i != 0) {
 				model.addAttribute("message", "添加成功");
@@ -123,39 +132,6 @@ public class SchoolNewsController extends BaseController {
 			return this.addNewsJumping(model, 6);
 		}
 		return this.addNewsJumping(model, 2);
-	}
-
-	/**
-	 * @param currentPage
-	 * @param model
-	 * @return 校园新闻类/上传/教育教研/校园文学的管理
-	 * 这个会发生中文乱码问题写过滤器时会处理
-	 * String userName = new String(name.getByte("ISO-8859-1"),"utf-8");
-	 */
-	@RequestMapping("manageSchoolNews")
-	public String manageSchoolNews(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
-			Model model, TbCategory tbCategory) {
-		TbCategory record = new TbCategory();
-		//这步是一般查询
-		record.setCaId(tbCategory.getCaId());
-		//这步是为了模糊查询
-		if(null!=tbCategory.getCaName()) {
-			record.setCaName(tbCategory.getCaName());
-		}
-		//携带的参数包括分页依据和查询条件还有显示条数
-		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页10条数据
-		session.setAttribute("currentPage", currentPage);
-		session.setAttribute("caName", tbCategory.getCaName());
-		//session和model是不同的,接下来两个model是为了把数据返回到前台,以便分页进行使用
-		model.addAttribute("caName", tbCategory.getCaName());
-		model.addAttribute("zid", tbCategory.getCaId());
-		TbCategory t = categoryService.selectByPrimaryKey(tbCategory.getCaId());
-		if(t.getCaPid()==3||t.getCaPid()==9||t.getCaPid()==12) {
-			return "admin/schoolnews/manageupload";
-		} else if(t.getCaPid()==6){
-			return "admin/notice/managenotice";
-		}
-		return "admin/schoolnews/manageschoolnews";
 	}
 
 	/**
@@ -317,7 +293,8 @@ public class SchoolNewsController extends BaseController {
 		String Date = dFormat.format(date);
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
 		String reContent = resourceService.uploadFile(file, path);
-		TbResource tb = new TbResource(item.getCaId(), Date, item.getCaName(), file.getOriginalFilename(), reContent);
+		TbUser tbUser=(TbUser)session.getAttribute("admin");
+		TbResource tb = new TbResource(item.getCaId(), Date, item.getCaName(), file.getOriginalFilename(), reContent,tbUser.getUsName());
 		resourceService.insert(tb);
 		model.addAttribute("message", "添加成功");
 		// 校园文学

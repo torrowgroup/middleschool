@@ -66,7 +66,7 @@
 					<a href="#" class="out"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;&nbsp;学生管理和教师成长管理</a>
                     <ul class="nav nav-second-level">
 	                    <li>
-	                      <a th:href="@{/political/uploadJumping}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;上传</a>
+	                      <a th:href="@{/political/uploadJumping?(Pid=9)}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;上传</a>
 	                    </li>
 	                    <li>
 	                      <div th:each="category,categoryStart:${uploadList}">
@@ -79,6 +79,9 @@
 				<li class="lione">
 					<a href="#" class="out"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;资源管理</a>
                     <ul class="nav nav-second-level">
+                    	<li>
+	                      <a th:href="@{/political/uploadJumping?(Pid=11)}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;资源类的上传</a>
+	                    </li>
 	                    <li>
 	                      <a th:href="@{/political/managePolitical?(caPid=11)}"  target="ie">资源管理</a>
 	                    </li>
