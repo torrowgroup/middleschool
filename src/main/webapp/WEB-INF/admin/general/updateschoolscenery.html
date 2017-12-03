@@ -3,42 +3,46 @@
 	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>home</title>
+<title>Home</title>
 <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 <script type="text/javascript" th:src="@{/static/js/upload.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/addscenery.css}">
 </head>
 <body>
 	<div th:text="${message}"></div>
 	<form
 		th:action="@{/general/updateSchoolScenery?(id=${tb.reId})}"
 		method="post" enctype="multipart/form-data">
+		
 		<table>
 			<tr>
-				<td>简介</td>
-				<td><input type="text" name="reTitle"
-					th:value="${tb.reTitle}" required="required"/></td>
-			</tr>
-		</table>
-		<div id="addCommodityIndex">
+				<td colspan="2">
+					<div id="addCommodityIndex">
 			<!--input-group start-->
 			<div class="input-group row">
-				<div class="col-sm-3">
-					<label>图片</label>
-				</div>
 				<div class="col-sm-9 big-photo">
 					<div id="preview">
 						<img alt="无图片" id="imghead" border="0"
 							th:src="@{/static/uploadimg/{picture}(picture=${tb.reContent})}"
-							width="90" height="90" onclick="$('#previewImg').click();">
+							width="150" height="150" onclick="$('#previewImg').click();">
 					</div>
 					<input type="file" name="picture" onchange="previewImage(this)"
-						style="display: none;" id="previewImg" required="required"/>
+						style="display: none;" id="previewImg" title="图片"/>
 					<!--<input id="uploaderInput" class="uploader__input" style="display: none;" type="file" accept="" multiple="">-->
 				</div>
 			</div>
 			<!--input-group end-->
 		</div>
-		<input type="submit" value="修改">
+				</td>
+				
+			</tr>
+			<tr>
+				<td><span>简介</span></td>
+				<td colspan="2"><input type="text" name="reTitle"
+					th:value="${tb.reTitle}" required="required"/></td>
+			</tr>
+		</table>
+	 <input type="submit" value="修改" title="修改" class="aa">
 	</form>
 </body>
 </html>

@@ -4,21 +4,23 @@
 
 <head>
   <title>home</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/updatecategory.css}">
 </head>
 <body>
-<div th:text="${message}"></div>
 <form th:action="@{/category/updateCategory?(caId=${category.caId})}" method="post">  
+	 <div class="lin">
 	  <table>
 	    <tr>
-	      <td>类别名称</td>
+	      <td><span>类别名称</span></td>
 		  <td>
 		  <input type="text" name="caName" th:value="${category.caName}" required="required"/>
 		  </td>  
 		</tr> 
 		<tr>
-		   <td><input type="submit" value="修改"/></td>
+		   <td colspan="2"><input type="submit" value="修改" title="修改" class="aa"/></td>
 		</tr>
 	  </table>
+	 </div>
 </form>  
 </body>
 </html>

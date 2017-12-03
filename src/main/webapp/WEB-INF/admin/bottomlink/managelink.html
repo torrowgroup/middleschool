@@ -1,33 +1,38 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>底部链接管理</title>
-
+  <title>home</title>
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/managelink.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/manageschoolnews.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/inquirytable.css}">
 </head>
 <body>
-<div th:text="${message}"></div>
+<div th:text="${message}" class="issucessor"></div>
 <div th:if="${sign}=='1'">无任何底部链接的信息</div>
 <div th:if="${sign}!='1'">
-		<table border="1" class="table1">
-			<thead>
-				<tr>
-					<td>链接名称</td>
-					<td>链接地址</td>
-					<td>Edit</td>
-					<td>Delete</td>
-				</tr>
-			</thead>
-			<tr th:each="link,linkStart:${list}">
+ <div class="aa">
+		<table class="table table-bordered table-hover table-condensed">
+       		 <thead>
+	            <tr>
+	                <th><span>连接名称</span></th>
+	                <th><span>链接地址</span></th>
+	                <th><span>Edit</span></th>
+	                <th><span>Delete</span></th>
+	            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="link,linkStart:${list}">
 				<td th:text="${link.reTitle}">${link.reTitle}</td>
 				<td th:text="${link.reContent}">${link.reContent}</td>
 				<td><a th:href="@{/link/selectOneLink?(id=${link.reId})}"><span class="glyphicon glyphicon-edit"></span></a></td>
 				<td><a th:href="@{/link/deleteLink?(id=${link.reId})}"
 					onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash"></span></a></td>
 			</tr>
-		</table>
-	</div>
+            </tbody>
+        </table>    
+</div>
+</div>
+</body>
+</html>

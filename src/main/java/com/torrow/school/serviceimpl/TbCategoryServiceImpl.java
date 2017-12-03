@@ -1,5 +1,6 @@
 package com.torrow.school.serviceimpl;
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -153,4 +154,20 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 		model.addAttribute("generalList", list);
 		model.addAttribute("sceneryList", item);	
 	}
+
+	@Override
+	public PageBean<TbCategory> findingByPaging(int currentPage, String inquiry, int pageSize) {
+		List<TbCategory> message = tbCategoryDao.selectBlur(inquiry);
+		int totalCount = message.size();
+		double tc = totalCount;
+		Double num = Math.ceil(tc / pageSize);// 向上取整
+		List<TbCategory> messageList = new ArrayList<TbCategory>();// 这个集合是为了分页显示的条数
+		for (int j = (currentPage - 1) * pageSize; j < currentPage * pageSize && j < totalCount; j++) {
+			messageList.add(message.get(j));
+		}
+		PageBean<TbCategory> pageBean = new PageBean<TbCategory>(currentPage, pageSize, messageList, num.intValue(), totalCount);
+		return pageBean;
+	}
+
+	
 }

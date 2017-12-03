@@ -9,6 +9,7 @@
 <script type="text/javascript" th:src="@{/static/js/upload.js}"></script>
 </head>
 <body>
+<div th:text="${message}" class="center"></div>
 <div class="aa">
 <div th:if="${sign}=='1'">请先去类别管理中添加相应类别</div>
 <div th:if="${sign}!='1'">
@@ -39,7 +40,7 @@
 			</div>
 			<!--input-group end-->
 		</div>
-			<input type="submit" value="添加" class="bb">
+			<input type="submit" value="添加" class="bb" title="添加">
 	</form>
 </div>
 </div>

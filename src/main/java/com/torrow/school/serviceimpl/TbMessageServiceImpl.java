@@ -12,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.torrow.school.base.BaseDao;
 import com.torrow.school.dao.TbMessageDao;
 import com.torrow.school.entity.TbMessage;
-import com.torrow.school.entity.TbUser;
 import com.torrow.school.service.TbMessageService;
 import com.torrow.school.util.PageBean;
 

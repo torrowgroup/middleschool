@@ -2,6 +2,7 @@ package com.torrow.school.service;
 
 import java.util.List;
 
+
 import org.springframework.ui.Model;
 
 import com.torrow.school.entity.TbCategory;
@@ -15,7 +16,9 @@ public interface TbCategoryService {
     List<TbCategory> selectByPid(List<Integer> pidList);
     //将学校概括，校园新闻，教育教研等封装进model,追加用户点击的功能项
     void getCategory(Integer rId,Model model);
-
+    
+    //对概括类的部分数据进行分页查看
+    public PageBean<TbCategory>  findingByPaging(int currentPage,String inquiry,int pageSize);//张金高用
     
 	//删除类别信息
     int deleteByPrimaryKey(Integer id);

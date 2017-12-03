@@ -11,21 +11,26 @@
 <body>
 <div th:text="${message}" class="issucessor"></div>
 <div th:if ="${pagemsg.totalCount}==0" class="issucessor">
-        没有任何校园新闻信息!
+        没有任何信息!
 </div>
  <div th:if ="${pagemsg.totalCount}!=0">
 <!--模糊查询  -->
+<<<<<<< HEAD
+ <div class="aa">
+ 	    <form th:action="@{/news/manageObject}" class="inquiry" method="post">
+=======
 <!--  <div class="aa"> -->
 <div class="mainbox">
  	    <form th:action="@{/news/manageSchoolNews}" class="inquiry" method="post">
+>>>>>>> 96f7274b47811cce8eef5780b6ffb6bf3fc0a31d
 		 	<input type="hidden" name="caId" th:value="${zid}">
-		    <input type="text" name="caName" class="inquiryinput" required>
-		    <input type="submit" value="查询" class="btn btn-default inquirysub">   
+		    <input type="text" name="caName" class="inquiryinput" placeholder="文件名称" required/>
+		    <input type="submit" value="查询" class="btn btn-default inquirysub" title="查询">   
 	    </form>
 		<table class="table table-bordered table-hover table-condensed">
        		 <thead>
 	            <tr>
-	                <th><span>上传的名称</span></th>
+	                <th><span>文件名称</span></th>
 	                <th><span>上传的时间</span></th>
 	                <th><span>操作</span></th>
 	            </tr>
@@ -36,7 +41,7 @@
                     <td th:text="${news.reIssuingdate}">${news.reIssuingdate}</td>
                 	<td>
                 		<a th:href="@{/news/down?(id=${news.reId})}" title="下载"><span class="glyphicon glyphicon-download-alt"></span></a>&nbsp;&nbsp;
-                		<a th:href="@{/news/deleteFile?(id=${news.reId})}"><span class="glyphicon glyphicon-trash"></span></a>
+                		<a th:href="@{/news/deleteFile?(id=${news.reId})}" onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash"></span></a>
                 	</td>
                 </tr>
             </tbody>
@@ -45,10 +50,10 @@
     
 <ul class="pagination"> 
    <li th:if ="${pagemsg.currPage != 1}">
-           <a th:href="@{/news/manageSchoolNews?(currentPage=1,caId=${zid},caName=${caName})}">首页</a>&nbsp;&nbsp;
+           <a th:href="@{/news/manageObject?(currentPage=1,caId=${zid},caName=${caName})}">首页</a>&nbsp;&nbsp;
    </li>
    <li th:if ="${pagemsg.currPage != 1}">
-           <a th:href="@{/news/manageSchoolNews?(currentPage=${pagemsg.currPage-1},caId=${zid},caName=${caName})}">上一页</a>&nbsp;&nbsp;
+           <a th:href="@{/news/manageObject?(currentPage=${pagemsg.currPage-1},caId=${zid},caName=${caName})}">上一页</a>&nbsp;&nbsp;
 	</li>	
 	<li th:if="${pagemsg.currPage == 1}">
 		<a href="#">首页</a>
@@ -58,11 +63,11 @@
 	</li>
 	
 	<li th:each="i:${#numbers.sequence(1,pagemsg.totalPage)}" th:if="${i > pagemsg.currPage-3} and ${i < pagemsg.currPage+3}">
-			<a th:href="@{/news/manageSchoolNews?(currentPage=${i},caId=${zid},caName=${caName})}"th:text="${i}">#</a>
+			<a th:href="@{/news/manageObject?(currentPage=${i},caId=${zid},caName=${caName})}"th:text="${i}">#</a>
 	</li>
 	
     <li th:if ="${pagemsg.currPage < pagemsg.totalPage}">
-           <a th:href="@{/news/manageSchoolNews?(currentPage=${pagemsg.currPage+1},caId=${zid},caName=${caName})}">下一页</a>&nbsp;&nbsp;
+           <a th:href="@{/news/manageObject?(currentPage=${pagemsg.currPage+1},caId=${zid},caName=${caName})}">下一页</a>&nbsp;&nbsp;
 	</li>
 	<li th:if="${pagemsg.currPage >= pagemsg.totalPage}">
 		<a href="#">下一页</a>

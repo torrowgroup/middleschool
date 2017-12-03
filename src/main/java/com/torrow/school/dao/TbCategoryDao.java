@@ -14,6 +14,9 @@ public interface TbCategoryDao {
 
 	public List<TbCategory> selectAllCaId();
 
+	public  List<TbCategory> selectBlur(@Param("inquiry")String inquiry);
+		
+
 	
 
 }

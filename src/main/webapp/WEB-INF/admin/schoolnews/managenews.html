@@ -10,18 +10,11 @@
 	th:href="@{/static/css/admin/managegeneral.css}">	
 	
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/manageschoolintroduction.css}">
-
 </head>
 <body>
-<<<<<<< HEAD
-	<div th:text="${message}"></div>
-	
-	<form th:action="@{/news/updateSchoolNews}" onSubmit="return modifyContent();"
-=======
+<div th:text="${message}"></div>
 <div class="total">
-
 <form th:action="@{/news/updateSchoolNews}" onSubmit="return modifyContent();"
->>>>>>> 1b92048d916eedb2293d8c1da16e89baa2088123
 		method="post" enctype="multipart/form-data">
 		<input type="hidden" name="reId" th:value="${tbResource.reId}">
 		<div  class="inner">

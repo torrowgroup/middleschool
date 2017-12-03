@@ -15,53 +15,34 @@
 </div>
  <div th:if ="${pagemsg.totalCount}!=0">
 <!--模糊查询  -->
-<<<<<<< HEAD
  <div class="aa">
- 	    <form th:action="@{/news/manageObject}" class="inquiry" method="post">
-		 	<input type="hidden" name="caPid" th:value="${zid}">
+ 	    <form th:action="@{/political/managePolitical}" class="inquiry" method="post">
+		 	<input type="hidden" name="caId" th:value="${zid}">
 		    <input type="text" name="caName" class="inquiryinput" placeholder="文件名称" required/>
 		    <input type="submit" value="查询" class="btn btn-default inquirysub" title="查询">   
-=======
-<!--  <div class="aa"> -->
- 	<div class="mainbox">
- 	    <form th:action="@{/news/manageSchoolNews}" class="inquiry" method="post">
-		 	<input type="hidden" name="caId" th:value="${zid}">
-		    <input type="text" name="caName" class="inquiryinput" required>
-		    <input type="submit" value="查询" class="btn btn-default inquirysub">   
->>>>>>> 96f7274b47811cce8eef5780b6ffb6bf3fc0a31d
 	    </form>
 		<table class="table table-bordered table-hover table-condensed">
        		 <thead>
 	            <tr>
-<<<<<<< HEAD
 	                <th><span>文件名称</span></th>
                 	<th><span>上传的时间</span></th>
                 	<th><span>操作</span></th>
-=======
-	                <th><span>上传的名称</span></th>
-                	<th><span>上传的时间</span></th>
-                	<th><span>删除</span></th>
-                	<th><span>下载</span></th>
->>>>>>> 96f7274b47811cce8eef5780b6ffb6bf3fc0a31d
 	            </tr>
             </thead>
             <tbody>
             	<tr th:each="news,newsStart:${pagemsg.lists}">
                 	<td th:text="${news.reTitle}">${news.reTitle}</td>
                 	<td th:text="${news.reIssuingdate}">${news.reIssuingdate}</td>
-                	<td>
-                		<a th:href="@{/news/down?(id=${news.reId})}" title="下载"><span class="glyphicon glyphicon-download-alt"></span></a>&nbsp;&nbsp;
-                		<a th:href="@{/news/deleteFile?(id=${news.reId})}" onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash"></span></a>
-                	</td>
+                	<td><a th:href="@{/political/down?(id=${news.reId})}">下载</a></td>
                 </tr>
             </tbody>
         </table>    
 <ul class="pagination"> 
    <li th:if ="${pagemsg.currPage != 1}">
-           <a th:href="@{/news/manageObject?(currentPage=1,caPid=${zid},caName=${caName})}">首页</a>&nbsp;&nbsp;
+           <a th:href="@{/political/managePolitical?(currentPage=1,caId=${zid},caName=${caName})}">首页</a>&nbsp;&nbsp;
    </li>
    <li th:if ="${pagemsg.currPage != 1}">
-           <a th:href="@{/news/manageObject?(currentPage=${pagemsg.currPage-1},caPid=${zid},caName=${caName})}">上一页</a>&nbsp;&nbsp;
+           <a th:href="@{/political/managePolitical?(currentPage=${pagemsg.currPage-1},caId=${zid},caName=${caName})}">上一页</a>&nbsp;&nbsp;
 	</li>	
 	<li th:if="${pagemsg.currPage == 1}">
 		<a href="#">首页</a>
@@ -71,11 +52,11 @@
 	</li>
 	
 	<li th:each="i:${#numbers.sequence(1,pagemsg.totalPage)}" th:if="${i > pagemsg.currPage-3} and ${i < pagemsg.currPage+3}">
-			<a th:href="@{/news/manageObject?(currentPage=${i},caPid=${zid},caName=${caName})}"th:text="${i}">#</a>
+			<a th:href="@{/political/managePolitical?(currentPage=${i},caId=${zid},caName=${caName})}"th:text="${i}">#</a>
 	</li>
 	
     <li th:if ="${pagemsg.currPage < pagemsg.totalPage}">
-           <a th:href="@{/news/manageObject?(currentPage=${pagemsg.currPage+1},caPid=${zid},caName=${caName})}">下一页</a>&nbsp;&nbsp;
+           <a th:href="@{/political/managePolitical?(currentPage=${pagemsg.currPage+1},caId=${zid},caName=${caName})}">下一页</a>&nbsp;&nbsp;
 	</li>
 	<li th:if="${pagemsg.currPage >= pagemsg.totalPage}">
 		<a href="#">下一页</a>

@@ -1,5 +1,7 @@
 package com.torrow.school.controller.manager;
 
+import java.io.UnsupportedEncodingException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +10,7 @@ import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
 import com.torrow.school.entity.TbUser;
+import com.torrow.school.util.Garbled;
 
 /**
  * 这个控制器是对类别进行管理的
@@ -55,12 +58,27 @@ public class CategoryController extends BaseController {
 	 * @param currentPage
 	 * @param model
 	 * @return 类别类的分页显示
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping("/manageCategory")
 	public String manageCategory(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
-			Model model) {
-		model.addAttribute("pagemsg", categoryService.findPage(currentPage, 8));// 回显分页数据
+			Model model,String inquiry) throws UnsupportedEncodingException {
+		if(null!=inquiry) {
+			//这是为了用来解决中文乱码的问题
+			Garbled g=new Garbled();
+			String s=g.getEncoding(inquiry);
+			if(s=="ISO-8859-1") {
+				try {
+					inquiry=g.info(inquiry);
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		model.addAttribute("pagemsg", categoryService.findingByPaging(currentPage, inquiry, 8));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
+		session.setAttribute("inquiry", inquiry);
+		model.addAttribute("inquiry", inquiry);
 		return "admin/category/managecategory";
 	}
 
@@ -80,10 +98,12 @@ public class CategoryController extends BaseController {
 	 * @param model
 	 * @param caName
 	 * @return 修改类别信息
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping("/updateCategory")
-	public String updateCategory(Model model, TbCategory tbCategory) {
+	public String updateCategory(Model model, TbCategory tbCategory) throws UnsupportedEncodingException {
 		int currentPage = (int) session.getAttribute("currentPage");
+		String inquiry=(String)session.getAttribute("inquiry");
 		TbCategory t = categoryService.selectCaName(tbCategory.getCaName());
 		if (null != t) {
 			model.addAttribute("message", "该类别已存在,修改失败");
@@ -101,16 +121,17 @@ public class CategoryController extends BaseController {
 				model.addAttribute("message", "不可以对管理员进行操作");
 			}
 		}
-		return this.manageCategory(currentPage, model);
+		return this.manageCategory(currentPage, model,inquiry);
 	}
 
 	/**
 	 * @param model
 	 * @param id
 	 * @return 根据id来删除类别类
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping("/deleteCategory")
-	public String deleteCategory(Model model, Integer id) {
+	public String deleteCategory(Model model, Integer id) throws UnsupportedEncodingException {
 		int currentPage = (int) session.getAttribute("currentPage");
 		TbCategory tbCategory = categoryService.selectByPrimaryKey(id);
 		if (!tbCategory.getCaName().equals("管理员")) {
@@ -125,7 +146,7 @@ public class CategoryController extends BaseController {
 		} else {
 			model.addAttribute("message", "你不可以对管理员进行操作");
 		}
-		return this.manageCategory(currentPage, model);
+		return this.manageCategory(currentPage, model,null);
 	}
 
 }
