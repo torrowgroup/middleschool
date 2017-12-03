@@ -1,5 +1,6 @@
 package com.torrow.school.controller.politicaleducation;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
 import com.torrow.school.entity.TbUser;
+import com.torrow.school.util.Garbled;
 
 /**
  * @author 安李杰
@@ -93,11 +95,11 @@ public class PoliticalEducationController extends BaseController{
 	}
 
 	
-	/**
+/*	*//**
 	 * @param currentPage
 	 * @param model
 	 * @return 政教处上传类的查看
-	 */
+	 *//*
 	@RequestMapping("manageEducationUpload")
 	public String manageUpload(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,
 			Integer id) {
@@ -107,7 +109,49 @@ public class PoliticalEducationController extends BaseController{
 		session.setAttribute("currentPage", currentPage);
 		model.addAttribute("zid", id);
 		return "politicaleducation/manageupload";
+	}*/
+	
+	/**
+	 * @param model 校园新闻类/上传/教育教研的管理
+	 * @return 管理资源下载和通知公告和图片的的管理
+	 */
+	@RequestMapping("managePolitical")
+	public String managePolitical(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,
+			TbCategory tbCategory) {
+		TbCategory record = new TbCategory();
+		if(null!=tbCategory.getCaPid()) {
+			record.setCaPid(tbCategory.getCaPid());
+			model.addAttribute("zid", tbCategory.getCaPid());
+		}
+		if(null!=tbCategory.getCaId()) {
+			record.setCaId(tbCategory.getCaId());
+			model.addAttribute("zid", tbCategory.getCaId());
+		}
+		if (null != tbCategory.getCaName()) {
+			String str=tbCategory.getCaName();
+			//这是为了用来解决中文乱码的问题
+			Garbled g=new Garbled();
+			String s=g.getEncoding(tbCategory.getCaName());
+			if(s=="ISO-8859-1") {
+				try {
+					str=g.info(tbCategory.getCaName());
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+			}
+			record.setCaName(str);
+			// session和model是不同的,接下来两个model是为了把数据返回到前台,以便分页进行使用
+			model.addAttribute("caName", str);
+		}
+		// 携带的参数包括分页依据和查询条件还有显示条数
+		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页10条数据
+		session.setAttribute("currentPage", currentPage);
+		if(null!=tbCategory.getCaPid()&&tbCategory.getCaPid()==11) {
+			return "politicaleducation/manageupload";
+		}
+		return "politicaleducation/downloadstudent";
 	}
+
 	
 	/**
 	 * @param model

@@ -25,7 +25,7 @@
 				<div class="next">
 					<ul>
 						<li><a th:href="@{/news/addNewsJumping?(Pid=6)}" target="ie">添加公告</a></li>
-						<li><a th:href="@{/news/manageObject?(id=6)}" target="ie">管理公告</a></li>
+						<li><a th:href="@{/news/manageObject?(caPid=6)}" target="ie">管理公告</a></li>
 					</ul>
 				</div>
 			</li>
@@ -36,7 +36,7 @@
 					<ul>
 						<li><a th:href="@{/news/addNewsJumping?(Pid=12)}"  target="ie">添加校园文学</a></li>
 						<li style="margin-top:0px" th:each="category,categoryStart:${literatureList}">
-							<a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}" th:text="${category.caName}" target="ie"></a>
+							<a th:href="@{/news/manageObject?(caId=${category.caId})}" th:text="${category.caName}" target="ie"></a>
 						</li>
 					</ul>
 				</div>
@@ -47,7 +47,7 @@
 				<div class="next">
 					<ul>
 						<li><a th:href="@{/news/addNewsJumping?(Pid=11)}"  target="ie">上传资源</a></li>
-						<li><a th:href="@{/news/manageObject?(id=11)}"  target="ie">资源管理</a></li>
+						<li><a th:href="@{/news/manageObject?(caPid=11)}"  target="ie">资源管理</a></li>
 					</ul>
 				</div>
 			</li>
@@ -91,10 +91,10 @@
 	                      <a th:href="@{/news/addNewsJumping?(Pid=2)}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加新闻</a>
 	                    </li>
 	                     <li th:each="category,categoryStart:${newsList}" class="hr">
-							  <a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}" target="ie" class="out1"> <span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}"></span></a>
+							  <a th:href="@{/news/manageObject?(caId=${category.caId})}" target="ie" class="out1"> <span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}"></span></a>
 						</li>
 						  <li th:each="category,categoryStart:${uploadList}">
-							   <a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}" target="ie" class="out1"><span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}" ></span></a>
+							   <a th:href="@{/news/manageObject?(caId=${category.caId})}" target="ie" class="out1"><span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}" ></span></a>
 	                    </li>
                     </ul>
 				</li>
@@ -106,7 +106,7 @@
 	                      <a th:href="@{/news/addNewsJumping?(Pid=3)}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加教育教研</a>
 	                    </li>
 	                   	<li th:each="category,categoryStart:${educationList}">
-							   <a th:href="@{/news/manageSchoolNews?(caId=${category.caId})}"  target="ie" class="out1"><span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}"></span></a>
+							   <a th:href="@{/news/manageObject?(caId=${category.caId})}"  target="ie" class="out1"><span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}"></span></a>
 	                    </li>
                     </ul>
 				</li>
@@ -145,7 +145,7 @@
 	                      <a th:href="@{/general/uploadPictureJumping}" target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加轮播图</a>
 	                    </li>
 	                    <li>
-	                      <a th:href="@{/news/manageObject?(id=10)}" target="ie" class="out1"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;轮播图管理</a>
+	                      <a th:href="@{/news/manageObject?(caPid=10)}" target="ie" class="out1"><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;轮播图管理</a>
 	                    </li>
                     </ul>
 				</li>

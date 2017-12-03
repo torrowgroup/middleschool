@@ -1,35 +1,37 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>类别类管理</title>
+  <title>home</title>
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/managecategory.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/manageschoolnews.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/inquirytable.css}">
 </head>
 <body>
-	<div th:text="${message}"></div>
-	<span th:if="${pagemsg.totalCount}==0"> 没有任何类别信息! </span>
-	<div th:if="${pagemsg.totalCount}!=0">
-	
+<div th:text="${message}" class="issucessor"></div>
+<div th:if ="${pagemsg.totalCount}==0" class="issucessor">
+        没有任何信息!
+</div>
+ <div th:if ="${pagemsg.totalCount}!=0">
 <!--模糊查询  -->
- <form th:action="@{/category/manageCategory}" method="post">
-    <input type="text" name="caName" required>
-    <input type="submit" value="查询">
+ <div class="aa">
+<form th:action="@{/category/manageCategory}" method="post" class="inquiry">
+    <input type="text" name="inquiry" required placeholder="类别名称"/>
+    <input type="submit" class="btn btn-default inquirysub" value="查询" title="查询">
 </form>
-<!--模糊查询  -->
-		<table border="1" class="table1">
-			<thead>
-				<tr>
+		<table class="table table-bordered table-hover table-condensed">
+       		 <thead>
+	            <tr>
 					<th><span>类别编号</span></th>
 					<th><span>类别名称</span></th>
 					<th><span>父类别</span></th>
 					<th><span>修改</span></th>
 					<th><span>删除</span></th>
 				</tr>
-			</thead>
-			<tr th:each="category,categoryStart:${pagemsg.lists}">
+            </thead>
+            <tbody>
+            <tr th:each="category,categoryStart:${pagemsg.lists}">
 				<td th:text="${category.caId}">${category.caId}</td>
 				<td th:text="${category.caName}">${category.caName}</td>
 				<td th:if="${category.caPid}=='1'">学校概括</td>
@@ -50,23 +52,36 @@
 					th:href="@{/category/deleteCategory?(id=${category.caId})}"
 					onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash"></span></a></td>
 			</tr>
-		</table>
+            </tbody>
+                
+        </table>    
+    
+<ul class="pagination"> 
+   <li th:if ="${pagemsg.currPage != 1}">
+           <a th:href="@{/category/manageCategory?(currentPage=1,inquiry=${inquiry})}">首页</a>&nbsp;&nbsp;
+   </li>
+   <li th:if ="${pagemsg.currPage != 1}">
+           <a th:href="@{/category/manageCategory?(currentPage=${pagemsg.currPage-1},inquiry=${inquiry})}">上一页</a>&nbsp;&nbsp;
+	</li>	
+	<li th:if="${pagemsg.currPage == 1}">
+		<a href="#">首页</a>
+	</li>
+	<li th:if="${pagemsg.currPage == 1}">
+		<a href="#">上一页</a>
+	</li>
 	
-		<ul class="pagination">
-			<span th:if="${pagemsg.currPage != 1}"> <a
-					th:href="@{/category/manageCategory?(currentPage=1)}">[首页]</a>&nbsp;&nbsp;
-					<a
-					th:href="@{/category/manageCategory?(currentPage=${pagemsg.currPage-1})}">[上一页]</a>&nbsp;&nbsp;
-			</span> <span th:if="${pagemsg.currPage == 1}"> [首页][上一页] </span> <span
-				th:each="i:${#numbers.sequence(1,pagemsg.totalPage)}"> <a
-					th:if="${i > pagemsg.currPage-3} and ${i < pagemsg.currPage+3}"
-					th:href="@{/category/manageCategory?(currentPage=${i})}"
-					th:text="${i}">#</a>
-			</span> <span th:if="${pagemsg.currPage < pagemsg.totalPage}"> <a
-					th:href="@{/category/manageCategory?(currentPage=${pagemsg.currPage+1})}">[下一页]</a>&nbsp;&nbsp;
-			</span> <span th:if="${pagemsg.currPage >= pagemsg.totalPage}"> [下一页]
-			</span>
+	<li th:each="i:${#numbers.sequence(1,pagemsg.totalPage)}" th:if="${i > pagemsg.currPage-3} and ${i < pagemsg.currPage+3}">
+			<a th:href="@{/category/manageCategory?(currentPage=${i},inquiry=${inquiry})}"th:text="${i}">#</a>
+	</li>
+	
+    <li th:if ="${pagemsg.currPage < pagemsg.totalPage}">
+           <a th:href="@{/category/manageCategory?(currentPage=${pagemsg.currPage+1},inquiry=${inquiry})}">下一页</a>&nbsp;&nbsp;
+	</li>
+	<li th:if="${pagemsg.currPage >= pagemsg.totalPage}">
+		<a href="#">下一页</a>
+	</li>
 </ul>
+</div>
 </div>
 </body>
 </html>

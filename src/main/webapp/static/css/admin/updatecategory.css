@@ -1,0 +1,20 @@
+body{
+	margin: 0;
+	padding: 0;
+	background: #ebebeb;
+}
+.lin{
+	width: 30%;
+	height: 150px;
+	margin-left: 35%;
+	margin-top: 10%;
+}
+td{ 
+	height: 50px;
+}
+.aa{
+	margin-left: 40%;
+	background:#2896ef;
+	color: white;
+	border-radius: 8px;
+}

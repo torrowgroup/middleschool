@@ -8,8 +8,6 @@ import com.torrow.school.entity.TbMessage;
 
 public interface TbMessageDao {
 	
-	
-	
 	/**
 	 * @param inquiry
 	 * @return 倒序模糊查找所有留言

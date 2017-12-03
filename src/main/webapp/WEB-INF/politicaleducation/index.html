@@ -47,7 +47,7 @@
 				<li><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-out" title="退出"></span></a></li>
 				<li><div class="le_1">
 						<a href="@{/political/viewMe}" target="ie">
-							<img th:src="@{/static/uploadimg/{picture}(picture=${session.manager.usPicture})}" alt="没有图片">
+							<img th:src="@{/static/uploadimg/{picture}(picture=${session.political.usPicture})}" alt="没有图片">
 						</a>
 					</div></li>
 				
@@ -70,7 +70,7 @@
 	                    </li>
 	                    <li>
 	                      <div th:each="category,categoryStart:${uploadList}">
-								<a th:href="@{/political/manageEducationUpload?(id=${category.caId})}" th:text="${category.caName}"  target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;---</a>
+								<a th:href="@{/political/managePolitical?(caId=${category.caId})}" th:text="${category.caName}"  target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;---</a>
 						  </div>
 	                    </li>
                     </ul>
@@ -80,7 +80,7 @@
 					<a href="#" class="out"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;资源管理</a>
                     <ul class="nav nav-second-level">
 	                    <li>
-	                      <a th:href="@{/news/manageObject?(id=11)}"  target="ie">资源管理</a>
+	                      <a th:href="@{/political/managePolitical?(caPid=11)}"  target="ie">资源管理</a>
 	                    </li>
                     </ul>
 				</li>

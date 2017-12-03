@@ -63,4 +63,12 @@
 		select count(*) from tb_category
 	</select>
 	
+	<!--这个是为了模糊查询  -->
+	<select id="selectBlur" parameterType="java.lang.String"  resultMap="BaseResultMap">
+		select ca_id, ca_pId, ca_name, spare
+    	from tb_category where true
+    	<if test="inquiry!=null">
+	     	and ca_name like CONCAT(CONCAT('%', #{inquiry}), '%')
+		</if>
+	</select>
 </mapper>
