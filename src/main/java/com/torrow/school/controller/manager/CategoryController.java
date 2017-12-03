@@ -1,6 +1,8 @@
 package com.torrow.school.controller.manager;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,8 +46,26 @@ public class CategoryController extends BaseController {
 	@RequestMapping("/addCategory")
 	public String addCategory(String caName, Integer caPid, Model model) {
 		TbCategory tbCategory = categoryService.selectCaName(caName);
+		List<TbCategory> one=new ArrayList<TbCategory>();
+		List<TbCategory> list=categoryService.selectAll();
+		if(!list.isEmpty()) {
+			for(TbCategory item:list) {
+				if(item.getCaPid()==caPid) {
+					if(caPid==11||caPid==6||caPid==7) {
+						model.addAttribute("message", "该类别已存在!");
+						one.add(item);
+					}else if(caPid==1||caPid==2||caPid==3) {
+						model.addAttribute("message", "添加的该类别名称已超出最大长度!");
+						one.add(item);
+					}
+				}
+			}
+		}
+		if(one.size()==1||one.size()>5) {
+			return "admin/category/addcategory";
+		}
 		if (null != tbCategory) {
-			model.addAttribute("message", "该类别已存在");
+			model.addAttribute("message", "该类别名称已存在");
 		} else {
 			TbCategory record = new TbCategory(caPid, caName);
 			categoryService.insert(record);

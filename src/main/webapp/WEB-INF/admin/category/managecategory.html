@@ -15,7 +15,7 @@
 </div>
  <div th:if ="${pagemsg.totalCount}!=0">
 <!--模糊查询  -->
- <div class="aa">
+<div class="mainbox">
 <form th:action="@{/category/manageCategory}" method="post" class="inquiry">
     <input type="text" name="inquiry" required placeholder="类别名称"/>
     <input type="submit" class="btn btn-default inquirysub" value="查询" title="查询">

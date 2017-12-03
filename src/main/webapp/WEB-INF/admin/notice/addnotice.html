@@ -9,24 +9,17 @@
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/addgeneral.css}">
 </head>
 <body>
-
 <div class="aa">
 <div th:if="${sign}=='1'">请先去类别管理中添加相应类别</div>
 <div th:if="${sign}!='1'">
-	<form th:action="@{/general/addGeneral}"  onSubmit="return modifyContent();" method="post" enctype="multipart/form-data">
+	<form th:action="@{/news/addSchoolNews}" onsubmit="modifyContent()" method="post"  enctype="multipart/form-data">
 		<table>
 			<tr>
 				<th><span>标题</span></th>
-				<td><input type="text" name="reTitle" required="required" maxlength="10"></td>
-			
-				<th><span>类型</span></th>
-				<td>
-					<select name="caId" class="cc">
-						<option th:each="category,categoryStart:${categoryList}" th:text="${category.caName}" th:value="${category.caId}" />
-					</select>
-				</td>
+				<td><input type="text" name="reTitle" required="required" maxlength="25"></td>
+				<td><input type="hidden" name="caId"  th:each="category,categoryStart:${categoryList}" th:value="${category.caId}">
+		    </td>
 			</tr>
-			
 			<tr>
 				<td colspan="4">
 					<div id="introduction">
@@ -40,8 +33,8 @@
 			</tr>
 			
 		</table>
-		<input type="submit" value="添加" class="bb" title="添加">	
-		<a th:href="@{/general/addSceneryJumping}" target="ie" class="out1" title="添加校园风光">添加校园风光</a>
+		<input type="submit" value="添加" class="bb" title="添加"/>	
+		<a th:href="@{/news/addNewsJumping?(Pid=9)}" class="out1" title="上传学生管理或教师成长">上传学生管理或教师成长</a>
 	</form>
 <script type="text/javascript" th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script>

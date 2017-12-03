@@ -17,16 +17,14 @@
 			<td width="20%">选择文件:</td>
 			<td width="20%"><input type="file" name="file" width="120px" required="required"></td>  
 		</tr>
-		<tr height="30px"></tr>	
+		<tr height="30px"></tr>
 		<tr>
-			<td>类别名称</td>
-			<td><select name="caId" class="cc">
-						<option th:each="category,categoryStart:${categoryList}" th:text="${category.caName}" th:value="${category.caId}" />
-				 </select></td>
+			<td><input type="hidden" name="caId"  th:each="category,categoryStart:${categoryList}" th:value="${category.caId}">
+		    </td>
 		</tr>
 		<tr height="30px"></tr>	
 		<tr>
-			 <td><input type="submit" value="上传" class="bb" title="上传"/></td>  
+			 <td><input type="submit" value="上传" class="bb"/></td>  
 		</tr>
 	</table>
 </div>

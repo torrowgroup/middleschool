@@ -15,39 +15,26 @@
 </div>
  <div th:if ="${pagemsg.totalCount}!=0">
 <!--模糊查询  -->
-<<<<<<< HEAD
- <div class="aa">
+<div class="mainbox">
  	    <form th:action="@{/news/manageObject}" class="inquiry" method="post">
 		 	<input type="hidden" name="caPid" th:value="${zid}">
 		    <input type="text" name="caName" class="inquiryinput" placeholder="文件名称" required/>
 		    <input type="submit" value="查询" class="btn btn-default inquirysub" title="查询">   
-=======
-<!--  <div class="aa"> -->
- 	<div class="mainbox">
- 	    <form th:action="@{/news/manageSchoolNews}" class="inquiry" method="post">
-		 	<input type="hidden" name="caId" th:value="${zid}">
-		    <input type="text" name="caName" class="inquiryinput" required>
-		    <input type="submit" value="查询" class="btn btn-default inquirysub">   
->>>>>>> 96f7274b47811cce8eef5780b6ffb6bf3fc0a31d
+ 	
 	    </form>
 		<table class="table table-bordered table-hover table-condensed">
        		 <thead>
 	            <tr>
-<<<<<<< HEAD
 	                <th><span>文件名称</span></th>
+	                <th><span>上传人</span></th>
                 	<th><span>上传的时间</span></th>
                 	<th><span>操作</span></th>
-=======
-	                <th><span>上传的名称</span></th>
-                	<th><span>上传的时间</span></th>
-                	<th><span>删除</span></th>
-                	<th><span>下载</span></th>
->>>>>>> 96f7274b47811cce8eef5780b6ffb6bf3fc0a31d
 	            </tr>
             </thead>
             <tbody>
             	<tr th:each="news,newsStart:${pagemsg.lists}">
                 	<td th:text="${news.reTitle}">${news.reTitle}</td>
+                	<td th:text="${news.reIssuer}">${news.reIssuer}</td>
                 	<td th:text="${news.reIssuingdate}">${news.reIssuingdate}</td>
                 	<td>
                 		<a th:href="@{/news/down?(id=${news.reId})}" title="下载"><span class="glyphicon glyphicon-download-alt"></span></a>&nbsp;&nbsp;

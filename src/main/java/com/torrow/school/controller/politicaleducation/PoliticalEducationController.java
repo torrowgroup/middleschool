@@ -1,6 +1,7 @@
 package com.torrow.school.controller.politicaleducation;
 
 import java.io.UnsupportedEncodingException;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
 import com.torrow.school.entity.TbResource;
-import com.torrow.school.entity.TbUser;
 import com.torrow.school.util.Garbled;
 
 /**
@@ -42,28 +42,17 @@ public class PoliticalEducationController extends BaseController{
 	/**
 	 * @param model
 	 * @param Pid
-	 * @return 政教处的上传
+	 * @return 资源下载的上传和学生圆地和教师园地的上传
 	 */
 	@RequestMapping("uploadJumping")
-	public String uploadJumping(Model model) {
-		TbUser tbUser=(TbUser)session.getAttribute("political");
-		List<TbCategory> list=categoryService.selectAll();
-		boolean enough=false;
-		if(!list.isEmpty()) {
-			for(TbCategory item:list) {
-				if(tbUser.getCaName().equals(item.getCaName())) {
-					model.addAttribute("TbCategory",item);
-					enough=true;
-				}
-			}
-		}
-		if(enough==false) {
-			model.addAttribute("message","请先去类别类中添加相应类别");
-			return "politicaleducation/empty";
+	public String uploadJumping(Model model, int Pid) {
+		categoryService.addBySelectPid(model, Pid);
+		if(Pid==11) {
+			log.info("---------------------");
+			return "politicaleducation/upload";
 		}
 		return "politicaleducation/uploadfile";
 	}
-	
 	/**
 	 * @param tbResource
 	 * @param picture
@@ -79,7 +68,11 @@ public class PoliticalEducationController extends BaseController{
 			if (en.getCaId() == tbResource.getCaId()) {
 				if (file.getOriginalFilename().equals(en.getReContent())) {
 					model.addAttribute("message", "该文件已存在,上传失败");
-					return this.uploadJumping(model);
+					if (item.getCaPid() == 9) {
+						return this.uploadJumping(model, 9);
+					} else {
+						return this.uploadJumping(model, 11);
+					}
 				}
 			}
 		}
@@ -91,26 +84,12 @@ public class PoliticalEducationController extends BaseController{
 		TbResource tb = new TbResource(item.getCaId(), Date, item.getCaName(), file.getOriginalFilename(), reContent);
 		resourceService.insert(tb);
 		model.addAttribute("message", "添加成功");
-		return this.uploadJumping(model);
+		if (item.getCaPid() == 9) {
+			return this.uploadJumping(model, 9);
+		}
+		return this.uploadJumping(model,11);
 	}
 
-	
-/*	*//**
-	 * @param currentPage
-	 * @param model
-	 * @return 政教处上传类的查看
-	 *//*
-	@RequestMapping("manageEducationUpload")
-	public String manageUpload(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,
-			Integer id) {
-		TbCategory record = new TbCategory();
-		record.setCaId(id);
-		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页数据
-		session.setAttribute("currentPage", currentPage);
-		model.addAttribute("zid", id);
-		return "politicaleducation/manageupload";
-	}*/
-	
 	/**
 	 * @param model 校园新闻类/上传/教育教研的管理
 	 * @return 管理资源下载和通知公告和图片的的管理
