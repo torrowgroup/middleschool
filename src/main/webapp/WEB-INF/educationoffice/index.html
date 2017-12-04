@@ -60,7 +60,24 @@
 								th:text="${category.caName}" target="ie" class="out2"><span
 								class="glyphicon glyphicon-list-alt"></span></a>
 				</li>
-				<!-- 新闻管理 -->
+				<!-- 学生管理和教师成长管理 -->
+				<li class="lione">
+<!-- 					<a href="#" class="out"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;&nbsp;学生管理和教师成长管理</a> -->
+<!--                     <ul class="nav nav-second-level"> -->
+<!-- 	                    <li> -->
+	                      <a th:href="@{/political/uploadJumping}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;上传</a>
+	                    </li>
+	                    <li>
+	                      <div th:each="category,categoryStart:${uploadList}">
+								<a th:href="@{/political/managePolitical?(caId=${category.caId})}" th:text="${category.caName}"  target="ie" class="out1"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;---</a>
+						  </div>
+<!-- 	                    </li> -->
+<!--                     </ul> -->
+				</li>
+				<!-- 资源下载 -->
+				<li class="lione">
+					<a th:href="@{/education/toUploadResource}" target="ie" class="out2">上传资源</a>
+				</li>
 				<li class="lione" th:each="category,categoryStart:${downloadList}">
 					<a th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"
 						th:text="${category.caName}" target="ie" class="out2">

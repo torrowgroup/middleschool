@@ -3,7 +3,6 @@ package com.torrow.school.serviceimpl;
 
 import java.text.ParseException;
 
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,7 +62,7 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	public List<TbResource> selectAll() {
 		return this.selectAllEntity();
 	}
-	
+
 	@Override
 	public int updateByPrimaryKey(TbResource record) {
 		return this.updateEntity(record);
@@ -78,7 +77,7 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	public PageBean<TbResource> findingByPaging(int currentPage, TbCategory record, int pageSize) {
 		List<TbResource> list = new ArrayList<TbResource>();// 这个集合是为了把得到资源类与类别类caId相同的的数据
 		List<TbCategory> tbCategory = tbCategoryDao.selectAllCaId();
-		String name=record.getCaName();
+		String name = record.getCaName();
 		List<TbResource> tbResource = tbResourceDao.queryAll(name);
 		for (TbCategory item : tbCategory) {
 			if (item.getCaPid()!=null) {
@@ -143,68 +142,16 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 				caIdGenerals.add(categoryList.get(i).getCaId());
 			}
 		}
-		TbResource general = null;
-		for (int i = 0; i < caIdGenerals.size(); i++) {// 将首页的展示学校简介等封装进model，此处定死概括类四个名称
-			general = this.selectByCaId(caIdGenerals.get(i));
-			if (general != null) {
-				general.setReContent(this.cutWord(general.getReContent()));// 截取html标签后部分
-				if (general.getCaName().equals("学校简介")) {
-					model.addAttribute("schoolGeneralIndex", general);
-				} else if (general.getCaName().equals("建校历史")) {
-					model.addAttribute("schoolHistory", general);
-				} else if (general.getCaName().equals("学校荣誉")) {
-					model.addAttribute("schoolHonorIndex", general);
-				} else if (general.getCaName().equals("教学成果")) {
-					model.addAttribute("educationAchieveIndex", general);
-				}
-			}
-		}
 		getResources(caIdNews, caIdGenerals, noticeCaId, resourcesId, model);// 将全部资源类按照条数要求，倒序要求得到
 	}
 
-	// 首页学校简介等处去除html标签
-	public String cutWord(String content) {
-		int startIndex = -1;
-		int stopIndex = -1;
-		String contentTemp = "";
-		char cutHtml[] = content.toCharArray();
-		if (content != null && !content.equals("")) {
-			if (content.indexOf("<") != -1) {
-				startIndex = content.indexOf("<");
-				contentTemp = content.substring(0, startIndex);// 将第一次标签出现前内容放入
-				for (int i = startIndex; i < cutHtml.length; i++) {
-					if (contentTemp.length() >= 92) {// 显示100个字
-						break;
-					}
-					if (content.indexOf(">", i) != -1) {
-						stopIndex = content.indexOf(">", i);
-						if (startIndex != -1) {
-							i = stopIndex + 1;// 跳过标签内容
-						}
-						startIndex = -1;
-						if (content.indexOf("<", i) > i) {// 当前不是>符时加入
-							contentTemp += content.charAt(i);
-						} else {
-							startIndex = content.indexOf("<", i) + 1;
-						}
-					} else {
-						break;
-					}
-				}
-			} else {
-				if (content.length() > 100) {
-					contentTemp = content.substring(0, 92);
-				} else {
-					contentTemp = content;
-				}
-			}
-			String cutEnd = contentTemp.substring(contentTemp.length() - 6, contentTemp.length() - 1);
-			if (cutEnd.indexOf('&') != -1) {
-				contentTemp = contentTemp.substring(0, contentTemp.length() - 6);
-			}
-			contentTemp += "......";
+	// 截取内容前120字，不去除html
+	public String cutWordWithHtml(String content) {
+		if (content.length() > 100) {
+			content = content.substring(0, 94);
 		}
-		return contentTemp;
+		content += "......";
+		return content;
 	}
 
 	// 将全部资源类按照条数要求，倒序要求得到
@@ -213,7 +160,15 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 		List<TbResource> sNews = new ArrayList<TbResource>();// 学校新闻，按倒序得到，只要8条,没有图片不要
 		List<TbResource> sNotices = new ArrayList<TbResource>();// 学校公告，按倒序得到，只要8条
 		List<TbResource> resourcesDown = new ArrayList<TbResource>();// 资源下载，按倒序得到，只要8条
+		List<TbResource> generalIndex = new ArrayList<TbResource>();// 学校概括，按顺序得到，只要4条
 		List<TbResource> allResources = this.selectAll();
+		for(int i=0;i<caIdGenerals.size();i++){
+			if(generalIndex.size()<4){
+				TbResource resource = this.selectByCaId(caIdGenerals.get(i));
+				resource.setReContent(this.cutWordWithHtml(resource.getReContent()));//只要120个字符
+				generalIndex.add(resource);
+			}
+		}
 		for (int i = allResources.size() - 1; i >= 0; i--) { // 倒序得到资源类
 			for (int j = 0; j < caIdNews.size(); j++) {
 				if (sNews.size() < 8 & allResources.get(i).getCaId() == caIdNews.get(j)) {// 当资源类属于新闻时取出
@@ -231,6 +186,7 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 				resourcesDown.add(allResources.get(i));
 			}
 		}
+		model.addAttribute("generalIndex", generalIndex);//首页四概括
 		model.addAttribute("notices", sNotices);
 		model.addAttribute("sNews", sNews);
 		model.addAttribute("resourcesDown", resourcesDown);
@@ -309,8 +265,8 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 					if (id == 1) {
 						item.setCaName(record.getCaName());
 						this.updateByPrimaryKey(item);
-					} 
-					if(id==2) {
+					}
+					if (id == 2) {
 						this.deleteByPrimaryKey(item.getReId());
 					}
 				}
@@ -348,5 +304,51 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 
 		}
 		return "--";
+	}
+
+	
+	// 首页学校简介等处去除html标签 ！！！！不用了
+	public String cutWord(String content) {
+		int startIndex = -1;
+		int stopIndex = -1;
+		String contentTemp = "";
+		char cutHtml[] = content.toCharArray();
+		if (content != null && !content.equals("")) {
+			if (content.indexOf("<") != -1) {
+				startIndex = content.indexOf("<");
+				contentTemp = content.substring(0, startIndex);// 将第一次标签出现前内容放入
+				for (int i = startIndex; i < cutHtml.length; i++) {
+					if (contentTemp.length() >= 92) {// 显示100个字
+						break;
+					}
+					if (content.indexOf(">", i) != -1) {
+						stopIndex = content.indexOf(">", i);
+						if (startIndex != -1) {
+							i = stopIndex + 1;// 跳过标签内容
+						}
+						startIndex = -1;
+						if (content.indexOf("<", i) > i) {// 当前不是>符时加入
+							contentTemp += content.charAt(i);
+						} else {
+							startIndex = content.indexOf("<", i) + 1;
+						}
+					} else {
+						break;
+					}
+				}
+			} else {
+				if (content.length() > 100) {
+					contentTemp = content.substring(0, 92);
+				} else {
+					contentTemp = content;
+				}
+			}
+			String cutEnd = contentTemp.substring(contentTemp.length() - 6, contentTemp.length() - 1);
+			if (cutEnd.indexOf('&') != -1) {
+				contentTemp = contentTemp.substring(0, contentTemp.length() - 6);
+			}
+			contentTemp += "......";
+		}
+		return contentTemp;
 	}
 }

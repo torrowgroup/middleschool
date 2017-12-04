@@ -85,9 +85,10 @@ public class LoginController extends BaseController {
 				session.setAttribute("teacher", tbUser);
 				if(tbCategory.getCaPid()==3) {//属于教育教研
 					model.addAttribute("identity", "教研组");
-				} else if(tbUser.getCaName().equals("政教处")) {
+				} 
+//				else if(tbUser.getCaName().equals("政教处")) {
 //					session.setAttribute("political",tbUser);
-				}	
+//				}	
 				view = "educationoffice/index";
 			}
 		}else {
@@ -120,7 +121,14 @@ public class LoginController extends BaseController {
 			model.addAttribute("famousTeacherOne", userService.selectAll().get(0));
 		}
 		if(userAll.size()>1){
-			model.addAttribute("famousTeacherTwo", userService.selectAll().get(1));
+			int a=0,b=0;
+			Random rd = new Random();
+			do{
+				a = rd.nextInt(userAll.size());
+				b = rd.nextInt(userAll.size());
+			}while(a==b);
+			model.addAttribute("famousTeacherOne", userService.selectAll().get(a));
+			model.addAttribute("famousTeacherTwo", userService.selectAll().get(b));
 		}	
 		return new ModelAndView("visitor/index");
 	}

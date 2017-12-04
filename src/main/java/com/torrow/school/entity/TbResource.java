@@ -30,7 +30,7 @@ public class TbResource implements Serializable {
 		super();
 	}
 
-	
+	//张金高用
 	public TbResource(Integer caId,String reIssuer, String reIssuingdate,String caName, String reTitle,
 			String reContent) {
 		super();

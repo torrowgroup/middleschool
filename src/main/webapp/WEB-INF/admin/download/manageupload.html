@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
@@ -15,12 +15,11 @@
 </div>
  <div th:if ="${pagemsg.totalCount}!=0">
 <!--模糊查询  -->
-<div class="mainbox">
+	<div class="mainbox">
  	    <form th:action="@{/news/manageObject}" class="inquiry" method="post">
 		 	<input type="hidden" name="caPid" th:value="${zid}">
 		    <input type="text" name="caName" class="inquiryinput" placeholder="文件名称/发布人/上传的日期" required/>
 		    <input type="submit" value="查询" class="btn btn-default inquirysub" title="查询">   
- 	
 	    </form>
 		<table class="table table-bordered table-hover table-condensed">
        		 <thead>
