@@ -94,5 +94,11 @@
 	    <if test="name!=null">
 	     	and re_title like CONCAT(CONCAT('%', #{name}), '%')
 		</if>
+		<if test="name!=null">
+	     	or re_issuer like CONCAT(CONCAT('%', #{name}), '%')
+		</if>
+		<if test="name!=null">
+	     	or re_issuingdate like CONCAT(CONCAT('%', #{name}), '%')
+		</if>
     </select> 
 </mapper>

@@ -30,17 +30,7 @@ public class TbResource implements Serializable {
 		super();
 	}
 
-	public TbResource(Integer reId,Integer caId, String caName, String reTitle, String reIssuer, String reIssuingdate,
-			String reContent) {
-		super();
-		this.reId=reId;
-		this.caId = caId;
-		this.caName = caName;
-		this.reTitle = reTitle;
-		this.reIssuer = reIssuer;
-		this.reIssuingdate = reIssuingdate;
-		this.reContent = reContent;
-	}
+	
 	public TbResource(Integer caId,String reIssuer, String reIssuingdate,String caName, String reTitle,
 			String reContent) {
 		super();
@@ -51,7 +41,7 @@ public class TbResource implements Serializable {
 		this.reTitle = reTitle;
 		this.reContent = reContent;
 	}
-
+	//安李杰在添加学校新闻时用到
 	public TbResource(Integer caId, String reIssuingdate,String caName, String reTitle,
 			String reContent) {
 		super();
@@ -61,6 +51,7 @@ public class TbResource implements Serializable {
 		this.reTitle = reTitle;
 		this.reContent = reContent;
 	}
+	
 	public TbResource(Integer caId,String caName,
 			String reContent) {
 		super();

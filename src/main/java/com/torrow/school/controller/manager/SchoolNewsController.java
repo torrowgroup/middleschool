@@ -79,10 +79,10 @@ public class SchoolNewsController extends BaseController {
 		}
 		TbCategory record = new TbCategory();
 		record.setCaId(tb.getCaId());
-		if (session.getAttribute("caName") != null) {
-			String caName = (String) session.getAttribute("caName");
-			record.setCaName(caName);
-		}
+//		if (session.getAttribute("caName") != null) {
+//			String caName = (String) session.getAttribute("caName");
+//			record.setCaName(caName);
+//		}
 		return this.manageObject(currentPage, model, record);
 	}
 
@@ -224,8 +224,8 @@ public class SchoolNewsController extends BaseController {
 			record.setCaId(tbCategory.getCaId());
 			model.addAttribute("zid", tbCategory.getCaId());
 		}
-		if (null != tbCategory.getCaName()) {
-			String str=tbCategory.getCaName();
+		String str=tbCategory.getCaName();
+		if (tbCategory.getCaName()!=null&&!tbCategory.getCaName().equals("")) {
 			//这是为了用来解决中文乱码的问题
 			Garbled g=new Garbled();
 			String s=g.getEncoding(tbCategory.getCaName());
@@ -294,7 +294,7 @@ public class SchoolNewsController extends BaseController {
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
 		String reContent = resourceService.uploadFile(file, path);
 		TbUser tbUser=(TbUser)session.getAttribute("admin");
-		TbResource tb = new TbResource(item.getCaId(), Date, item.getCaName(), file.getOriginalFilename(), reContent,tbUser.getUsName());
+		TbResource tb = new TbResource(item.getCaId(),tbUser.getUsName(), Date, item.getCaName(), file.getOriginalFilename(), reContent);
 		resourceService.insert(tb);
 		model.addAttribute("message", "添加成功");
 		// 校园文学

@@ -22,14 +22,14 @@
  <div class="mainbox">
  	    <form th:action="@{/news/manageObject}" class="inquiry" method="post">
 		 	<input type="hidden" name="caPid" th:value="${zid}">
-		    <input type="text" name="caName" class="inquiryinput" placeholder="标题" required/>
+		    <input type="text" name="caName" class="inquiryinput" placeholder="标题/发布人/日期" required/>
 		    <input type="submit" value="查询" class="btn btn-default inquirysub" title="查询">   
 	    </form>
 		<table class="table table-bordered table-hover table-condensed">
        		 <thead>
 	            <tr>
 	                <th><span>标题</span></th>
-	                <th><span>发布者</span></th>
+	                <th><span>发布人</span></th>
 	                <th><span>日期</span></th>
 	                <th><span>详情</span></th>
 	                <th><span>删除</span></th>

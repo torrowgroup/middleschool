@@ -81,7 +81,7 @@ public class PoliticalEducationController extends BaseController{
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
 		String reContent = resourceService.uploadFile(file, path);
 		TbUser tbUser=(TbUser)session.getAttribute("teacher");
-		TbResource tb = new TbResource(item.getCaId(), Date, item.getCaName(), file.getOriginalFilename(), reContent,tbUser.getUsName());
+		TbResource tb = new TbResource(item.getCaId(),tbUser.getUsName(), Date, item.getCaName(), file.getOriginalFilename(), reContent);
 		resourceService.insert(tb);
 		model.addAttribute("message", "添加成功");
 		if (item.getCaPid() == 9) {
@@ -106,8 +106,8 @@ public class PoliticalEducationController extends BaseController{
 			record.setCaId(tbCategory.getCaId());
 			model.addAttribute("zid", tbCategory.getCaId());
 		}
-		if (null != tbCategory.getCaName()) {
-			String str=tbCategory.getCaName();
+		String str=tbCategory.getCaName();
+		if (tbCategory.getCaName()!=null&&!tbCategory.getCaName().equals("")) {
 			//这是为了用来解决中文乱码的问题
 			Garbled g=new Garbled();
 			String s=g.getEncoding(tbCategory.getCaName());
