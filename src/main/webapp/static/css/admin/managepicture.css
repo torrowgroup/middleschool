@@ -3,20 +3,24 @@ body{
 	padding: 0;
 	background: #ebebeb;
 }
+*{
+	font-size:18px;
+}
 .aa{
-	width: 600px;
-	height:1500px;
+	width: 500px;
+	height:700px;
 	margin: 0 auto;
 	margin-top: 4%;
-	background:yellow;
 }
 table{
 	width:100%;
-	height:
+	height:100%;
 }
 img{
-	width:120px;
-	height: 120px;
+	width:200px;
+	height: 130px;
+	margin-top:20px;
+	margin-bottom:20px;
 }
 td{
 	text-align: center;

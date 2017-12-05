@@ -15,17 +15,17 @@
         没有任何轮播图信息！
     </span>
  <div th:if ="${pagemsg.totalCount}!=0">
-        <table border="1"  class="table1">   
+        <table border="1"  class="table1 table-hover">   
         <thead>
             <tr>
-            	<td width="30%"><span>图片名称</span></td>
-                <td width="30%"><span>图片</span></td>
-                <td width="60%"><span>删除</span></td>
+            	<td width="25%"><span>图片名称</span></td>
+                <td width="50%"><span>图片</span></td>
+                <td width="25%"><span>删除</span></td>
             </tr>
             </thead>
                 <tr th:each="general,generalStart:${pagemsg.lists}">
                     <td th:text="${general.reTitle}">${news.reTitle}</td>
-                    <td><img alt="无图片" width="100px;" height="80px;" th:src="@{/static/uploadimg/{picture}(picture=${general.reContent})}" /></td>
+                    <td><img alt="无图片" th:src="@{/static/uploadimg/{picture}(picture=${general.reContent})}" /></td>
                 	<td><a th:href="@{/general/deleteScenery?(id=${general.reId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
                 </tr>
         </table>   
