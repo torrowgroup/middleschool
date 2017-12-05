@@ -25,7 +25,14 @@ public interface TbResourceService {
     List<TbResource> selectListByCaId(Integer caId);
     //得到考试时间和联系方式
     void getTimeInfor(Model model) throws ParseException;
-
+    
+    //判断标题是否重复/是否置顶，有的话把其他都设成否（取消置顶）sign==1代表判断标题是否重复，sign==0代表指定操作 
+    //返回值1代表标题是否重复，2代表是否置顶，0代表二者都没
+    int getNumber(TbResource record,Model model,int sign);
+    
+    //返回系统日期
+    public String Date();
+    
     //为了查看一条信息
     TbResource selectByPrimaryKey(Integer id);
     //根据caId来进行查询
@@ -36,12 +43,12 @@ public interface TbResourceService {
     public PageBean<TbResource>  findPage(int currentPage,int pageSize);
     //对资源类的部分数据进行分页查看
     public PageBean<TbResource>  findingByPaging(int currentPage,TbCategory record,int pageSize);//张金高用
+    //对于轮播图的分页查看那种不需要PID和ID的
+    public PageBean<TbResource>  findingByPage(int currentPage,String inquiry,int pageSize);
     //根据id来删除资源类
     int deleteByPrimaryKey(Integer id);
     //插入资源类
     int insert(TbResource record);
-    //根据caId来删除
-    int deleteByCaId(Integer caId);
 	//根据reTitle来查询
     public TbResource selectByReTitle(String reTitle);//张金高用
     //根据reContent来查询

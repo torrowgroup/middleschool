@@ -29,6 +29,7 @@
 	            <tr>
 	                <th><span>标题</span></th>
 	                <th><span>日期</span></th>
+	                <th><span>是否置顶</span></th>
 	                <th><span>详情</span></th>
 	                <th><span>删除</span></th>
 	            </tr>
@@ -37,6 +38,12 @@
             	<tr th:each="news,newsStart:${pagemsg.lists}">
                     <td th:text="${news.reTitle}">${news.reTitle}</td>
                     <td th:text="${news.reIssuingdate}">${news.reIssuingdate}</td>
+                	<td th:if="${news.spare}=='是'">
+                		<a th:href="@{/news/stick?(id=${news.reId},caId=${zid},caName=${caName})}">取消置顶</a>
+                	</td>
+                	<td th:if="${news.spare}=='否'">
+                		<a th:href="@{/news/stick?(id=${news.reId},caId=${zid},caName=${caName})}">置顶</a>
+                	</td>
                 	<td class="pp"><a th:href="@{/news/selectOneNews?(id=${news.reId})}">详情</a></td>
                 	<td><a th:href="@{/news/deleteNews?(id=${news.reId})}" onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash"></span></a></td>
                 </tr>

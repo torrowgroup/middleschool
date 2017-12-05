@@ -34,7 +34,7 @@ public interface TbCategoryService {
 	public PageBean<TbCategory>  findPage(int currentPage,int pageSize);
 	//通过传进去父id来查询信息安李杰加
 	public List<TbCategory> queryByPid(int Pid);//张金高用
-	//添加的跳转
+	// 添加校园新闻、上传（学生管理、教师成长）、 教研组上的上传、资源下载类的上传、校园文学类的上传、学校公告类的添加
 	public void addBySelectPid(Model model,int Pid);
 	//首页的显示的类别类
 	public void findAllCategory(Model model);

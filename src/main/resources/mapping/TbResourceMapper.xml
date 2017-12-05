@@ -16,12 +16,6 @@
     where re_id = #{reId,jdbcType=INTEGER}
   </delete>
   
-  <!--根据caId来删除 -->
-  <delete id="deleteByCaId" parameterType="java.lang.Integer">
-    delete from tb_resource
-    where ca_id = #{caId,jdbcType=INTEGER}
-  </delete>
-  
   	<!--根据reTitle来查询  -->
   	<select id="selectByTitle"   parameterType="java.lang.String"  resultMap="BaseResultMap">
 		select * from tb_resource where re_title = #{reTitle}
@@ -99,6 +93,15 @@
 		</if>
 		<if test="name!=null">
 	     	or re_issuingdate like CONCAT(CONCAT('%', #{name}), '%')
+		</if>
+    </select> 
+    
+    <!--这个是为了根据图片caName来查询轮播图片的信息  -->
+	<select id="selectBlur" parameterType="java.lang.String"  resultMap="BaseResultMap">
+	    select re_id, ca_id, ca_name, re_title, re_issuer, re_issuingdate, spare, re_content
+	    from tb_resource where true 
+	    <if test="inquiry!=null">
+	     	and ca_name like CONCAT(CONCAT('%', #{inquiry}), '%')
 		</if>
     </select> 
 </mapper>

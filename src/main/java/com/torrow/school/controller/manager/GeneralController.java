@@ -42,27 +42,10 @@ public class GeneralController extends BaseController {
 		TbCategory record = new TbCategory();
 		record.setCaPid(7);
 		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,4));// 回显分页数据
-		model.addAttribute("sign", 1);// 为了在查看管理校园风光时是同一个界面
 		session.setAttribute("currentPage", currentPage);
 		return "admin/general/managescenery";
 	}
 	
-//	/**
-//	 * @param currentPage
-//	 * @param model
-//	 * @return 管理图片轮播图
-//	 */
-//	@RequestMapping("managePicture")
-//	public String managePicture(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model) {
-//		TbCategory record = new TbCategory();
-//		record.setCaPid(10);
-//		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record,4));// 回显分页数据
-//		model.addAttribute("sign", 1);// 为了在查看管理轮播图时是同一个界面
-//		session.setAttribute("currentPage", currentPage);
-//		return "admin/managepicture/managepicture";
-//	}
-//	
-//	
 	/**
 	 * @param model
 	 * @param id
@@ -71,25 +54,76 @@ public class GeneralController extends BaseController {
 	@RequestMapping("selectOneScenery")
 	public String selectOneScenery(Model model,Integer id) {
 		TbResource tb = resourceService.selectByPrimaryKey(id);
-		model.addAttribute("tb",tb);
+		if(null!=tb) {
+			model.addAttribute("tb",tb);
+		}else {
+			//返回提示页面
+			model.addAttribute("message", "该校园风光不存在!");
+			return "admin/empty";
+		}
 		return "admin/general/updateschoolscenery";
 	}
 	
+	/**
+	 * @return 轮播图的跳转
+	 */
+	@RequestMapping("uploadCarouselJumping")
+	public String uploadCarouselJumping() {
+		return "admin/managepicture/upload";
+	}
+
 	
 	/**
 	 * @param model
-	 * @return 图片类的上传
+	 * @param tbResource
+	 * @return 上传轮播图和校徽
+	 * @throws Exception 
 	 */
-	@RequestMapping("uploadPictureJumping")
-	public String uploadPictureJumping(Model model) {
-		int Pid=10;//查询轮播图
-		List<TbCategory> list=categoryService.queryByPid(Pid);
-		if(!list.isEmpty()) {
-			model.addAttribute("uploadList", list);
+	@RequestMapping("uploadCarousel")
+	public String uploadCarousel(Model model,TbResource tbResource,MultipartFile picture) throws Exception {
+		List<TbResource> list=new ArrayList<TbResource>();
+		List<TbResource> one=new ArrayList<TbResource>();
+		List<TbResource> t = resourceService.selectAll();
+			for(TbResource en:t) {
+				if("图片".equals(en.getCaName())) {
+					if("首页轮播".equals(en.getReTitle())&&tbResource.getReTitle().equals("首页轮播")) {
+						model.addAttribute("message", "首页轮播最多有3幅");
+						list.add(en);
+					}else if(!tbResource.getReTitle().equals("首页轮播")&&tbResource.getReTitle().equals(en.getReTitle())){
+						model.addAttribute("message",tbResource.getReTitle()+"最多有一幅轮播图片");
+						one.add(en);
+					}
+				}
+			}
+		//判断图片是否是3个
+		if (list.size() > 2||one.size()==1) {
+			return "admin/managepicture/upload";
+		}
+		String path = session.getServletContext().getRealPath("/static/uploadimg");
+		String reContent = resourceService.uploadPicture(picture, path);
+		TbResource record = new TbResource("图片",tbResource.getReTitle(),
+				reContent);
+		record.setCaId(0);
+		int i = resourceService.insert(record);
+		if (i != 0) {
+			model.addAttribute("message", "添加成功");
 		} else {
-			model.addAttribute("sign",1);
+			model.addAttribute("message", "添加失败");
 		}
 		return "admin/managepicture/upload";
+	}
+	
+	/**
+	 * @param currentPage
+	 * @param model
+	 * @return 这个分页是为了查看轮播图和校徽等图片信息仅此
+	 */
+	@RequestMapping("manageCarousel")
+	public String manageCarousel(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,Model model) {
+		String inquiry="图片";
+		model.addAttribute("pagemsg", resourceService.findingByPage(currentPage, inquiry, 3));// 回显分页数据
+		session.setAttribute("currentPage", currentPage);
+		return "admin/managepicture/managepicture";
 	}
 	
 	/**
@@ -103,10 +137,7 @@ public class GeneralController extends BaseController {
 		TbCategory tbCategory = categoryService.selectByPrimaryKey(tbResource.getCaId());
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
 		String reContent = resourceService.uploadPicture(picture, path);
-//		TbResource t=new TbResource(tbCategory.getCaId(),reContent);
 		if(tbCategory.getCaPid()==7) {
-//			//这是验证图片是否重名
-//			resourceService.updateDeleteTbResourceByCaId(t,3);
 			TbResource tb = new TbResource(tbResource.getCaId(),tbResource.getCaName(),tbResource.getReTitle(),reContent);
 			int i=resourceService.insert(tb);
 			if(i!=0) {
@@ -122,9 +153,6 @@ public class GeneralController extends BaseController {
 			}else {
 				model.addAttribute("message", "添加失败");
 			}
-		}
-		if(tbCategory.getCaPid()==10) {
-			return this.uploadPictureJumping(model);
 		}
 		return this.addSceneryJumping(model);
 	}
@@ -190,16 +218,24 @@ public class GeneralController extends BaseController {
 	public String deleteScenery(Model model,Integer id) {
 		int currentPage = (int) session.getAttribute("currentPage");
 		TbResource tb = resourceService.selectByPrimaryKey(id);
-		String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tb.getReContent();
-		File files = new File(path);
-		if (files.exists()) {
-			files.delete();
+		if(null!=tb) {
+			String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tb.getReContent();
+			File files = new File(path);
+			if (files.exists()) {
+				files.delete();
+			}
+			String msg = "删除失败";
+			if (resourceService.deleteByPrimaryKey(id) == 1) {
+				msg = "删除成功";
+			}
+			model.addAttribute("message", msg);
+			//这是对于图片信息（轮播图）的删除
+			if(tb.getCaName().equals("图片")) {
+				return this.manageCarousel(currentPage, model);
+			}
+		}else {
+			model.addAttribute("message", "这条数据不存在!");
 		}
-		String msg = "删除失败";
-		if (resourceService.deleteByPrimaryKey(id) == 1) {
-			msg = "删除成功";
-		}
-		model.addAttribute("message", msg);
 		return this.manageScenery(currentPage, model);
 	}
 
@@ -249,7 +285,6 @@ public class GeneralController extends BaseController {
 		if(!list.isEmpty()) {
 			model.addAttribute("categoryList", list);
 		} else {
-//			model.addAttribute("message","该类别名称不存在");
 			model.addAttribute("sign", 1);
 		}
 		return "admin/general/addgeneral";
@@ -284,39 +319,6 @@ public class GeneralController extends BaseController {
 		}
 		return this.addGeneralJumping(model);
 	}
-	
-//	/**
-//	 * @param model
-//	 * @param id
-//	 * @param reTitle
-//	 * @param reContent
-//	 * @param caName
-//	 * @return 对于概括类进行修改的操作
-//	 */
-//	@RequestMapping("updateGeneral")
-//	public String updateGeneral(Model model, @RequestParam(value = "picture", required = false) MultipartFile[] picture,
-//			TbResource tbResource) throws IllegalStateException, IOException {
-//		if(tbResource.getReContent().equals(null)) {
-//			int i=resourceService.deleteByPrimaryKey(tbResource.getReId());
-//			if(i!=0) {
-//				model.addAttribute("message", "保存成功");
-//			}else {
-//				model.addAttribute("message", "保存失败");
-//			}
-//		}
-//		TbResource tb = resourceService.selectByPrimaryKey(tbResource.getReId());
-//		if (null != tb) {
-//			tb.setReContent(tbResource.getReContent());
-//			int i=resourceService.updateByPrimaryKey(tb);
-//			if(i!=0) {
-//				model.addAttribute("message", "保存成功");
-//			}else {
-//				model.addAttribute("message", "保存失败");
-//			}
-//		} 
-//		return this.manage(model,tb.getCaId());
-//	}
-	
 	
 	// 用于富文本编辑器的图片上传
 	@RequestMapping("uploadImg")

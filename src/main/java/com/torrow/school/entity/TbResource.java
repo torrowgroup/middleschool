@@ -16,7 +16,7 @@ public class TbResource implements Serializable {
 
     private String caName;	//类别类名称
 
-    private String reTitle;		//资源标题，图片简介，链接名称
+    private String reTitle;		//资源标题，图片简介，链接名称,轮播图类别名称
 
     private String reIssuer;	//发布人或者通知对象(姓名)
 
@@ -24,7 +24,7 @@ public class TbResource implements Serializable {
 
     private String reContent;	//内容
     
-    private String spare;	//备用
+    private String spare;	//是否置顶(状态：是代表置顶按钮变成取消置顶、否代表非置顶，按钮是置顶状态),
 
 	public TbResource() {
 		super();

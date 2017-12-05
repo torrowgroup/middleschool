@@ -25,7 +25,7 @@ public class NoCacheFilter implements Filter{
         hsr.setHeader("Pragma", "no-cache"); // HTTP 1.0.  
         hsr.setDateHeader("Expires", 0); // Proxies.  
         chain.doFilter(req, res);  
-          
+        System.out.println("--------------------");
     }  
   
     @Override  
