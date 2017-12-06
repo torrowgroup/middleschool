@@ -47,6 +47,7 @@ public class CategoryController extends BaseController {
 	public String addCategory(String caName, Integer caPid, Model model) {
 		TbCategory tbCategory = categoryService.selectCaName(caName);
 		List<TbCategory> one=new ArrayList<TbCategory>();
+		List<TbCategory> lists=new ArrayList<TbCategory>();
 		List<TbCategory> list=categoryService.selectAll();
 		if(!list.isEmpty()) {
 			for(TbCategory item:list) {
@@ -56,12 +57,12 @@ public class CategoryController extends BaseController {
 						one.add(item);
 					}else if(caPid==1||caPid==2||caPid==3) {
 						model.addAttribute("message", "添加的该类别名称已超出最大长度!");
-						one.add(item);
+						lists.add(item);
 					}
 				}
 			}
 		}
-		if(one.size()==1||one.size()>7) {
+		if(one.size()==1||lists.size()>7) {
 			return "admin/category/addcategory";
 		}
 		if (null != tbCategory) {

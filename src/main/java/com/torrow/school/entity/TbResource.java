@@ -16,7 +16,7 @@ public class TbResource implements Serializable {
 
     private String caName;	//类别类名称
 
-    private String reTitle;		//资源标题，图片简介，链接名称
+    private String reTitle;		//资源标题，图片简介，链接名称,轮播图类别名称
 
     private String reIssuer;	//发布人或者通知对象(姓名)
 
@@ -24,23 +24,12 @@ public class TbResource implements Serializable {
 
     private String reContent;	//内容
     
-    private String spare;	//备用
+    private String spare;	//是否置顶(状态：是代表置顶按钮变成取消置顶、否代表非置顶，按钮是置顶状态),
 
 	public TbResource() {
 		super();
 	}
-	
-	public TbResource(Integer reId,Integer caId, String caName, String reTitle, String reIssuer, String reIssuingdate,
-			String reContent) {
-		super();
-		this.reId=reId;
-		this.caId = caId;
-		this.caName = caName;
-		this.reTitle = reTitle;
-		this.reIssuer = reIssuer;
-		this.reIssuingdate = reIssuingdate;
-		this.reContent = reContent;
-	}
+
 	//张金高用
 	public TbResource(Integer caId,String reIssuer, String reIssuingdate,String caName, String reTitle,
 			String reContent) {
@@ -52,7 +41,7 @@ public class TbResource implements Serializable {
 		this.reTitle = reTitle;
 		this.reContent = reContent;
 	}
-
+	//安李杰在添加学校新闻时用到
 	public TbResource(Integer caId, String reIssuingdate,String caName, String reTitle,
 			String reContent) {
 		super();
@@ -62,6 +51,7 @@ public class TbResource implements Serializable {
 		this.reTitle = reTitle;
 		this.reContent = reContent;
 	}
+	
 	public TbResource(Integer caId,String caName,
 			String reContent) {
 		super();

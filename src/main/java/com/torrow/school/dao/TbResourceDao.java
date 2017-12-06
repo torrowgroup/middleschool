@@ -14,12 +14,6 @@ public interface TbResourceDao {
 	
 	//根据caId得到所有资源类，不分页，张金高加
 	List<TbResource> selectListByCaId(@Param("caId")Integer caId);
-	
-	/**
-	 * @param caId
-	 * @return 根据caId来删除
-	 */
-	public int deleteByCaId(@Param("caId")Integer caId);
 
 	public TbResource selectByCaId(@Param("caId")Integer caId);
 	//根据reTitle来查询
@@ -28,5 +22,7 @@ public interface TbResourceDao {
 	public TbResource selectByContent(@Param("reContent")String reContent);
 
 	public List<TbResource> queryAll(@Param("name")String name);
+	
+	public List<TbResource> selectBlur(@Param("inquiry")String inquiry);
 	
 }

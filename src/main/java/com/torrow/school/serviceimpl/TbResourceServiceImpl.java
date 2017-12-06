@@ -1,6 +1,7 @@
 
 package com.torrow.school.serviceimpl;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 
 import java.text.SimpleDateFormat;
@@ -75,42 +76,60 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 
 	@Override
 	public PageBean<TbResource> findingByPaging(int currentPage, TbCategory record, int pageSize) {
-		List<TbResource> list = new ArrayList<TbResource>();// 这个集合是为了把得到资源类与类别类caId相同的的数据
+		// 这个集合是为了把得到资源类与类别类caId相同的的数据
+		List<TbResource> list = new ArrayList<TbResource>();
+		//这个集合才是最终的集合，把取消置顶状态的的放置在最前边
+		List<TbResource> tbLists=new ArrayList<TbResource>();
 		List<TbCategory> tbCategory = tbCategoryDao.selectAllCaId();
 		String name = record.getCaName();
 		List<TbResource> tbResource = tbResourceDao.queryAll(name);
 		for (TbCategory item : tbCategory) {
-			if (item.getCaPid()!=null) {
-				if (item.getCaPid()==record.getCaPid()) {
-					for (int i=tbResource.size()-1;i>=0;i--) { 
-						if (tbResource.get(i).getCaId()==item.getCaId()) {
-							list.add(tbResource.get(i));
+			if (item.getCaPid() != null) {
+				if (item.getCaPid() == record.getCaPid()) {
+					for (int i = tbResource.size() - 1; i >= 0; i--) {
+						if (tbResource.get(i).getCaId() == item.getCaId()) {
+							if(tbResource.get(i).getSpare()!=null) {
+								if(tbResource.get(i).getSpare().equals("是")) {
+									tbLists.add(tbResource.get(i));
+								}else {
+									list.add(tbResource.get(i));
+								}
+							} else {
+								list.add(tbResource.get(i));
+							}
 						}
 					}
 				} else {
-					for (int i=tbResource.size()-1;i>=0;i--) {
-						if (tbResource.get(i).getCaId()==item.getCaId() && tbResource.get(i).getCaId()==record.getCaId()) {
-							list.add(tbResource.get(i));
+					for (int i = tbResource.size() - 1; i >= 0; i--) {
+						if (tbResource.get(i).getCaId() == item.getCaId()
+								&& tbResource.get(i).getCaId() == record.getCaId()) {
+							if(tbResource.get(i).getSpare()!=null) {
+								if(tbResource.get(i).getSpare().equals("是")) {
+									tbLists.add(tbResource.get(i));
+								}else {
+									list.add(tbResource.get(i));
+								}
+							} else {
+								list.add(tbResource.get(i));
+							}
 						}
 					}
 				}
 			}
 		}
-		int totalCount = list.size();// 得到总记录数
+		for(int i=0;i<=list.size()-1;i++) {
+			tbLists.add(list.get(i));
+		}
+		int totalCount = tbLists.size();// 得到总记录数
 		double tc = totalCount;
 		Double num = Math.ceil(tc / pageSize);// 向上取整
 		List<TbResource> lists = new ArrayList<TbResource>();// 这个集合是为了分页显示的条数
 		for (int j = (currentPage - 1) * pageSize; j < currentPage * pageSize && j < totalCount; j++) {
-			lists.add(list.get(j));
+			lists.add(tbLists.get(j));
 		}
 		PageBean<TbResource> pageBean = new PageBean<TbResource>(currentPage, pageSize, lists, num.intValue(),
 				totalCount);
 		return pageBean;
-	}
-
-	@Override
-	public int deleteByCaId(Integer caId) {
-		return tbResourceDao.deleteByCaId(caId);
 	}
 
 	@Override
@@ -162,10 +181,10 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 		List<TbResource> resourcesDown = new ArrayList<TbResource>();// 资源下载，按倒序得到，只要8条
 		List<TbResource> generalIndex = new ArrayList<TbResource>();// 学校概括，按顺序得到，只要4条
 		List<TbResource> allResources = this.selectAll();
-		for(int i=0;i<caIdGenerals.size();i++){
-			if(generalIndex.size()<4){
+		for (int i = 0; i < caIdGenerals.size(); i++) {
+			if (generalIndex.size() < 4) {
 				TbResource resource = this.selectByCaId(caIdGenerals.get(i));
-				resource.setReContent(this.cutWordWithHtml(resource.getReContent()));//只要120个字符
+				resource.setReContent(this.cutWordWithHtml(resource.getReContent()));// 只要120个字符
 				generalIndex.add(resource);
 			}
 		}
@@ -186,7 +205,7 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 				resourcesDown.add(allResources.get(i));
 			}
 		}
-		model.addAttribute("generalIndex", generalIndex);//首页四概括
+		model.addAttribute("generalIndex", generalIndex);// 首页四概括
 		model.addAttribute("notices", sNotices);
 		model.addAttribute("sNews", sNews);
 		model.addAttribute("resourcesDown", resourcesDown);
@@ -306,7 +325,6 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 		return "--";
 	}
 
-	
 	// 首页学校简介等处去除html标签 ！！！！不用了
 	public String cutWord(String content) {
 		int startIndex = -1;
@@ -350,5 +368,48 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 			contentTemp += "......";
 		}
 		return contentTemp;
+	}
+
+	@Override
+	public int getNumber(TbResource record, Model model, int sign) {
+		List<TbResource> resource = this.selectAll();
+		for (TbResource en : resource) {
+			if (en.getCaId() == record.getCaId()) {
+				// sign==1代表标题是否重复
+				if (sign == 1) {
+					if (en.getReTitle().equals(record.getReTitle())) {
+						return 1;
+					}
+				} else if (sign == 0) {
+					en.setSpare("置顶");
+					this.updateByPrimaryKey(en);
+					return 2;
+				}
+			}
+		}
+		return 0;
+	}
+
+	@Override
+	public String Date() {
+		Date date = new Date();
+		DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd"); // HH表示24小时制；
+		String Date = dFormat.format(date);
+		return Date;
+	}
+
+	@Override
+	public PageBean<TbResource> findingByPage(int currentPage, String inquiry, int pageSize) {
+		//这个根据caName来查看
+		List<TbResource> message = tbResourceDao.selectBlur(inquiry);
+		int totalCount = message.size();
+		double tc = totalCount;
+		Double num = Math.ceil(tc / pageSize);// 向上取整
+		List<TbResource> messageList = new ArrayList<TbResource>();// 这个集合是为了分页显示的条数
+		for (int j = (currentPage - 1) * pageSize; j < currentPage * pageSize && j < totalCount; j++) {
+			messageList.add(message.get(j));
+		}
+		PageBean<TbResource> pageBean = new PageBean<TbResource>(currentPage, pageSize, messageList, num.intValue(), totalCount);
+		return pageBean;
 	}
 }

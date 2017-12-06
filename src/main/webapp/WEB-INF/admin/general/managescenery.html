@@ -4,9 +4,9 @@
 
 <head>
   <title>home</title>
-<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/managepicture.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
 <script type="text/javascript" th:src="@{/static/js/bootstrap.min.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/managepicture.css}">
 </head>
 <body>
 <div class="aa">
@@ -20,14 +20,12 @@
             <tr>
             	<td width="30%"><span>简介</span></td>
                 <td width="30%"><span>校园风光</span></td>
-                <td width="30%"><span>详情</span></td>
                 <td width="60%"><span>删除</span></td>
             </tr>
             </thead>
                 <tr th:each="general,generalStart:${pagemsg.lists}">
                     <td th:text="${general.reTitle}">${news.reTitle}</td>
                     <td><img alt="无图片" width="100px;" height="80px;" th:src="@{/static/uploadimg/{picture}(picture=${general.reContent})}" /></td>
-                	<td><a th:href="@{/general/selectOneScenery?(id=${general.reId})}">详情</a>
                 	<td><a th:href="@{/general/deleteScenery?(id=${general.reId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
                 </tr>
         </table>   

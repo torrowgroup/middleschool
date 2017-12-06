@@ -121,7 +121,8 @@ public class EducationController extends BaseController {
 		String Date = dFormat.format(date);
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
 		String reContent = resourceService.uploadFile(file, path);
-		TbResource tb = new TbResource(item.getCaId(), Date, item.getCaName(), file.getOriginalFilename(), reContent);
+		TbUser tbUser=(TbUser)session.getAttribute("identity");
+		TbResource tb = new TbResource(item.getCaId(), tbUser.getUsName(),Date, item.getCaName(), file.getOriginalFilename(), reContent);
 		resourceService.insert(tb);
 		model.addAttribute("message", "添加成功");
 		return this.uploadEducation(model);

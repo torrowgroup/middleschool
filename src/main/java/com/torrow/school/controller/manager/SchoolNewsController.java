@@ -3,10 +3,8 @@ package com.torrow.school.controller.manager;
 import java.io.File;
 
 
+
 import java.io.UnsupportedEncodingException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,11 +35,12 @@ public class SchoolNewsController extends BaseController {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @param model
-	 * @return 添加校园新闻、上传（学生管理、教师成长）、 教研组上的上传、资源下载类的上传、校园文学类的上传、学校公告类的添加
+	 * @param model父ID
+	 * @return 添加校园新闻2、上传9（学生管理、教师成长）、 教研组上的上传3、资源下载类的上传11、校园文学类的上传12、学校公告类的添加6
 	 */
 	@RequestMapping("addNewsJumping")
 	public String addNewsJumping(Model model, int Pid) {
+		//这个方法是为了返回类别数据在添加页面
 		categoryService.addBySelectPid(model, Pid);
 		if (Pid == 9 || Pid == 3 || Pid == 12) {
 			return "admin/schoolnews/uploadfile";
@@ -60,9 +59,11 @@ public class SchoolNewsController extends BaseController {
 	 */
 	@RequestMapping("deleteFile")
 	public String deleteFile(Model model, Integer id) {
+		//从session中取得分页数
 		int currentPage = (int) session.getAttribute("currentPage");
 		TbResource tb = resourceService.selectByPrimaryKey(id);
 		if (null != tb) {
+			//去服务器文件目录下看该文件是否存在，存在就删
 			String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tb.getReContent();
 			File files = new File(path);
 			if (files.exists()) {
@@ -74,15 +75,17 @@ public class SchoolNewsController extends BaseController {
 			}
 			model.addAttribute("message", msg);
 		} else {
+			//返回提示页面
 			model.addAttribute("message", "这个文件不存在");
 			return "admin/empty";
 		}
+		//这个是为了封装ID去管理页面查找数据
 		TbCategory record = new TbCategory();
 		record.setCaId(tb.getCaId());
-		if (session.getAttribute("caName") != null) {
-			String caName = (String) session.getAttribute("caName");
-			record.setCaName(caName);
-		}
+//		if (session.getAttribute("caName") != null) {
+//			String caName = (String) session.getAttribute("caName");
+//			record.setCaName(caName);
+//		}
 		return this.manageObject(currentPage, model, record);
 	}
 
@@ -91,34 +94,31 @@ public class SchoolNewsController extends BaseController {
 	 * @param reTitle
 	 * @param reContent
 	 * @param caName
-	 * @return 添加学校新闻
+	 * @return 添加学校新闻（父ID为2）和添加学校公告（父ID为6）
+	 *
 	 */
 	@RequestMapping("addSchoolNews")
 	public String addSchoolNews(Model model, TbResource tbResource) {
 		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
-		List<TbResource> resource = resourceService.selectAll();
-		for (TbResource en : resource) {
-			if (en.getCaId() == tbResource.getCaId()) {
-				if (en.getReTitle().equals(tbResource.getReTitle())) {
-					model.addAttribute("message", "该标题已存在，添加失败");
-					if (item.getCaPid() == 2) {
-						return this.addNewsJumping(model, 2);
-					} else {
-						return this.addNewsJumping(model, 6);
-					}
-				}
+		//这个方法是为了判断标题是否重复
+	    if(resourceService.getNumber(tbResource, model, 1)==1) {
+	    	model.addAttribute("message", "该标题已存在，添加失败");
+	    	if (item.getCaPid() == 2) {
+				return this.addNewsJumping(model, 2);
+			} else {
+				return this.addNewsJumping(model, 6);
 			}
-		}
-		Date date = new Date();
-		DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd"); // HH表示24小时制；
-		String Date = dFormat.format(date);
+	    }
 		if (null != item) {
-			TbResource record = new TbResource(item.getCaId(), Date, item.getCaName(), tbResource.getReTitle(),
+			TbResource record = new TbResource(item.getCaId(), resourceService.Date(), item.getCaName(), tbResource.getReTitle(),
 					tbResource.getReContent());
+			 //从用户登录信息中取出用户名在添加公告时用
 			 if(item.getCaPid()==6) {
 				 TbUser tbUser=(TbUser)session.getAttribute("admin");
 				 record.setReIssuer(tbUser.getUsName());
 			 }
+			 record.setSpare("否");
+			 //把数据存数据库			 
 			int i = resourceService.insert(record);
 			if (i != 0) {
 				model.addAttribute("message", "添加成功");
@@ -128,12 +128,39 @@ public class SchoolNewsController extends BaseController {
 		} else {
 			model.addAttribute("message", "添加失败,不存在该类别");
 		}
+		//返回添加公告
 		if (item.getCaPid() == 6) {
 			return this.addNewsJumping(model, 6);
 		}
+		//返回添加新闻
 		return this.addNewsJumping(model, 2);
 	}
-
+	
+	/**
+	 * @param model
+	 * @param id
+	 * @param tbCategory
+	 * @return 置顶和取消置顶的操作,
+	 */
+	@RequestMapping("stick")
+	public String stick(Model model,int id,TbCategory tbCategory) {
+		int currentPage = (int) session.getAttribute("currentPage");
+		TbResource tb = resourceService.selectByPrimaryKey(id);
+		if(tb.getSpare().equals("是")) {
+			tb.setSpare("否");
+//			log.info("=========="+resourceService.getNumber(tb, model, 0));
+//			if(resourceService.getNumber(tb, model, 0)==2) {
+//				model.addAttribute("message", "置顶成功");
+//			}
+			model.addAttribute("message", "取消置顶成功");
+		} else {
+			tb.setSpare("是");
+			model.addAttribute("message", "置顶成功");
+		}
+		resourceService.updateByPrimaryKey(tb);
+		return manageObject(currentPage,model,tbCategory);
+	}
+	
 	/**
 	 * @param id
 	 * @param model
@@ -145,6 +172,7 @@ public class SchoolNewsController extends BaseController {
 		if (null != tb) {
 			model.addAttribute("tbResource", tb);
 		} else {
+			//这个方法是为了当这条数据不存在时返回一个提示页面
 			model.addAttribute("message", "该名称不存在");
 			return "admin/empty";
 		}
@@ -160,12 +188,14 @@ public class SchoolNewsController extends BaseController {
 	/**
 	 * @param model
 	 * @param
-	 * @return 删除学校新闻
+	 * @return 删除学校新闻和学校公告
 	 */
 	@RequestMapping("deleteNews")
 	public String deleteNews(Model model, int id) {
 		int currentPage = (int) session.getAttribute("currentPage");
 		TbResource tb = resourceService.selectByPrimaryKey(id);
+		// 这是为了返回那条信息的分页位置
+		TbCategory record = new TbCategory();
 		if (null != tb) {
 			int i = resourceService.deleteByPrimaryKey(id);
 			if (i != 0) {
@@ -173,59 +203,42 @@ public class SchoolNewsController extends BaseController {
 			} else {
 				model.addAttribute("message", "删除失败");
 			}
+			TbCategory tbCategory = categoryService.selectByPrimaryKey(tb.getCaId());
+			if(tbCategory.getCaPid()==6) {
+				record.setCaPid(6);
+			}else {
+				record.setCaId(tb.getCaId());
+			}
 		} else {
+			//这个为了返回提示页面
 			model.addAttribute("message", "这条新闻不存在");
 			return "admin/empty";
 		}
-		// 这是为了返回那条信息的分页位置
-		TbCategory record = new TbCategory();
-		record.setCaId(tb.getCaId());
 		return this.manageObject(currentPage, model, record);
 	}
 	
 	/**
-	 * @param model
-	 * @param id
-	 * @return 删除图片
-	 */
-	@RequestMapping("deleteScenery")
-	public String deleteScenery(Model model,Integer id) {
-		int currentPage = (int) session.getAttribute("currentPage");
-		TbResource tb = resourceService.selectByPrimaryKey(id);
-		String path = session.getServletContext().getRealPath("static/uploadimg") + "/" + tb.getReContent();
-		File files = new File(path);
-		if (files.exists()) {
-			files.delete();
-		}
-		String msg = "删除失败";
-		if (resourceService.deleteByPrimaryKey(id) == 1) {
-			msg = "删除成功";
-		}
-		model.addAttribute("message", msg);
-		TbCategory tbCategory=new TbCategory();
-		tbCategory.setCaPid(10);
-		return this.manageObject(currentPage, model,tbCategory);
-	}
-
-	/**
-	 * @param model 校园新闻类/上传/教育教研的管理
-	 * @return 管理资源下载和通知公告和图片的的管理
+	 * @param model 校园新闻类2/上传9/教育教研的管理3
+	 * @return 管理资源下载11和通知公告6的的管理
+	 * 之所以把参数改为对象是为了少传参数
 	 */
 	@RequestMapping("manageObject")
 	public String manageObject(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, Model model,
 			TbCategory tbCategory) {
-		log.info(tbCategory);
 		TbCategory record = new TbCategory();
+		//当以父ID来进行管理这些分页数据时用的主要有公告6，资源下载11，图片10
 		if(null!=tbCategory.getCaPid()) {
 			record.setCaPid(tbCategory.getCaPid());
 			model.addAttribute("zid", tbCategory.getCaPid());
+			session.setAttribute("Pid", tbCategory.getCaPid());
 		}
+		//对于以caId来进行查看这些分页数据
 		if(null!=tbCategory.getCaId()) {
 			record.setCaId(tbCategory.getCaId());
 			model.addAttribute("zid", tbCategory.getCaId());
 		}
-		if (null != tbCategory.getCaName()) {
-			String str=tbCategory.getCaName();
+		String str=tbCategory.getCaName();
+		if (tbCategory.getCaName()!=null&&!tbCategory.getCaName().equals("")) {
 			//这是为了用来解决中文乱码的问题
 			Garbled g=new Garbled();
 			String s=g.getEncoding(tbCategory.getCaName());
@@ -246,9 +259,7 @@ public class SchoolNewsController extends BaseController {
 		if(null!=tbCategory.getCaPid()) {
 			if (tbCategory.getCaPid() == 6) {
 				return "admin/notice/managenotice";
-			} else if (tbCategory.getCaPid() == 10) {
-				return "admin/managepicture/managepicture";
-			}
+			} 
 		}
 		if(null!=tbCategory.getCaId()) {
 			TbCategory t = categoryService.selectByPrimaryKey(tbCategory.getCaId());
@@ -266,11 +277,13 @@ public class SchoolNewsController extends BaseController {
 	 * @param picture
 	 * @param model
 	 * @return 上传的操作
+	 * 有教研组的上传父ID为3，资源下载上传11，上传类的上传（学生管理和教师成长）9
 	 * @throws Exception
 	 */
 	@RequestMapping("upload")
 	public String upload(TbResource tbResource, MultipartFile file, Model model) throws Exception {
 		TbCategory item = categoryService.selectByPrimaryKey(tbResource.getCaId());
+		//这个是为了判断文件名在指定的父id下是否重,重的话跳转到上传页面重新上传
 		List<TbResource> resource = resourceService.selectAll();
 		for (TbResource en : resource) {
 			if (en.getCaId() == tbResource.getCaId()) {
@@ -288,13 +301,11 @@ public class SchoolNewsController extends BaseController {
 				}
 			}
 		}
-		Date date = new Date();
-		DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd"); // HH表示24小时制；
-		String Date = dFormat.format(date);
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
 		String reContent = resourceService.uploadFile(file, path);
+		//从session中获得用户名作为文件的上传名
 		TbUser tbUser=(TbUser)session.getAttribute("admin");
-		TbResource tb = new TbResource(item.getCaId(), Date, item.getCaName(), file.getOriginalFilename(), reContent,tbUser.getUsName());
+		TbResource tb = new TbResource(item.getCaId(),tbUser.getUsName(), resourceService.Date(), item.getCaName(), file.getOriginalFilename(), reContent);
 		resourceService.insert(tb);
 		model.addAttribute("message", "添加成功");
 		// 校园文学
