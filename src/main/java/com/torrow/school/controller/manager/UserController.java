@@ -227,7 +227,7 @@ public class UserController extends BaseController {
 			int boo = userService.updateByPrimaryKey(user);
 			if(boo==1){
 				model.addAttribute("message", "修改完成");
-				session.setAttribute("amdin", user);
+				session.setAttribute("admin", user);
 			} else {
 				model.addAttribute("message", "修改失败");
 			}

@@ -21,4 +21,10 @@ $(function(){
     },function () {
         timer = setInterval(gotoLeft,40)
     })
+    $(".navLi").hover(function () {
+        $(this).children('ul').stop().slideDown('500');
+
+    },function () {
+        $(this).children('ul').stop().slideUp('fast');
+    })
 })

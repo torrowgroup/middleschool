@@ -5,21 +5,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>郑州一二二中学</title>
-<link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}"
-	type="text/css">
-<link rel="stylesheet" th:href="@{/static/css/visitor/style.css}"
-	type="text/css">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/static/css/visitor/style.css}" type="text/css">
+    
+</head>
+<body>
+<div th:fragment="header">
+
 <script th:src="@{/static/js/jquery.min.js}"></script>
 <script th:src="@{/static/js/bootstrap.min.js}"></script>
 <script th:src="@{/static/js/visitor/carousel.js}"></script>
 <script th:src="@{/static/js/visitor/notice.js}"></script>
-<script th:src="@{/static/js/visitor/scroll.js}"></script>
-</head>
-<body>
-<div th:fragment="header">
+<div class="topmax">
 	<div class="container header">
 		<div class="logo">
-			<img th:src="@{/static/images/visitor/logo.jpg}" alt="加载中">
+			<img th:src="@{/static/images/visitor/title.png}" alt="加载中">
 		</div>
 		<div class="headerRight">
 			<p th:if="${midExam != '--'}">
@@ -36,16 +36,19 @@
 			</p>
 		</div>
 	</div>
+	</div>
 	<!--导航条-->
 	<div class="navBox">
 		<ul class="navUl">
 			<li class="navLi hidden-xs"><a th:href="@{/index}">首页</a></li>
-			<li class="navLi"><a href="#">学校概况</a>
-				<ul class="navSecondUl">
-					<li th:each="general,generals:${generals}"><a
-						th:href="@{/visitorGN/viewGeneral?(gId= ${general.caId})}"
-						th:text="${general.caName}" >学校概况</a></li>
-				</ul></li>
+			<li class="navLi">
+                <a href="#">学校概况</a>
+                <ul class="navSecondUl">
+                    <li th:each="general,generals:${generals}">
+                    	<a th:href="@{/visitorGN/viewGeneral?(gId= ${general.caId})}" th:text="${general.caName}" target="_blank">学校概况</a>
+                    </li>
+                </ul>
+            </li>
 			<li class="navLi"><a href="#">校园新闻</a>
 				<ul class="navSecondUl">
 					<li th:each="news,newsStart:${schoolNews}"><a
@@ -119,6 +122,7 @@
 	
 	
 	<div class="footer" th:fragment="footer">
+	<link rel="stylesheet" th:href="@{/static/css/visitor/backtop.css}" type="text/css">
         <div class="container footerBox">
             <div class="row">
                 <div class="col-sm-3 col-xs-6 footerBox1 hidden-xs"><img th:src="@{/static/images/visitor/bottomlogo.png}" alt=""></div>
@@ -149,6 +153,8 @@
                 </div>
             </div>
         </div>
+        <div class="backtop"></div>
+        <script type="text/javascript" th:src="@{/static/js/visitor/backtop.js}"></script>
     </div>
 	<script th:inline="javascript">
 		console.log("12")
@@ -156,22 +162,22 @@
 		var todayTime = today.getFullYear() + "年" + today.getMonth() + "月"
 				+ today.getDate() + "日";
 		$('#todayTime').text(todayTime);
-		var schoolGeneralIndex = /*[[${schoolGeneralIndex}]]*/null;//学校简介
-		var schoolHistory = /*[[${schoolHistory}]]*/null;//建校历史
-		var schoolHonorIndex = /*[[${schoolHonorIndex}]]*/null;//学校荣誉
-		var educationAchieveIndex = /*[[${educationAchieveIndex}]]*/null;//教学成果
-		if (schoolGeneralIndex != null) {
-			$('#schoolGeneralIndex').html(schoolGeneralIndex.reContent)
-		}
-		if (schoolHistory != null) {
-			$('#schoolHistory').html(schoolHistory.reContent);
-		}
-		if (schoolHonorIndex != null) {
-			$('#schoolHonorIndex').html(schoolHonorIndex.reContent);
-		}
-		if (educationAchieveIndex != null) {
-			$('#educationAchieveIndex').html(educationAchieveIndex.reContent);
-		}
+// 		var schoolGeneralIndex = /*[[${schoolGeneralIndex}]]*/null;//学校简介
+// 		var schoolHistory = /*[[${schoolHistory}]]*/null;//建校历史
+// 		var schoolHonorIndex = /*[[${schoolHonorIndex}]]*/null;//学校荣誉
+// 		var educationAchieveIndex = /*[[${educationAchieveIndex}]]*/null;//教学成果
+// 		if (schoolGeneralIndex != null) {
+// 			$('#schoolGeneralIndex').html(schoolGeneralIndex.reContent)
+// 		}
+// 		if (schoolHistory != null) {
+// 			$('#schoolHistory').html(schoolHistory.reContent);
+// 		}
+// 		if (schoolHonorIndex != null) {
+// 			$('#schoolHonorIndex').html(schoolHonorIndex.reContent);
+// 		}
+// 		if (educationAchieveIndex != null) {
+// 			$('#educationAchieveIndex').html(educationAchieveIndex.reContent);
+// 		}
 	</script>
 </body>
 </html>

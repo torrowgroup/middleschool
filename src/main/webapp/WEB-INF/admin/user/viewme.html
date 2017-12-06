@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.tdymeleaf.org">
 
 <head>
 <title>Home</title>
@@ -14,51 +14,48 @@
 <body>
 	<div th:text="${message}" class="message"></div>
 	<div class="content">
-		<table class="table table-bordered">
+		<table class="table table-hover table-condensed">
 			<tr>
-				<th><span>姓名</span></th>
-				<td><span th:text="${session.admin.usName}"></span></td>
+				<td width="20%"><span>姓名</span></td>
+				<td width="80%"><span th:text="${session.admin.usName}"></span></td>
 			</tr>
 			<tr>
-				<th width="100px"><span>邮箱</span></th>
+				<td width="100px"><span>邮箱</span></td>
 				<td><span th:text="${session.admin.usEmail}"></span></td>
 			</tr>
 			<tr>
-				<th><span>性别</span></th>
+				<td><span>性别</span></td>
 				<td><span th:text="${session.admin.usSex}"></span></td>
 			</tr>
 			<tr>
-				<th><span>身份</span></th>
+				<td><span>身份</span></td>
 				<td><span th:text="${session.admin.caName}"></span></td>
 			</tr>
 			<tr>
-				<th><span>联系方式</span></th>
+				<td><span>联系方式</span></td>
 				
 				<td><span th:text="${session.admin.usPhone}"></span></td>
 			</tr>
 			<tr>
-				<th><span>照片</span></th>
+				<td><span>照片</span></td>
 				<td class="bb">
 					<img alt="没有照片" width="200px;" height="50px;"
 					th:src="@{/static/uploadimg/{picture}(picture=${session.admin.usPicture})}" />
 				</td>
 			</tr>
 			<tr>
-				<th><span>简介</span></th>
-				<td><a href="#"  class="aa"
-					th:onclick="'showIntro(1)'" data-toggle="modal" data-target="#introAch" onfocus="this.blur();">查看简介</a></td>
-			</tr>
-			<tr>
-				<th><span>成就</span></th>
-				
-				<td><a href="#" class="aa"
-					th:onclick="'showIntro(2)'" data-toggle="modal" data-target="#introAch" onfocus="this.blur();">查看成就</a></td>
-			</tr>
-			<tr>
-				<th><span>操作</span></th>
+				<td><span>查看</span></td>
 				<td>
-					<a th:href="@{/user/toUpdateMe}" class="aa">修改个人资料</a>
-					<a th:href="@{/user/toUpdatePsw}" class="udpateP">修改密码</a>
+					<a href="#"  class="aa"
+					th:onclick="'showIntro(1)'" data-toggle="modal" data-target="#introAch" onfocus="tdis.blur();" >查看简介</a>
+					<a href="#" class="aa"
+					th:onclick="'showIntro(2)'" data-toggle="modal" data-target="#introAch" onfocus="tdis.blur();" >查看成就</a></td>
+			</tr>
+			<tr>
+				<td><span>修改</span></td>
+				<td>
+					<a th:href="@{/user/toUpdateMe}" class="aa">个人资料</a>
+					<a th:href="@{/user/toUpdatePsw}" class="aa">密码</a>
 				</td>
 			</tr>
 		</table>

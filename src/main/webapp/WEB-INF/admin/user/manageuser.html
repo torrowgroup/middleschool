@@ -5,8 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>管理用户</title>
-<link rel="stylesheet" type="text/css"
-	th:href="@{/static/dist/css/wangEditor.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/dist/css/wangEditor.min.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/manageuser.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/inquirytable.css}">
@@ -14,13 +13,15 @@
 <body>
 	<div th:text="${message}" class="issucessor"></div>
 	<div class="mainbox">
-		<form th:action="@{/user/manageUser}" class="inquiry">
+		<div class="thir">
+			<a th:href="@{/user/toAddUser}" title="添加用户">添加用户</a>
+			<form th:action="@{/user/manageUser}" class="inquiry">
 			<input type="text" name="inquiry" th:value="${inquiry}" placeholder="姓名/邮箱/职位/电话" required="required" class="inquiryinput" maxlength="20"/>
 			<input type="submit" value="提交" class="btn btn-default inquirysub"/>
 		</form>
-		
-		<div th:if="${pagemsg.totalCount}==0" class="issucessor">没有任何用户信息！</div>
-		<div th:if="${pagemsg.totalCount}!=0" >
+		</div>
+			<div th:if="${pagemsg.totalCount}==0" class="issucessor">没有任何用户信息！</div>
+			<div th:if="${pagemsg.totalCount}!=0" >
 			<table class="table table-bordered table-hover table-condensed"  >
 				<tr>
 					<th class="aa"><span>姓名</span></th>
@@ -40,8 +41,8 @@
 						<td class="aa" th:text="${user.caName}">${user.caName }</td>
 						<td class="aa" th:text="${user.usPhone}">${user.usPhone }</td>
 						<td class="bb" ><img alt="无图片" th:src="@{/static/uploadimg/{picture}(picture=${user.usPicture})}" /></td>
-						<td class="aa"><button onclick="show(this)" th:name="${user.usIntroduction}" data-toggle="modal" data-target="#myModal">预览</button></td>
-						<td class="aa"><button onclick="show(this)" th:name="${user.usAchievements}" data-toggle="modal" data-target="#myModal">预览</button></td>
+						<td class="aa"><button onclick="show(this)" title="预览简介" th:name="${user.usIntroduction}" data-toggle="modal" data-target="#myModal">预览</button></td>
+						<td class="aa"><button onclick="show(this)" title="预览成就" th:name="${user.usAchievements}" data-toggle="modal" data-target="#myModal">预览</button></td>
 						<td class="aa">
 							<a th:href="@{/user/toUpdateUser?(id=${user.usId},page=${pagemsg.currPage})}" title="修改"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
 							<a th:href="@{/user/deleteUser?(id=${user.usId},page=${pagemsg.currPage})}" title="删除"
@@ -71,8 +72,8 @@
 					<a href="#">下一页</a>
 	 			</li>
 			</ul>
-			</div>
 		</div>
+	</div>
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">

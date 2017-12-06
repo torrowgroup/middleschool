@@ -14,9 +14,10 @@
     <script th:src="@{/static/js/visitor/scroll.js}"></script>
 </head>
 <body>
+<div class="topmax">
     <div class="container header">
         <div class="logo">
-            <img th:src="@{/static/images/visitor/logo.jpg}" alt="加载中">
+            <img th:src="@{/static/images/visitor/title.png}" alt="加载中">
         </div>
         <div class="headerRight">
             <p th:if="${midExam != '--'}">距离期中<span th:text="${midExam}"></span>天</p>
@@ -25,6 +26,7 @@
             <p class="hidden-xs">今天<span id="todayTime">--年--月--日</span></p>
         </div>
     </div>
+</div>    
     <!--导航条-->
     <div class="navBox">
         <ul class="navUl">
@@ -160,13 +162,13 @@
                     <div class="teacher1" th:if="${famousTeacherOne!=null}">
                     	<a th:href="@{/visitorNEL/teacherDetail?(usId=${famousTeacherOne.usId})}">
 	                        <img th:src="@{/static/uploadimg/{picture}(picture=${famousTeacherOne.usPicture})}" alt="没有上传图片">
-	                        <span th:text="${famousTeacherOne.usName}">名师</span>
+	                        <span th:text="${famousTeacherOne.usName}">教师</span>
                     	</a>
                     </div>
                     <div class="teacher2"  th:if="${famousTeacherTwo!=null}">
                     	<a th:href="@{/visitorNEL/teacherDetail?(usId=${famousTeacherTwo.usId})}">
 	                        <img th:src="@{/static/uploadimg/{picture}(picture=${famousTeacherTwo.usPicture})}" alt="没有上传图片">
-	                        <span th:text="${famousTeacherTwo.usName}">名师</span>
+	                        <span th:text="${famousTeacherTwo.usName}">教师</span>
 	                    </a>
                     </div>
                 </div>

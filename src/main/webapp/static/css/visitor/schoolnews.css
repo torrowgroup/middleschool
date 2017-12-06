@@ -14,6 +14,8 @@
     text-decoration: none;
     line-height: 40px;
     font-size: 14px;
+    transition:margin-left 1s;
+	-webkit-transition:margin-left 1s; /* Safari */
 }
 .newscontent .newscontentUl>li>span{
     font-size:12px;
@@ -66,6 +68,9 @@
 .pagingRight>span{
     letter-spacing: 1px;
 }
+.location a:hover{
+    color:blueviolet;
+}
 .selectBox{
     display: inline-block;
     position: relative;
@@ -73,17 +78,20 @@
     height: 30px;
     border:1px solid rgba(48,64,91,.5);
 }
+
 .selectBox .selectBoxUl{
     position: absolute;
-    /* top:-300px; */
+    top:-300px;
     width: 40px;
     /* height: 300px; */
-    /* overflow-y: scroll; */
+    left:-1px;
+    overflow-y: hidden;
     overflow-x: hidden;
     list-style: none;
     display: none;
     border: 1px solid rgba(48,64,91,.5);
     background-color: #fff;
+    cursor: pointer;
 }
 .selectBox>span{
     line-height: 30px;
@@ -95,6 +103,11 @@
 .selectBox .selectBoxUl>li{
     list-style: none;
 }
+.newscontentUl>li>a:hover{
+    color:red;
+    margin-left:8px;
+    overflow:hidden;
+}
 .selectBox .selectBoxUl>li>a{
     display: inline-block;
     color: black;
@@ -105,4 +118,63 @@
 .selectBox .selectBoxUl>li>a:hover{
     background-color: rgb(227,227,227);
 }
+.location{
+    float: left;
+    line-height: 30px;
+}
+.location1{
+    float: right;
+}
+.centersearch{
+    width: 100%;
+/*     background: red; */
+}
+input{
+    background:none;
+    outline:none;
+    border:0px;
+}
+.searchbox{
+    width: 250px;
+    position: relative;
+}
+.searchbox>form{
+    width:250px;
+    font-size: 0px;
+}
+.searchboxinput{
+    height:30px;
+    position: absolute;
+    padding-left:5px;
+    line-height:30px\9 !important;
+    width:190px;
+    border:1.5px solid purple;
+    border-right:0;
+    font-size: 12px;
+    right:60px;
+    display: none;
+}
+.searchboxbtn{
+    position: absolute;
+    right:0;
+    width:60px;
+    height:30px;
+/*     border:2px solid #FF8C00; */
+/* 	border:2px solid #264169; */
+	border:2px solid purple;
+    background-color:purple;
+    font-size: 10px;
+}
+.searchbox>form>span{
+    position: absolute;
+    right:0;
+    width:60px;
+    height:34px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 30px;
+    color:#FFF;
+    cursor: pointer;
+}
+
 

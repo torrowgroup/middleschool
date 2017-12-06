@@ -4,9 +4,10 @@ body{
 	background: #ebebeb;
 }
 .aa{
-	width: 300px;
+	width: 500px;
 	margin:0 auto;
 	margin-top: 10%;
+	height:300px;
 }
 .bb{
 	width: 50px;

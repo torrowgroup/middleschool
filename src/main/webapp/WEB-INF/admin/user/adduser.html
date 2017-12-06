@@ -11,7 +11,7 @@
 <div class="bod">
 	<div th:text="${message}" class="message"></div>
 		<form th:action="@{/user/addUser}" method="post" enctype="multipart/form-data" th:onsubmit="'javascript:checkPicture(this);'">
-			<table border="0" class="t1">
+			<table class="t1">
 				<tr>
 					<td width="41%"><span>邮&nbsp;&nbsp;&nbsp;&nbsp;箱</span></td>
 					<td width="55%">
@@ -22,14 +22,12 @@
 						<span id="wrong" class="glyphicon glyphicon-remove" style="display: none;"></span>
 					</td>
 				</tr>
-				<tr><td colspan="3"></td></tr>
 				<tr>
 					<td><span>密&nbsp;&nbsp;&nbsp;&nbsp;码</span></td>
 					<td><input type="password" name="usPassword" id="password"
 					required="required" maxlength="20"></td>
 					<td></td>
 				</tr>
-				<tr><td colspan="3"></td></tr>
 				<tr>
 					<td><span>确认密码</span></td>
 					<td>
@@ -40,19 +38,17 @@
 						<span id="wrongAgain" class="glyphicon glyphicon-remove" style="display: none;"></span>
 					</td>
 				</tr>
-				<tr><td colspan="3"></td></tr>
 				</table>
-				<table border="0" class="t2">
+				<table border="1" class="t2">
 				<tr>
 					<td><span>姓&nbsp;&nbsp;&nbsp;&nbsp;名</span></td>
 					<td><input type="text" name="usName" required="required" maxlength="10"></td>
 				</tr>
-				<tr><td colspan="2"></td></tr>
 				<tr>
-					<td ><span>性别</span></td>
-					<td >
-						<input name="usSex" type="radio" value="男" />男 
-						<input name="usSex" type="radio" value="女" />女
+					<td><span>性别</span></td>
+					<td id="sex">
+						<input name="usSex" type="radio" value="男" class="small"/><span>男</span>
+						<input name="usSex" type="radio" value="女" class="small"/><span>女</span>
 					</td>
 				</tr>
 				<tr>
@@ -63,7 +59,6 @@
 					</select>
 				</td>
 				</tr>
-				<tr><td colspan="2"></td></tr>
 				<tr>
 					<td><span>选择图片</span></td>
 					<td>
@@ -77,7 +72,6 @@
 						</div>
 					</td>
 				</tr>
-				<tr><td colspan="2"></td></tr>
 				<tr>
 					<td colspan="2">
 						<input type="submit" class="bb" id="sure" value="添加" >

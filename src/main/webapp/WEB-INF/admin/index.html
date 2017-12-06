@@ -5,6 +5,7 @@
 <head>
 <title>郑州一二二中学管理系统</title>
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/index.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/mid.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
 </head>
 <body onload="getdates()">
@@ -14,54 +15,69 @@
 			<img th:src="@{/static/images/navone.png}" alt="">
 		</div>  
 		<div class="mid">
-		<ul class="midul">
-			<li id="aa">
-				<img th:src="@{/static/images/admin/sec11.png}" alt="" class="photo1">
-				<a th:href="@{/message/manageMessage}"  target="ie"><span class="changecolor">留言板</span></a>
-			</li>
-			<li>
-				<img th:src="@{/static/images/admin/sec22.png}" alt="" class="photo2">
-				<span class="changecolor">公告</span>
-				<div class="next">
-					<ul>
-						<li><a th:href="@{/news/addNewsJumping?(Pid=6)}" target="ie">添加公告</a></li>
-						<li><a th:href="@{/news/manageObject?(caPid=6)}" target="ie">管理公告</a></li>
+			<div style="clear:both"></div>
+			<div class="menu_navcc">
+				<div class="menu_nav clearfix">
+					<ul class="nav_content">
+						<li class="current"><a th:href="@{/message/manageMessage}"  target="ie" title="留言板"><span>留言板</span></a></li>
+						<li class="current"><a th:href="@{/news/manageObject?(caPid=6)}" title="公告"  target="ie"><span>公告</span></a></li> 
+						<li class="current"><a href="schoolhistory.html" title="校园文学"  target="ie"><span>校园文学</span></a></li>
+						<li style="position:relative;"  class="current"><a th:href="@{/news/manageObject?(caPid=11)}" title="资源下载"  target="ie"><span>资源下载</span></a><em></em></li>
+						<li class="current"><a th:href="@{/user/manageUser}" title="用户"  target="ie"><span>用户</span></a></li>
 					</ul>
 				</div>
-			</li>
-			<li>
-				<img th:src="@{/static/images/admin/sec33.png}" alt="" class="photo3">
-				<span class="changecolor">校园文学</span>
-				<div class="next">
-					<ul>
-						<li><a th:href="@{/news/addNewsJumping?(Pid=12)}"  target="ie">添加校园文学</a></li>
-						<li style="margin-top:0px" th:each="category,categoryStart:${literatureList}">
-							<a th:href="@{/news/manageObject?(caId=${category.caId})}" th:text="${category.caName}" target="ie"></a>
-						</li>
-					</ul>
-				</div>
-			</li>
-			<li>
-				<img th:src="@{/static/images/admin/sec44.png}" alt="" class="photo4">
-				<span class="changecolor">资源下载</span>
-				<div class="next">
-					<ul>
-						<li><a th:href="@{/news/addNewsJumping?(Pid=11)}"  target="ie">上传资源</a></li>
-						<li><a th:href="@{/news/manageObject?(caPid=11)}"  target="ie">资源管理</a></li>
-					</ul>
-				</div>
-			</li>
-			<li>
-				<img th:src="@{/static/images/admin/sec55.png}" alt="" class="photo5">
-				<span class="changecolor">用户</span>
-				<div class="next">
-					<ul>
-						<li><a th:href="@{/user/toAddUser}"  target="ie">添加用户</a></li>
-						<li><a th:href="@{/user/manageUser}"  target="ie">用户管理</a></li>
-					</ul>
-				</div>
-			</li>
-		</ul>
+			</div>
+		
+		
+		
+<!-- 		<ul class="midul"> -->
+<!-- 			<li id="aa"> -->
+<!-- 				<img th:src="@{/static/images/admin/sec11.png}" alt="" class="photo1"> -->
+<!-- 				<a th:href="@{/message/manageMessage}"  target="ie"><span class="changecolor">留言板</span></a> -->
+<!-- 			</li> -->
+<!-- 			<li> -->
+<!-- 				<img th:src="@{/static/images/admin/sec22.png}" alt="" class="photo2"> -->
+<!-- 				<span class="changecolor">公告</span> -->
+<!-- 				<div class="next"> -->
+<!-- 					<ul> -->
+<!-- 						<li><a th:href="@{/news/addNewsJumping?(Pid=6)}" target="ie">添加公告</a></li> -->
+<!-- 						<li><a th:href="@{/news/manageObject?(caPid=6)}" target="ie">管理公告</a></li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
+<!-- 			</li> -->
+<!-- 			<li> -->
+<!-- 				<img th:src="@{/static/images/admin/sec33.png}" alt="" class="photo3"> -->
+<!-- 				<span class="changecolor">校园文学</span> -->
+<!-- 				<div class="next"> -->
+<!-- 					<ul> -->
+<!-- 						<li><a th:href="@{/news/addNewsJumping?(Pid=12)}"  target="ie">添加校园文学</a></li> -->
+<!-- 						<li style="margin-top:0px" th:each="category,categoryStart:${literatureList}"> -->
+<!-- 							<a th:href="@{/news/manageObject?(caId=${category.caId})}" th:text="${category.caName}" target="ie"></a> -->
+<!-- 						</li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
+<!-- 			</li> -->
+<!-- 			<li> -->
+<!-- 				<img th:src="@{/static/images/admin/sec44.png}" alt="" class="photo4"> -->
+<!-- 				<span class="changecolor">资源下载</span> -->
+<!-- 				<div class="next"> -->
+<!-- 					<ul> -->
+<!-- 						<li><a th:href="@{/news/addNewsJumping?(Pid=11)}"  target="ie">上传资源</a></li> -->
+<!-- 						<li><a th:href="@{/news/manageObject?(caPid=11)}"  target="ie">资源管理</a></li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
+<!-- 			</li> -->
+<!-- 			<li> -->
+<!-- 				<img th:src="@{/static/images/admin/sec55.png}" alt="" class="photo5"> -->
+<!-- 				<span class="changecolor">用户</span> -->
+<!-- 				<div class="next"> -->
+<!-- 					<ul> -->
+<!-- 						<li><a th:href="@{/user/toAddUser}"  target="ie">添加用户</a></li> -->
+<!-- 						<li><a th:href="@{/user/manageUser}"  target="ie">用户管理</a></li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
+<!-- 			</li> -->
+<!-- 		</ul> -->
 	</div>
 		<div class="two">  
 			<ul>
@@ -91,7 +107,7 @@
 	                      <a th:href="@{/news/addNewsJumping?(Pid=2)}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加新闻</a>
 	                    </li>
 	                     <li th:each="category,categoryStart:${newsList}" class="hr">
-							  <a th:href="@{/news/manageObject?(caId=${category.caId})}" target="ie" class="out1"> <span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}"></span></a>
+							  <a th:href="@{/news/manageObject?(caId=${category.caId})}" target="ie" class="out1"> <span class="glyphicon glyphicon-globe" ></span><span class="fonts" th:text="${category.caName}"></span></a>
 						</li>
 						  <li th:each="category,categoryStart:${uploadList}">
 							   <a th:href="@{/news/manageObject?(caId=${category.caId})}" target="ie" class="out1"><span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}" ></span></a>
@@ -193,6 +209,10 @@
  		  $('.out1').hover(function(){
    	 		$(this).css("backgroundColor", "white");
  		})
+ 		$(".current").click(function(){
+ 			$(this).children("a").css("background-image", "url(/middleschool/static/images/admin/nav_li_current.gif)");
+ 			$(this).siblings().children("a").css("background-image","none");
+		})  
     });
 </script>
 </html>
