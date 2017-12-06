@@ -1,0 +1,42 @@
+@charset "UTF-8";
+body{
+	margin:0;
+	padding: 0;
+	background: #ebebeb;
+}
+.mainbox{
+	width:400px;
+	height: 300px;
+	margin:0 auto;	
+}
+table{
+	margin-top:150px;
+	width:50%;
+	height: 60%;
+	background: #fff;
+}
+
+span{
+	line-height: 30px;
+}
+a{
+	line-height: 30px;
+}
+.pp a:hover{
+	text-decoration: none;
+}
+ body { 
+ 	margin:0px;
+ 	padding:0px;
+ 	text-align: center;
+ }
+.pagination span{
+ 	border:1px solid #f3f3f3;
+ 	border-radius:2px;
+ 	background:white;
+ 	color:black;
+ 	padding:8px 12px;	
+ }
+  .pagination span:hover{
+  	background:#ebebeb;
+  }

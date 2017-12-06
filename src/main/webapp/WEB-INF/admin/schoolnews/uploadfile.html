@@ -5,9 +5,10 @@
 <head>
   <title>home</title>
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/upload.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/sign.css}">
 </head>
 <body>
-<div th:if="${sign}=='1'">请先去类别管理中添加相应类别</div>
+<div th:if="${sign}=='1'" class="center">请先去类别管理中添加相应类别</div>
 <div th:if="${sign}!='1'">
 <div th:text="${message}" class="center"></div>
 <form th:action="@{/news/upload}" method="post" enctype="multipart/form-data">

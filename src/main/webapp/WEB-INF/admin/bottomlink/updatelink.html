@@ -10,8 +10,8 @@
 <form th:action="@{/link/updateLink?(id=${link.reId})}" method="post">  
 	  <table>
 		<tr>
-				<td>链接名称</td>
-				<td><input type="text" name="reTitle" th:value="${link.reTitle}"/></td>
+				<td width="30%">链接名称</td>
+				<td width="70%"><input type="text" name="reTitle" th:value="${link.reTitle}"/></td>
 			</tr>
 			
 			<tr>
@@ -19,7 +19,7 @@
 				<td><input type="url" name="reContent" th:value="${link.reContent}"/></td>
 			</tr>
 		<tr>
-		   <td><input type="submit" value="修改" class="mm" title="修改"/></td>
+		   <td colspan="2"><input type="submit" value="修改" class="mm" title="修改"/></td>
 		</tr>
 	  </table>
 </form>  

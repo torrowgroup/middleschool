@@ -30,9 +30,8 @@
 	                <th><span>标题</span></th>
 	                <th><span>发布人</span></th>
 	                <th><span>日期</span></th>
-	                <th><span>是否置顶</span></th>
 	                <th><span>详情</span></th>
-	                <th><span>删除</span></th>
+	                <th><span>操作</span></th>
 	            </tr>
             </thead>
             <tbody>
@@ -40,14 +39,15 @@
                     <td th:text="${news.reTitle}">${news.reTitle}</td>
                     <td th:text="${news.reIssuer}">${news.reIssuer}</td>
                     <td th:text="${news.reIssuingdate}">${news.reIssuingdate}</td>
+                    <td class="pp"><a th:href="@{/news/selectOneNews?(id=${news.reId})}">详情</a></td>
                 	<td th:if="${news.spare}=='是'">
-                		<a th:href="@{/news/stick?(id=${news.reId},caPid=${zid},caName=${caName})}">取消置顶</a>
+                		<a th:href="@{/news/stick?(id=${news.reId},caId=${zid},caName=${caName})}">取消置顶</a>|
+                		<a th:href="@{/news/deleteNews?(id=${news.reId})}" onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash" title="删除"></span></a>
                 	</td>
                 	<td th:if="${news.spare}=='否'">
-                		<a th:href="@{/news/stick?(id=${news.reId},caPid=${zid},caName=${caName})}">置顶</a>
+                		<a th:href="@{/news/stick?(id=${news.reId},caId=${zid},caName=${caName})}">置顶</a>
+                		<a th:href="@{/news/deleteNews?(id=${news.reId})}" onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash" title="删除"></span></a>
                 	</td>
-                	<td class="pp"><a th:href="@{/news/selectOneNews?(id=${news.reId})}">详情</a></td>
-                	<td><a th:href="@{/news/deleteNews?(id=${news.reId})}" onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash"></span></a></td>
                 </tr>
             </tbody>
         </table>    

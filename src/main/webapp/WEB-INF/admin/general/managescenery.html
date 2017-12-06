@@ -10,8 +10,8 @@
 </head>
 <body>
 <div class="aa">
-<div th:text="${message}"></div>
-<span th:if ="${pagemsg.totalCount}==0">
+<div th:text="${message}" class="center"></div>
+<span th:if ="${pagemsg.totalCount}==0" class="center">
         没有任何校园风光信息！
     </span>
  <div th:if ="${pagemsg.totalCount}!=0">
@@ -20,13 +20,13 @@
             <tr>
             	<td width="30%"><span>简介</span></td>
                 <td width="30%"><span>校园风光</span></td>
-                <td width="60%"><span>删除</span></td>
+                <td width="60%"><span>操作</span></td>
             </tr>
             </thead>
                 <tr th:each="general,generalStart:${pagemsg.lists}">
                     <td th:text="${general.reTitle}">${news.reTitle}</td>
                     <td><img alt="无图片" width="100px;" height="80px;" th:src="@{/static/uploadimg/{picture}(picture=${general.reContent})}" /></td>
-                	<td><a th:href="@{/general/deleteScenery?(id=${general.reId})}" onclick="return confirm('确定要删除吗')">Delete</a></td>
+                	<td><a th:href="@{/general/deleteScenery?(id=${general.reId})}" onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash" title="删除"></span></a></td>
                 </tr>
         </table>   
     
