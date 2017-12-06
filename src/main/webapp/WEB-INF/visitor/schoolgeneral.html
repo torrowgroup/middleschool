@@ -8,8 +8,7 @@
     <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/static/css/visitor/style.css}" type="text/css">
 	<link rel="stylesheet" th:href="@{/static/css/visitor/aboutschool.css}" type="text/css">
-    <script th:src="@{/static/js/jquery.min.js}"></script>
-    <script th:src="@{/static/js/bootstrap.min.js}"></script>
+	<link rel="stylesheet" th:href="@{/static/css/visitor/backtop.css}" type="text/css">
 </head>
 <body>
 <div th:replace="headerfooter :: header"></div> 
@@ -42,11 +41,11 @@
 </div>
 <div class="clearfix"></div>
 <div th:replace="headerfooter::footer"></div>
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
 <script th:inline="javascript">
-// 	window.onload = function (){
-		var resource = /*[[${resource}]]*/ null;
-		$('#reContent').html(resource.reContent);
-// 	}
+	var resource = /*[[${resource}]]*/ null;
+	$('#reContent').html(resource.reContent);
 	var nId = /*[[${useCategory.caId}]]*/;
 	$("a[name="+nId+"]").addClass("active1");
 </script>

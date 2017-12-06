@@ -3,9 +3,9 @@ body{
 	padding: 0;
 	background-color: #eeeeec !important;
 }	 
-.aa{
-	width: 700px;
-	height: 200px;
+.nn{
+	width: 800px;
+	height: 300px;
 	margin: 0 auto;
 /* 	margin-top: 10%; */
 }
@@ -20,6 +20,17 @@ table{
 td{
 	text-align: center;
 }
-th{
+tr{
 	text-align: center !important;
+	height:60px !important;
+	
+}	
+.inquiryinput{
+	margin-left:-100px;
+}
+.cent{
+	text-align:center;
+}
+.issucessor{
+	text-align:center;
 }

@@ -32,38 +32,6 @@ public class LoginController extends BaseController {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @param usEmail
-	 * @param usPassword
-	 * @param model
-	 * @return 登陆的方法
-	 */
-//	@RequestMapping("userLogin")
-//	public String login(String usEmail,String usPassword,Model model){
-//		TbUser tbUser=userService.login(usEmail,usPassword);
-//		if(null!=tbUser) {
-//			model.addAttribute("msg", "登录成功");
-//			//这个方法是为了获得首页的显示数据
-//			categoryService.findAllCategory(model);
-//			TbCategory tbCategory = categoryService.selectByPrimaryKey(tbUser.getCaId());
-//			//进入机构部的管理页面
-//			if(tbCategory.getCaPid()==3) {
-//				session.setAttribute("education", tbUser);
-//				return "educationoffice/index";
-//			} else if(tbUser.getCaName().equals("政教处")) {
-//				session.setAttribute("political",tbUser);
-//				return "politicaleducation/index";
-//			} else if(tbUser.getCaName().equals("教师")) {
-//				session.setAttribute("teacher",tbUser);
-//				return "teacher/index";
-//			}
-//			session.setAttribute("admin",tbUser);
-//			return "admin/index";
-//		}else {
-//			model.addAttribute("msg", "用户名或密码错误");
-//		}
-//		return "index";
-//	}
 	
 	/**
 	 * @param usEmail
@@ -83,12 +51,11 @@ public class LoginController extends BaseController {
 				view = "admin/index";
 			} else {
 				session.setAttribute("teacher", tbUser);
-				if(tbCategory.getCaPid()==3) {//属于教育教研
+				if(tbCategory.getCaPid()==3) {//当用户属于教育教研
 					model.addAttribute("identity", "教研组");
-				} 
-//				else if(tbUser.getCaName().equals("政教处")) {
-//					session.setAttribute("political",tbUser);
-//				}	
+				} else if(tbCategory.getCaName().equals("政教处")) {//当用户是政教处
+					model.addAttribute("identity", "政教处");
+				}
 				view = "educationoffice/index";
 			}
 		}else {

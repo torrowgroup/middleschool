@@ -2,22 +2,22 @@
  * Created by 王少旗 on 2017/10/31.
  */
 	
-//	console.log($('.selectBoxUl')[0].clientHeight)
-	$('.selectBox').on('click',function () {
-	    $('.selectBoxUl').stop().fadeToggle() ;
-	    var h1 = $('.selectBoxUl')[0].clientHeight;
-	    if(h1>260){
-	    	$('.selectBoxUl').css({"top":260,"height":"260px","overflowY":"scroll"});
-	    }else{
-	    	$('.selectBoxUl').css('top',-h1);
-	    }
-	    
-	})
+	$("#anyThing").on('click','.selectBox',function(){
+		 $(".selectBoxUl").stop().fadeToggle('fast') ;
+		    var h1 = $('.selectBoxUl')[0].clientHeight;
+		    console.log(h1);
+		    if(h1>260){
+		    	$('.selectBoxUl').css({"top":-260,"height":"260px","overflowY":"scroll"});
+		    }else{
+		    	$('.selectBoxUl').css('top',-h1);
+		    }
+		});
 	
 	function turnPageNew (obj){	//新闻界面的跳转页数
 		var text = obj.text;//跳转页数
 		var name = obj.id;	//类别类id
-		window.location.href = "viewNews?currentPage="+text+"&nId="+name;
+		var inquiry = obj.name; //查询内容
+		window.location.href = "viewNews?currentPage="+text+"&nId="+name+'&inquiry='+inquiry;
 	}
 	
 	function turnPageView (obj){//学校风光界面的跳转页数

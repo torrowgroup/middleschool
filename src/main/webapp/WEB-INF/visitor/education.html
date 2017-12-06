@@ -29,10 +29,24 @@
             </ul>
         </div>
         <div class="schollright">
-            <div class="location"><a th:href="@{/index}">首页</a><span th:if="${useCategory!=null}">.<a href="#" th:text="${useCategory.caName}">教育教研</a></span></div>
-            <div th:if="${resourceList.totalPage==0}">
-            	<h3 class="titlesc">暂没有相关内容</h3>
-            </div>
+        	<div class="centersearch">
+	            <div class="location"><a th:href="@{/index}">首页</a><span th:if="${useCategory!=null}">.<a href="#" th:text="${useCategory.caName}">教育教研</a></span></div>
+	            <div th:if="${resourceList.totalPage==0}">
+	            	<h3 class="titlesc">暂没有相关内容</h3>
+	            </div>
+	            <!--搜索框-->
+					<div class="location1">
+						<div class="searchbox">
+							<form class="form1">
+								<input class="searchboxinput" placeholder="教研记录标题" id="inquiry"
+									th:name="${useCategory.caId}"
+									th:oninput="'javascript:inquiryNews();'"> <input
+									class="searchboxbtn" type="submit" value=""> <span
+									class="glyphicon glyphicon-search seacherspan"></span>
+							</form>
+						</div>
+					</div>
+				</div>
             <div th:if="${resourceList.totalPage>0}">
 	            <h3 class="titlesc" th:text="${resourceList.lists[0].caName}">教育教研</h3>
 	            <div class="newscontent">
@@ -82,6 +96,8 @@
 <div class="clearfix"></div>
 <div th:replace="headerfooter::footer"></div>
 <script th:src="@{/static/js/visitor/select.js}"></script>
+<script th:src="@{/static/js/visitor/inquiry.js}"></script>
+<script th:src="@{/static/js/visitor/searcher.js}"></script>
 <script th:inline="javascript">
 	var useCategory = /*[[${useCategory}]]*/;
 	if(useCategory!=null){

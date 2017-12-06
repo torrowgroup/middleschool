@@ -6,6 +6,10 @@ body, ul, li, h3, img, p, dl, dt, dd {
 body{
     background-color: #fff;
 }
+.topmax{
+    width: 100%;
+    background: url('../../images/visitor/topback.png') repeat-y center #e5e9f5;;
+}
 .header{
     max-width: 1000px;
     padding: 28px 0 17px 0;
@@ -48,17 +52,21 @@ body{
     display: inline-block;
     zoom:1;
     width: 11.111%;
-    font-size: 14px;
+    padding:2px 0px;
+    font-size: 15px;
     text-align: center;
-    height: 42px;
+    height: 53px;
+    border-right: #626d8c 1px dotted;
+    overflow: hidden;
 }
 .navBox .navUl .navLi>a{
     display: block;
     padding:0;
     margin: 0;
     height: 100%;
-    line-height: 42px;
+    line-height: 53px;
     color: white;
+    font-weight: bold;
     text-decoration: none;
     overflow: hidden;
 }
@@ -67,26 +75,29 @@ body{
     border-top: 2px solid #f10000;
     overflow: hidden;
 }
-.navBox .navUl .navLi:hover .navSecondUl{
+/* .navBox .navUl .navLi:hover .navSecondUl{
     display: block;
     background-color: #121822;
-}
+} */
 .navSecondUl{
-    top:42px;
-    width: 15%;
+    top:52px;
+    width: 13%;
     display: none;
     z-index: 80;
     list-style: none;
     position: absolute;
     text-align: center;
+    background-color: #121822;
+    padding-bottom:10px;
 }
 .navSecondUl>li{
     list-style: none;
     line-height: 32px;
 }
 .navSecondUl>li>a{
-    color: white;
+     color: white;
     display: block;
+    font-size: 14px;
     height: 100%;
     text-decoration: none;
 }
@@ -229,6 +240,13 @@ body{
     white-space: nowrap;
     text-overflow: ellipsis;
     background: url("../../images/visitor/pont.jpg") no-repeat left center;
+    transition:padding-left 1s;
+	-webkit-transition:padding-left 1s; /* Safari */
+}
+.mainBbody>li>a:hover{
+	color:red;
+	padding-left:20px;
+	overflow:hidden;
 }
 .mainBbody>li>span{
     float: right;
@@ -276,7 +294,7 @@ body{
 .teacher2 img{
     width: 100%;
 }
-.teacher2>span{
+.teacher2 span{
     display: inline-block;
     position: absolute;
     width: 100%;

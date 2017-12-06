@@ -27,16 +27,5 @@ setTimeout("getdates()",1000);
 getdates();
 
 
-// $(document).ready(function(){
-//  $(".next").hover(function(){
-//     $(this).prev().find('span').css({"width": "90px","height": "30px","background": "white",	"color": "black",	"display": "block",	"margin-left": "0px","border-radius": "4px"});
-// },function(){
-//      $(this).prev().find('span').css({"width": "90px","height": "20px","background": "none",	"color": "white",	"display": "block",	"margin-left": "0px","border-radius": "0px"});
-// });
-// });
-
-
-// "width": "90px","height": "30px","background": "white",	"color": "black",	"display": "block",	"margin-left": "0px",
-// "border-radius": "4px";
 
     

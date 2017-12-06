@@ -17,7 +17,7 @@
 		.t1{
 			width: 30%;
 			height:230px;
-			margin-left:15%;
+			margin-left:5%;
 			margin-top:10%;
 			float: left;
 		}
@@ -25,16 +25,25 @@
 			width: 30%;
 			height:280px;
 			margin-top:10%;
+			margin-left:10%;
 			float: left;
 		}
-		
+		td{
+			line-height:40px;
+		}
 		input{
-			width: 200px;
+			width: 230px;
 			height: 30px;
 			border-radius:5px; 
 			-moz-border-radius:5px; 
 			-webkit-border-radius:5px; 
 			border:1px solid #ccc;
+		}
+		#sex input{
+			width:15px;
+			heigth:15px;
+			margin-left:20px; 
+			margin-top:15px;
 		}
 		.demo_1{
 			width: 202px;
@@ -48,8 +57,11 @@
 		.bod td{
 			text-align:center;
 		}
-		span{
-			float:right;
+		#sex span{
+			
+			width:60px;
+			margin-left:20px;
+			line-heigt:50px!important;	
 			font-size: 16px;
 		}
 		.bb{

@@ -5,7 +5,7 @@ body{
 }
 .content{
 	margin:5% auto;
-	width:50%;
+	width:33%;
 	text-align: right;
 }
 .message{
@@ -29,6 +29,9 @@ td{
 	text-align: center !important;
 	text-align: center;
 }
+tr{
+	height:50px;
+}
 img{
 	width: 30%;
 } 
@@ -40,13 +43,19 @@ img{
 	line-height: 100px;
 }
 span{
-	font-size: 18px;
-/* 	font-weight: bold; */
+	font-size: 16px;
 }
 .aa{
-	font-size:16px;
+	font-size:14px;
+	color:black;
+	background:#d3d7cf;
+	padding:5px 5px;
+	border-radius:5px;
 }
+
 .aa:hover{
 	text-decoration: none;
+	color:black;
+	background:#b6b0d1;
 }
 
