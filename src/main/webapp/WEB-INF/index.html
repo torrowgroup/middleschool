@@ -51,10 +51,11 @@ alert("sdaddf");
 </script> -->
 <script th:inline="javascript">
 	window.onload=function(){
-		if(session.getAttribute("admin")==null){  
-	        response.sendRedirect("index.html");  
-	        return;  
-	    }  
+		 //防止页面后退
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
 	}
 </script> 
 </html>
