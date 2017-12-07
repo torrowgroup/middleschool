@@ -15,7 +15,7 @@
 	<div class="mainbox">
 		<div class="thir">
 			<a th:href="@{/user/toAddUser}" title="添加用户">添加用户</a>
-			<form th:action="@{/user/manageUser}" class="inquiry">
+			<form th:action="@{/user/manageUser}" class="inquiry" method="post">
 			<input type="text" name="inquiry" th:value="${inquiry}" placeholder="姓名/邮箱/职位/电话" required="required" class="inquiryinput" maxlength="20"/>
 			<input type="submit" value="提交" class="btn btn-default inquirysub"/>
 		</form>

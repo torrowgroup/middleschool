@@ -1,18 +1,22 @@
 body{
 	margin:0;
 	padding: 0;
+	background:#efefef;
 }
 table{
 	width: 400px;
-	height: 180px;
+	height:240px;
 	margin :0 auto;
-	margin-top: 10%;
+	margin-top: 16%;
+}
+td{
+	font-size:18px;
 }
 .aa{
 	background:#2896ef;
 	color:white;
 	width:60px;
-	height:30px;
+	height:35px;
 	margin-left:200px;
 	border-radius:6px;
 }

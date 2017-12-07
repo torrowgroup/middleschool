@@ -8,6 +8,7 @@
 <script type="text/javascript" th:src="@{/static/js/bootstrap.min.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/managepicture.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/page.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/sign.css}">
 </head>
 <body>
 <div class="aa">
@@ -16,9 +17,9 @@
         没有任何轮播图信息！
     </span>
  <div th:if ="${pagemsg.totalCount}!=0">
-        <table border="1"  class="table1 table-hover">   
+        <table border="1"  class="table1 table-hover table-bordered">   
         <thead>
-            <tr>
+            <tr class="col">
             	<td width="25%"><span>图片名称</span></td>
                 <td width="50%"><span>图片</span></td>
                 <td width="25%"><span>操作</span></td>

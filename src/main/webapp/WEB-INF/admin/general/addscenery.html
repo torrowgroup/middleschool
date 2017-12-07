@@ -7,9 +7,10 @@
 <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 <script type="text/javascript" th:src="@{/static/js/upload.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/addscenery.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/sign.css}">
 </head>
 <body>
-	<div th:text="${message}"></div>
+	<div th:text="${message}" class="center"></div>
 	<form th:action="@{/general/addSchoolScenery}" method="post"
 		enctype="multipart/form-data">
 		
