@@ -1,4 +1,4 @@
-package com.torrow.school.controller.politicaleducation;
+package com.torrow.school.controller.political;
 
 import java.io.UnsupportedEncodingException;
 

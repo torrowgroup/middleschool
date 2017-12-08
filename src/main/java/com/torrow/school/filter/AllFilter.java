@@ -7,12 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;  
 import javax.servlet.ServletResponse;  
 import javax.servlet.http.HttpServletResponse;  
-  
-public class NoCacheFilter implements Filter{  
-  
+public class AllFilter implements Filter{  
     @Override  
     public void destroy() {  
-        // TODO Auto-generated method stub  
           
     }  
   
@@ -25,13 +22,13 @@ public class NoCacheFilter implements Filter{
         hsr.setHeader("Pragma", "no-cache"); // HTTP 1.0.  
         hsr.setDateHeader("Expires", 0); // Proxies.  
         chain.doFilter(req, res);  
-        System.out.println("--------------------");
+        //这么做是为了设置字符编码只限于post的
+        req.setCharacterEncoding("UTF-8");
+		res.setContentType("text/html;charset=utf8");
     }  
   
     @Override  
     public void init(FilterConfig arg0) throws ServletException {  
-        // TODO Auto-generated method stub  
           
     }  
-  
 }  

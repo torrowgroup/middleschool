@@ -253,7 +253,7 @@ public class SchoolNewsController extends BaseController {
 			model.addAttribute("caName", str);
 		}
 		// 携带的参数包括分页依据和查询条件还有显示条数
-		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页10条数据
+		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 7));// 回显分页10条数据
 		session.setAttribute("currentPage", currentPage);
 		if(null!=tbCategory.getCaPid()) {
 			if (tbCategory.getCaPid() == 6) {
