@@ -29,7 +29,6 @@ public class TeacherFilter implements Filter{
 			  // 获得在下面代码中要用的request,response,session对象
 	        HttpServletRequest servletRequest = (HttpServletRequest) request;
 	        HttpSession session = servletRequest.getSession();
-			
 			//判断用户是否登录
 			TbUser teacher=(TbUser)session.getAttribute("teacher");
 			if(teacher != null) {

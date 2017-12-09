@@ -15,6 +15,23 @@ function inquiryNews() {
 			success : function(data) {
 				var inquiry = data.inquiry;
 				var news = data.news;
+				var list = data.news.lists;
+			    var len = list.length;		//判断提示框是否有必要出现
+				if(len!=0){
+					$(".prompt").show();
+					var htm = '';
+					if(len>5){
+						len=5;
+					}
+					for(var i=0;i<len;i++){
+						htm+='<a href="/middleschool/visitorGN/viewNews?nId='+caId+'&inquiry='+list[i].reTitle+'">'+list[i].reTitle+'</a> <br/>';
+					}
+					$(".prompt").html(htm);
+				}
+				if(len==0||inquiry==''){
+					$(".prompt").html('');
+					$(".prompt").hide();
+				}	
 				if(news.totalPage==0){
 					$('#noThing').html('<div> <h3 class="titlesc">暂没有相关内容</h3> </div>')
 					$('#anyThing').html('');
@@ -41,12 +58,10 @@ function inquiryNews() {
 					} else {
 						pageCut = '<li><a href="#">&laquo;</a></li>';
 					}
-					if(news.totalPage==1){
-						pageCut +='<li> <a '+
-						'href="/middleschool/visitorGN/viewNews?currentPage=1&nId='+news.lists[0].caId+
-						'&inquiry='+inquiry+'">1</a> </li>';
-					}
-					for(var i=2;i<news.totalPage;i++){	//得到七页内容
+					pageCut +='<li> <a '+
+					'href="/middleschool/visitorGN/viewNews?currentPage=1&nId='+news.lists[0].caId+
+					'&inquiry='+inquiry+'">1</a> </li>';
+					for(var i=2;i<=news.totalPage;i++){	//得到七页内容
 						if(i>news.currPage-3&&i<news.currPage+3){
 							pageCut +='<li> <a '+
 							'href="/middleschool/visitorGN/viewNews?currentPage='+i+'&nId='+news.lists[0].caId+

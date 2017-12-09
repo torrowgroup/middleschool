@@ -1,88 +1,111 @@
-	body{
-			margin:0;
-			padding:0;
-			height:630px;
-		}
-		.message{
-			text-align: center;
-			padding-top:2%;
-			font-size:15px;
-			color:red;
-		}
-		.bod{
-			width:100%;
-			height:100%;
-			background:#efefef;
-		}
-		.t1{
-			width: 30%;
-			height:230px;
-			margin-left:5%;
-			margin-top:10%;
-			float: left;
-		}
-		.t2{
-			width: 30%;
-			height:280px;
-			margin-top:10%;
-			margin-left:10%;
-			float: left;
-		}
-		td{
-			line-height:40px;
-		}
-		input{
-			width: 230px;
-			height: 30px;
-			border-radius:5px; 
-			-moz-border-radius:5px; 
-			-webkit-border-radius:5px; 
-			border:1px solid #ccc;
-		}
-		#sex input{
-			width:15px;
-			heigth:15px;
-			margin-left:20px; 
-			margin-top:15px;
-		}
-		.demo_1{
-			width: 202px;
-			height: 30px;
-			border-radius: 3px;
-			margin-top:10px;
-		}
-		tr{
-			height:10px;
-		}
-		.bod td{
-			text-align:center;
-		}
-		#sex span{
-			
-			width:60px;
-			margin-left:20px;
-			line-heigt:50px!important;	
-			font-size: 16px;
-		}
-		.bb{
-			width: 50px;
-			height: 30px;
-			border-radius: 8px;
-			position: absolute;
-			margin-left: 150px;
-			display: block;
-			background:#2896ef;
-			color: white;
-		}
-		#ok{
-			color:green;
-		}
-		#wrong{
-			color:red;
-		}
-		#okAgain{
-			color:green;
-		}
-		#wrongAgain{
-			color:red;
-		}
+body {
+	margin: 0;
+	padding: 0;
+	height: 630px;
+}
+
+.message {
+	text-align: center;
+	padding-top: 2%;
+	font-size: 15px;
+	color: red;
+}
+
+.clearfix {
+	overflow: auto;
+	clear: both;
+	padding-left: 10%;
+}
+
+.bod {
+	width: 100%;
+	height: 100%;
+	background: #efefef;
+}
+
+.t1 {
+	width: 30%;
+	height: 200px;
+	margin-left: 5%;
+	margin-top: 10%;
+	float: left;
+}
+
+.t2 {
+	width: 30%;
+	height: 350px;
+	margin-top: 10%;
+	margin-left: 10%;
+	float: left;
+}
+
+td {
+	line-height: 40px;
+}
+
+input {
+	width: 230px;
+	height: 30px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #ccc;
+}
+
+#sex input {
+	width: 15px;
+	height: 15px;
+	margin-left: 20px;
+	margin-top: 15px;
+}
+
+.demo_1 {
+	width: 230px;
+	height: 30px;
+	border-radius: 3px;
+	margin-top: 10px;
+}
+
+tr {
+	height: 10px;
+	border: 1px
+}
+
+.bod td {
+	text-align: center;
+}
+
+#sex span {
+	width: 60px;
+	margin-left: 10px;
+	line-height: 50px !important;
+	font-size: 16px;
+}
+
+.bb {
+	width:100px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 8px;
+	background: #2896ef;
+	color: white;
+}
+.btnTr{
+	height: 100px;
+}
+
+#ok {
+	color: green;
+}
+
+#wrong {
+	color: red;
+}
+
+#okAgain {
+	color: green;
+}
+
+#wrongAgain {
+	color: red;
+}

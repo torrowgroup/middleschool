@@ -4,7 +4,10 @@
 	line-height: 90px;
 	text-align: right;
 }
-
+.fonts{
+	color:gray;
+	 padding: 15px 0px;
+}
 @media ( max-width : 900px) {
 	.sidebar-collapse .nav>li>a {
 		font-size: 12px;

@@ -16,8 +16,14 @@
 <body>
 <div th:replace="headerfooter :: header"></div> 
 <div class="centerImg">
-    <img th:src="@{/static/images/visitor/banner5.jpg}" alt="加载中">
-</div>
+		<div class="centerimgBox">
+			<div th:if="@{schoolNewsPicture!=null}">
+			<img th:src="@{/static/uploadimg/{picture}(picture=${schoolNewsPicture.reContent})}" alt="">
+			<div class="sideLeft"></div>
+			<div class="sideRight"></div>
+		</div>
+		</div>
+	</div>
 
 <div class="mainbox1">
     <div class="schollabout">

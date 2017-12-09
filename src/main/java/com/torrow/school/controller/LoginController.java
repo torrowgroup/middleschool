@@ -4,21 +4,27 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
 import javax.mail.MessagingException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.torrow.school.base.BaseController;
 import com.torrow.school.entity.TbCategory;
+import com.torrow.school.entity.TbResource;
 import com.torrow.school.entity.TbUser;
 import com.torrow.school.util.Email;
+
 import sun.misc.BASE64Encoder;
 /**
  * @author 张金高
@@ -46,7 +52,6 @@ public class LoginController extends BaseController {
 		if(null!=tbUser) {
 			categoryService.findAllCategory(model);			//这个方法是为了获得首页的显示数据
 			TbCategory tbCategory = categoryService.selectByPrimaryKey(tbUser.getCaId());
-			session.setAttribute("usEmail", usEmail);
 			if(tbUser.getCaName().equals("管理员")){
 				session.setAttribute("admin",tbUser);
 				view = "admin/index";
@@ -82,9 +87,9 @@ public class LoginController extends BaseController {
 	public ModelAndView index(Model model) throws ParseException{
 		categoryService.getCategory(0,model);
 		List<TbCategory> categoryList = categoryService.selectAll();
-		resourceService.getResource(categoryList,model);//得到新闻，公告等,追加资源下载
-		resourceService.getTimeInfor(model);//得到考试和联系信息
-		List<TbUser> userAll = userService.selectAll();//首页名师推荐
+		resourceService.getResource(categoryList,model);//得到新闻，公告等,追加资源下载,只应用于首页
+		resourceService.getTimeInfor(model);//得到考试和联系信息,追加底部链接
+		List<TbUser> userAll = userService.selectAll();//首页教师剪影
 		if(userAll.size()>0){
 			model.addAttribute("famousTeacherOne", userService.selectAll().get(0));
 		}

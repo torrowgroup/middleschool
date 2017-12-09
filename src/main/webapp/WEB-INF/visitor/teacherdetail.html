@@ -8,13 +8,21 @@
     <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/static/css/visitor/style.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/static/css/visitor/teacherdetail.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/static/css/visitor/aboutschool.css}"
+	type="text/css">
 </head>
 <body>
 <div th:replace="headerfooter :: header"></div> 
 
 <div class="centerImg">
-    <img th:src="@{/static/images/visitor/news1.jpg}" alt="">
-</div>
+		<div class="centerimgBox">
+			<div th:if="@{teacherPicture!=null}">
+			<img th:src="@{/static/uploadimg/{picture}(picture=${teacherPicture.reContent})}" alt="">
+			<div class="sideLeft"></div>
+			<div class="sideRight"></div>
+		</div>
+		</div>
+	</div>
 
 <div class="mainbox1">
     <div class="schollabout">

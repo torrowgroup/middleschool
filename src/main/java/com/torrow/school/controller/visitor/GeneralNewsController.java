@@ -1,6 +1,7 @@
 package com.torrow.school.controller.visitor;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +48,6 @@ public class GeneralNewsController extends BaseController {
 		categoryService.getCategory(gId,model);//将学校概括等菜单项封装进model，以及用户选择的功能项
 		resourceService.getTimeInfor(model);//得到考试和联系信息
 		TbCategory category = categoryService.selectByPrimaryKey(gId);
-		log.info("--"+category);
 		if(category.getCaPid()==7){	 //查看校园风光时调用
 			TbCategory categoryInquiry = new TbCategory();
 			categoryInquiry.setCaId(category.getCaId());
@@ -98,32 +98,13 @@ public class GeneralNewsController extends BaseController {
 		}
 		TbCategory record = new TbCategory();
 		record.setCaId(nId);
-		record.setCaName(inquiry);//此处安李杰代码不能使
+		record.setCaName(inquiry);//此处安李杰代码不能使pid
 		PageBean<TbResource> resourceLists = resourceService.findingByPaging(currentPage, record,10);
 		categoryService.getCategory(nId,model);//将概括，新闻等封装进model，供下拉菜单使用，以及用户选择的功能项
 		resourceService.getTimeInfor(model);//得到考试和联系信息
 		model.addAttribute("news", resourceLists);
 		model.addAttribute("inquiry", inquiry);
 		return new ModelAndView("visitor/schoolnews");
-	}
-	
-	/**
-	 * @param rId	接受用户查看的具体的新闻id
-	 * @param nId	接受用户查看的功能
-	 * @param model
-	 * @return 		查看新闻详情
-	 */
-	@RequestMapping("newDetails")
-	public ModelAndView newDetails(Integer rId,Integer nId,Model model) throws ParseException{
-		TbResource resource = resourceService.selectByPrimaryKey(rId);
-		int pId = categoryService.selectByPrimaryKey(nId).getCaPid();//得到所选择的资源类的pId，如果是学生管理和教师发展提供下载
-		if (pId==9) {
-			model.addAttribute("download", true);
-		}
-		model.addAttribute("resource", resource);
-		categoryService.getCategory(nId,model);//将概括，新闻等封装进model，供下拉菜单使用，以及用户选择的功能项
-		resourceService.getTimeInfor(model);//得到考试和联系信息
-		return new ModelAndView("visitor/newdetails");
 	}
 	
 	/**
@@ -147,6 +128,25 @@ public class GeneralNewsController extends BaseController {
 		map.put("news", resourceLists);
 		map.put("inquiry", inquiry);
 		return map;
+	}
+	
+	/**
+	 * @param rId	接受用户查看的具体的新闻id
+	 * @param nId	接受用户查看的功能
+	 * @param model
+	 * @return 		查看新闻详情
+	 */
+	@RequestMapping("newDetails")
+	public ModelAndView newDetails(Integer rId,Integer nId,Model model) throws ParseException{
+		TbResource resource = resourceService.selectByPrimaryKey(rId);
+		int pId = categoryService.selectByPrimaryKey(nId).getCaPid();//得到所选择的资源类的pId，如果是学生管理和教师发展提供下载
+		if (pId==9) {
+			model.addAttribute("download", true);
+		}
+		model.addAttribute("resource", resource);
+		categoryService.getCategory(nId,model);//将概括，新闻等封装进model，供下拉菜单使用，以及用户选择的功能项
+		resourceService.getTimeInfor(model);//得到考试和联系信息
+		return new ModelAndView("visitor/newdetails");
 	}
 	
 	/**

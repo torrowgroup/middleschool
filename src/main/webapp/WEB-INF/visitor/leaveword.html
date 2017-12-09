@@ -15,8 +15,14 @@
 <body>
 <div th:replace="headerfooter :: header"></div> 
 <div class="centerImg">
-    <img th:src="@{/static/images/visitor/news1.jpg}" alt="">
-</div>
+		<div class="centerimgBox">
+			<div th:if="@{newsPicture!=null}">
+			<img th:src="@{/static/uploadimg/{picture}(picture=${newsPicture.reContent})}" alt="">
+			<div class="sideLeft"></div>
+			<div class="sideRight"></div>
+		</div>
+		</div>
+	</div>
 
 <div class="mainbox1">
         <div class="schollright">
@@ -25,8 +31,9 @@
                 <h1>欢迎您
                     <span>请留下您宝贵的见解：</span>
                     <span class="isSuccess" th:text="${message}"></span>
+                	<span class="watchwordn"><a th:href="@{/visitorNEL/viewLeaveWords}">查看留言</a></span>
                 </h1>
-                <label>
+                <label>	
                     <span>您的姓名 :</span>
                     <input id="name" type="text" name="meHide" placeholder="您的姓名（选填）" maxlength="10"/>
                 </label>

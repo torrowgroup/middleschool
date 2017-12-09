@@ -30,7 +30,7 @@
     <!--导航条-->
     <div class="navBox">
         <ul class="navUl">
-            <li class="navLi hidden-xs"><a th:href="@{/index}">首页</a></li>
+            <li class="navLi hidden-xs" style="border-left:#626d8c 1px dotted"><a th:href="@{/index}">首页</a></li>
             <li class="navLi">
                 <a href="#">学校概况</a>
                 <ul class="navSecondUl">
@@ -91,16 +91,16 @@
         </ol>
         <!-- 轮播（Carousel）项目 -->
         <div class="carousel-inner">
-            <div class="item active">
-                <img th:src="@{/static/images/visitor/ba1.png}" alt="First slide">
-                <div class="carousel-caption">校园1</div>
-            </div>
-            <div class="item">
-                <img th:src="@{/static/images/visitor/ba2.png}" alt="Second slide">
+			<div class="item active" th:if="${#arrays.length(indexScroll)>0}">
+			    <img th:src="@{/static/uploadimg/{picture}(picture=${indexScroll[0].reContent})}" alt="First slide">
+			    <div class="carousel-caption">校园1</div>
+			</div>
+            <div class="item" th:if="${#arrays.length(indexScroll)>1}">
+                <img th:src="@{/static/uploadimg/{picture}(picture=${indexScroll[1].reContent})}" alt="Second slide">
                 <div class="carousel-caption">校园2</div>
             </div>
-            <div class="item">
-                <img th:src="@{/static/images/visitor/ba1.png}" alt="Third slide">
+            <div class="item" th:if="${#arrays.length(indexScroll)>2}">
+                <img th:src="@{/static/uploadimg/{picture}(picture=${indexScroll[2].reContent})}" alt="Third slide">
                 <div class="carousel-caption">校园3</div>
             </div>
         </div>
@@ -113,26 +113,21 @@
     <div class="mainBox">
         <div class="container mainCenter">
             <div class="row mainTop">
-            	<div th:each="resource,resourceS:${generalIndex}">
-	                <div class="col-sm-3 col-xs-6 mainLeft" th:if="${resourceS.index!=3}">
-	                    <h3>
-	                    	<a th:href="@{/visitorGN/viewGeneral?(gId= ${resource.caId})}" th:text="${resource.reTitle}">标题</a>
-	                    </h3>
-						<p><a th:href="@{/visitorGN/viewGeneral?(gId= ${resource.caId})}" class="generalIndex" th:name="${resource.reContent}">内容</a></p>                    
-	                </div>
-	                <div class="col-sm-3 col-xs-6 mainLeft" th:if="${resourceS.index==3}" style="border: none">
-	                    <h3>
-	                    	<a th:href="@{/visitorGN/viewGeneral?(gId= ${resource.caId})}" th:text="${resource.reTitle}">标题概况</a>
-	                    </h3>
-						<p><a th:href="@{/visitorGN/viewGeneral?(gId= ${resource.caId})}" class="generalIndex" th:name="${resource.reContent}">内容</a></p>                    
-	                </div>
+                <div class="col-sm-3 col-xs-6 mainLeft" th:each="resource,resourceS:${generalIndex}">
+                    <h3><a th:href="@{/visitorGN/viewGeneral?(gId= ${resource.caId})}" th:text="${resource.reTitle}">标题</a></h3>
+                    <p><a th:href="@{/visitorGN/viewGeneral?(gId= ${resource.caId})}" class="generalIndex" th:name="${resource.reContent}">大致内容</a></p>
+                    <a href="">
+                        <div class="mainImg">
+                            <img th:src="@{${resource.spare}}" alt="" class="generalPicture">
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-9 col-xs-12">
                     <div class="row mainBottom">
                         <div class="col-sm-6 col-xs-12">
-                            <div class="mainBheader changeColor">
+                           <div class="mainBheader changeColor">
                            <a th:href="@{/visitorNEL/viewNotices?(nId= 6)}" target="_blank">公告 |notice<span class="pull-right">&gt; 更多</span></a>
                             </div>
                             <ul class="mainBbody">
@@ -162,13 +157,13 @@
                     <div class="teacher1" th:if="${famousTeacherOne!=null}">
                     	<a th:href="@{/visitorNEL/teacherDetail?(usId=${famousTeacherOne.usId})}">
 	                        <img th:src="@{/static/uploadimg/{picture}(picture=${famousTeacherOne.usPicture})}" alt="没有上传图片">
-	                        <span th:text="${famousTeacherOne.usName}">教师</span>
+	                        <span th:text="${famousTeacherOne.usName}" class="showthis">教师</span>
                     	</a>
                     </div>
                     <div class="teacher2"  th:if="${famousTeacherTwo!=null}">
                     	<a th:href="@{/visitorNEL/teacherDetail?(usId=${famousTeacherTwo.usId})}">
 	                        <img th:src="@{/static/uploadimg/{picture}(picture=${famousTeacherTwo.usPicture})}" alt="没有上传图片">
-	                        <span th:text="${famousTeacherTwo.usName}">教师</span>
+	                        <span th:text="${famousTeacherTwo.usName}" class="showthis">教师</span>
 	                    </a>
                     </div>
                 </div>
@@ -185,7 +180,7 @@
                     <ul class="scrollUl1">
                         <li th:each="resource,resourceStart:${sNews}">
                         	<a th:href="@{/visitorGN/newDetails?(rId=${resource.reId},nId=${resource.caId})}">
-                        		<img th:src="@{${resource.reContent}}" alt="暂无图片" style="width: 100%;height: 100%;">
+                        		<img th:src="@{${resource.reContent}}" alt="暂无图片" class="bigimg">
                         		<span th:text="${resource.reTitle}">新闻标题</span>	
                         	</a>
                         </li>
@@ -204,7 +199,7 @@
 	
 	var generalIndex = $(".generalIndex");
 	for(var i=0;i<generalIndex.length;i++){
-		$(generalIndex[i]).html($(generalIndex[i]).attr("name"));
+		$(generalIndex[i]).html($(generalIndex[i]).attr('name'));
 	}
 </script>
 </body>

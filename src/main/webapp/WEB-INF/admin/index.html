@@ -21,9 +21,10 @@
 					<ul class="nav_content">
 						<li class="current"><a th:href="@{/message/manageMessage}"  target="ie" title="留言板"><span>留言板</span></a></li>
 						<li class="current"><a th:href="@{/news/manageObject?(caPid=6)}" title="公告"  target="ie"><span>公告</span></a></li> 
-						<li class="current"><a href="schoolhistory.html" title="校园文学"  target="ie"><span>校园文学</span></a></li>
-						<li style="position:relative;"  class="current"><a th:href="@{/news/manageObject?(caPid=11)}" title="资源下载"  target="ie"><span>资源下载</span></a><em></em></li>
+						<li style="position:relative;"  class="current"><a th:href="@{/news/manageObject?(caPid=11)}" title="资源下载"  target="ie"><span>资源</span></a><em></em></li>
 						<li class="current"><a th:href="@{/user/manageUser}" title="用户"  target="ie"><span>用户</span></a></li>
+						<li class="current"><a th:href="@{http://jingao.site:8080/wordpress}" title="博客"  target="_blank"><span>博客</span></a></li>
+						<li class="current"><a th:href="@{http://jingao.site:8080/bbs}" title="论坛"  target="_blank"><span>论坛</span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -84,7 +85,7 @@
 				<li>
 					<div class="le_1">
 						<a th:href="@{/user/viewMe}" target="ie" title="个人中心">
-							<img th:src="@{/static/uploadimg/{picture}(picture=${session.admin.usPicture})}" alt="没有图片">
+							<img th:src="@{/stati/uploadimg/{picture}(picture=${session.admin.usPicture})}" alt="没有图片">
 						</a>
 					</div>
 				</li>
@@ -123,6 +124,18 @@
 	                    </li>
 	                   	<li th:each="category,categoryStart:${educationList}">
 							   <a th:href="@{/news/manageObject?(caId=${category.caId})}"  target="ie" class="out1"><span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}"></span></a>
+	                    </li>
+                    </ul>
+				</li>
+				<!-- 校园文学 -->
+				<li class="lione">
+					<a th:href="@{/news/addNewsJumping?(Pid=12)}"  target="ie" class="out"><span class="glyphicon glyphicon-towerglyphicon glyphicon-tower"></span>&nbsp;&nbsp;校园文学<span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <ul class="nav nav-second-level">
+	                    <li>
+	                      	<a th:href="@{/news/addNewsJumping?(Pid=3)}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;上传校园文学</a>
+	                    </li>
+	                   	<li th:each="category,categoryStart:${literatureList}">
+							<a th:href="@{/news/manageObject?(caId=${category.caId})}" target="ie" class="out1"><span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}"></span></a>
 	                    </li>
                     </ul>
 				</li>
@@ -221,7 +234,15 @@
  		$(".current").click(function(){
  			$(this).children("a").css("background-image", "url(/middleschool/static/images/admin/nav_li_current.gif)");
  			$(this).siblings().children("a").css("background-image","none");
-		})  
+		}) 
+		$("#main-menu").click(function(){
+			 $(".current").children().css("background-image","none");
+			 
+		})
+　		var wh =  $(window).height();//浏览器当前窗口可视区域高度
+		var sheight = (wh-75)+'px';
+		$("#ifr").css("height",sheight);
+		$(".box").css("height",sheight);
     });
 </script>
 </html>

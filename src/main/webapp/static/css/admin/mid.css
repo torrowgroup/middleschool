@@ -16,10 +16,10 @@ a:hover{text-decoration:underline;}
 }
  
 .menu_navcc{
-	width:530px;
+	width:700px;
 }
 .menu_nav{
-	width:530px;
+	width:700px;
 	height:48px;
 	
 	float:left;
@@ -31,7 +31,7 @@ a:hover{text-decoration:underline;}
 }
 .menu_nav .nav_content li{
 	width:88px;
-	height:48px;
+	height:37px;
 	padding-left:15px;
 	padding-right:13px;
 	float:left;line-height:48px;
@@ -42,11 +42,11 @@ a:hover{text-decoration:underline;}
 .menu_nav .nav_content li a{
 	color:#fff;
 	width:88px;
-	height:48px; 
+	height:37px; 
 	display:block;
 }
 .menu_nav .nav_content li.current{
-	line-height:48px;
+	line-height:37px;
 }
 .menu_nav .nav_content li.current a,.menu_nav .nav_content li a:hover{
 	width:88px;
