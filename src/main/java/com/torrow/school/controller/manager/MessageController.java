@@ -37,7 +37,7 @@ public class MessageController extends BaseController {
 		if(inquiry!=null){
 			inquiry = new String(inquiry.getBytes("iso8859-1"),"utf-8");
 		}
-		model.addAttribute("messagePage", messageService.findPage(currentPage,inquiry,5));// 回显分页数据
+		model.addAttribute("messagePage", messageService.findPage(currentPage,inquiry,7));// 回显分页数据
 		model.addAttribute("inquiry", inquiry);
 		return "admin/message/managemessage";
 	}

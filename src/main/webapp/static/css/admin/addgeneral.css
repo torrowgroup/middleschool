@@ -6,7 +6,7 @@ body{
 .aa{	
 	width: 800px;
 	height: 400px;
-	margin: 50px auto;
+	margin: 80px auto;
 	
 }
 table{
@@ -25,7 +25,9 @@ table input{
 	border:1px solid #ccc;
 	outline: none;
 }
-
+.message{
+	text-align: center;
+}
 .cc{
 	width: 250px;
 	height:30px;
@@ -43,18 +45,32 @@ table input{
 }
 .bb{
 	display:block;
-	float:left;
-	width: 60px;
+	margin-left:40%;
+	margin-top:50px;
+	width: 70px;
 	height: 30px;
 	background: #2896ef;
 	border:none;
 	border-radius: 3px;
 	color: white;
 	cursor: pointer;
-	
-	
 }
 .out1{
+	display:block;
+	float:left;
+	height: 30px;
+    background: #2896ef;
+	font-size:16px;
+	text-align:left;
+	text-decoration: none;
+	color: white;
+	cursor: pointer;
+	margin-left:30px;
+	line-height: 30px;
+	padding: 0 10px;
+	border-radius: 3px;
+}
+.addmanagerbtn{
 	display:block;
 	float:left;
 	height: 30px;

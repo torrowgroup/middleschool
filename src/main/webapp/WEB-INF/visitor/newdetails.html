@@ -17,8 +17,8 @@
 <div th:replace="headerfooter :: header"></div> 
 <div class="centerImg">
 		<div class="centerimgBox">
-			<div th:if="@{schoolNewsPicture!=null}">
-			<img th:src="@{/static/uploadimg/{picture}(picture=${schoolNewsPicture.reContent})}" alt="">
+			<div th:if="${newsPicture!=null}">
+			<img th:src="@{/static/uploadimg/{picture}(picture=${newsPicture.reContent})}" alt="">
 			<div class="sideLeft"></div>
 			<div class="sideRight"></div>
 		</div>

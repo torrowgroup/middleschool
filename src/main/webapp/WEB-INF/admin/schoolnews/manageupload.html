@@ -13,7 +13,6 @@
 <div th:if ="${pagemsg.totalCount}==0" class="issucessor">
         没有任何信息!
 </div>
- <div th:if ="${pagemsg.totalCount}!=0">
 <!--模糊查询  -->
 <div class="mainbox">
  	    <form th:action="@{/news/manageObject}" class="inquiry" method="post">
@@ -21,6 +20,7 @@
 		    <input type="text" name="caName" class="inquiryinput" placeholder="文件名称/发布人/日期" required/>
 		    <input type="submit" value="查询" class="btn btn-default inquirysub" title="查询">   
 	    </form>
+	     <div th:if ="${pagemsg.totalCount}!=0">
 		<table class="table table-bordered table-hover table-condensed">
        		 <thead>
 	            <tr>

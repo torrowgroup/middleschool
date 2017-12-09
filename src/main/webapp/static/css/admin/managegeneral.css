@@ -36,10 +36,11 @@ button{
 #introEditor{
 	padding: 10px;
 	width: 98%;
-	height: 400px;
+	height: 460px;
 	background:white;
 	overflow:scroll;
 	overflow-x: hidden;
+	border: 1px solid #ccc;
 	
 }
 .ziti{
@@ -63,7 +64,7 @@ button{
 	
 }
 .ziti p{
-	margin-left:-100px;
+	margin-left:-150px;
 	margin-top:-20px;
 	color:gray;
 	font-size:16px;

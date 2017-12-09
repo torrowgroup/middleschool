@@ -8,6 +8,7 @@
 	th:href="@{/static/dist/css/wangEditor.min.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/addgeneral.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/sign.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/addnotices.css}">
 </head>
 <body>
 <div class="aa">
@@ -15,13 +16,13 @@
 <div th:if="${sign}!='1'">
 	<form th:action="@{/news/addSchoolNews}" onsubmit="modifyContent()" method="post"  enctype="multipart/form-data">
 		<table>
-			<tr>
-				<th><span>标题</span></th>
-				<td><input type="text" name="reTitle" required="required" maxlength="25"></td>
-				<td><input type="hidden" name="caId"  th:each="category,categoryStart:${categoryList}" th:value="${category.caId}">
+			<tr class="hei">
+				<th width="30%"><span>标题&nbsp;&nbsp;</span></th>
+				<td colsoan="2"><input type="text" name="reTitle" required="required" maxlength="25">
+				<input type="hidden" name="caId"  th:each="category,categoryStart:${categoryList}" th:value="${category.caId}">
 		    </td>
 			</tr>
-			<tr>
+			<tr class="editorDiv">
 				<td colspan="4">
 					<div id="introduction">
 						<textarea style="display: none;" name="reContent" 

@@ -135,13 +135,13 @@ body,html{
     width: 85%;
 	left:15%;
 	top:75px;
-
+	bottom:0px;
 	position: absolute;
     float: left;
-    background-image: url(../images/wel.gif);
+	background-image: url(../../images/admin/wel.gif);
     background-position: 50% 50%;
     background-size: 70%;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; 
 }
 #date{
 	width: 100%;

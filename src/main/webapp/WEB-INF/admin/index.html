@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>郑州一二二中学管理系统</title>
+<title>郑州122中学管理系统</title>
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/index.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/mid.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
@@ -28,64 +28,13 @@
 					</ul>
 				</div>
 			</div>
-		
-		
-		
-<!-- 		<ul class="midul"> -->
-<!-- 			<li id="aa"> -->
-<!-- 				<img th:src="@{/static/images/admin/sec11.png}" alt="" class="photo1"> -->
-<!-- 				<a th:href="@{/message/manageMessage}"  target="ie"><span class="changecolor">留言板</span></a> -->
-<!-- 			</li> -->
-<!-- 			<li> -->
-<!-- 				<img th:src="@{/static/images/admin/sec22.png}" alt="" class="photo2"> -->
-<!-- 				<span class="changecolor">公告</span> -->
-<!-- 				<div class="next"> -->
-<!-- 					<ul> -->
-<!-- 						<li><a th:href="@{/news/addNewsJumping?(Pid=6)}" target="ie">添加公告</a></li> -->
-<!-- 						<li><a th:href="@{/news/manageObject?(caPid=6)}" target="ie">管理公告</a></li> -->
-<!-- 					</ul> -->
-<!-- 				</div> -->
-<!-- 			</li> -->
-<!-- 			<li> -->
-<!-- 				<img th:src="@{/static/images/admin/sec33.png}" alt="" class="photo3"> -->
-<!-- 				<span class="changecolor">校园文学</span> -->
-<!-- 				<div class="next"> -->
-<!-- 					<ul> -->
-<!-- 						<li><a th:href="@{/news/addNewsJumping?(Pid=12)}"  target="ie">添加校园文学</a></li> -->
-<!-- 						<li style="margin-top:0px" th:each="category,categoryStart:${literatureList}"> -->
-<!-- 							<a th:href="@{/news/manageObject?(caId=${category.caId})}" th:text="${category.caName}" target="ie"></a> -->
-<!-- 						</li> -->
-<!-- 					</ul> -->
-<!-- 				</div> -->
-<!-- 			</li> -->
-<!-- 			<li> -->
-<!-- 				<img th:src="@{/static/images/admin/sec44.png}" alt="" class="photo4"> -->
-<!-- 				<span class="changecolor">资源下载</span> -->
-<!-- 				<div class="next"> -->
-<!-- 					<ul> -->
-<!-- 						<li><a th:href="@{/news/addNewsJumping?(Pid=11)}"  target="ie">上传资源</a></li> -->
-<!-- 						<li><a th:href="@{/news/manageObject?(caPid=11)}"  target="ie">资源管理</a></li> -->
-<!-- 					</ul> -->
-<!-- 				</div> -->
-<!-- 			</li> -->
-<!-- 			<li> -->
-<!-- 				<img th:src="@{/static/images/admin/sec55.png}" alt="" class="photo5"> -->
-<!-- 				<span class="changecolor">用户</span> -->
-<!-- 				<div class="next"> -->
-<!-- 					<ul> -->
-<!-- 						<li><a th:href="@{/user/toAddUser}"  target="ie">添加用户</a></li> -->
-<!-- 						<li><a th:href="@{/user/manageUser}"  target="ie">用户管理</a></li> -->
-<!-- 					</ul> -->
-<!-- 				</div> -->
-<!-- 			</li> -->
-<!-- 		</ul> -->
 	</div>
 		<div class="two">  
 			<ul>
 				<li>
 					<div class="le_1">
 						<a th:href="@{/user/viewMe}" target="ie" title="个人中心">
-							<img th:src="@{/stati/uploadimg/{picture}(picture=${session.admin.usPicture})}" alt="没有图片">
+							<img th:src="@{/static/uploadimg/{picture}(picture=${session.admin.usPicture})}" alt="没有图片">
 						</a>
 					</div>
 				</li>
@@ -104,6 +53,9 @@
 				<li class="lione">
 					<a href="#" class="out"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;新闻管理<span class="glyphicon glyphicon-chevron-right"></span></a>
                     <ul class="nav nav-second-level">
+						<li class="hr">
+							<a th:href="@{/news/addNewsJumping?(Pid=9)}" target="ie" class="out1" title="上传学生管理或教师成长"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;上传新闻文件</a>
+	                    </li>
 	                    <li class="hr">
 	                      <a th:href="@{/news/addNewsJumping?(Pid=2)}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加新闻</a>
 	                    </li>
@@ -129,10 +81,10 @@
 				</li>
 				<!-- 校园文学 -->
 				<li class="lione">
-					<a th:href="@{/news/addNewsJumping?(Pid=12)}"  target="ie" class="out"><span class="glyphicon glyphicon-towerglyphicon glyphicon-tower"></span>&nbsp;&nbsp;校园文学<span class="glyphicon glyphicon-chevron-right"></span></a>
+					<a href="#"  target="ie" class="out"><span class="glyphicon glyphicon-towerglyphicon glyphicon-tower"></span>&nbsp;&nbsp;校园文学<span class="glyphicon glyphicon-chevron-right"></span></a>
                     <ul class="nav nav-second-level">
 	                    <li>
-	                      	<a th:href="@{/news/addNewsJumping?(Pid=3)}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;上传校园文学</a>
+	                      	<a  th:href="@{/news/addNewsJumping?(Pid=12)}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;上传校园文学</a>
 	                    </li>
 	                   	<li th:each="category,categoryStart:${literatureList}">
 							<a th:href="@{/news/manageObject?(caId=${category.caId})}" target="ie" class="out1"><span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}"></span></a>
@@ -144,8 +96,11 @@
 					<a href="#" class="out"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;&nbsp;概括管理<span class="glyphicon glyphicon-chevron-right"></span></a>
                     <ul class="nav nav-second-level" >
                     	<li>
-	                      <a th:href="@{/general/addGeneralJumping}" class="out1" target="ie"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加概括</a>
+	                    	<a th:href="@{/general/addSceneryJumping}" target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;添加校园风光</a>
 	                    </li>
+	                    <li>
+							<a th:href="@{/general/addGeneralJumping}" class="out1" target="ie"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加概括</a>
+	                 	</li>
 	                    <li th:each="category,categoryStart:${generalList}">
 							<a th:href="@{/general/manageGeneral?(id=${category.caId})}" target="ie" class="out1" ><span class="glyphicon glyphicon-globe"></span><span class="fonts" th:text="${category.caName}"></span></a>
 						</li>
@@ -203,22 +158,14 @@
 				</li>
  			</ul>
 		</div><!-- 左侧菜单 -->
-		<iframe src=""   id="ifr" name="ie"></iframe><!-- iframe标签 -->
+		<iframe src="../../iframe.html"   id="ifr" name="ie">
+		</iframe><!-- iframe标签 -->
 	</div>
 	</div>
 </body>
 <script th:src="@{/static/js/jquery.min.js}"></script>
 <script th:src="@{/static/js/admin/index.js}"></script>
 <script th:src="@{/static/js/bootstrap.min.js}"></script>
-<!-- <script th:inline="javascript">
-	window.onload=function(){
-		 //防止页面后退
-        history.pushState(null, null, document.URL);
-        window.addEventListener('popstate', function () {
-            history.pushState(null, null, document.URL);
-        });
-	}
-</script>  -->
 <script>
 	$(document).ready(function(){
         $('.out').click(function(e) {
@@ -237,7 +184,6 @@
 		}) 
 		$("#main-menu").click(function(){
 			 $(".current").children().css("background-image","none");
-			 
 		})
 　		var wh =  $(window).height();//浏览器当前窗口可视区域高度
 		var sheight = (wh-75)+'px';

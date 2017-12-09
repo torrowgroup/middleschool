@@ -15,15 +15,13 @@
 
 <div class="centerImg">
 		<div class="centerimgBox">
-			<div th:if="@{generalPicture!=null}">
+			<div th:if="${generalPicture!=null}">
 				<img th:src="@{/static/uploadimg/{picture}(picture=${generalPicture.reContent})}" alt="">
-	<!-- 			<img th:src="@{/static/images/visitor/news1.jpg}" alt=""> -->
 				<div class="sideLeft"></div>
 				<div class="sideRight"></div>
 			</div>
 		</div>
 	</div>
-
 <div class="mainbox1">
     <div class="schollabout">
         <div class="schollleft">

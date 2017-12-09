@@ -54,10 +54,10 @@ public class NoticeEducateLiteratureController extends BaseController{
 		TbCategory record = null;
 		PageBean<TbResource> resourceLists = new PageBean<TbResource>();
 		if(recordList==null||recordList.size()==0){
-			model.addAttribute("message", "暂时没有内容");
 			return new ModelAndView("visitor/notices");
 		} else {
-			record = recordList.get(0);
+			record = new TbCategory();
+			record.setCaId(recordList.get(0).getCaId());
 			resourceLists = resourceService.findingByPaging(currentPage, record,10);
 		}
 		categoryService.getCategory(record.getCaId(),model);//将概括，新闻等封装进model，供下拉菜单使用，以及用户选择的功能项

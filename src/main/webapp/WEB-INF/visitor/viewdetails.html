@@ -19,7 +19,7 @@
 
 <div class="centerImg">
 		<div class="centerimgBox">
-			<div th:if="@{newsPicture!=null}">
+			<div th:if="${newsPicture!=null}">
 			<img th:src="@{/static/uploadimg/{picture}(picture=${newsPicture.reContent})}" alt="">
 <!-- 			<img th:src="@{/static/images/visitor/news1.jpg}" alt=""> -->
 			<div class="sideLeft"></div>

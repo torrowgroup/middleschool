@@ -4,35 +4,39 @@
 
 <head>
   <title>查看考试时间</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/managertesttime.css}">
 </head>
 <body>
-<div th:text="${message}"></div>
-<div th:if="${midExam==null && finallExam==null && catchingExam==null}">
-	没有相关内容
-</div>
-<div th:if="${midExam!=null || finallExam!=null || catchingExam!=null}">
-	<table>
-		<tr>
-			<td>考试名称</td>
-			<td>考试时间</td>
-			<td>修改</td>
-		</tr>
-		<tr th:if="${midExam!=null}"> 
-			<td th:text="${midExam.reTitle}">考试名称</td>
-			<td th:text="${midExam.reContent}">考试时间</td>
-			<td><a th:href="@{/others/toUpdateTestTime?(reId=${midExam.reId})}">修改</a></td>
-		</tr>
-		<tr th:if="${finalExam!=null}">
-			<td th:text="${finalExam.reTitle}">考试名称</td>
-			<td th:text="${finalExam.reContent}">考试时间</td>
-			<td><a th:href="@{/others/toUpdateTestTime?(reId=${finalExam.reId})}">修改</a></td>
-		</tr>
-		<tr th:if="${catchingExam!=null}">
-			<td th:text="${catchingExam.reTitle}">考试名称</td>
-			<td th:text="${catchingExam.reContent}">考试时间</td>
-			<td><a th:href="@{/others/toUpdateTestTime?(reId=${catchingExam.reId})}">修改</a></td>
-		</tr>
-	</table>
+<div class="total">
+	<p th:text="${message}"></p>
+	<div th:if="${midExam==null && finallExam==null && catchingExam==null}">
+		没有相关内容
+	</div>
+	<div th:if="${midExam!=null || finallExam!=null || catchingExam!=null}" class="content">
+		<table class="table table-hover table-bordered">
+			<tr>
+				<th>考试名称</th>
+				<th>考试时间</th>
+				<th>修改</th>
+			</tr>
+			<tr th:if="${midExam!=null}"> 
+				<td th:text="${midExam.reTitle}">考试名称</td>
+				<td th:text="${midExam.reContent}">考试时间</td>
+				<td><a th:href="@{/others/toUpdateTestTime?(reId=${midExam.reId})}">修改</a></td>
+			</tr>
+			<tr th:if="${finalExam!=null}">
+				<td th:text="${finalExam.reTitle}">考试名称</td>
+				<td th:text="${finalExam.reContent}">考试时间</td>
+				<td><a th:href="@{/others/toUpdateTestTime?(reId=${finalExam.reId})}">修改</a></td>
+			</tr>
+			<tr th:if="${catchingExam!=null}">
+				<td th:text="${catchingExam.reTitle}">考试名称</td>
+				<td th:text="${catchingExam.reContent}">考试时间</td>
+				<td><a th:href="@{/others/toUpdateTestTime?(reId=${catchingExam.reId})}">修改</a></td>
+			</tr>
+		</table>
+	</div>
 </div>
 </body>
 </html>

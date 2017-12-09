@@ -1,6 +1,28 @@
 @CHARSET "UTF-8";
+body{
+	margin:0;
+	padding: 0;
+	background: #ebebeb;
+}
 .content{
-	width:60%;
-	text-align: center;
+	width:30%;
+/* 	text-align: center; */
 	margin:5% auto;
+}
+table{
+	background: white;
+}
+td{
+	vertical-align:middle !important;
+	line-height: inherit !important;
+}
+input{
+	width:100%;
+}
+.sex{
+	width:10%;
+}
+#sure{
+	margin-left:30%;
+	width: 100px;	
 }

@@ -17,8 +17,8 @@
 	<div th:text="${msg}" class="issucessor"></div>
 	<div class="mainbox">
 		
-		<div class="nn" th:if="${messagePage.totalCount>0}">
-		<div class="thir">
+<!-- 		<div class="nn" th:if="${messagePage.totalCount>0}"> -->
+		<div class="thir" th:if="${messagePage.totalCount>0}">
 			<form th:action="@{/message/manageMessage}" class="inquiry">
 				<input type="text" name="inquiry" th:value="${inquiry}"
 					maxlength="20" required="required" class="inquiryinput" /> 

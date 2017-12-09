@@ -1,0 +1,40 @@
+body{
+	margin:0;
+	padding: 0;
+	background: #ebebeb;
+}	
+.total{
+	width: 600px;
+	height: 300px;
+	margin:0 auto;
+	margin-top: 10%;
+}
+table{
+	width: 90%;
+	height: 60%;
+	margin-left: 5%;
+	margin-top: 10%;
+	border-collapse: collapse;
+	background-color: white;
+	vertical-align: middle;
+}
+p{
+	text-align: center;
+	color: red;
+}
+.content{
+	width: 100%;
+	height: 400px;
+}
+td{
+	text-align: center;
+	vertical-align:middle;	
+}
+tr{
+	height: 50px;
+}
+th{
+	text-align: center;
+	padding: 6px 8px;
+	background: #cccccc;
+}

@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+.thir{
+	width:100%;
+	height:70px;
+	margin-top:20px;
+}
+.thir a{
+	display:block;
+	width:80px;
+	height:35px;
+	line-height:35px;
+	background: #cccccc;
+	text-align:center;
+	border-radius:4px;
+	color:black;
+	cursor:pointer;
+	font-size:16px;
+	position:absolute;
+	margin-top:20px;
+} 
+.thir a:hover{
+	background:#c3beda;
+	text-decoration:none;
+}

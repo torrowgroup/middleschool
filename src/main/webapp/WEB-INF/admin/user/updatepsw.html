@@ -15,19 +15,19 @@
 			<span class="input-group-addon">旧密码&nbsp;&nbsp;&nbsp;</span>
 			<input type="password" name="oldPsw" class="form-control" placeholder="oldPassword" required id="oldPsw" maxlength="20"/>
 		</div>
-		<br>
+		<br><br>
 		<div class="input-group">
 			<span class="input-group-addon">新密码&nbsp;&nbsp;&nbsp;</span>
 			<input type="password" name="password" required id="password" maxlength="20"  class="form-control" placeholder="password" />
 		</div>
-		<br>
+		<br><br>
 		<div class="input-group">
 			<span class="input-group-addon">再次输入</span>
 			<input type="password" id="again" required th:oninput="'javascript:pswAgain();'" class="form-control" placeholder="password again"/>
 				<span id="okAgain" class="glyphicon glyphicon-ok" style="display: none;"></span>
 				<span id="wrongAgain" class="glyphicon glyphicon-remove" style="display: none;"></span>
 		</div>
-		<br>
+		<br><br>
 		<button class="bb">修改</button>
 	</form>
 	</div>

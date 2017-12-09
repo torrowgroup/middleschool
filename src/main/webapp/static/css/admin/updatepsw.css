@@ -1,24 +1,30 @@
 body{
 	margin:0;
 	padding: 0;
+	width:100%;
+	height:100%;
 	background: #ebebeb;
 }
 .aa{
 	width: 500px;
 	margin:0 auto;
-	margin-top: 10%;
-	height:300px;
+ 	margin-top: 10%; 
+	height:auto;
 }
 .bb{
-	width: 50px;
+	width: 60px;
 	height: 30px;
-	border-radius: 8px;
-	background:#2896ef;
-	color: white;
+	border-radius: 5px;
+	color:white;
+	background:#418bfa;
 	margin-left: 40%;
 }
 .message{
 	text-align: center;
 	color:red;
 	font-size: 16px;
+}
+form{
+	margin-top:20%;
+	height: 100%;
 }

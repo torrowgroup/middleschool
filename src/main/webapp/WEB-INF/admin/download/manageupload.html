@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/manageschoolnews.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/inquirytable.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/managerupload.css}">
 </head>
 <body>
 <div th:text="${message}" class="issucessor"></div>
@@ -16,11 +17,14 @@
  <div th:if ="${pagemsg.totalCount}!=0">
 <!--模糊查询  -->
 	<div class="mainbox">
- 	    <form th:action="@{/news/manageObject}" class="inquiry" method="post">
-		 	<input type="hidden" name="caPid" th:value="${zid}">
-		    <input type="text" name="caName" class="inquiryinput" placeholder="文件名称/发布人/上传的日期" required/>
-		    <input type="submit" value="查询" class="btn btn-default inquirysub" title="查询">   
-	    </form>
+		<div class="thir">
+			<a th:href="@{/news/addNewsJumping?(Pid=11)}" title="上传资源">上传资源</a>
+ 	    	<form th:action="@{/news/manageObject}" class="inquiry" method="post">
+		 		<input type="hidden" name="caPid" th:value="${zid}">
+		    	<input type="text" name="caName" class="inquiryinput" placeholder="文件名称/发布人/上传的日期" required/>
+		    	<input type="submit" value="查询" class="btn btn-default inquirysub" title="查询">   
+	   	    </form>
+	    </div>
 		<table class="table table-bordered table-hover table-condensed">
        		 <thead>
 	            <tr class="sur">
