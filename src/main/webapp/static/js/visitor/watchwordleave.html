@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1000">
+    <title>郑州一二二中学</title>
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/static/css/visitor/style.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/static/css/visitor/teacherdetail.css}" type="text/css">
+   <script th:src="@{/static/js/jquery.min.js}"></script>
+    <script th:src="@{/static/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:replace="headerfooter :: header"></div> 
+
+<div class="centerImg">
+    <img th:src="@{/static/images/visitor/banner5.jpg}" alt="">
+</div>
+
+<div class="mainbox1">
+    <div class="schollabout">
+        <div class="schollright">
+            <table class="table table-bordered">
+                <caption>边框表格布局</caption>
+                <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>城市</th>
+                    <th>邮编</th>
+                    <th>邮编</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Tanmay</td>
+                    <td>Bangalore</td>
+                    <td>560001</td>
+                    <td>560001</td>
+                </tr>
+                <tr>
+                    <td>Sachin</td>
+                    <td>Mumbai</td>
+                    <td>400003</td>
+                    <td>560001</td>
+                </tr>
+                <tr>
+                    <td>Uma</td>
+                    <td>Pune</td>
+                    <td>411027</td>
+                    <td>560001</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="footer">
+    <div class="container footerBox">
+        <div class="row">
+            <div class="col-sm-3 col-xs-6 footerBox1 hidden-xs"><img src="./images/bottomlogo.png" alt=""></div>
+            <div class="col-sm-3 col-xs-6 footerBox1">
+                <h3>联系我们:</h3>
+                <p>电话：56565656</p>
+                <p>邮箱：56789@789685</p>
+                <p>地址：郑州市中原区二二一中学</p>
+            </div>
+            <div class="col-sm-3 col-xs-6 footerBox1">
+                <h3>友情链接:</h3>
+                <p><a href="">郑州市外国语中学</a></p>
+                <p><a href="">郑州一中</a></p>
+                <p><a href="">郑州大学附属中学</a></p>
+                <p><a href="">港区教育单位</a></p>
+            </div>
+            <div class="col-sm-3 col-xs-12 footerBox1">
+                <h3><a href="">留言板进入留言</a></h3>
+                <p>&nbsp;</p>
+                <p>版权所有@郑州二二一中学</p>
+                <p>备案信息：<a href="">豫ICP备1111111号</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

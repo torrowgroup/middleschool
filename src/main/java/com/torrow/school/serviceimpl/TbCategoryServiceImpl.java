@@ -92,7 +92,7 @@ public class TbCategoryServiceImpl extends BaseDao<TbCategory> implements TbCate
 		return categoryList;
 	}
 	
-	
+	@Override
 	public void getCategory(Integer rId,Model model){
 		List<TbCategory> category = this.selectAll();
 		List<TbCategory> generals = new ArrayList<TbCategory>();//概括类

@@ -152,9 +152,21 @@
 
 .isSuccess{
 	position:absolute;
-	width:50px;
+	width:60px;
+	font-size:14px !important;
 	top:25px;
 	left:50%;
 	transform:translateX(-50%);
-	color:rgb(48,64,91);
+	color:red;
+}
+.watchwordn{
+	position:absolute;
+	padding-right:40px;
+	top:25px;
+	right:0;
+	color:red;
+}
+.watchwordn>a{
+	text-decoration: none;
+	font-size:16px;
 }

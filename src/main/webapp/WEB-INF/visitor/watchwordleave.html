@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>郑州一二二中学-查看留言</title>
+<link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/static/css/visitor/style.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/static/css/visitor/teacherdetail.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/static/css/visitor/schoolnews.css}" type="text/css">
+<link rel="stylesheet" th:href="@{/static/css/visitor/watchword.css}" type="text/css">
+	
+</head>
+<body>
+	<div th:replace="headerfooter :: header"></div>
+
+	<div class="centerImg">
+		<div class="centerimgBox">
+			<div th:if="@{newsPicture!=null}">
+			<img th:src="@{/static/uploadimg/{picture}(picture=${newsPicture.reContent})}" alt="">
+			<div class="sideLeft"></div>
+			<div class="sideRight"></div>
+		</div>
+		</div>
+	</div>
+
+	<div class="mainbox1">
+		<div class="schollabout">
+			<h3>留言板</h3>
+			<div class="schollright" th:if="${messagePage.totalCount>0}">
+				<table class="table table-bordered wordtable">
+					<caption class="leavewordmes"><a th:href="@{/visitorNEL/toLeaveWord}">&lt; 返回留言  </a></caption>
+					<thead>
+						<tr>
+							<th>标题</th>
+							<th>留言者</th>
+							<th>状态</th>
+							<th>时间</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="message,messageS:${messagePage.lists}">
+							<td><a href="#" th:text="${message.meTitle}" title="点击查看详情" th:name="${message.meContent}" th:id="${message.meReply}" onclick="showContent(this)" data-toggle="modal" data-target="#myModal" class="title">标题</a></td>
+							<td th:text="${message.meHide}" class="centertd">留言者</td>
+							<td th:text="${message.meStatus}" class="centertd">状态</td>
+							<td th:text="${message.meIssuingdate}" class="centertd">时间</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="paging1" id="anyThing">
+					<ul class="pagingUl">
+						<li th:if="${messagePage.currPage-1>0}"><a
+							th:href="@{/visitorNEL/viewLeaveWords?(currentPage=${messagePage.currPage-1})}">&laquo;</a>
+						</li>
+						<li th:if="${messagePage.currPage-1==0}"><a href="#">&laquo;</a></li>
+						<li th:each="i:${#numbers.sequence(1,messagePage.totalPage)}"
+							th:if="${i > messagePage.currPage-3} and ${i < messagePage.currPage+3}"><a
+							th:href="@{/visitorNEL/viewLeaveWords?(currentPage=${i})}"
+							th:text="${i}">#</a></li>
+						<li th:if="${messagePage.currPage+1<=messagePage.totalPage}"><a
+							th:href="@{/visitorNEL/viewLeaveWords?(currentPage=${messagePage.currPage+1})}">&raquo;</a>
+						</li>
+						<li th:if="${messagePage.currPage+1>messagePage.totalPage}"><a href="#">&raquo;</a>
+						</li>
+					</ul>
+					<div class="pagingRight">
+						<span>跳转到</span>
+						<div class="selectBox">
+							<span><span th:text="${messagePage.currPage}"></span> <i
+								class="glyphicon glyphicon-chevron-down pull-right"
+								style="line-height: 30px"></i></span>
+							<ul class="selectBoxUl">
+								<li th:each="i:${#numbers.sequence(1,messagePage.totalPage)}"><a
+									href="#" th:onclick="'turnPageMessage(this);'"
+									th:id="${messagePage.lists[0].meId}"
+									th:text="${i}"></a></li>
+							</ul>
+						</div>
+						<span>页 共<span th:text="${messagePage.totalPage}"></span>页
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+			</div>
+			<div class="modal-body">
+				<div id="leaveWord">
+					<h4>留言内容</h4>
+					<hr/>
+					<div id="leaveContent">
+						无内容
+					</div>
+					<hr/>
+					<h4>校方回复</h4>
+					<hr/>
+					<div id="replyContent">
+						无内容
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+	<div class="clearfix"></div>
+	<div th:replace="headerfooter::footer"></div>
+	<script th:src="@{/static/js/jquery.min.js}"></script>
+	<script th:src="@{/static/js/bootstrap.min.js}"></script>
+	<script th:src="@{/static/js/visitor/select.js}"></script>
+	<script th:src="@{/static/js/visitor/searcher.js}"></script>
+	<script th:inline="javascript">
+		function showContent(obj){
+			var messageContent = obj.name;
+			var reply = obj.id;
+			$('#leaveContent').html(messageContent);
+			if(reply==''){
+				reply="校方还没有回复";
+			}
+			$('#replyContent').html(reply);
+		}
+	</script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 
-<title>郑州一二二中学-教研组</title>
+<title>郑州一二二中学</title>
 <link rel="stylesheet" type="text/css"
 	th:href="@{/static/css/educationoffice/indexone.css}">
 <link rel="stylesheet" type="text/css"
@@ -48,13 +48,13 @@
 						<ul class="nav nav-second-level">
 							<li th:each="category,categoryStart:${educationList}"><a
 								th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"
-								th:text="${category.caName}"></a></li>
+								th:text="${category.caName}" class="fonts"><span class="glyphicon glyphicon-globe"></span></a></li>
 						</ul></li>
-					<li th:each="category,categoryStart:${educationList}" class="lione" th:if="${identity=='教研组'}">
+					<!-- <li th:each="category,categoryStart:${educationList}" class="lione" th:if="${identity=='教研组'}">
 						<a
 						th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"
 						target="ie" th:text="${category.caName}"></a>
-					</li>
+					</li> -->
 					<!-- 学生管理和教师成长管理 -->
 					<li class="lione" th:if="${identity=='政教处'}">
 						<a th:href="@{/political/uploadJumping?(Pid=9)}" target="ie" class="out1">
@@ -68,26 +68,35 @@
 					<!-- 校园文学 -->
 					<li class="lione"><a
 						th:href="@{/education/toUploadLiterature}" class="out2"
-						target="ie"><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;&nbsp;上传校园文学</a>
+						target="ie"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;上传校园文学</a>
+					</li>
+					<li class="lione"><a
+						href="#" class="out2"
+						><span class="glyphicon glyphicon-tree-conifer"></span>&nbsp;&nbsp;管理校园文学</a>
 						<ul class="nav nav-second-level">
 							<li th:each="category,categoryStart:${literatureList}"><a
 								th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"
 								th:text="${category.caName}" target="ie" class="out2"><span
 									class="glyphicon glyphicon-list-alt"></span></a></li>
 						</ul></li>
-					<li th:each="category,categoryStart:${literatureList}"
-						class="lione"><a
-						th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"
-						th:text="${category.caName}" target="ie" class="out2"><span
-							class="glyphicon glyphicon-list-alt"></span></a></li>
+<!-- 					<li th:each="category,categoryStart:${literatureList}" -->
+<!-- 						class="lione"><a -->
+<!-- 						th:href="@{/education/manageEducationUpload?(caId=${category.caId})}" -->
+<!-- 						th:text="${category.caName}" target="ie" class="out2"><span -->
+<!-- 							class="glyphicon glyphicon-list-alt"></span></a></li> -->
 					<!-- 资源下载 -->
 					<li class="lione"><a th:href="@{/education/toUploadResource}"
-						target="ie" class="out2">上传资源</a></li>
+						target="ie" class="out2">上传资源</a>
+					</li>
 					<li class="lione" th:each="category,categoryStart:${downloadList}">
-						<a
-						th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"
-						th:text="${category.caName}" target="ie" class="out2"> <span
-							class="glyphicon glyphicon-list-alt"></span></a>
+						<a th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"
+						th:text="${category.caName}" target="ie" class="out2"> <span class="glyphicon glyphicon-list-alt"></span></a>
+					</li>
+					<li class="lione">
+						<a th:href="@{http://jingao.site:8080/wordpress}" target="_blank">我的博客</a>
+					</li>
+					<li class="lione">
+						<a th:href="@{http://jingao.site:8080/bbs}" target="_blank">我的论坛</a>
 					</li>
 				</ul>
 			</div>
@@ -109,6 +118,20 @@
 		}
 		window.setInterval("reinitIframe()", 200);
 	</script>
+	<script>
+	$(document).ready(function(){
+        $('.out').click(function(e) {
+            $(this).next().stop().slideToggle()
+            e.preventDefault();
+        })
+        $('.out').hover(function(){
+   	 		$(this).css("backgroundColor", "#f9f9f9");
+ 		})
+ 		  $('.out1').hover(function(){
+   	 		$(this).css("backgroundColor", "white");
+ 		})
+    });
+</script>
 </body>
 </html>
 <!-- 

@@ -14,7 +14,7 @@ public interface TbCategoryService {
     List<TbCategory> selectAll();
     //根据所有用户部门得到所有用户类别类 安李杰用
     List<TbCategory> selectByPid(List<Integer> pidList);
-    //将学校概括，校园新闻，教育教研等封装进model,追加用户点击的功能项
+    //将学校概括，校园新闻，教育教研等封装进model,追加用户点击的功能项,追加得到底部链接
     void getCategory(Integer rId,Model model);
     
     //对概括类的部分数据进行分页查看

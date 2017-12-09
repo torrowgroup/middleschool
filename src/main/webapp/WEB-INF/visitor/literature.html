@@ -16,8 +16,15 @@
 <div th:replace="headerfooter :: header"></div> 
 
 <div class="centerImg">
-    <img th:src="@{/static/images/visitor/news1.jpg}" alt="">
-</div>
+		<div class="centerimgBox">
+			<div th:if="@{literaturePicture!=null}">
+			<img th:src="@{/static/uploadimg/{picture}(picture=${literaturePicture.reContent})}" alt="">
+<!-- 			<img th:src="@{/static/images/visitor/news1.jpg}" alt=""> -->
+			<div class="sideLeft"></div>
+			<div class="sideRight"></div>
+		</div>
+		</div>
+	</div>
 
 <div class="mainbox1">
     <div class="schollabout">

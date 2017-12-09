@@ -1,11 +1,14 @@
 
 package com.torrow.school.controller.visitor;
 
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -84,19 +88,43 @@ public class NoticeEducateLiteratureController extends BaseController{
 	 * @return
 	 * 	得到教研组内容
 	 * @throws ParseException 
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping("viewEducation")
 	public ModelAndView viewEducation(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
-			Model model,Integer rId) throws ParseException{
+			Model model,Integer rId,String inquiry) throws ParseException, UnsupportedEncodingException{
+		if(inquiry!=null){
+			inquiry = new String (inquiry.getBytes("iso8859-1"),"utf-8");			
+		}
 		TbCategory category = new TbCategory();
 		category.setCaId(rId);
+		category.setCaName(inquiry);
 		PageBean<TbResource> resourceList = resourceService.findingByPaging(currentPage, category, 10);
 		categoryService.getCategory(rId,model);//将概括，新闻等封装进model，供下拉菜单使用，以及用户选择的功能项
 		resourceService.getTimeInfor(model);//得到考试和联系信息
 		model.addAttribute("resourceList", resourceList);
+		model.addAttribute("inquiry", inquiry);
 		return new ModelAndView("visitor/education");
 	}
 	
+	/**
+	 * @param currentPage
+	 * @param caId 
+	 * ajax 实时刷新查询教育教研信息
+	 */
+	@RequestMapping("ajaxEducation")
+	public @ResponseBody Map<String,Object> ajaxEducation(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
+			Model model,Integer caId,String inquiry) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		TbCategory category = new TbCategory();
+		category.setCaId(caId);
+		category.setCaName(inquiry);
+		PageBean<TbResource> resourceList = resourceService.findingByPaging(currentPage, category, 10);
+		log.info("resourceList:"+resourceList);
+		map.put("inquiry", inquiry);
+		map.put("resourceList", resourceList);
+		return map;
+	}
 	
 	/**
 	 * @param rId 下载文件的id
@@ -186,7 +214,7 @@ public class NoticeEducateLiteratureController extends BaseController{
 			meHide="匿名";
 		}
 		if(meTitle==null||meTitle.equals("")){
-			meContent = "无标题";
+			meTitle = "无标题";
 		}
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String dateString = formatter.format(new Date());
@@ -200,6 +228,23 @@ public class NoticeEducateLiteratureController extends BaseController{
 		categoryService.getCategory(0, model);
 		resourceService.getTimeInfor(model);//得到考试和联系信息
 		return new ModelAndView("visitor/leaveword");
+	}
+	
+	/**
+	 * @param model
+	 * @return	查看留言
+	 * @throws ParseException 
+	 */
+	@RequestMapping("viewLeaveWords")
+	public ModelAndView viewLeaveWords(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, String inquiry,Model model) throws UnsupportedEncodingException, ParseException {
+		if(inquiry!=null){
+			inquiry = new String(inquiry.getBytes("iso8859-1"),"utf-8");
+		}
+		categoryService.getCategory(0, model);
+		resourceService.getTimeInfor(model);//得到考试和联系信息
+		model.addAttribute("messagePage", messageService.findPage(currentPage,inquiry,10));// 回显分页数据
+		model.addAttribute("inquiry", inquiry);
+		return new ModelAndView("visitor/watchwordleave");
 	}
 	
 	// 用于富文本编辑器的图片上传

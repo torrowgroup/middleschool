@@ -11,16 +11,16 @@
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/inquirytable.css}">
 </head>
 <body>
-	<div th:text="${message}" class="issucessor"></div>
 	<div class="mainbox">
 		<div class="thir">
 			<a th:href="@{/user/toAddUser}" title="添加用户">添加用户</a>
 			<form th:action="@{/user/manageUser}" class="inquiry">
-			<input type="text" name="inquiry" th:value="${inquiry}" placeholder="姓名/邮箱/职位/电话" required="required" class="inquiryinput" maxlength="20"/>
-			<input type="submit" value="提交" class="btn btn-default inquirysub"/>
-		</form>
+				<input type="text" name="inquiry" th:value="${inquiry}" placeholder="姓名/邮箱/职位/电话" required="required" class="inquiryinput" maxlength="20"/>
+				<input type="submit" value="提交" class="btn btn-default inquirysub"/>
+			</form>
 		</div>
-			<div th:if="${pagemsg.totalCount}==0" class="issucessor">没有任何用户信息！</div>
+			<div th:text="${message}" class="message"></div>
+			<div th:if="${pagemsg.totalCount}==0" class="message">没有任何用户信息	</div>
 			<div th:if="${pagemsg.totalCount}!=0" >
 			<table class="table table-bordered table-hover table-condensed"  >
 				<tr>

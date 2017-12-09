@@ -164,10 +164,10 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 		getResources(caIdNews, caIdGenerals, noticeCaId, resourcesId, model);// 将全部资源类按照条数要求，倒序要求得到
 	}
 
-	// 截取内容前120字，不去除html
+	// 截取内容前30字，不去除html
 	public String cutWordWithHtml(String content) {
-		if (content.length() > 100) {
-			content = content.substring(0, 94);
+		if (content.length() > 30) {
+			content = content.substring(0, 30);
 		}
 		content += "......";
 		return content;
@@ -181,17 +181,20 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 		List<TbResource> resourcesDown = new ArrayList<TbResource>();// 资源下载，按倒序得到，只要8条
 		List<TbResource> generalIndex = new ArrayList<TbResource>();// 学校概括，按顺序得到，只要4条
 		List<TbResource> allResources = this.selectAll();
+		String reContentTemp ;
 		for (int i = 0; i < caIdGenerals.size(); i++) {
 			if (generalIndex.size() < 4) {
 				TbResource resource = this.selectByCaId(caIdGenerals.get(i));
-				resource.setReContent(this.cutWordWithHtml(resource.getReContent()));// 只要120个字符
+				reContentTemp = resource.getReContent(); 
+				resource.setReContent(this.cutWordWithHtml(reContentTemp));// 只要30个字符,
+				resource.setSpare(this.getPicture(reContentTemp));// 得到图片，暂时存放于备用字段！！！！！
 				generalIndex.add(resource);
 			}
 		}
 		for (int i = allResources.size() - 1; i >= 0; i--) { // 倒序得到资源类
 			for (int j = 0; j < caIdNews.size(); j++) {
 				if (sNews.size() < 8 & allResources.get(i).getCaId() == caIdNews.get(j)) {// 当资源类属于新闻时取出
-					String content = this.getPicture(allResources.get(i).getReContent(), 0);// 将图片从富文本中得到并暂存于资源类内容中,没有图片的新闻不要
+					String content = this.getPicture(allResources.get(i).getReContent());// 将图片从富文本中得到并暂存于资源类内容中,没有图片的新闻不要
 					if (content != null) {
 						allResources.get(i).setReContent(content);
 						sNews.add(allResources.get(i));
@@ -214,10 +217,10 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 	/**
 	 * @param content
 	 * @param where
-	 *            使用处，在学校简介，建校历史首页处只要图片前
+	 *            使用处，在学校简介，建校历史,校园新闻首页等处只要图片前
 	 * @return 用于从富文本中分离图片，此方法仅存在于该类中，接口层没有相应方法
 	 */
-	public String getPicture(String content, int where) {
+	public String getPicture(String content) {
 		String img = "src=\"";// \"\"是为了加入"" alt在前
 		int startIndex = -1;
 		int stopIndex = -1;
@@ -228,15 +231,13 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 			length = img.length();
 			stopIndex = content.indexOf("\"", startIndex + length);
 		}
-		if (startIndex != -1 && where == 0) {
+		if (startIndex != -1) {
 			for (int i = startIndex + length; i < stopIndex; i++) {
 				contentTemp += content.charAt(i);
 			}
 			if (contentTemp.indexOf("middleschool") != -1) {
 				contentTemp = ".." + contentTemp;// 本地图片回到项目名前
 			}
-		} else if (startIndex != -1 && where == 1) {// 当有图片是首页学校概括时
-			contentTemp = content.split("<img")[0];// 截取图片前的部分
 		} else {// 当无图片是学校概括时
 			contentTemp = null;
 		}
@@ -302,6 +303,25 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 		TbResource phone = this.selectByReTitle("电话");
 		TbResource email = this.selectByReTitle("邮箱");
 		TbResource address = this.selectByReTitle("地址");
+		List<TbResource> resourceList = this.selectAll();
+		List<TbResource> linksList = new ArrayList<TbResource>();//底部链接
+		List<TbResource> indexScroll = new ArrayList<TbResource>();//首页轮播
+		for(int i=0;i<resourceList.size();i++){
+			if(resourceList.get(i)!=null&&resourceList.get(i).getCaName().equals("底部链接")){//当属于底部链接时
+				linksList.add(resourceList.get(i));
+			} else if(resourceList.get(i)!=null&&resourceList.get(i).getReTitle().equals("首页轮播")){//属于前台图片时
+				indexScroll.add(resourceList.get(i));
+			}
+		}
+		model.addAttribute("newsPicture", this.selectByReTitle("校园新闻"));
+		model.addAttribute("generalPicture", this.selectByReTitle("学校概括"));
+		model.addAttribute("educationPicture", this.selectByReTitle("教育教研"));
+		model.addAttribute("literaturePicture", this.selectByReTitle("校园文学"));
+		model.addAttribute("teacherPicture", this.selectByReTitle("教师风采"));
+		model.addAttribute("noticePicture", this.selectByReTitle("公告"));
+		model.addAttribute("schoolPicture", this.selectByReTitle("校徽"));
+		model.addAttribute("linksList", linksList);
+		model.addAttribute("indexScroll",indexScroll);
 		model.addAttribute("midExam", this.subtractDay(midExam));
 		model.addAttribute("finalExam", this.subtractDay(finalExam));
 		model.addAttribute("catchingExam", this.subtractDay(catchingExam));
@@ -412,4 +432,5 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 		PageBean<TbResource> pageBean = new PageBean<TbResource>(currentPage, pageSize, messageList, num.intValue(), totalCount);
 		return pageBean;
 	}
+
 }

@@ -1,9 +1,4 @@
 package com.torrow.school.service;
-import com.torrow.school.entity.TbCategory;
-
-import com.torrow.school.entity.TbResource;
-import com.torrow.school.util.PageBean;
-
 import java.text.ParseException;
 import java.util.List;
 
@@ -12,6 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.torrow.school.entity.TbCategory;
+import com.torrow.school.entity.TbResource;
+import com.torrow.school.util.PageBean;
 
 public interface TbResourceService {
     //张金高
@@ -23,7 +22,7 @@ public interface TbResourceService {
     void getResource(List<TbCategory> categoryList, Model model);
     //根据caId得到对应资源类，不分页
     List<TbResource> selectListByCaId(Integer caId);
-    //得到考试时间和联系方式
+    //得到考试时间和联系方式,追加底部链接信息
     void getTimeInfor(Model model) throws ParseException;
     
     //判断标题是否重复/是否置顶，有的话把其他都设成否（取消置顶）sign==1代表判断标题是否重复，sign==0代表指定操作 

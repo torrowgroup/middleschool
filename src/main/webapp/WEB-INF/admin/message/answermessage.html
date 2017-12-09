@@ -6,41 +6,43 @@
 <title>Home</title>
 <link rel="stylesheet" type="text/css"
 	th:href="@{/static/dist/css/wangEditor.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/answermessage.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.css}">
+	<script th:src="@{/static/js/bootstrap.min.js}"></script>
 </head>
 <body>
-	<table border="1">
-		<tr>
-			<td>标题：</td>
-			<td th:text="${message.meTitle}"></td>
-		</tr>
-		<tr>
-			<td>发布人：</td>
-			<td th:text="${message.meHide}"></td>
-		</tr>
-		<tr>
-			<td>内容</td>
-			<td><div id="meContent">没有填写内容</div></td>
-		</tr>
-		<tr>
-			<td>留言日期：</td>
-			<td th:text="${message.meIssuingdate}" /></td>
-		</tr>
-		<tr>
-			<td>回复</td>
-			<td>
+	<div class="content">
+		<table class="table table-hover table-border">
+			<tr class="leftTd">
+				<td width="15%">发布人</td>
+				<td th:text="${message.meHide}"></td>
+			</tr>
+			<tr class="leftTd">
+				<td class="leftTd">标题</td>
+				<td th:text="${message.meTitle}"></td>
+			</tr>
+			<tr>
+				<td class="leftTd">内容</td>
+				<td><div id="meContent">没有填写内容</div></td>
+			</tr>
+			<tr class="leftTd">
+				<td class="leftTd">留言日期</td>
+				<td th:text="${message.meIssuingdate}" /></td>
+			</tr>
+		</table>
+		<div>
 				<form th:action="@{/message/reply}" method="post"
 					onsubmit="modifyContent()">
-					<div style="width: 700px; height: 600px;">
+					<div class="text">
 						<input type="hidden" name="id" th:value="${message.meId}" />
 						<input type="hidden" name="page" th:value="${page}" />
 						<textarea name="meReply" style="display: none;" id="content"></textarea>
-						<div id="editor" style="height: 350px;"></div>
-						<input type="submit" value="回复" />
+						<div id="editor"></div>
+						<input class="btn" type="submit" value="回复" />
 					</div>
 				</form>
-			</td>
-		</tr>
-	</table>
+		</div>
+	</div>
 	<script type="text/javascript"
 		th:src="@{/static/dist/js/lib/jquery-1.10.2.min.js}"></script>
 	<script type="text/javascript"

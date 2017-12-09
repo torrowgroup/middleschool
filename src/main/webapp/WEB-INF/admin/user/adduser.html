@@ -10,7 +10,7 @@
 <body>
 <div class="bod">
 	<div th:text="${message}" class="message"></div>
-		<form th:action="@{/user/addUser}" method="post" enctype="multipart/form-data" th:onsubmit="'javascript:checkPicture(this);'">
+		<form th:action="@{/user/addUser}" method="post" enctype="multipart/form-data" th:onsubmit="'javascript:checkPicture(this);'" class="clearfix">
 			<table class="t1">
 				<tr>
 					<td width="41%"><span>邮&nbsp;&nbsp;&nbsp;&nbsp;箱</span></td>
@@ -39,25 +39,25 @@
 					</td>
 				</tr>
 				</table>
-				<table border="1" class="t2">
+				<table class="t2">
 				<tr>
 					<td><span>姓&nbsp;&nbsp;&nbsp;&nbsp;名</span></td>
-					<td><input type="text" name="usName" required="required" maxlength="10"></td>
-				</tr>
-				<tr>
-					<td><span>性别</span></td>
-					<td id="sex">
-						<input name="usSex" type="radio" value="男" class="small"/><span>男</span>
-						<input name="usSex" type="radio" value="女" class="small"/><span>女</span>
-					</td>
+					<td style="text-align:left;padding-left:20px"><input type="text" name="usName" required="required" maxlength="10"></td>
 				</tr>
 				<tr>
 					<td><span>身&nbsp;&nbsp;&nbsp;&nbsp;份</span></td>
-					<td>
+					<td style="text-align:left;padding-left:20px">
 					<select class="demo_1"  name="caId">
 						<option th:each="category,categoryStart:${categoryList}" th:text="${category.caName}" th:value="${category.caId}" />
 					</select>
 				</td>
+				</tr>
+				<tr>
+					<td><span>性&nbsp;&nbsp;&nbsp;&nbsp;别</span></td>
+					<td id="sex" style="text-align:left;padding-left:20px">
+						<input name="usSex" type="radio" value="男" th:checked="checked" class="small"/><span>男</span>
+						<input name="usSex" type="radio" value="女" class="small"/><span>女</span>
+					</td>
 				</tr>
 				<tr>
 					<td><span>选择图片</span></td>
@@ -72,12 +72,13 @@
 						</div>
 					</td>
 				</tr>
-				<tr>
-					<td colspan="2">
+				<tr class="btnTr">
+					<td th:colspan="2">
 						<input type="submit" class="bb" id="sure" value="添加" >
 					</td>
 				</tr>
 			</table>
+			
 		</form>
 		</div>
 <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>

@@ -149,8 +149,14 @@ body{
     max-width: 1000px;
 }
 .mainLeft{
-    border-right:1.5px solid #d7d7d7;
-    height:160px;
+   /*  border-right:1.5px solid #d7d7d7;
+    height:160px; */
+}
+.mainLeft:hover{
+	opacity: 0.7;
+}
+.mainBheader>a>span:hover{
+	color:#122d55;
 }
 .mainLeft>h3>a{
     text-decoration: none;
@@ -161,39 +167,33 @@ body{
 }
 .mainLeft>p{
     margin: 10px 0;
-    font-size: 14px;
-    line-height: 20px;
-    overflow: hidden;
+    font-size: 12px;
+   /*  line-height: 20px;
+    overflow: hidden; */
 }
 .mainLeft>p>a{
     color:rgb(48,64,91);
     text-decoration: none;
 }
-.mainLeft>p>span{
-    padding-left:5px;
-    background-color: white;
-    position: absolute;
-    bottom:14px;
-    right: 23px;
-    letter-spacing: 1px;
-}
+
 .mainImg{
     width: 100%;
     margin-bottom: 10px;
-    background-color: rebeccapurple;
+   /*  background-color: rebeccapurple; */
 }
 .mainImg img{
     width: 100%;
+    height:160px;
 }
 .mainTop{
-    position: relative;
+   /*  position: relative; */
     margin-bottom: 40px;
 }
-.sline{
+/* .sline{
 	margin:50px 0px;
 	height:1px;
 	background-color: #e9e8ea;
-}
+} */
 .mainBheader{
     width: 100%;
     height: 33px;
@@ -273,8 +273,37 @@ body{
 }
 .teacher1 img{
     width: 100%;
+    height: 135px;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 2;
 }
-.teacher1 span{
+.showthis{
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 0px;
+    background: -webkit-linear-gradient(rgba(48,64,91,.1), rgba(48,64,91,.6)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(rgba(48,64,91,.1), rgba(48,64,91,.6)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(rgba(48,64,91,.1), rgba(48,64,91,.6)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(rgba(48,64,91,.1), rgba(48,64,91,.6)); /* 标准的语法 */
+    /*background-color: rgba(48,64,91,.7);*/
+    bottom: 0;
+    color:white;
+    line-height: 30px;
+    padding-left: 10px;
+    transition: height .5s ;
+    -webkit-transition: height .5s;
+    z-index: 222;
+}
+.teacher1:hover .showthis{
+    height: 30px;
+}
+.teacher2:hover .showthis{
+    height: 30px;
+}
+/* .teacher1 span{
     display: inline-block;
     position: absolute;
     width: 100%;
@@ -284,7 +313,7 @@ body{
     color:white;
     line-height: 30px;
     padding-left: 10px;
-}
+} */
 .teacher2{
     position: relative;
     width: 100%;
@@ -292,19 +321,14 @@ body{
     overflow: hidden;
 }
 .teacher2 img{
-    width: 100%;
-}
-.teacher2 span{
-    display: inline-block;
     position: absolute;
+    top:0;
+    left:0;
+    z-index: 2;
     width: 100%;
-    height: 30px;
-    background-color: rgba(48,64,91,.7);
-    bottom: 0;
-    color:white;
-    line-height: 30px;
-    padding-left: 10px;
+    height: 135px;
 }
+
 .sBox{
     padding:0;
     margin:10px auto 0 auto;
@@ -338,15 +362,29 @@ body{
     font-size: 16px;
     margin-right: 10px;
     zoom: 1;
+    overflow:hidden;
 }
 .sBox1 ul li>a{
     text-decoration: none;
     margin: 0;
     padding:0;
 }
+.sBox1 ul li>a>img{
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 2;
+    width: 225px;
+    height: 150px;
+    cursor: pointer;
+    transition: all 0.5s;
+    -moz-transition: all 0.5s; /* Firefox 4 */
+    -webkit-transition: all 0.5s; /* Safari 和 Chrome */
+    -o-transition: all 0.5s;
+}
 .sBox1 ul li span{
     position: absolute;
-    display: inline-block;
+    /*display: inline-block;*/
     width: 100%;
     height: 20px;
     font-size: 12px;
@@ -357,7 +395,16 @@ body{
     background-color: rgba(99,6,95,.7);
     overflow: hidden;
     white-space: nowrap;
+    z-index: 20;
     text-overflow: ellipsis;
+}
+.sBox1 ul li>a:hover .bigimg{
+    transform: scale(1.2);
+    ms-transform:scale(1.2); 	/* IE 9 */
+    -moz-transform:scale(1.2); 	/* Firefox */
+    -webkit-transform:scale(1.2); /* Safari 和 Chrome */
+    -o-transform:scale(1.2);
+
 }
 .newsScroll {
     max-width: 1000px;
@@ -446,4 +493,8 @@ body{
     .newsScroll{
         padding: 0 30px;
     }
+}
+.leaveIndex:hover{
+	text-decoration: none;
+	color:#babdb6;
 }
