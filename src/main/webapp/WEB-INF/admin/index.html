@@ -210,6 +210,15 @@
 <script th:src="@{/static/js/jquery.min.js}"></script>
 <script th:src="@{/static/js/admin/index.js}"></script>
 <script th:src="@{/static/js/bootstrap.min.js}"></script>
+<!-- <script th:inline="javascript">
+	window.onload=function(){
+		 //防止页面后退
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+	}
+</script>  -->
 <script>
 	$(document).ready(function(){
         $('.out').click(function(e) {

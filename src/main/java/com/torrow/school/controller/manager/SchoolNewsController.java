@@ -140,22 +140,21 @@ public class SchoolNewsController extends BaseController {
 	 * @param model
 	 * @param id
 	 * @param tbCategory
-	 * @return 置顶和取消置顶的操作,
+	 * @return 置顶和取消置顶的操作,sign==1,代表置顶状态,sign==0,代表非置顶状态
 	 */
 	@RequestMapping("stick")
-	public String stick(Model model,int id,TbCategory tbCategory) {
+	public String stick(Model model,int id,TbCategory tbCategory,int sign) {
 		int currentPage = (int) session.getAttribute("currentPage");
 		TbResource tb = resourceService.selectByPrimaryKey(id);
-		if(tb.getSpare().equals("是")) {
+		if(sign==1&&tb.getSpare().equals("是")) {
 			tb.setSpare("否");
-//			log.info("=========="+resourceService.getNumber(tb, model, 0));
-//			if(resourceService.getNumber(tb, model, 0)==2) {
-//				model.addAttribute("message", "置顶成功");
-//			}
 			model.addAttribute("message", "取消置顶成功");
-		} else {
+		}else if(sign==0&&tb.getSpare().equals("否")){
 			tb.setSpare("是");
 			model.addAttribute("message", "置顶成功");
+		} else {
+			model.addAttribute("message","状态不可变!");
+			return manageObject(currentPage,model,tbCategory);
 		}
 		resourceService.updateByPrimaryKey(tb);
 		return manageObject(currentPage,model,tbCategory);
@@ -254,7 +253,7 @@ public class SchoolNewsController extends BaseController {
 			model.addAttribute("caName", str);
 		}
 		// 携带的参数包括分页依据和查询条件还有显示条数
-		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页10条数据
+		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 7));// 回显分页10条数据
 		session.setAttribute("currentPage", currentPage);
 		if(null!=tbCategory.getCaPid()) {
 			if (tbCategory.getCaPid() == 6) {

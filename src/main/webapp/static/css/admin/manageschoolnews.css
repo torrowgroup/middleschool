@@ -23,6 +23,20 @@ a{
 .pp a:hover{
 	text-decoration: none;
 }
+.add{
+	display:block;
+	width:80px;
+	height:35px;
+	line-height:35px;
+	background: #cccccc;
+	text-align:center;
+	border-radius:4px;
+	color:black;
+	cursor:pointer;
+	font-size:16px;
+	position:absolute;
+	margin-top:20px;
+}
  body { 
  	margin:0px;
  	padding:0px;

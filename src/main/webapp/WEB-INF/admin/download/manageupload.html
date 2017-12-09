@@ -23,7 +23,7 @@
 	    </form>
 		<table class="table table-bordered table-hover table-condensed">
        		 <thead>
-	            <tr>
+	            <tr class="sur">
 	                <th><span>文件名称</span></th>
 	                <th><span>发布人</span></th>
                 	<th><span>上传的日期</span></th>
@@ -36,8 +36,8 @@
                 	<td th:text="${news.reIssuer}">${news.reIssuer}</td>
                 	<td th:text="${news.reIssuingdate}">${news.reIssuingdate}</td>
                 	<td>
-                		<a th:href="@{/news/down?(id=${news.reId})}" title="下载"><span class="glyphicon glyphicon-download-alt"></span></a>&nbsp;&nbsp;
-                		<a th:href="@{/news/deleteFile?(id=${news.reId})}" onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash"></span></a>
+                		<a th:href="@{/news/down?(id=${news.reId})}" title="下载"><span class="glyphicon glyphicon-download-alt" title="下载"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                		<a th:href="@{/news/deleteFile?(id=${news.reId})}" onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash" title="删除"></span></a>
                 	</td>
                 </tr>
             </tbody>

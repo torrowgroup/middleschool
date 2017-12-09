@@ -16,7 +16,7 @@
 <body>
  <div class="mainbox">
  	<div class="thir">
- 		<a th:href="@{/news/addNewsJumping?(Pid=6)}" title="添加公告">添加公告</a>
+		<a th:href="@{/news/addNewsJumping?(Pid=6)}" title="添加公告" class="add">添加公告</a>
  		<!--模糊查询  -->
  	    <form th:action="@{/news/manageObject}" class="inquiry" method="post">
 		 	<input type="hidden" name="caPid" th:value="${zid}">
@@ -35,9 +35,8 @@
 	                <th><span>标题</span></th>
 	                <th><span>发布人</span></th>
 	                <th><span>日期</span></th>
-	                <th><span>是否置顶</span></th>
 	                <th><span>详情</span></th>
-	                <th><span>删除</span></th>
+	                <th><span>操作</span></th>
 	            </tr>
             </thead>
             <tbody>
@@ -45,14 +44,15 @@
                     <td th:text="${news.reTitle}">${news.reTitle}</td>
                     <td th:text="${news.reIssuer}">${news.reIssuer}</td>
                     <td th:text="${news.reIssuingdate}">${news.reIssuingdate}</td>
+                    <td class="pp"><a th:href="@{/news/selectOneNews?(id=${news.reId})}">详情</a></td>
                 	<td th:if="${news.spare}=='是'">
-                		<a th:href="@{/news/stick?(id=${news.reId},caPid=${zid},caName=${caName})}">取消置顶</a>
+                		<a th:href="@{/news/stick?(id=${news.reId},caPid=${zid},caName=${caName},sign=1)}">取消置顶</a>&nbsp;|&nbsp;
+                		<a th:href="@{/news/deleteNews?(id=${news.reId})}" onclick="return confirm('确定要删除吗')">删除</a>
                 	</td>
                 	<td th:if="${news.spare}=='否'">
-                		<a th:href="@{/news/stick?(id=${news.reId},caPid=${zid},caName=${caName})}">置顶</a>
+                		<a th:href="@{/news/stick?(id=${news.reId},caPid=${zid},caName=${caName},sign=0)}">置顶</a>&nbsp;|&nbsp;
+                		<a th:href="@{/news/deleteNews?(id=${news.reId})}" onclick="return confirm('确定要删除吗')">删除</a>
                 	</td>
-                	<td class="pp"><a th:href="@{/news/selectOneNews?(id=${news.reId})}">详情</a></td>
-                	<td><a th:href="@{/news/deleteNews?(id=${news.reId})}" onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash"></span></a></td>
                 </tr>
             </tbody>
         </table>    

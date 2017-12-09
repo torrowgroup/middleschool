@@ -6,7 +6,7 @@ body{
 	width: 500px;
 	height:400px;
 	margin: 0 auto;
-	margin-top:4%;
+	margin-top:10%;
 }
 table{
 	width: 100%;
@@ -15,13 +15,14 @@ table{
 }
 .bb{
 	width: 60px;
-	height: 30px;
+	height: 35px;
+	line-height:35px;
 	background: #2896ef;
 	border-radius: 8px;
 	color: white;
 	cursor: pointer;
-	margin-left: 28%;
-	margin-top:30px;
+	margin-left: 55%;
+	margin-top:40px;
 }
 .cc{
 	width: 300px;
@@ -29,9 +30,9 @@ table{
 	float: left;
 }
 img{
-	width:75%;
-	height:40%;
-	margin-left:100px;
+	width:300px;
+	height:200px;
+	margin-left:120px;
 	margin-top:60px;
 } 
 .center{

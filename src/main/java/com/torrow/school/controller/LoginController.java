@@ -217,9 +217,27 @@ public class LoginController extends BaseController {
 		return new ModelAndView("updatepassword");
 	}
 	
+	/**
+	 * 管理员的退出登录
+	 * @return 退出登录清空session
+	 */
 	@RequestMapping("logout")
 	public String logout() {
-		session.invalidate();
+		TbUser tbUser=(TbUser)session.getAttribute("admin");
+		session.removeAttribute("admin");
+		log.info("--------------------"+tbUser);
+		return "index";
+	}
+	
+	/**
+	 * 教师/教研组/政教处的退出登录
+	 * @return 退出登录清空session
+	 */
+	@RequestMapping("loginOut")
+	public String loginOut() {
+		TbUser tbUser=(TbUser)session.getAttribute("teacher");
+		session.removeAttribute("teacher");
+		log.info("--------------------"+tbUser);
 		return "index";
 	}
 }

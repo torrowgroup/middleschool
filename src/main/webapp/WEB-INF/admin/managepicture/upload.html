@@ -12,7 +12,7 @@
 <body>
 <div th:text="${message}" class="center"></div>
 <div class="aa">
-<div th:if="${sign}=='1'">请先去类别管理中添加相应类别</div>
+<div th:if="${sign}=='1'" class="center">请先去类别管理中添加相应类别</div>
 <div th:if="${sign}!='1'">
 	<form th:action="@{/general/uploadCarousel}" method="post"
 		enctype="multipart/form-data" class="bs-example bs-example-form" role="form">
@@ -45,15 +45,8 @@
 						style="display: none;" id="previewImg" required="required">
 				</div>
 			</div>
-		<!-- </tr>
-			<tr>
-				<td width="15%"><span>类别名称</span></td>
-				<td><select name="caId" class="cc">
-							<option th:each="category,categoryStart:${uploadList}" th:text="${category.caName}" th:value="${category.caId}" />
-					 </select></td>
-			</tr>
-		</table> -->
-			<input type="submit" value="添加" class="bb" title="添加">
+
+			<input type="submit" value="添加" class="bb" title="添加"/>
 	</form>
 </div>
 </div>

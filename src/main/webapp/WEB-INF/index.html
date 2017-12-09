@@ -36,13 +36,23 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
+alert("sdaddf");
 	//权限验证  
 	if(session.getAttribute("admin")==null){
 	    response.sendRedirect("index.html");  
 	    return;  
 	}  
-	alert("sdaddf");
+	
 	}
-</script>
+</script> -->
+<script th:inline="javascript">
+	window.onload=function(){
+		 //防止页面后退
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+	}
+</script> 
 </html>

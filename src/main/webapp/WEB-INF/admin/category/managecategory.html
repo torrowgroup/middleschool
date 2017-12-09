@@ -17,7 +17,7 @@
 <!--模糊查询  -->
 <div class="mainbox">
 <form th:action="@{/category/manageCategory}" method="post" class="inquiry">
-    <input type="text" name="inquiry" required placeholder="类别名称"/>
+    <input type="text" name="inquiry" class="inquiryinput" required placeholder="类别名称"/>
     <input type="submit" class="btn btn-default inquirysub" value="查询" title="查询">
 </form>
 		<table class="table table-bordered table-hover table-condensed">
@@ -26,8 +26,7 @@
 					<th><span>类别编号</span></th>
 					<th><span>类别名称</span></th>
 					<th><span>父类别</span></th>
-					<th><span>修改</span></th>
-					<th><span>删除</span></th>
+					<th><span>操作</span></th>
 				</tr>
             </thead>
             <tbody>
@@ -47,10 +46,10 @@
 				<td th:if="${category.caPid}=='12'">校园文学</td>
 				<td th:if="${category.caPid}=='13'">其他信息</td>
 				<td><a
-					th:href="@{/category/selectOneCategory?(id=${category.caId})}"><span class="glyphicon glyphicon-edit"></span></a></td>
-				<td><a
+					th:href="@{/category/selectOneCategory?(id=${category.caId})}"><span class="glyphicon glyphicon-edit" title="修改"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a
 					th:href="@{/category/deleteCategory?(id=${category.caId})}"
-					onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash"></span></a></td>
+					onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash" title="删除"></span></a></td>
 			</tr>
             </tbody>
                 

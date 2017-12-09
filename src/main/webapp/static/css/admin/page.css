@@ -1,0 +1,16 @@
+@charset "UTF-8";
+ body { 
+ 	margin:0px;
+ 	padding:0px;
+ 	text-align: center;
+ }
+.pagination span{
+ 	border:1px solid #f3f3f3;
+ 	border-radius:2px;
+ 	background:white;
+ 	color:black;
+ 	padding:8px 12px;	
+ }
+  .pagination span:hover{
+  	background:#ebebeb;
+  }
