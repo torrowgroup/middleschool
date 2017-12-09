@@ -16,10 +16,11 @@ import com.torrow.school.entity.TbUser;
 
 public class TeacherFilter implements Filter{
 
+	private FilterConfig config;
+
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
-		
+		this.config = filterConfig;
 	}
 
 	@Override  
@@ -30,7 +31,7 @@ public class TeacherFilter implements Filter{
 	        HttpSession session = servletRequest.getSession();
 			//判断用户是否登录
 			TbUser teacher=(TbUser)session.getAttribute("teacher");
-	        if(teacher != null) {
+			if(teacher != null) {
 	        	 chain.doFilter(request, response);
 	        }else {
 	        	// 当用户为登录或登录超时时提醒并跳转到登录界面
@@ -45,7 +46,7 @@ public class TeacherFilter implements Filter{
 
 	@Override
 	public void destroy() {
-		
+		this.config = null;
 	}
 
 }

@@ -96,7 +96,7 @@ public class CategoryController extends BaseController {
 				}
 			}
 		}
-		model.addAttribute("pagemsg", categoryService.findingByPaging(currentPage, inquiry, 8));// 回显分页数据
+		model.addAttribute("pagemsg", categoryService.findingByPaging(currentPage, inquiry, 7));// 回显分页数据
 		session.setAttribute("currentPage", currentPage);
 		session.setAttribute("inquiry", inquiry);
 		model.addAttribute("inquiry", inquiry);
