@@ -52,3 +52,6 @@ a{
   .pagination span:hover{
   	background:#ebebeb;
   }
+  .col{
+  	  color:red;
+  }

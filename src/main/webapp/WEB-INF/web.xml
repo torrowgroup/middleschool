@@ -68,7 +68,37 @@
 
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
-        <url-pattern>/manager/*</url-pattern>
+        <url-pattern>/link/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/category/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/general/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/message/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/others/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/news/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/user/*</url-pattern>
 	</filter-mapping>
 	<!-- 配置教研组登陆过滤器 -->
 	<filter>

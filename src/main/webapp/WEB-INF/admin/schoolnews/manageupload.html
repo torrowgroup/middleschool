@@ -37,7 +37,7 @@
                     <td th:text="${news.reIssuingdate}">${news.reIssuingdate}</td>
                 	<td>
                 		<a th:href="@{/news/down?(id=${news.reId})}" title="下载"><span class="glyphicon glyphicon-download-alt"></span></a>&nbsp;&nbsp;
-                		<a th:href="@{/news/deleteFile?(id=${news.reId})}" onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash"></span></a>
+                		<a th:href="@{/news/deleteFile?(id=${news.reId})}" onclick="return confirm('确定要删除吗')"><span class="glyphicon glyphicon-trash" title="删除"></span></a>
                 	</td>
                 </tr>
             </tbody>
