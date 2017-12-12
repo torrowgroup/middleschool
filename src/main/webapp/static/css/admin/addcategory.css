@@ -35,10 +35,11 @@ input {
 }
 
 .butone {
-	width: 55px;
-	height: 35px;
-	border-radius: 8px;
-	margin-left: 260px;
+	width: 65px;
+	height: 40px;
+	font-size:16px;
+	border-radius: 5px;
+	margin-left: 240px;
 	background: #2896ef;
 	color: white;
 }

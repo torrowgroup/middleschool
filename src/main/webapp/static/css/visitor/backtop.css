@@ -9,3 +9,7 @@
     cursor: pointer;
     display: none;
 }
+.leaveIndex:hover{
+	text-decoration: none;
+	color:#83abe8;
+}

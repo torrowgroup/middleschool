@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">;
+<html xmlns="https://www.w3.org/1999/xhtml">;
+<head>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@taglib prefix="s" uri="/struts-tags"%>
+<title>无标题文档</title>
+<script language="javascript">
+function $(obj){return document.getElementById(obj);}
+function show(objid) {$(objid).style.display='inline';}
+function hidden(objid) {$(objid).style.display='none';}
+function doit(){
+var sel_val=$('sel').value;
+if (sel_val=='') {hidden('a1');hidden('a2');}
+if (sel_val==0) {hidden('a1');hidden('a2');}
+if (sel_val==1) {show('a1');hidden('a2');}
+if (sel_val==2) {show('a2');hidden('a1');}
+}
+</script>
+</head>
+
+<body>
+<select name="sel" id="sel" onchange="javascript：doit();">
+<option selected="selected">请选择</option>
+<option value="0">不要输入框</option>
+<option value="1">输入框1</option>
+<option value="2">输入框2</option>
+</select>
+
+<input value="输入框1" type="text" name="a1" id="a1" style="display:none;" />
+<input value="输入框2" type="text" name="a2" id="a2" style="display:none;" />
+<br />
+<br />
+</body>
+</html>

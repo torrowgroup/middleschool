@@ -4,14 +4,21 @@
 
 <head>
   <title>Home</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/updatetesttime.css}">
 </head>
 <body>
 <div th:text="${message}"></div>
 <div  th:if="${updateTime==null}">此数据已被删除</div>
-<div  th:if="${updateTime!=null}">
+<div  th:if="${updateTime!=null}" class="content">
 	<form th:action="@{/others/updateTestTime}" method="post">
 		<input type="hidden" name="reId" th:value="${updateTime.reId}"/>
-		<table>
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<td colspan="2">考试时间</td>
+				</tr>
+			</thead>
 			<tr>
 				<td>考试名称</td>
 				<td th:text="${updateTime.reTitle}">考试名称</td>
@@ -19,11 +26,11 @@
 			<tr>
 				<td>考试时间</td>
 				<td>
- 					<input type="date" name="reContent" th:value="${updateTime.reContent}"  />
+ 					<input type="date" name="reContent" class="form-control" th:value="${updateTime.reContent}"  />
 				</td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="修改"/></td>
+				<td colspan="2"><input type="submit" class="btn" data-toggle="button" title="提交修改" value="修改"/></td>
 			</tr>
 		</table>
 	</form>

@@ -88,7 +88,7 @@ public class EducationController extends BaseController {
 			record.setCaName(tbCategory.getCaName());
 		}
 		//携带的参数包括分页依据和查询条件还有显示条数
-		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 10));// 回显分页10条数据
+		model.addAttribute("pagemsg", resourceService.findingByPaging(currentPage, record, 7));// 回显分页10条数据
 		session.setAttribute("currentPage", currentPage);
 		session.setAttribute("caName", tbCategory.getCaName());
 		//session和model是不同的,接下来两个model是为了把数据返回到前台,以便分页进行使用

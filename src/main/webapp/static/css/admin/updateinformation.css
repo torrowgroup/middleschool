@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+body{
+	background: #ebebeb;
+}
+.content{
+	margin:10% auto;
+	width: 40%;
+	height: 260px;
+}
+table{
+	background: white;
+	text-align: center;
+	font-size: 16px;
+}
+td{
+	vertical-align: middle !important;
+}
+thead>tr{
+	height: 55px;	
+}
+thead>tr>td {
+	background: #cccccc;
+}
+.btn{
+	background:#2896ef;
+	color:white;
+}

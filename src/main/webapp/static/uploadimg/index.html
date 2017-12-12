@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+
+<script language="javascript">
+function ajax(method,url,param,flag,returnFun){
+    var httpRequest="";
+    if(window.XMLHttpRequest){
+        httpRequest=new XMLHttpRequest();
+    }else if(window.ActiveXObject){
+        httpRequest=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    httpRequest.onreadystatechange=function(){
+        if(httpRequest.readyState==4 && httpRequest.status==200){
+            returnFun(httpRequest.responseText);
+        }
+    };
+    if(method=="get"){
+        var queryString="";
+        if(param !="" || param !=null){
+            queryString="?"+param;
+        }
+        httpRequest.open("get",url+queryString,flag);
+        httpRequest.send(null);
+    }else if(method=="post"){
+        httpRequest.open("post",url,flag);
+        httpRequest.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        httpRequest.send(param);
+    }
+}
+function turnPage(url){
+    $.ajax({
+        type:"post",
+        url:url,
+        success:function(html){
+            $("#content").html(html);
+        }
+    })
+}
+</script>
+</head>
+
+<body>
+	 <div id="content" style="border: 92px solid red;width: 210px"></div>
+    <button onclick="turnPage('weixin.html')">微信</button>
+    <button onclick="turnPage('tongxunlu.html')">通讯录</button>
+    <button onclick="turnPage('zhaopengyou.html')">找朋友</button>
+    <button onclick="turnPage('wo.html')">我</button>
+</body>
+</html>

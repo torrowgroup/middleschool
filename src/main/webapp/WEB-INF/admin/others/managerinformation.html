@@ -4,19 +4,22 @@
 
 <head>
   <title>Home</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/managerinformation.css}">
 </head>
 <body>
-
-<div th:text="${message}"></div>
+<div th:text="${message}" class="message"></div>
 <div th:if="${phone==null && email==null && address==null}">
 	没有联系方式
 </div>
-<div th:if="${phone!=null || email!=null || address!=null}">
-	<table>
-		<tr>
-			<td>联系方式</td>
-			<td>内容</td>
-		</tr>
+<div th:if="${phone!=null || email!=null || address!=null}" class="content">
+	<table class="table table-hover table-bordered">
+		<thead>
+			<tr>
+				<td>联系方式</td>
+				<td>内容</td>
+			</tr>
+		</thead>
 		<tr th:if="${phone!=null}"> 
 			<td th:text="${phone.reTitle}">电话</td>
 			<td th:text="${phone.reContent}">内容</td>
@@ -30,7 +33,7 @@
 			<td th:text="${address.reContent}">内容</td>
 		</tr>
 	</table>
-	<a th:href="@{/others/toUpdateInformation}">修改</a>
+	<a th:href="@{/others/toUpdateInformation}" class="btn" data-toggle="button">修改</a>
 </div>
 </body>
 </html>

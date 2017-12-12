@@ -3,15 +3,13 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=1000">
 <title>郑州一二二中学</title>
-    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/static/css/visitor/style.css}" type="text/css">
-    
 </head>
 <body>
 <div th:fragment="header">
-
+ <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css"> 
+ <link rel="stylesheet" th:href="@{/static/css/visitor/publicstyle.css}" type="text/css">
 <script th:src="@{/static/js/jquery.min.js}"></script>
 <script th:src="@{/static/js/bootstrap.min.js}"></script>
 <script th:src="@{/static/js/visitor/carousel.js}"></script>
@@ -40,7 +38,7 @@
 	<!--导航条-->
 	<div class="navBox">
 		<ul class="navUl">
-			<li class="navLi hidden-xs" style="border-left:#626d8c 1px dotted"><a th:href="@{/index}">首页</a></li>
+			<li class="navLi" style="border-left:#626d8c 1px dotted"><a th:href="@{/index}">首页</a></li>
 			<li class="navLi">
                 <a href="#">学校概况</a>
                 <ul class="navSecondUl">
@@ -93,10 +91,10 @@
 	
 	<div class="footer" th:fragment="footer">
 	<link rel="stylesheet" th:href="@{/static/css/visitor/backtop.css}" type="text/css">
-        <div class="container footerBox">
+        <div class="footerBox">
             <div class="row">
-                <div class="col-sm-3 col-xs-6 footerBox1 hidden-xs"><img th:src="@{/static/images/visitor/bottomlogo.png}" alt=""></div>
-                <div class="col-sm-3 col-xs-6 footerBox1" th:if="${phone!=null || email!=null || address !=null}">
+                <div class="col-sm-3 col-xs-3 footerBox1"><img th:src="@{/static/images/visitor/bottomlogo.png}" alt=""></div>
+                <div class="col-sm-3 col-xs-3 footerBox1" th:if="${phone!=null || email!=null || address !=null}">
                     <h3>联系我们:</h3>
                     <p th:if="${phone!=null}">
                     	电话：<span th:text="${phone.reContent}">电话号码</span>
@@ -108,17 +106,17 @@
                     	地址：<span th:text="${address.reContent}">地址</span>
                     </p>
                 </div>
-                <div class="col-sm-3 col-xs-6 footerBox1">
+                <div class="col-sm-3 col-xs-3 footerBox1">
                     <h3>友情链接:</h3>
                     <p th:each="resource,resourceS:${linksList}">
                     	<a th:href="@{${resource.reContent}}" th:text="${resource.reTitle}"></a>
                     </p>
                 </div>
-                <div class="col-sm-3 col-xs-12 footerBox1">
+                <div class="col-sm-3 col-xs-3 footerBox1">
                     <h3><a th:href="@{/visitorNEL/toLeaveWord}" class="leaveIndex">留言板进入留言</a></h3>
                     <p>&nbsp;</p>
                     <p>版权所有@河南艾未特网络技术有限公司</p>
-<!--                     <p>备案信息：<a href="">豫ICP备1111111号</a></p> -->
+                    <p>备案信息：<a href="#">豫ICP备1111111号</a></p>
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@ body{
 }
 .topmax{
     width: 100%;
-    background: url('../../images/visitor/topback.png') repeat-y center #e5e9f5;;
+    background: url('../../images/visitor/topback.png') repeat-y center #e5e9f5;
 }
 .header{
     max-width: 1000px;
@@ -26,12 +26,27 @@ body{
     position: absolute;
     right:0;
     top:28px;
+    padding-top:10px;
+    padding-right: 65px;
     color: #3c3c3c;
 }
 .headerRight p{
     font-size: 12px;
     line-height: 20px;
     text-align: right;
+}
+
+.headerclock{
+    width: 50px;
+    height: 60px;
+    position: absolute;
+    top:0px;
+    right: 12px;
+    z-index: 100;
+}
+.headerclock img{
+    width: 100%;
+    height: 100%;
 }
 .navBox{
     width: 100%;
@@ -43,7 +58,6 @@ body{
     margin: 0 auto;
     list-style: none;
     display: block;
-    width: 100%;
     font-size: 0;
     background-color: rgb(48,64,91);
 }
@@ -52,19 +66,22 @@ body{
     display: inline-block;
     zoom:1;
     width: 11.111%;
-    padding:2px 0px;
+    padding:0;
     font-size: 15px;
     text-align: center;
-    height: 53px;
+    height: 45px;
     border-right: #626d8c 1px dotted;
     overflow: hidden;
+}
+.firstli{
+    border-left: #626d8c 1px dotted;
 }
 .navBox .navUl .navLi>a{
     display: block;
     padding:0;
     margin: 0;
     height: 100%;
-    line-height: 53px;
+    line-height: 45px;
     color: white;
     font-weight: bold;
     text-decoration: none;
@@ -75,12 +92,9 @@ body{
     border-top: 2px solid #f10000;
     overflow: hidden;
 }
-/* .navBox .navUl .navLi:hover .navSecondUl{
-    display: block;
-    background-color: #121822;
-} */
+
 .navSecondUl{
-    top:52px;
+    top:43px;
     width: 13%;
     display: none;
     z-index: 80;
@@ -95,7 +109,7 @@ body{
     line-height: 32px;
 }
 .navSecondUl>li>a{
-     color: white;
+    color: white;
     display: block;
     font-size: 14px;
     height: 100%;
@@ -107,6 +121,8 @@ body{
 .navSecondUl>li>a:hover{
     color:white;
 }
+
+
 #myCarousel .carousel-inner .item>img{
     width: 100%;
 }
@@ -145,19 +161,12 @@ body{
     width: 100%;
     margin-top:20px;
 }
-.mainCenter{
-    max-width: 1000px;
-}
-.mainLeft{
-   /*  border-right:1.5px solid #d7d7d7;
-    height:160px; */
-}
-.mainLeft:hover{
-	opacity: 0.7;
-}
-.mainBheader>a>span:hover{
-	color:#122d55;
-}
+/*.mainCenter{*/
+    /*max-width: 1000px;*/
+/*}*/
+/*.mainLeft{*/
+    /*border-right:2px solid #d7d7d7;*/
+/*}*/
 .mainLeft>h3>a{
     text-decoration: none;
     color: rgb(48,64,91);
@@ -165,35 +174,45 @@ body{
     font-family: "微软雅黑";
     font-weight: 600;
 }
+.mainLeft>h3>a:hover{
+    color:purple;
+}
 .mainLeft>p{
     margin: 10px 0;
-    font-size: 12px;
-   /*  line-height: 20px;
-    overflow: hidden; */
+    font-size: 14px;
+    line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .mainLeft>p>a{
     color:rgb(48,64,91);
     text-decoration: none;
 }
-
+.mainLeft:hover{
+   opacity: .8;
+}
+.mainLeft{
+    margin-bottom: 20px;
+}
 .mainImg{
     width: 100%;
-    margin-bottom: 10px;
-   /*  background-color: rebeccapurple; */
+    height: 150px;
+    background-color: rebeccapurple;
 }
 .mainImg img{
     width: 100%;
-    height:160px;
+    height: 100%;
 }
 .mainTop{
-   /*  position: relative; */
-    margin-bottom: 40px;
+    /*margin-bottom: 25px;*/
+    /*height: 150px;*/
+    /*width: 100%;*/
 }
-/* .sline{
-	margin:50px 0px;
-	height:1px;
-	background-color: #e9e8ea;
-} */
+/*.mainTop img{*/
+    /*width: 100%;*/
+    /*height: 95%;*/
+    /*margin-left: 15px;*/
+/*}*/
 .mainBheader{
     width: 100%;
     height: 33px;
@@ -216,6 +235,18 @@ body{
 .mainBheader>a>span{
     font-size: 12px;
     font-weight: 200;
+}
+.mainBheader>a>i{
+    font-style:normal;
+}
+.mainBheader>a>i:hover{
+    color: rgb(48,64,91);
+}
+.mainBheader>a>em{
+    font-style:normal;
+}
+.mainBheader>a>em:hover{
+    color:#ccc;
 }
 .mainBbody{
     padding-top:15px;
@@ -240,13 +271,15 @@ body{
     white-space: nowrap;
     text-overflow: ellipsis;
     background: url("../../images/visitor/pont.jpg") no-repeat left center;
-    transition:padding-left 1s;
-	-webkit-transition:padding-left 1s; /* Safari */
+    -webkit-transition: padding-left .5s;
+    -moz-transition: padding-left .5s;
+    -ms-transition: padding-left .5s;
+    -o-transition: padding-left .5s;
+    transition: padding-left .5s;
 }
 .mainBbody>li>a:hover{
-	color:red;
-	padding-left:20px;
-	overflow:hidden;
+    color:red;
+    padding-left: 25px;
 }
 .mainBbody>li>span{
     float: right;
@@ -267,10 +300,10 @@ body{
     position: relative;
     width: 100%;
     height: 135px;
-    /* background-color: red; */
     margin-bottom: 12px;
     overflow: hidden;
 }
+
 .teacher1 img{
     width: 100%;
     height: 135px;
@@ -297,23 +330,13 @@ body{
     -webkit-transition: height .5s;
     z-index: 222;
 }
+
 .teacher1:hover .showthis{
     height: 30px;
 }
 .teacher2:hover .showthis{
     height: 30px;
 }
-/* .teacher1 span{
-    display: inline-block;
-    position: absolute;
-    width: 100%;
-    height: 30px;
-    background-color: rgba(48,64,91,.7);
-    bottom: 0;
-    color:white;
-    line-height: 30px;
-    padding-left: 10px;
-} */
 .teacher2{
     position: relative;
     width: 100%;
@@ -362,7 +385,7 @@ body{
     font-size: 16px;
     margin-right: 10px;
     zoom: 1;
-    overflow:hidden;
+    overflow: hidden;
 }
 .sBox1 ul li>a{
     text-decoration: none;
@@ -407,9 +430,9 @@ body{
 
 }
 .newsScroll {
-    max-width: 1000px;
+    /*max-width: 1000px;*/
     margin: 20px auto 0px auto;
-    padding:0 15px;
+    padding:0 10px;
     overflow: hidden;
 }
 .changeColor2{
@@ -452,8 +475,9 @@ body{
     color:white;
     line-height: 20px;
 }
-
-
+.scollnews1{
+    width: 100%;
+}
 
 
 
@@ -464,21 +488,76 @@ body{
     .logo{
         width: 29.5%;
     }
+
 }
 
 
 @media (max-width: 768px) {
+    .headerclock{
+        width: 40px;
+        height: 50px;
+        position: absolute;
+        top:6px;
+        right: 20px;
+        z-index: 100;
+    }
     .navBox .navUl .navLi{
         width: 22.222%;
         font-size: 14px;
         text-align: center;
-        height: 42px;
+        border-right: none;
+        height: 30px;
     }
     .navBox .navUl .navLi:hover .navSecondUl{
         display: none;
     }
     .navUl{
         text-align: center;
+    }
+
+    .navBox .navUl .navLi>a{
+        line-height: 30px;
+    }
+    .navBox .navUl .navLi:hover {
+        background-color: inherit;
+        border-top: 0px solid #f10000;
+        overflow: hidden;
+    }
+    .firstli{
+        border: 0;
+    }
+    .navSecondUl{
+        height: 0;
+        padding:0;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .mainLeft>h3>a{
+        text-decoration: none;
+        color: rgb(48,64,91);
+        font-size: 16px;
+        font-family: "微软雅黑";
+        font-weight: bold;
+    }
+    .mainLeft>p>a{
+        font-size: 12px;
+    }
+
+    .mainCenter{
+        max-width: 768px;
+    }
+    .newsScroll{
+        max-width: 768px;
+    }
+
+
+
+}
+
+@media (max-width: 992px){
+    .mainImg{
+        height: 100px;
     }
 }
 
@@ -491,10 +570,47 @@ body{
 
 @media (max-width: 1200px){
     .newsScroll{
-        padding: 0 30px;
+        max-width: 1000px;
+    }
+    .mainCenter{
+        max-width: 1000px;
     }
 }
-.leaveIndex:hover{
-	text-decoration: none;
-	color:#babdb6;
+
+@media (min-width: 1200px){
+    .header{
+        width: 75%;
+        max-width: 100%;
+        min-width: 1000px;
+    }
+    .navUl{
+        width: 75%;
+        max-width: 100%;
+        min-width: 1000px;
+    }
+
+    .mainCenter{
+        width: 75%;
+        min-width: 1000px;
+    }
+
+    .sBox{
+        width: 100%;
+        max-width: 100%;
+    }
+    .sBox1{
+        width: 100%;
+        max-width: 100%;
+    }
+    .newsScroll{
+        width: 75%;
+        min-width: 1000px !important;
+        /*padding:0 10px;*/
+    }
+}
+
+@media (min-width: 1700px){
+    .mainImg{
+       height: 180px;
+    }
 }

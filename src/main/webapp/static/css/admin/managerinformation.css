@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+body{
+	background: #ebebeb;
+}
+.content{
+	margin:7% auto;
+	width:50%; 
+}
+table {
+	text-align:center;
+	vertical-align:middle;
+	background: white;
+}
+thead>tr{
+	background: #cccccc;
+}
+.message{
+	text-align: center;
+	color:red;
+	margin: 50px;
+}
+tr{
+	height:50px;
+}
+.btn{
+	margin-top:30px;
+	margin-left:50%;
+	background: #2896ef;
+	color:white;
+}

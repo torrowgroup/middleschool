@@ -21,7 +21,7 @@
         </div>
         <div class="headerRight">
             <p th:if="${midExam != '--'}">距离期中<span th:text="${midExam}"></span>天</p>
-            <p th:if="${finalExam != '--'}">距离期末<span th:text="${finalExam}"></span>天</p>
+            <p th:if="${finalExam != '--' and midExam == '--'}">距离期末<span th:text="${finalExam}"></span>天</p>
             <p th:if="${catchingExam != '--'}">距离中招<span th:text="${catchingExam}"></span>天</p>
             <p class="hidden-xs">今天<span id="todayTime">--年--月--日</span></p>
         </div>
@@ -116,7 +116,7 @@
                 <div class="col-sm-3 col-xs-6 mainLeft" th:each="resource,resourceS:${generalIndex}">
                     <h3><a th:href="@{/visitorGN/viewGeneral?(gId= ${resource.caId})}" th:text="${resource.reTitle}">标题</a></h3>
                     <p><a th:href="@{/visitorGN/viewGeneral?(gId= ${resource.caId})}" class="generalIndex" th:name="${resource.reContent}">大致内容</a></p>
-                    <a href="">
+                    <a th:href="@{/visitorGN/viewGeneral?(gId= ${resource.caId})}">
                         <div class="mainImg">
                             <img th:src="@{${resource.spare}}" alt="" class="generalPicture">
                         </div>
@@ -170,26 +170,28 @@
             </div>
         </div>
     </div>
-    <div class="newsScroll">
-        <div class="mainBheader changeColor2">
-            <a th:href="@{/visitorGN/moreNews}">图片新闻<span class="pull-right">&gt; 更多</span></a>
-        </div>
-        <div class="sBox">
-            <div class="sBox1">
-                <div class="scroll">
-                    <ul class="scrollUl1">
-                        <li th:each="resource,resourceStart:${sNews}">
-                        	<a th:href="@{/visitorGN/newDetails?(rId=${resource.reId},nId=${resource.caId})}">
-                        		<img th:src="@{${resource.reContent}}" alt="暂无图片" class="bigimg">
-                        		<span th:text="${resource.reTitle}">新闻标题</span>	
-                        	</a>
-                        </li>
-                    </ul>
-                    <ul class="scrollUl2"></ul>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="scollnews1">
+	    <div class="container newsScroll">
+	        <div class="mainBheader changeColor2">
+	            <a th:href="@{/visitorGN/moreNews}">图片新闻<span class="pull-right">&gt; 更多</span></a>
+	        </div>
+	        <div class="sBox">
+	            <div class="sBox1">
+	                <div class="scroll">
+	                    <ul class="scrollUl1">
+	                        <li th:each="resource,resourceStart:${sNews}">
+	                        	<a th:href="@{/visitorGN/newDetails?(rId=${resource.reId},nId=${resource.caId})}">
+	                        		<img th:src="@{${resource.reContent}}" alt="暂无图片" class="bigimg">
+	                        		<span th:text="${resource.reTitle}">新闻标题</span>	
+	                        	</a>
+	                        </li>
+	                    </ul>
+	                    <ul class="scrollUl2"></ul>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+    </div>  
 <div th:replace="headerfooter::footer"></div>
 <script th:src="@{/static/js/jquery.min.js}"></script>
 <script th:inline="javascript">

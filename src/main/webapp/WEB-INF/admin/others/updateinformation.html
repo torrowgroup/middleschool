@@ -4,39 +4,50 @@
 
 <head>
   <title>Home</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/updateinformation.css}">
 </head>
 <body>
-<table>
-	<tr th:if="${phone!=null}"> 
-		<form th:action="@{/others/updateInformation}" method="post">
-			<input type="hidden" name="reId" th:value="${phone.reId}"/>
-			<td th:text="${phone.reTitle}">电话</td>
-			<td><input type="text" name="reContent" th:value="${phone.reContent}" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" maxlength="11"/></td>
-			<td>
-				<input type="submit" value="修改"/>
-			</td>
-		</form>
-	</tr>
-	<tr th:if="${email!=null}">
-		<form th:action="@{/others/updateInformation}" method="post">
-				<input type="hidden" name="reId" th:value="${email.reId}"/>
-			<td th:text="${email.reTitle}">邮箱</td>
-			<td><input type="email" name="reContent" th:value="${email.reContent}" maxlength="20"/></td>
-			<td>
-				<input type="submit" value="修改"/>
-			</td>
-		</form>
-	</tr>
-	<tr th:if="${address!=null}">
-		<form th:action="@{/others/updateInformation}" method="post">
-			<input type="hidden" name="reId" th:value="${address.reId}"/>
-			<td th:text="${address.reTitle}">地址</td>
-			<td><input type="text" name="reContent" th:value="${address.reContent}" maxlength="25"/></td>
-			<td>
-				<input type="submit" value="修改"/>
-			</td>
-		</form>
-	</tr>
-</table>
+<div class="content">
+	<table class="table table-hover table-bordered">
+		<thead>
+			<tr>
+				<td>联系方式</td>
+				<td>内容</td>
+				<td>操作</td>
+			</tr>
+		</thead>
+		<tr th:if="${phone!=null}"> 
+			<form th:action="@{/others/updateInformation}" method="post">
+				<input type="hidden" name="reId" th:value="${phone.reId}"/>
+				<td th:text="${phone.reTitle}">电话</td>
+				<td><input type="text" name="reContent" class="form-control" th:value="${phone.reContent}" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" maxlength="11"/></td>
+				<td>
+					<input type="submit" class="btn" data-toggle="button" value="修改"/>
+				</td>
+			</form>
+		</tr>
+		<tr th:if="${email!=null}">
+			<form th:action="@{/others/updateInformation}" method="post">
+					<input type="hidden" name="reId" th:value="${email.reId}"/>
+				<td th:text="${email.reTitle}">邮箱</td>
+				<td><input type="email" name="reContent" class="form-control" th:value="${email.reContent}" maxlength="20"/></td>
+				<td>
+					<input type="submit" class="btn" data-toggle="button" value="修改"/>
+				</td>
+			</form>
+		</tr>
+		<tr th:if="${address!=null}">
+			<form th:action="@{/others/updateInformation}" method="post">
+				<input type="hidden" name="reId" th:value="${address.reId}"/>
+				<td th:text="${address.reTitle}">地址</td>
+				<td><input type="text" name="reContent" class="form-control" th:value="${address.reContent}" maxlength="25"/></td>
+				<td>
+					<input type="submit" class="btn" data-toggle="button" value="修改"/>
+				</td>
+			</form>
+		</tr>
+	</table>
+</div>
 </body>
 </html>

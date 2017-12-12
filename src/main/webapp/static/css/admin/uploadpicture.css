@@ -1,7 +1,8 @@
 body{
 	margin:0;
 	padding: 0;
-	background: #ebebeb;}
+	background: #ebebeb;
+}
 .aa{
 	width: 500px;
 	height:400px;
@@ -14,14 +15,15 @@ table{
 	border-collapse: collapse;
 }
 .bb{
-	width: 60px;
-	height: 35px;
+	width: 70px;
+	height: 40px;
+	font-size:16px;
 	line-height:35px;
 	background: #2896ef;
-	border-radius: 8px;
+	border-radius: 6px;
 	color: white;
 	cursor: pointer;
-	margin-left: 55%;
+	margin-left: 45%;
 	margin-top:40px;
 }
 .cc{
@@ -32,7 +34,7 @@ table{
 img{
 	width:300px;
 	height:200px;
-	margin-left:120px;
+	margin-left:90px;
 	margin-top:60px;
 } 
 .center{

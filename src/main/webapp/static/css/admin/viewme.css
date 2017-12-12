@@ -47,8 +47,9 @@ span{
 }
 .aa{
 	font-size:14px;
-	color:black;
-	background:#d3d7cf;
+	width:100px;
+	color:white;
+	background:#2896ef;
 	padding:5px 5px;
 	border-radius:5px;
 }
@@ -56,6 +57,5 @@ span{
 .aa:hover{
 	text-decoration: none;
 	color:black;
-	background:#b6b0d1;
 }
 

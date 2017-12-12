@@ -12,71 +12,75 @@
 <body>
 <div class="content">
 	<form th:action="@{/user/updateMe}" method="post" enctype="multipart/form-data" onsubmit="modifyContent()">
-		<table class="table">
-			<tr>
-				<td>邮箱</td>
-				<td>
-					<input type="email" name="usEmail" id="usEmail" required th:value="${session.admin.usEmail}" th:oninput="'testEmail()'" maxlength="25"/>
-					<span id="ok" class="glyphicon glyphicon-ok" style="display: none;"></span>
-					<span id="wrong" class="glyphicon glyphicon-remove" style="display: none;"></span>
-				</td>
-			</tr>
-			<tr>
-				<td>姓名</td>
-				<td><input type="text" name="usName" th:value="${session.admin.usName}" /></td>
-			</tr>
-			<tr>
-				<td>性别</td>
-				<td><input class="sex" name="usSex" type="radio" value="男" th:checked="${session.admin.usSex=='男'}" />男
-					<input class="sex" name="usSex" type="radio" value="女" th:checked="${session.admin.usSex=='女'}" />女
-				</td>
-			</tr>
-			<tr>
-				<td>身份</td>
-				<td th:text="${session.admin.caName}"></td>
-			</tr>
-			<tr>
-				<td>联系方式</td>
-				<td><input type="text" name="usPhone"
-					th:value="${session.admin.usPhone}" maxlength="11"/></td>
-			</tr>
-			<tr>
-				<td>照片</td>
-				<td>
-					<div class="col-sm-9 big-photo">
-						<div id="preview">
-							<img id="imghead" border="0" alt="未上传图片" title="点击更换图片"
-								th:src="@{/static/uploadimg/{picture}(picture=${session.admin.usPicture})}"
-								width="90" height="90" onclick="$('#previewImg').click();">
+		<div class="tableLeft">
+			<table class="table table-hover">
+				<tr>
+					<td>邮箱</td>
+					<td>
+						<input type="email" name="usEmail" class="form-control" id="usEmail" required th:value="${session.admin.usEmail}" th:oninput="'testEmail()'" maxlength="25"/>
+						<span id="ok" class="glyphicon glyphicon-ok" style="display: none;"></span>
+						<span id="wrong" class="glyphicon glyphicon-remove" style="display: none;"></span>
+					</td>
+				</tr>
+				<tr>
+					<td>姓名</td>
+					<td><input type="text" name="usName" class="form-control" th:value="${session.admin.usName}" /></td>
+				</tr>
+				<tr>
+					<td>性别</td>
+					<td><input class="sex" name="usSex" type="radio" value="男" th:checked="${session.admin.usSex=='男'}" />男
+						<input class="sex" name="usSex" type="radio" value="女" th:checked="${session.admin.usSex=='女'}" />女
+					</td>
+				</tr>
+				<tr>
+					<td>身份</td>
+					<td th:text="${session.admin.caName}"></td>
+				</tr>
+			</table>
+		</div>
+		<div class="tableRight">
+			<table class="table table-hover">
+				<tr>
+					<td>联系方式</td>
+					<td><input type="text" name="usPhone" class="form-control"
+						th:value="${session.admin.usPhone}" maxlength="11"/></td>
+				</tr>
+				<tr>
+					<td>照片</td>
+					<td>
+						<div class="col-sm-9 big-photo">
+							<div id="preview">
+								<img id="imghead" border="0" alt="未上传图片" title="点击更换图片"
+									th:src="@{/static/uploadimg/{picture}(picture=${session.admin.usPicture})}"
+									width="90" height="90" onclick="$('#previewImg').click();">
+							</div>
+							<input type="file" name="picture" onchange="previewImage(this)"
+								style="display: none;" id="previewImg" accept="image/*">
 						</div>
-						<input type="file" name="picture" onchange="previewImage(this)"
-							style="display: none;" id="previewImg" accept="image/*">
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>简介</td>
-				<td>
- 					<a href="#" id="introShow" data-toggle="modal" data-target="#intro">修改简介</a>
-					<div id="introduction">
-						<textarea style="display: none;" name="usIntroduction"
-							id="usIntroduction"></textarea>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>成就</td>
-				<td>
-					<div id="achievements">
-						<textarea style="display: none;" name="usAchievements"
-							id="usAchievements"></textarea>
-					</div> <a href="#" id="achieveShow" data-toggle="modal" data-target="#achieve">修改成就</a>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" id="sure" value="确认修改"/></td>
-			</tr>
-		</table>
+					</td>
+				</tr>
+				<tr>
+					<td>简介</td>
+					<td>
+	 					<a href="#" id="introShow" class="minbtn" data-toggle="modal" data-target="#intro">修改简介</a>
+						<div id="introduction">
+							<textarea style="display: none;" name="usIntroduction"
+								id="usIntroduction"></textarea>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>成就</td>
+					<td>
+						<div id="achievements">
+							<textarea style="display: none;" name="usAchievements"
+								id="usAchievements"></textarea>
+						</div> <a href="#" id="achieveShow" class="minbtn" data-toggle="modal" data-target="#achieve">修改成就</a>
+					</td>
+				</tr>
+			</table>
+			<input type="submit" class="btnmy"  id="sure" value="确认修改"/>
+		</div>
 	</form>
 </div>
 

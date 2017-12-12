@@ -14,18 +14,17 @@
 <script th:src="@{js/bootstrap.min.js}"></script>
 </head>
 <body>
-	<div th:text="${msg}" class="issucessor"></div>
-	<div class="mainbox">
-		
-<!-- 		<div class="nn" th:if="${messagePage.totalCount>0}"> -->
-		<div class="thir" th:if="${messagePage.totalCount>0}">
+<div th:text="${msg}" class="issucessor"></div>
+<div class="mainbox">
+		<div th:if="${messagePage.totalCount==0}" class="message">查询不到留言信息</div>
+		<div class="thir">		
 			<form th:action="@{/message/manageMessage}" class="inquiry">
-				<input type="text" name="inquiry" th:value="${inquiry}"
+				<input type="text" name="inquiry" th:value="${inquiry}" placeholder="标题/日期"
 					maxlength="20" required="required" class="inquiryinput" /> 
 				<input type="submit" value="查询" class="btn btn-default inquirysub" />
 			</form>
 		</div>
-		<div th:if="${messagePage.totalCount==0}">查询不到留言信息</div>
+			<div th:if="${messagePage.totalCount>0}">
 			<table class="table-bordered table-hover">
 				<tr>
 					<th>标题</th>

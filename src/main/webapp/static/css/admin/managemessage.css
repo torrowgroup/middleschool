@@ -34,3 +34,8 @@ tr{
 .issucessor{
 	text-align:center;
 }
+.message{
+	margin: 0 auto;
+	text-align:center;
+	color:red;
+}

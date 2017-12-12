@@ -5,12 +5,19 @@ body{
 	background: #ebebeb;
 }
 .content{
-	width:30%;
-/* 	text-align: center; */
-	margin:5% auto;
+	width:85%;
+	margin:7% auto;
 }
-table{
-	background: white;
+.tableLeft{
+	float:left;
+	width: 40%;
+}
+.tableLeft tr{
+	height: 60px;
+}
+.tableRight{
+	float:right;
+	width: 40%;
 }
 td{
 	vertical-align:middle !important;
@@ -23,6 +30,18 @@ input{
 	width:10%;
 }
 #sure{
-	margin-left:30%;
+	margin-left:20%;
+	margin-top:5%;
+	height:30px;
 	width: 100px;	
+	color:white;
+	background:#2896ef;
+	border-radius: 4px;
+}
+.minbtn{
+	padding:5px;
+	border-radius:4px;
+	font-size:14px;
+	color:white;
+	background:#2896ef;
 }

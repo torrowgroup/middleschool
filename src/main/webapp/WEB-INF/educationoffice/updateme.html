@@ -8,12 +8,13 @@
 <link rel="stylesheet" type="text/css"
 	th:href="@{/static/dist/css/wangEditor.min.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/static/css/teacher/updateme.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/updateme.css}">
 <body>
 <div class="content">
 	<div th:text="${message}" class="message"></div>
 	<form th:action="@{/education/updateMe}" method="post" enctype="multipart/form-data" onsubmit="modifyContent()">
-		<table class="table table-bordered">
+		<div class="tableLeft">
+			<table class="table table-hover">
 			<tr>
 				<td>邮箱</td>
 				<td>
@@ -28,15 +29,19 @@
 			</tr>
 			<tr>
 				<td>性别</td>
-				<td><input name="usSex" type="radio" value="男"
-					th:checked="${session.teacher.usSex=='男'}" />男 <input name="usSex"
-					type="radio" value="女" th:checked="${session.teacher.usSex=='女'}" />女
+				<td>
+					<input name="usSex" type="radio" value="男" class="sex" th:checked="${session.teacher.usSex=='男'}" />男 
+					<input name="usSex" type="radio" value="女" class="sex" th:checked="${session.teacher.usSex=='女'}" />女
 				</td>
 			</tr>
 			<tr>
 				<td>身份</td>
 				<td th:text="${session.teacher.caName}"></td>
 			</tr>
+			</table>
+		</div>
+		<div class="tableRight">
+			<table class="table table-hover">
 			<tr>
 				<td>联系方式</td>
 				<td><input type="text" name="usPhone"
@@ -77,10 +82,11 @@
 			<tr>
 				<td colspan="2">
 					<input type="submit" id="sure" value="确认修改"/>
-					<a th:href="@{/education/toUpdatePsw}" class="udpateP">修改密码</a>
+					<a th:href="@{/education/toUpdatePsw}"  class="udpateP">修改密码</a>
 				</td>
 			</tr>
 		</table>
+		</div>
 	</form>
 </div>
 

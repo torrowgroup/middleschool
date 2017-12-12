@@ -23,17 +23,17 @@
 			<tr th:if="${midExam!=null}"> 
 				<td th:text="${midExam.reTitle}">考试名称</td>
 				<td th:text="${midExam.reContent}">考试时间</td>
-				<td><a th:href="@{/others/toUpdateTestTime?(reId=${midExam.reId})}">修改</a></td>
+				<td><a th:href="@{/others/toUpdateTestTime?(reId=${midExam.reId})}" title="修改"><span class="glyphicon glyphicon-edit"></span></a></td>
 			</tr>
 			<tr th:if="${finalExam!=null}">
 				<td th:text="${finalExam.reTitle}">考试名称</td>
 				<td th:text="${finalExam.reContent}">考试时间</td>
-				<td><a th:href="@{/others/toUpdateTestTime?(reId=${finalExam.reId})}">修改</a></td>
+				<td><a th:href="@{/others/toUpdateTestTime?(reId=${finalExam.reId})}" title="修改"><span class="glyphicon glyphicon-edit"></span></a></td>
 			</tr>
 			<tr th:if="${catchingExam!=null}">
 				<td th:text="${catchingExam.reTitle}">考试名称</td>
 				<td th:text="${catchingExam.reContent}">考试时间</td>
-				<td><a th:href="@{/others/toUpdateTestTime?(reId=${catchingExam.reId})}">修改</a></td>
+				<td><a th:href="@{/others/toUpdateTestTime?(reId=${catchingExam.reId})}" title="修改"><span class="glyphicon glyphicon-edit"></span></a></td>
 			</tr>
 		</table>
 	</div>
