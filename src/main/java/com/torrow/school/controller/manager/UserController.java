@@ -276,7 +276,7 @@ public class UserController extends BaseController {
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
 		String fileName = userService.uploadPicture(file, path);
 		// 返回图片的URL地址
-		response.getWriter().write("/middleschool/static/uploadimg/" + fileName);
+		response.getWriter().write(session.getServletContext().getContextPath()+"/static/uploadimg/" + fileName);
 	}
 
 	/**

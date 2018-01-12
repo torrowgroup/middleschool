@@ -12,6 +12,7 @@
 </head>
 <body>
 	<div class="mainbox">
+	<div th:text="${message}" class="message"></div>
 		<div class="thir">
 			<a th:href="@{/user/toAddUser}" title="添加用户">添加用户</a>
 			<form th:action="@{/user/manageUser}" class="inquiry">
@@ -19,7 +20,6 @@
 				<input type="submit" value="提交" class="btn btn-default inquirysub"/>
 			</form>
 		</div>
-			<div th:text="${message}" class="message"></div>
 			<div th:if="${pagemsg.totalCount}==0" class="message">没有任何用户信息	</div>
 			<div th:if="${pagemsg.totalCount}!=0" >
 			<table class="table table-bordered table-hover table-condensed"  >

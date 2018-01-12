@@ -1,0 +1,120 @@
+body{
+			margin: 0;
+			padding: 0;
+		}
+		.box{
+			width: 100%;
+			height: 100%;
+		}
+		.gallery{
+			width: 80%;
+			height: 70%;
+			/*background: red;*/
+			position: absolute;
+			left: 10%;
+			top: 10%;
+		}
+		.gallery1{
+			width: 30%;
+			height: 40%;
+			background: blue;
+			float: left;
+			position: relative;
+			margin-left: 2%;
+			margin-top: 2%;
+		}
+		.word{
+			position: absolute;
+			bottom: 5px;
+			left: 120px;
+			font-size: 20px;
+			z-index: 2;
+		}
+		.gallery1 img{
+			width: 100%;
+			height: 100%;
+		}
+		.gallery2{
+			width: 30%;
+			height: 40%;
+			background: blue;
+			float: left;
+			position: relative;
+			margin-left: 2%;
+			margin-top: 2%;
+		}
+		.gallery2 img{
+			width: 100%;
+			height: 100%;
+		}
+		.gallery3{
+			width: 30%;
+			height: 40%;
+			background: blue;
+			float: left;
+			position: relative;
+			margin-left: 2%;
+			margin-top: 2%;
+		}
+		.gallery3 img{
+			width: 100%;
+			height: 100%;
+		}
+		.gallery4{
+			width: 30%;
+			height: 40%;
+			background: blue;
+			float: left;
+			position: relative;
+			margin-left: 2%;
+			margin-top: 2%;
+		}
+		.gallery4 img{
+			width: 100%;
+			height: 100%;
+		}
+		.gallery5{
+			width: 30%;
+			height: 40%;
+			background: blue;
+			float: left;
+			position: relative;
+			margin-left: 2%;
+			margin-top: 2%;
+		}
+		.gallery5 img{
+			width: 100%;
+			height: 100%;
+		}
+		.gallery6{
+			width: 30%;
+			height: 40%;
+			background: blue;
+			float: left;
+			position: relative;
+			margin-left: 2%;
+			margin-top: 2%;
+		}
+		.gallery6 img{
+			width: 100%;
+			height: 100%;
+		}
+		.gallery > div:hover > img {
+  			transform: scale(1.5, 1.5);
+  			transition:0.6s transform;
+  		
+		}
+		.gallery > div:hover .word{
+			display: none;
+		}
+		.gallery > div:hover {
+  			z-index: 1;
+		}
+		.foot{
+			width: 100%;
+			height: 10%;
+			position: absolute;
+			bottom: 10%;
+			margin-left: 2%;
+			margin-top: 2%;
+		}

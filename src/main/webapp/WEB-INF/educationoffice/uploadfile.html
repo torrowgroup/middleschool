@@ -5,11 +5,12 @@
 <head>
   <title>home</title>
 <link rel="stylesheet" type="text/css" th:href="@{/static/css/admin/upload.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/educationoffice/uploadfile.css}">
 </head>
 <body>
 <div th:if="${sign}=='1'">管理员未添加相应类别</div>
 <div th:if="${sign}!='1'">
-<div th:text="${message}"></div>
+<div th:text="${message}" class="message"></div>
 <form th:action="@{/education/upload}" method="post" enctype="multipart/form-data">
 <div class="aa">
 	<table>
@@ -22,7 +23,7 @@
 		</tr>
 		<tr height="30px"></tr>	
 		<tr>
-			 <td><input type="submit" value="上传" class="bb"/></td>  
+			 <td><input type="submit" value="上传" class="uploadbtn"/></td>  
 		</tr>
 	</table>
 </div>

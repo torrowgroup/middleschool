@@ -6,9 +6,10 @@
 <title>home</title>
 <link rel="stylesheet" type="text/css"
 	th:href="@{/static/css/admin/upload.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/educationoffice/uploadfile.css}">
 </head>
 <body>
-	<div th:text="${message}"></div>
+	<div th:text="${message}" class="message"></div>
 	<div th:if="${literatureList==null}">管理员未添加校园文学类别</div>
 	<div th:if="${literatureList!=null}">
 		<form th:action="@{/education/uploadLiterature}" method="post"
@@ -30,7 +31,7 @@
 					</tr>
 					<tr height="30px"></tr>
 					<tr>
-						<td><input type="submit" value="上传" class="bb" /></td>
+						<td><input type="submit" value="上传" class="uploadbtn" /></td>
 					</tr>
 				</table>
 			</div>

@@ -105,7 +105,7 @@
 				</ul>
 			</div>
 			<!-- 左侧菜单 -->
-			<iframe src="/middleschool/iframe.html" id="ifr" name="ie"></iframe>
+			<iframe src="iframe.html" id="ifr" name="ie"></iframe>
 			<!-- iframe标签 -->
 		</div>
 	</div>
@@ -137,23 +137,3 @@
 </script>
 </body>
 </html>
-<!-- 
-	<a th:href="@{/education/uploadEducation}" target="ie" class="out2"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;教育教研上传</a>
-	<div th:each="category,categoryStart:${educationList}">
-		<a th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"
-			th:text="${category.caName}"></a>
-	</div>
-	<hr>
-	<a th:href="@{/education/schoolLiterature}" class="out2"><span
-		class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校园文学的上传</a>
-	<div th:each="category,categoryStart:${literatureList}">
-		<a th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"
-			th:text="${category.caName}" target="ie" class="out2"><span
-			class="glyphicon glyphicon-list-alt"></span></a>
-	</div>
-	<div th:each="category,categoryStart:${downloadList}">
-		<a th:href="@{/education/manageEducationUpload?(caId=${category.caId})}"
-			th:text="${category.caName}" target="ie" class="out2"><span
-			class="glyphicon glyphicon-list-alt"></span></a>
-	</div>
- -->

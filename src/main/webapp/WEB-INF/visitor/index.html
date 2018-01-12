@@ -7,6 +7,7 @@
     <title>郑州一二二中学</title>
     <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/static/css/visitor/style.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/static/css/visitor/backtop.css}" type="text/css">
     <script th:src="@{/static/js/jquery.min.js}"></script>
     <script th:src="@{/static/js/bootstrap.min.js}"></script>
     <script th:src="@{/static/js/visitor/carousel.js}"></script>
@@ -20,7 +21,7 @@
             <img th:src="@{/static/images/visitor/title.png}" alt="加载中">
         </div>
         <div class="headerRight">
-            <p th:if="${midExam != '--'}">距离期中<span th:text="${midExam}"></span>天</p>
+            <p th:if="${midExam != '--' and midExam > '0'}">距离期中<span th:text="${midExam}"></span>天</p>
             <p th:if="${finalExam != '--' and midExam == '--'}">距离期末<span th:text="${finalExam}"></span>天</p>
             <p th:if="${catchingExam != '--'}">距离中招<span th:text="${catchingExam}"></span>天</p>
             <p class="hidden-xs">今天<span id="todayTime">--年--月--日</span></p>
@@ -192,8 +193,41 @@
 	        </div>
 	    </div>
     </div>  
-<div th:replace="headerfooter::footer"></div>
+<div class="footer">
+        <div class="footerBox">
+            <div class="row">
+            
+                <div class="col-sm-3 col-xs-6 footerBox1 hidden-xs"><img th:src="@{/static/images/visitor/bottomlogo.png}" alt=""></div>
+                <div class="col-sm-3 col-xs-6 footerBox1" th:if="${phone!=null || email!=null || address !=null}">
+                    <h3>联系我们:</h3>
+                    <p th:if="${phone!=null}">
+                    	电话：<span th:text="${phone.reContent}">电话号码</span>
+                    </p>
+                    <p th:if="${email!=null}">
+                    	邮箱：<span th:text="${email.reContent}">邮箱</span>
+                    </p>
+                    <p th:if="${address}">
+                    	地址：<span th:text="${address.reContent}">地址</span>
+                    </p>
+                </div>
+                <div class="col-sm-3 col-xs-6 footerBox1">
+                    <h3>友情链接:</h3>
+                    <p th:each="resource,resourceS:${linksList}">
+                    	<a th:href="@{${resource.reContent}}" th:text="${resource.reTitle}"></a>
+                    </p>
+                </div>
+                <div class="col-sm-3 col-xs-12 footerBox1">
+                    <h3><a th:href="@{/visitorNEL/toLeaveWord}" class="leaveIndex">留言板进入留言</a></h3>
+                    <p>&nbsp;</p>
+                    <p>版权所有@河南艾未特网络技术有限公司</p>
+                    <p>备案信息：<a href="#">豫ICP备1111111号</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="backtop"></div>
+    </div>
 <script th:src="@{/static/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/visitor/backtop.js}"></script>
 <script th:inline="javascript">
 	var today = new Date();	//获得今天时间
 	var todayTime = today.getFullYear()+"年"+today.getMonth()+"月"+today.getDate()+"日"; 
@@ -203,6 +237,22 @@
 	for(var i=0;i<generalIndex.length;i++){
 		$(generalIndex[i]).html($(generalIndex[i]).attr('name'));
 	}
+    $(function(){
+        var imgns = $(".item").children('img');
+        var fheight = $(imgns[0]).height();
+        for(var i=1;i<imgns.length;i++){
+            $(imgns[i]).height(fheight);
+        }
+
+        $(window).resize(function() {
+            var imgns1 = $(".item");
+            var imgn = $(imgns1[0]);
+            var fheight1 = imgn.height();
+            for(var i=1;i<imgns1.length;i++){
+                $(imgns1[i]).children('img').height(fheight1);
+            }
+        });
+    })
 </script>
 </body>
 </html>

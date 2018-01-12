@@ -1,12 +1,12 @@
 .centerImg{
     width: 100%;
+    min-width:1000px;
     height:145px;
-    min-width: 1000px;
     background-color: #8050a0;
+    overflow: hidden;
 }
 .centerimgBox{
 	width:1000px;
-	margin:0 atuo;
 	left:50%;
 	transform: translate(-50%);
 	-ms-transform: translate(-50%); /* IE 9 */
@@ -33,6 +33,8 @@
     background: -o-linear-gradient(right,rgba(128,80,160,1), rgba(128,80,160,0)); 
     background: -moz-linear-gradient(right,rgba(128,80,160,1), rgba(128,80,160,0));
     background: linear-gradient(to right,rgba(128,80,160,1), rgba(128,80,160,0));
+    filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=1,startColorStr=#8050a0,endColorStr=#00FFFFFF);
+
 }
 .sideRight{
 	width:200px;
@@ -45,6 +47,7 @@
     background: -o-linear-gradient(left,rgba(128,80,160,1), rgba(128,80,160,0)); 
     background: -moz-linear-gradient(left,rgba(128,80,160,1), rgba(128,80,160,0));
     background: linear-gradient(to left,rgba(128,80,160,1), rgba(128,80,160,0));
+    filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=1,startColorStr=#00FFFFFF,endColorStr=#8050a0);
 }
 .mainbox1{
     margin-top: 20px;

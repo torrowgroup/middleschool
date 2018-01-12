@@ -7,11 +7,10 @@
 		if(email!=usEmail&&email.length!=0){
 			$.ajax({
 				type : 'post',
-				url : projectPath+'user/testEmail',
+				url : projectPath+'education/testEmail',
 				data : {email:email},
 				contentType:'application/x-www-form-urlencoded', //contentType很重要
 				success : function(data) {
-					console.log(data.msg+" ")
 					if(data.msg==1){
 						$("#ok").show();
 						$("#wrong").hide();

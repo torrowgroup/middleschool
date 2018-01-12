@@ -10,8 +10,8 @@
 	th:href="@{/static/css/bootstrap.min.css}">
 <link rel="stylesheet" type="text/css"
 	th:href="@{/static/css/inquirytable.css}">
-<script th:src="@{js/jquery.min.js}"></script>
-<script th:src="@{js/bootstrap.min.js}"></script>
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
 </head>
 <body>
 <div th:text="${msg}" class="issucessor"></div>
@@ -19,7 +19,7 @@
 		<div th:if="${messagePage.totalCount==0}" class="message">查询不到留言信息</div>
 		<div class="thir">		
 			<form th:action="@{/message/manageMessage}" class="inquiry">
-				<input type="text" name="inquiry" th:value="${inquiry}" placeholder="标题/日期"
+				<input type="text" name="inquiry" th:value="${inquiry}" placeholder="标题/日期/状态"
 					maxlength="20" required="required" class="inquiryinput" /> 
 				<input type="submit" value="查询" class="btn btn-default inquirysub" />
 			</form>

@@ -6,7 +6,7 @@ function inquiryEducation() {
 	var caId = $('#inquiry').prop("name");
 		$.ajax({
 			type : 'post',
-			url : '/middleschool/visitorNEL/ajaxEducation',
+			url : projectPath+'visitorNEL/ajaxEducation',
 			data : {
 				caId:caId,
 				inquiry : inquiry
@@ -17,6 +17,7 @@ function inquiryEducation() {
 				var list = data.resourceList.lists;
 			    var len = list.length;		//判断提示框是否有必要出现
 				if(len!=0){
+					$(".prompt").css("border-bottom-color","purple");
 					$(".prompt").show();
 					var htm = '';
 					if(len>5){
@@ -25,10 +26,12 @@ function inquiryEducation() {
 					for(var i=0;i<len;i++){
 						htm+='<a href="/middleschool/visitorNEL/viewEducation?rId='+caId+'&inquiry='+list[i].reTitle+'">'+list[i].reTitle+'</a> <br/>';
 					}
+					
 					$(".prompt").html(htm);
 				}
 				if(len==0||inquiry==''){
 					$(".prompt").html('');
+					$(".prompt").css("border-bottom-color","none");
 					$(".prompt").hide();
 				}	
 				if(resourceList.totalCount==0){

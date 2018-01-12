@@ -15,6 +15,7 @@
 </head>
 <body>
  <div class="mainbox">
+ 	 <div th:text="${message}" class="message"></div>
  	<div class="thir">
 		<a th:href="@{/news/addNewsJumping?(Pid=6)}" title="添加公告" class="add">添加公告</a>
  		<!--模糊查询  -->
@@ -24,7 +25,6 @@
 		    <input type="submit" value="查询" class="btn btn-default inquirysub" title="查询">   
 	    </form>
 	</div>
-	 <div th:text="${message}" class="message"></div>
 	<div th:if ="${pagemsg.totalCount}==0" class="message">
 	        没有任何公告类信息
 	</div>

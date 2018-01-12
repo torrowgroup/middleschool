@@ -24,7 +24,7 @@ td{
 	line-height: inherit !important;
 }
 input{
-	width:100%;
+	width:200PX;
 }
 .sex{
 	width:10%;
@@ -44,4 +44,8 @@ input{
 	font-size:14px;
 	color:white;
 	background:#2896ef;
+}
+.message{
+	color: red;
+	text-align: center;
 }

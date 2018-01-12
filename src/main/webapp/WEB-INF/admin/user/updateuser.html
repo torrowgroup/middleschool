@@ -46,7 +46,7 @@
 			</tr>
 			<tr>
 				<td class="bb"><span>身份</span></td>
-				<td><select name="caId" id="cc">
+				<td><select name="caId" id="cc" class="form-control">
 						<option th:each="category,categoryStart:${categoryList}"
 							th:text="${category.caName}" th:value="${category.caId}"
 							th:selected="${user.caId==category.caId}" />
@@ -76,7 +76,7 @@
 			</tr>
 			<tr>
 				<td class="bb"><span>简介</span></td>
-				<td><a href="javascript:void(0)" id="content" onClick="showT()">查看/修改简介</a>
+				<td><a href="javascript:void(0)" id="content" class="minbtn" onClick="showT()">查看/修改简介</a>
 					<div id="introduction">
 						<textarea style="display: none;" name="usIntroduction"
 							id="usIntroduction"></textarea>
@@ -84,7 +84,7 @@
 			</tr>
 			<tr>
 				<td class="bb"><span>成就</span></td>
-				<td><a href="javascript:void(0)" id="achieveShow" onClick="show()">查看/修改成就</a>
+				<td><a href="javascript:void(0)" id="achieveShow"  class="minbtn" onClick="show()">查看/修改成就</a>
 					<div id="achieveShow">
 						<textarea style="display: none;" name="usAchievements"
 							id="usAchievements"></textarea>
@@ -107,19 +107,6 @@
 		<div id="achieveEditor"></div>
 		<button onClick='hide()'>完成</button>
 	</div>
-<script th:inline="javascript">
-/*<![CDATA[*/
-	window.onload=function(){
-		var user = /*[[${user}]]*/;
-		if(user!=null){
-			var usIntroduction = /*[[${user.usIntroduction}]]*/ null;//给两个富文本赋值
-			var usAchievements = /*[[${user.usAchievements}]]*/ null;
-			introdEditor.$txt.html(usIntroduction);
-			achieveEditor.$txt.html(usAchievements);
-		}
-	}
-/*]]>*/
-</script>
 </div>
 	<script th:src="@{/static/js/jquery.min.js}"></script>
 	<script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
@@ -133,5 +120,19 @@
 	<script type="text/javascript"
 		th:src="@{/static/js/admin/user/testemail.js}"></script>
 	<script th:src="@{/static/js/admin/user/zhezhaoone.js}"></script>
+	<script th:inline="javascript">
+/*<![CDATA[*/
+	window.onload=function(){
+		var user = /*[[${user}]]*/;
+		if(user!=null){
+			var usIntroduction = /*[[${user.usIntroduction}]]*/ null;//给两个富文本赋值
+			var usAchievements = /*[[${user.usAchievements}]]*/ null;
+			introdEditor.$txt.html(usIntroduction);
+			achieveEditor.$txt.html(usAchievements);
+		}
+	}
+	var projectPath = /*[[${application.rootPath}]]*/;
+/*]]>*/
+</script>
 </body>
 </html>

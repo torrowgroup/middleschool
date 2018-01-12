@@ -4,7 +4,9 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -121,7 +124,7 @@ public class EducationController extends BaseController {
 		String Date = dFormat.format(date);
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
 		String reContent = resourceService.uploadFile(file, path);
-		TbUser tbUser=(TbUser)session.getAttribute("identity");
+		TbUser tbUser=(TbUser)session.getAttribute("teacher");
 		TbResource tb = new TbResource(item.getCaId(), tbUser.getUsName(),Date, item.getCaName(), file.getOriginalFilename(), reContent);
 		resourceService.insert(tb);
 		model.addAttribute("message", "添加成功");
@@ -305,5 +308,19 @@ public class EducationController extends BaseController {
 		message = resourceService.uploadFile(file, path);
 		return message;
 	}
-
+	// 验证用户邮箱是否被添加过
+		@RequestMapping("testEmail")
+		public @ResponseBody Map<String, Object> testEmail(String email) {
+			String msg = "1";
+			List<TbUser> lists = userService.selectAll();
+			for (int i = 0; i < lists.size(); i++) {
+				if (lists.get(i).getUsEmail().equals(email)) {
+					msg = "0";
+					break;
+				}
+			}
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("msg", msg);
+			return map;
+		}
 }

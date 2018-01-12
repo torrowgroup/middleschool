@@ -144,6 +144,7 @@ input{
 	width:190px;
 	border:1px solid purple;
 	border-top:none;
+	border-bottom-color:white;
 	display:none;
 	overflow: hidden;
 	white-space: nowrap;

@@ -35,7 +35,7 @@ img{
 	height: 15px;
 }
 .aa{
-	width: 48px;
+	width: 55px;
 	margin-left: 55%;
 	background-color: #2470e2;
 	color: white;
@@ -46,7 +46,8 @@ img{
 }
 #cc{
 	width: 60%;
-	height: 30px;
+	height: 32px;
+	padding-top: 5px;
 }
  #hidebg{
  	position:relative;
@@ -111,3 +112,10 @@ button{
 #introdEditor,#achieveEditor{
 	height:280px;
 } 
+.minbtn{
+	padding:5px;
+	border-radius:4px;
+	font-size:14px;
+	color:white;
+	background:#2896ef;
+}

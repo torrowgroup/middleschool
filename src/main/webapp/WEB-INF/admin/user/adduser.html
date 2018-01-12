@@ -10,12 +10,12 @@
 <body>
 <div class="bod">
 	<div th:text="${message}" class="message"></div>
-		<form th:action="@{/user/addUser}" method="post" enctype="multipart/form-data" th:onsubmit="'javascript:checkPicture(this);'" class="clearfix">
+			<form th:action="@{/user/addUser}" method="post" enctype="multipart/form-data" class="clearfix">
 			<table class="t1">
 				<tr>
 					<td width="41%"><span>邮&nbsp;&nbsp;&nbsp;&nbsp;箱</span></td>
 					<td width="55%">
-						<input type="email" name="usEmail" id="usEmail" required="required" th:oninput="'javascript:testEmail();'" maxlength="25" >
+						<input type="email" name="usEmail" id="usEmail" required="required" th:oninput="'javascript:testEmail(this);'" maxlength="25" >
 					</td>
 					<td width="4%">
 						<span id="ok" class="glyphicon glyphicon-ok" style="display: none;"></span>
@@ -85,5 +85,17 @@
 <script type="text/javascript" th:src="@{/static/js/admin/user/testemail.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/admin/user/adduser.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/upload.js}"></script>
+<script th:inline="javascript">
+	var projectPath = /*[[${application.rootPath}]]*/;
+	$(document).ready(function(){
+	  $("form").submit(function(e){
+		var picture = $('#previewImg');
+		if(picture.val() == ''){
+			alert("未选择图片");
+			e.preventDefault();
+		}
+	  });
+	});
+</script>
 </body>
 </html>

@@ -105,11 +105,12 @@ body,html{
 	margin-left:10px;
 	margin-top: 8px;
 }
-.lione > a > span:nth-child(2n):hover{
-	transform:rotate(90deg);
-	-ms-transform:rotate(90deg); /* IE 9 */
-	-webkit-transform:rotate(90deg); /* Safari and Chrome */
-}
+/*张金高改*/
+/* .lione > a > span:nth-child(2n):hover{ */
+/* 	transform:rotate(90deg); */
+/* 	-ms-transform:rotate(90deg); IE 9 */
+/* 	-webkit-transform:rotate(90deg); Safari and Chrome */
+/* } */
 .out{
 	background-color:#f9f9f9;
 }

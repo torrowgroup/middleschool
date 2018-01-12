@@ -24,8 +24,8 @@
 		<div class="input-group">
 			<span class="input-group-addon">再次输入</span>
 			<input type="password" id="again" required th:oninput="'javascript:pswAgain();'" class="form-control" placeholder="password again"/>
-				<span id="okAgain" class="glyphicon glyphicon-ok" style="display: none;"></span>
-				<span id="wrongAgain" class="glyphicon glyphicon-remove" style="display: none;"></span>
+			<span id="okAgain" class="glyphicon glyphicon-ok" style="display: none;"></span>
+			<span id="wrongAgain" class="glyphicon glyphicon-remove" style="display: none;"></span>
 		</div>
 		<br><br>
 		<button class="bb">修改</button>
@@ -33,5 +33,8 @@
 	</div>
 <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/admin/user/adduser.js}"></script>
+<script th:inline="javascript">
+	var projectPath = /*[[${application.rootPath}]]*/;
+</script>
 </body>
 </html>

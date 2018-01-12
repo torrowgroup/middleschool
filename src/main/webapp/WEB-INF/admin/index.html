@@ -51,7 +51,7 @@
 				</li>
 				<!-- 新闻管理 -->
 				<li class="lione">
-					<a href="#" class="out"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;新闻管理<span class="glyphicon glyphicon-chevron-right"></span></a>
+					<a href="#" class="out"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;新闻管理<span class="glyphicon glyphicon-chevron-right" id="rightdown"></span></a>
                     <ul class="nav nav-second-level">
 						<li class="hr">
 							<a th:href="@{/news/addNewsJumping?(Pid=9)}" target="ie" class="out1" title="上传学生管理或教师成长"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;上传新闻文件</a>
@@ -59,7 +59,7 @@
 	                    <li class="hr">
 	                      <a th:href="@{/news/addNewsJumping?(Pid=2)}"  target="ie" class="out1"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;增加新闻</a>
 	                    </li>
-	                     <li th:each="category,categoryStart:${newsList}" class="hr">
+	                     <li th:each="category,categoryStart:${newsList}" class="hr	">
 							  <a th:href="@{/news/manageObject?(caId=${category.caId})}" target="ie" class="out1"> <span class="glyphicon glyphicon-globe" ></span><span class="fonts" th:text="${category.caName}"></span></a>
 						</li>
 						  <li th:each="category,categoryStart:${uploadList}">
@@ -158,7 +158,7 @@
 				</li>
  			</ul>
 		</div><!-- 左侧菜单 -->
-		<iframe src="/middleschool/iframe.html"   id="ifr" name="ie">
+		<iframe src="iframe.html"   id="ifr" name="ie">
 		</iframe><!-- iframe标签 -->
 	</div>
 	</div>
@@ -166,34 +166,4 @@
 <script th:src="@{/static/js/jquery.min.js}"></script>
 <script th:src="@{/static/js/admin/index.js}"></script>
 <script th:src="@{/static/js/bootstrap.min.js}"></script>
-<script>
-	$(document).ready(function(){
-        $('.out').click(function(e) {
-            $(this).next().stop().slideToggle()
-            e.preventDefault();
-        })
-        $('.out').hover(function(){
-   	 		$(this).css("backgroundColor", "#f9f9f9");
- 		})
- 		  $('.out1').hover(function(){
-   	 		$(this).css("backgroundColor", "white");
- 		})
- 		$(".current").click(function(){
- 			$(this).children("a").css("background-image", "url(/middleschool/static/images/admin/nav_li_current.gif)");
- 			$(this).siblings().children("a").css("background-image","none");
-		}) 
-		$("#main-menu").click(function(){
-			 $(".current").children().css("background-image","none");
-		})
-　		                     
-		window.onload = test;
-        function test(){
-			var wh =  $(window).height();//浏览器当前窗口可视区域高度
-			var sheight = (wh-75)+'px';
-			$("#ifr").css("height",sheight);
-			$(".box").css("height",sheight);
-// 			setInterval(test,3000);
-        }
-    });
-</script>
 </html>

@@ -327,8 +327,9 @@ public class SchoolNewsController extends BaseController {
 	public void uploadImg(MultipartFile file, HttpServletResponse response) throws Exception {
 		String path = session.getServletContext().getRealPath("/static/uploadimg");
 		String fileName = resourceService.uploadPicture(file, path);
+		String projectPath = session.getServletContext().getContextPath();
 		// 返回图片的URL地址
-		response.getWriter().write("/middleschool/static/uploadimg/" + fileName);
+		response.getWriter().write(projectPath+"/static/uploadimg/" + fileName);
 	}
 
 	/**

@@ -1,7 +1,12 @@
 body {
 	margin: 0;
 	padding: 0;
-	background-color: #ebebeb;
+	background-color: #ebebeb !important;
+}
+.all{
+/* 	width:1900px; */
+/* 	margin:0 auto; */
+	overflow: hidden;
 }
 .content{
 	width: 40%;
@@ -16,6 +21,7 @@ table {
 	border-collapse: collapse;
 }
 .leftTd{
+	width:130px!important;
 	height: 40px!important;
 }
 tr td{

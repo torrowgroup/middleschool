@@ -508,9 +508,9 @@ body{
         border-right: none;
         height: 30px;
     }
-    .navBox .navUl .navLi:hover .navSecondUl{
+   /*  .navBox .navUl .navLi:hover .navSecondUl{
         display: none;
-    }
+    } */
     .navUl{
         text-align: center;
     }
@@ -527,10 +527,7 @@ body{
         border: 0;
     }
     .navSecondUl{
-        height: 0;
-        padding:0;
-        margin: 0;
-        overflow: hidden;
+        visibility: hidden;
     }
 
     .mainLeft>h3>a{

@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+.uploadbtn{
+	width: 100px;
+	height: 30px;
+	background: #418bfa;
+	border-radius: 6px;
+	color: white;
+	font-size:16px;
+	cursor: pointer;
+	margin:20px 80%;
+}
+.message{
+	color: red;
+	text-align: center;	
+	margin-top: 50px;
+}

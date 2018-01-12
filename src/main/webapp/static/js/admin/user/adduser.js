@@ -15,11 +15,3 @@
 			$("#wrongAgain").show();
 		}
 	}
-	function checkPicture(obj){
-		var p = obj.picture;
-		if(p.value == ''){
-			alert("未选择图片");
-			return false;
-		}
-		return true;
-	}

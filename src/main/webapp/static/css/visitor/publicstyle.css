@@ -9,7 +9,7 @@ body{
 .topmax{
     width: 100%;
     min-width: 1000px;
-    background: url('../images/topback.png') repeat-y center #e5e9f5;;
+    background: url('../../images/visitor/topback.png') repeat-y center #e5e9f5;;
 }
 .header{
     width: 75%;
@@ -127,6 +127,7 @@ body{
 }
 
 .footer{
+	overflow:hidden;
     width: 100%;
     min-width:1000px;
     margin-top:20px;

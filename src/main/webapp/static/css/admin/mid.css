@@ -58,7 +58,7 @@ a:hover{text-decoration:underline;}
 	background-repeat: no-repeat; 
 }
 .menu_nav .nav_content li a:hover{
-	background:url(../../images/admin/nav_li_hover.gif) no-repeat;
+/* 	background:url(../../images/admin/nav_li_hover.gif) no-repeat; *//*张金高改,不需要了*/
 	line-height:37px;
 	text-decoration:none;
 }

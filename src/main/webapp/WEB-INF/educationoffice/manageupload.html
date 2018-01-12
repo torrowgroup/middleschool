@@ -18,7 +18,7 @@
 <!--模糊查询  -->
 <form th:action="@{/education/manageEducationUpload}" method="post" class="inquiry">
  	<input type="hidden" name="caId" th:value="${zid}">
-    <input type="text" name="caName" class="inquiryinput" required>
+    <input type="text" name="caName" class="inquiryinput" required placeholder="文件名/上传时间">
     <input type="submit" class="btn btn-default inquirysub" value="查询">
 </form>
  <div th:if ="${pagemsg.totalCount}!=0">

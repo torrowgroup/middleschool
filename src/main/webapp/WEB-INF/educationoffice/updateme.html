@@ -67,7 +67,7 @@
 					<div id="introduction">
 						<textarea style="display: none;" name="usIntroduction"
 							id="usIntroduction"></textarea>
-					</div> <a href="#" id="introShow" data-toggle="modal" data-target="#intro">修改简介</a>
+					</div> <a href="#" id="introShow" class="minbtn" data-toggle="modal" data-target="#intro">修改简介</a>
 				</td>
 			</tr>
 			<tr>
@@ -76,13 +76,16 @@
 					<div id="achievements">
 						<textarea style="display: none;" name="usAchievements"
 							id="usAchievements"></textarea>
-					</div> <a href="#" id="achieveShow" data-toggle="modal" data-target="#achieve">修改成就</a>
+					</div> <a href="#" id="achieveShow" class="minbtn" data-toggle="modal" data-target="#achieve">修改成就</a>
 				</td>
+			</tr>
+			<tr>
+				<td>密码</td>
+				<td><a th:href="@{/education/toUpdatePsw}"  class="minbtn updatePswTea">修改密码</a></td>
 			</tr>
 			<tr>
 				<td colspan="2">
 					<input type="submit" id="sure" value="确认修改"/>
-					<a th:href="@{/education/toUpdatePsw}"  class="udpateP">修改密码</a>
 				</td>
 			</tr>
 		</table>
@@ -132,14 +135,14 @@
 <script type="text/javascript" th:src="@{/static/dist/js/wangEditor.min.js}"></script>
 <script type="text/javascript" th:src="@{/static/js/admin/user/updateuser.js}" ></script>
 <script type="text/javascript" th:src="@{/static/js/bootstrap.min.js}" ></script>
-<script type="text/javascript" th:src="@{/static/js/teacher/user/testemail.js}" ></script>
+<script type="text/javascript" th:src="@{/static/js/teacher/testemail.js}" ></script>
 <script type="text/javascript" th:src="@{/static/js/upload.js}"></script>
 <script th:inline="javascript">
 	/*<![CDATA[*/
+	var projectPath = /*[[${application.rootPath}]]*/;
 	window.onload=function(){
 		var usIntroduction = /*[[${session.teacher.usIntroduction}]]*/;//给两个富文本赋值
 		var usAchievements = /*[[${session.teacher.usAchievements}]]*/;
-// 		alert(usAchievements)
 		introdEditor.$txt.html(usIntroduction);
 		achieveEditor.$txt.html(usAchievements);
 	}

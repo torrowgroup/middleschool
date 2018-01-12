@@ -6,7 +6,7 @@ function inquiryNews() {
 	var caId = $('#inquiry').prop("name");
 		$.ajax({
 			type : 'post',
-			url : '/middleschool/visitorGN/inquiryAjax',
+			url : projectPath+'visitorGN/inquiryAjax',
 			data : {
 				nId:caId,
 				inquiry : inquiry
