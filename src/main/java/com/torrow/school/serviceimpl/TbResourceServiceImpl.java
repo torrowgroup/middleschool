@@ -185,10 +185,12 @@ public class TbResourceServiceImpl extends BaseDao<TbResource> implements TbReso
 		for (int i = 0; i < caIdGenerals.size(); i++) {
 			if (generalIndex.size() < 4) {
 				TbResource resource = this.selectByCaId(caIdGenerals.get(i));
-				reContentTemp = resource.getReContent(); 
-				resource.setReContent(this.cutWordWithHtml(reContentTemp));// 只要30个字符,
-				resource.setSpare(this.getPicture(reContentTemp));// 得到图片，暂时存放于备用字段！！！！！
-				generalIndex.add(resource);
+				if(resource!=null){
+					reContentTemp = resource.getReContent(); 
+					resource.setReContent(this.cutWordWithHtml(reContentTemp));// 只要30个字符,
+					resource.setSpare(this.getPicture(reContentTemp));// 得到图片，暂时存放于备用字段！！！！！
+					generalIndex.add(resource);
+				}
 			}
 		}
 		for (int i = allResources.size() - 1; i >= 0; i--) { // 倒序得到资源类

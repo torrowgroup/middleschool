@@ -116,9 +116,9 @@
             <div class="row mainTop">
                 <div class="col-sm-3 col-xs-6 mainLeft" th:each="resource,resourceS:${generalIndex}">
                     <h3><a th:href="@{/visitorGN/viewGeneral?(gId= ${resource.caId})}" th:text="${resource.reTitle}">标题</a></h3>
-                    <p><a th:href="@{/visitorGN/viewGeneral?(gId= ${resource.caId})}" class="generalIndex" th:name="${resource.reContent}">大致内容</a></p>
+                    <p><a th:href="@{/visitorGN/viewGeneral?(gId= ${resource.caId})}" class="generalIndex" th:name="${resource.reContent}">简介内容</a></p>
                     <a th:href="@{/visitorGN/viewGeneral?(gId= ${resource.caId})}">
-                        <div class="mainImg">
+                        <div class="mainImg" th:if="${resource.spare!=null}">
                             <img th:src="@{${resource.spare}}" alt="" class="generalPicture">
                         </div>
                     </a>
