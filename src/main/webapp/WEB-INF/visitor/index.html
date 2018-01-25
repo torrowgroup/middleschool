@@ -18,7 +18,12 @@
 <div class="topmax">
     <div class="container header">
         <div class="logo">
-            <img th:src="@{/static/images/visitor/title.png}" alt="加载中">
+            <div class="schoollogo1">
+                <img th:src="@{/static/images/visitor/xiaohui.jpg}">
+            </div>
+            <div class="schoollogo2">
+                <img th:src="@{/static/images/visitor/title.png}">
+            </div>
         </div>
         <div class="headerRight">
             <p th:if="${midExam != '--' and midExam > '0'}">距离期中<span th:text="${midExam}"></span>天</p>

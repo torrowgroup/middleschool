@@ -18,9 +18,21 @@ body{
 }
 .logo{
     width: 50%;
+    position: relative;
 }
 .logo img{
     width: 100%;
+    height: 100%;
+}
+.logo .schoollogo1{
+    float: left;
+    width:20%;
+    height: 100%;
+}
+.logo .schoollogo2{
+    float: left;
+    width:80%;
+    height: 100%;
 }
 .headerRight{
     position: absolute;
